@@ -1,0 +1,3 @@
+SYNTHETIC QA FIXTURE — NOT STUDENT DATA
+
+These PDFs exist only to verify long mathematical explanations, long chapter names, missing optional values, different scores, different subject combinations, different question counts, malformed-expression flags and multiple question-analysis pages. They are not examination results.

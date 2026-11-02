@@ -1,0 +1,82 @@
+{
+  "generatedAt": "2026-11-02T09:00:00.000Z",
+  "source": "backend/app/data/spa/student-portal.json :: examAnalysis",
+  "note": "The two content-reference PDFs named in the brief were not present in the workspace; these deliverables preserve the canonical in-app analysis payload that feeds the same export workflow.",
+  "reports": {
+    "full": {
+      "file": "MediXO_EduX_Full_Exam_Analysis_Report.pdf",
+      "pages": 14,
+      "sourceValues": 247,
+      "missingValues": [],
+      "flags": []
+    },
+    "intelligence": {
+      "file": "MediXO_EduX_Exam_Intelligence_Report.pdf",
+      "pages": 2,
+      "sourceValues": 247,
+      "missingValues": [],
+      "sourceValuesOutsideTwoPageDigest": 115,
+      "dataScope": "Two-page digest; complete source-value preservation is verified against the Full Analysis Report.",
+      "flags": []
+    }
+  },
+  "qa": {
+    "full": {
+      "file": "qa/premium-pdf-stress-test.pdf",
+      "pages": 24,
+      "missingValues": [],
+      "flags": [
+        {
+          "report": "full",
+          "source": "Q4",
+          "value": "\\frac{1}{2",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q8",
+          "value": "\\frac{1}{2",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q12",
+          "value": "\\frac{1}{2",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q16",
+          "value": "\\frac{1}{2",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q20",
+          "value": "\\frac{1}{2",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q24",
+          "value": "\\frac{1}{2",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q28",
+          "value": "\\frac{1}{2",
+          "reason": "Unbalanced TeX source"
+        }
+      ]
+    },
+    "intelligence": {
+      "file": "qa/intelligence-edge-cases.pdf",
+      "pages": 2,
+      "missingValues": [],
+      "sourceValuesOutsideTwoPageDigest": 133,
+      "dataScope": "Synthetic two-page QA digest; not a source-of-truth document.",
+      "flags": []
+    }
+  }
+}
