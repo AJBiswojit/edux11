@@ -208,7 +208,7 @@ export function buildPremiumModel({ data = {}, subject, user, generatedAt, kind 
     reportId: `${kind === 'full' ? 'FAR' : 'EIR'} / ${examId}`,
     examId,
     examName,
-    examTitleShort: examName.length > 46 ? `${examName.slice(0, 43)}…` : examName,
+    examTitleShort: examName,
     subjectText: base.subjectText,
     activeSubject,
     who,

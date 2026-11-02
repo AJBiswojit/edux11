@@ -1,3 +1,3 @@
-SYNTHETIC QA FIXTURE — NOT STUDENT DATA
+SYNTHETIC QA FIXTURES — NOT STUDENT DATA
 
-These PDFs exist only to verify long mathematical explanations, long chapter names, missing optional values, different scores, different subject combinations, different question counts, malformed-expression flags and multiple question-analysis pages. They are not examination results.
+These V2 PDFs validate 2/3 subjects, long chapter and topic names, long mathematical explanations, multi-line derivations, missing optional values, 30+ question-review rows, different scores, large revision-priority lists and different page counts. Malformed expressions are deliberately included and shown verbatim for verification. They are not examination results.

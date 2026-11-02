@@ -1,206 +1,1565 @@
 {
-  "source_note": "The two content-reference PDFs named in the brief were not present in the workspace; these deliverables preserve the canonical in-app analysis payload that feeds the same export workflow.",
+  "engine": "premium-academic-editorial-v2",
+  "source_note": "The two named content-reference PDFs were not present in the workspace. These V2 deliverables preserve the canonical in-app analysis payload that feeds the same export workflow; no examination values were invented.",
   "source_payload": "backend/app/data/spa/student-portal.json :: examAnalysis",
   "source_value_count": 247,
   "checks": {
-    "full_report_page_count_at_least_9": true,
-    "intelligence_report_exactly_2_pages": true,
+    "canonical_full_report_generated": true,
+    "canonical_intelligence_3_to_4_pages": true,
+    "distinct_report_visual_identities": true,
     "a4_portrait_all_pages": true,
-    "embedded_fonts": true,
-    "logo_on_every_page": true,
-    "header_footer_consistent": true,
-    "report_identification_consistent": true,
-    "page_numbering_consistent": true,
-    "page_totals_consistent": true,
+    "embedded_inter_manrope_stix_math": true,
+    "official_logo_on_every_page": true,
+    "header_footer_report_id_consistent": true,
+    "page_numbers_and_totals_consistent": true,
     "no_blank_pages": true,
+    "no_unintended_manifest_collisions": true,
+    "zero_rendered_text_overlaps": true,
+    "no_footer_collisions_or_clipping": true,
     "no_out_of_bounds_text": true,
     "print_readable_minimum_font": true,
+    "balanced_page_composition": true,
     "canonical_source_values_preserved": true,
     "all_question_ids_preserved": true,
-    "all_full_analysis_sections_present": true,
+    "all_full_sections_present": true,
     "all_intelligence_sections_present": true,
-    "charts_and_vector_math_rendered": true,
-    "no_raw_tex_in_student_facing_pdf": true,
-    "malformed_expression_flagged_in_qa": true,
-    "qa_multiple_question_pages": true
+    "no_raw_tex_in_student_facing_pdfs": true,
+    "malformed_math_flagged_in_qa": true,
+    "qa_scenarios_have_different_page_counts": true,
+    "qa_covers_2_and_3_subjects": true,
+    "qa_covers_30_plus_question_rows": true,
+    "qa_covers_large_revision_lists": true,
+    "every_page_rendered_for_visual_review": true
   },
   "all_checks_passed": true,
-  "full_report": {
-    "file": "deliverables/MediXO_EduX_Full_Exam_Analysis_Report.pdf",
-    "pages": 14,
-    "a4_portrait": true,
-    "expected_pages": null,
-    "page_count_ok": true,
-    "fonts": [
-      "CZZZZZ+Inter-Regular",
-      "DZZZZZ+Manrope-ExtraLight",
-      "EZZZZZ+Inter-Regular",
-      "FZZZZZ+Inter-Regular",
-      "GZZZZZ+STIXTwoMath-Regular"
-    ],
-    "fonts_embedded": true,
-    "logo_images_per_page": [
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      2
-    ],
-    "logo_on_every_page": true,
-    "drawings_per_page": [
-      82,
-      89,
-      91,
-      70,
-      30,
-      66,
-      76,
-      76,
-      63,
-      93,
-      41,
-      57,
-      49,
-      29
-    ],
-    "header_footer_on_every_page": true,
-    "report_identification_on_every_page": true,
-    "page_numbering_sequential": true,
-    "page_total_on_every_page": true,
-    "blank_pages": [],
-    "out_of_bounds_text_spans": [],
-    "minimum_font_size": 6.4,
-    "maximum_font_size": 31.0,
-    "text_characters": 17773,
-    "normalised_text_characters": 17759,
-    "raw_tex_in_text": false
-  },
-  "intelligence_report": {
-    "file": "deliverables/MediXO_EduX_Exam_Intelligence_Report.pdf",
-    "pages": 2,
-    "a4_portrait": true,
-    "expected_pages": 2,
-    "page_count_ok": true,
-    "fonts": [
-      "CZZZZZ+Inter-Regular",
-      "DZZZZZ+Manrope-ExtraLight",
-      "EZZZZZ+Inter-Regular",
-      "FZZZZZ+Inter-Regular",
-      "GZZZZZ+STIXTwoMath-Regular"
-    ],
-    "fonts_embedded": true,
-    "logo_images_per_page": [
-      1,
-      2
-    ],
-    "logo_on_every_page": true,
-    "drawings_per_page": [
-      119,
-      149
-    ],
-    "header_footer_on_every_page": true,
-    "report_identification_on_every_page": true,
-    "page_numbering_sequential": true,
-    "page_total_on_every_page": true,
-    "blank_pages": [],
-    "out_of_bounds_text_spans": [],
-    "minimum_font_size": 6.4,
-    "maximum_font_size": 17.0,
-    "text_characters": 4578,
-    "normalised_text_characters": 4576,
-    "raw_tex_in_text": false
-  },
-  "qa_report": {
-    "file": "deliverables/qa/premium-pdf-stress-test.pdf",
-    "pages": 24,
-    "a4_portrait": true,
-    "expected_pages": null,
-    "page_count_ok": true,
-    "fonts": [
-      "CZZZZZ+Inter-Regular",
-      "DZZZZZ+Manrope-ExtraLight",
-      "EZZZZZ+Inter-Regular",
-      "FZZZZZ+Inter-Regular",
-      "GZZZZZ+STIXTwoMath-Regular"
-    ],
-    "fonts_embedded": true,
-    "logo_images_per_page": [
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      2
-    ],
-    "logo_on_every_page": true,
-    "drawings_per_page": [
-      75,
-      80,
-      71,
-      66,
-      161,
-      110,
-      156,
-      110,
-      159,
-      116,
-      162,
-      116,
-      162,
-      116,
-      162,
-      116,
-      162,
-      116,
-      164,
-      70,
-      55,
-      21,
-      53,
-      33
-    ],
-    "header_footer_on_every_page": true,
-    "report_identification_on_every_page": true,
-    "page_numbering_sequential": true,
-    "page_total_on_every_page": true,
-    "blank_pages": [],
-    "out_of_bounds_text_spans": [],
-    "minimum_font_size": 6.4,
-    "maximum_font_size": 31.0,
-    "text_characters": 33397,
-    "normalised_text_characters": 33373,
-    "raw_tex_in_text": true
+  "reports": {
+    "full": {
+      "group": "reports",
+      "pages": 16,
+      "pdf": {
+        "file": "deliverables/MediXO_EduX_Full_Exam_Analysis_Report.pdf",
+        "pages": 16,
+        "a4_portrait": true,
+        "fonts": [
+          "CZZZZZ+Inter-Regular",
+          "DZZZZZ+Manrope-ExtraLight",
+          "EZZZZZ+STIXTwoMath-Regular",
+          "FZZZZZ+Inter-Regular",
+          "GZZZZZ+Inter-Regular"
+        ],
+        "embedded_fonts": {
+          "Inter": true,
+          "Manrope": true,
+          "STIXTwoMath": true
+        },
+        "logo_images_per_page": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2
+        ],
+        "logo_on_every_page": true,
+        "drawings_per_page": [
+          18,
+          44,
+          79,
+          62,
+          51,
+          20,
+          24,
+          24,
+          24,
+          24,
+          60,
+          59,
+          38,
+          41,
+          33,
+          20
+        ],
+        "header_footer_on_every_page": true,
+        "report_identification_on_every_page": true,
+        "page_numbering_sequential": true,
+        "page_total_on_every_page": true,
+        "blank_pages": [],
+        "out_of_bounds_text_lines": [],
+        "footer_collisions": [],
+        "clipped_text_candidates": [],
+        "rendered_line_overlaps": [],
+        "rendered_text_bar_overlaps": [],
+        "minimum_font_size": 7.5,
+        "maximum_font_size": 62.0,
+        "raw_tex_in_text": false
+      },
+      "manifest": {
+        "component_count": 258,
+        "box_count": 2585,
+        "text_text_overlaps": [],
+        "text_bar_overlaps": [],
+        "sibling_component_overlaps": [],
+        "component_boundary_violations": [],
+        "footer_collisions": [],
+        "orphan_headings": [],
+        "repeated_table_header_failures": [],
+        "overflowing_components": [],
+        "page_coverage": [
+          {
+            "page": 1,
+            "coverage": 0.902,
+            "max_y": 720.4
+          },
+          {
+            "page": 2,
+            "coverage": 0.896,
+            "max_y": 716.3
+          },
+          {
+            "page": 3,
+            "coverage": 0.961,
+            "max_y": 762.2
+          },
+          {
+            "page": 4,
+            "coverage": 0.901,
+            "max_y": 720.0
+          },
+          {
+            "page": 5,
+            "coverage": 0.942,
+            "max_y": 748.7
+          },
+          {
+            "page": 6,
+            "coverage": 0.896,
+            "max_y": 716.5
+          },
+          {
+            "page": 7,
+            "coverage": 0.968,
+            "max_y": 767.4
+          },
+          {
+            "page": 8,
+            "coverage": 0.968,
+            "max_y": 767.4
+          },
+          {
+            "page": 9,
+            "coverage": 0.968,
+            "max_y": 767.4
+          },
+          {
+            "page": 10,
+            "coverage": 0.968,
+            "max_y": 767.4
+          },
+          {
+            "page": 11,
+            "coverage": 0.897,
+            "max_y": 717.2
+          },
+          {
+            "page": 12,
+            "coverage": 0.784,
+            "max_y": 636.8
+          },
+          {
+            "page": 13,
+            "coverage": 0.987,
+            "max_y": 781.1
+          },
+          {
+            "page": 14,
+            "coverage": 0.973,
+            "max_y": 771.2
+          },
+          {
+            "page": 15,
+            "coverage": 0.995,
+            "max_y": 786.5
+          },
+          {
+            "page": 16,
+            "coverage": 0.718,
+            "max_y": 590.5
+          }
+        ],
+        "zero_unintended_overlaps": true
+      },
+      "generation": {
+        "file": "MediXO_EduX_Full_Exam_Analysis_Report.pdf",
+        "label": "Full Exam Analysis Report",
+        "pages": 16,
+        "sourceValues": 247,
+        "missingValues": [],
+        "sourceValuesOutsideDigest": 0,
+        "dataScope": "Complete canonical source-value preservation.",
+        "flags": [],
+        "layout": {
+          "componentCount": 258,
+          "boxCount": 2585,
+          "textTextOverlaps": [],
+          "textBarOverlaps": [],
+          "siblingComponentOverlaps": [],
+          "componentBoundaryViolations": [],
+          "footerCollisions": [],
+          "orphanHeadings": [],
+          "repeatedTableHeaderFailures": [],
+          "overflowingComponents": [],
+          "zeroUnintendedOverlaps": true
+        },
+        "synthetic": false
+      }
+    },
+    "intelligence": {
+      "group": "reports",
+      "pages": 4,
+      "pdf": {
+        "file": "deliverables/MediXO_EduX_Exam_Intelligence_Report.pdf",
+        "pages": 4,
+        "a4_portrait": true,
+        "fonts": [
+          "CZZZZZ+Inter-Regular",
+          "DZZZZZ+Manrope-ExtraLight",
+          "EZZZZZ+STIXTwoMath-Regular",
+          "FZZZZZ+Inter-Regular",
+          "GZZZZZ+Inter-Regular"
+        ],
+        "embedded_fonts": {
+          "Inter": true,
+          "Manrope": true,
+          "STIXTwoMath": true
+        },
+        "logo_images_per_page": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "logo_on_every_page": true,
+        "drawings_per_page": [
+          47,
+          67,
+          51,
+          46
+        ],
+        "header_footer_on_every_page": true,
+        "report_identification_on_every_page": true,
+        "page_numbering_sequential": true,
+        "page_total_on_every_page": true,
+        "blank_pages": [],
+        "out_of_bounds_text_lines": [],
+        "footer_collisions": [],
+        "clipped_text_candidates": [],
+        "rendered_line_overlaps": [],
+        "rendered_text_bar_overlaps": [],
+        "minimum_font_size": 7.8,
+        "maximum_font_size": 28.0,
+        "raw_tex_in_text": false
+      },
+      "manifest": {
+        "component_count": 81,
+        "box_count": 657,
+        "text_text_overlaps": [],
+        "text_bar_overlaps": [],
+        "sibling_component_overlaps": [],
+        "component_boundary_violations": [],
+        "footer_collisions": [],
+        "orphan_headings": [],
+        "repeated_table_header_failures": [],
+        "overflowing_components": [],
+        "page_coverage": [
+          {
+            "page": 1,
+            "coverage": 0.915,
+            "max_y": 729.9
+          },
+          {
+            "page": 2,
+            "coverage": 0.905,
+            "max_y": 722.8
+          },
+          {
+            "page": 3,
+            "coverage": 0.901,
+            "max_y": 719.7
+          },
+          {
+            "page": 4,
+            "coverage": 0.877,
+            "max_y": 702.8
+          }
+        ],
+        "zero_unintended_overlaps": true
+      },
+      "generation": {
+        "file": "MediXO_EduX_Exam_Intelligence_Report.pdf",
+        "label": "Exam Intelligence Report",
+        "pages": 4,
+        "sourceValues": 247,
+        "missingValues": [],
+        "sourceValuesOutsideDigest": 108,
+        "dataScope": "Academic briefing; complete source-value preservation is verified against the Full Analysis Report.",
+        "flags": [],
+        "layout": {
+          "componentCount": 81,
+          "boxCount": 657,
+          "textTextOverlaps": [],
+          "textBarOverlaps": [],
+          "siblingComponentOverlaps": [],
+          "componentBoundaryViolations": [],
+          "footerCollisions": [],
+          "orphanHeadings": [],
+          "repeatedTableHeaderFailures": [],
+          "overflowingComponents": [],
+          "zeroUnintendedOverlaps": true
+        },
+        "synthetic": false
+      }
+    },
+    "full-edge-cases-2-subjects": {
+      "group": "qa",
+      "pages": 33,
+      "pdf": {
+        "file": "deliverables/qa/full-edge-cases-2-subjects.pdf",
+        "pages": 33,
+        "a4_portrait": true,
+        "fonts": [
+          "CZZZZZ+Inter-Regular",
+          "DZZZZZ+Manrope-ExtraLight",
+          "EZZZZZ+STIXTwoMath-Regular",
+          "FZZZZZ+Inter-Regular",
+          "GZZZZZ+Inter-Regular"
+        ],
+        "embedded_fonts": {
+          "Inter": true,
+          "Manrope": true,
+          "STIXTwoMath": true
+        },
+        "logo_images_per_page": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2
+        ],
+        "logo_on_every_page": true,
+        "drawings_per_page": [
+          18,
+          37,
+          58,
+          55,
+          36,
+          65,
+          79,
+          99,
+          69,
+          99,
+          86,
+          144,
+          83,
+          86,
+          103,
+          103,
+          74,
+          149,
+          40,
+          73,
+          132,
+          73,
+          124,
+          105,
+          76,
+          96,
+          89,
+          50,
+          44,
+          37,
+          29,
+          25,
+          10
+        ],
+        "header_footer_on_every_page": true,
+        "report_identification_on_every_page": true,
+        "page_numbering_sequential": true,
+        "page_total_on_every_page": true,
+        "blank_pages": [],
+        "out_of_bounds_text_lines": [],
+        "footer_collisions": [],
+        "clipped_text_candidates": [],
+        "rendered_line_overlaps": [],
+        "rendered_text_bar_overlaps": [],
+        "minimum_font_size": 7.4,
+        "maximum_font_size": 62.0,
+        "raw_tex_in_text": true
+      },
+      "manifest": {
+        "component_count": 428,
+        "box_count": 5459,
+        "text_text_overlaps": [],
+        "text_bar_overlaps": [],
+        "sibling_component_overlaps": [],
+        "component_boundary_violations": [],
+        "footer_collisions": [],
+        "orphan_headings": [],
+        "repeated_table_header_failures": [],
+        "overflowing_components": [],
+        "page_coverage": [
+          {
+            "page": 1,
+            "coverage": 0.863,
+            "max_y": 693.2
+          },
+          {
+            "page": 2,
+            "coverage": 0.747,
+            "max_y": 611.2
+          },
+          {
+            "page": 3,
+            "coverage": 0.957,
+            "max_y": 759.8
+          },
+          {
+            "page": 4,
+            "coverage": 0.819,
+            "max_y": 661.7
+          },
+          {
+            "page": 5,
+            "coverage": 0.927,
+            "max_y": 738.6
+          },
+          {
+            "page": 6,
+            "coverage": 0.993,
+            "max_y": 784.8
+          },
+          {
+            "page": 7,
+            "coverage": 0.511,
+            "max_y": 443.5
+          },
+          {
+            "page": 8,
+            "coverage": 0.942,
+            "max_y": 749.1
+          },
+          {
+            "page": 9,
+            "coverage": 0.69,
+            "max_y": 570.7
+          },
+          {
+            "page": 10,
+            "coverage": 0.922,
+            "max_y": 734.7
+          },
+          {
+            "page": 11,
+            "coverage": 0.775,
+            "max_y": 630.7
+          },
+          {
+            "page": 12,
+            "coverage": 0.979,
+            "max_y": 775.2
+          },
+          {
+            "page": 13,
+            "coverage": 0.764,
+            "max_y": 622.8
+          },
+          {
+            "page": 14,
+            "coverage": 0.974,
+            "max_y": 771.8
+          },
+          {
+            "page": 15,
+            "coverage": 0.707,
+            "max_y": 582.2
+          },
+          {
+            "page": 16,
+            "coverage": 0.987,
+            "max_y": 781.1
+          },
+          {
+            "page": 17,
+            "coverage": 0.718,
+            "max_y": 590.0
+          },
+          {
+            "page": 18,
+            "coverage": 0.985,
+            "max_y": 779.2
+          },
+          {
+            "page": 19,
+            "coverage": 0.699,
+            "max_y": 577.1
+          },
+          {
+            "page": 20,
+            "coverage": 0.57,
+            "max_y": 485.3
+          },
+          {
+            "page": 21,
+            "coverage": 0.959,
+            "max_y": 761.0
+          },
+          {
+            "page": 22,
+            "coverage": 0.987,
+            "max_y": 780.8
+          },
+          {
+            "page": 23,
+            "coverage": 0.86,
+            "max_y": 691.0
+          },
+          {
+            "page": 24,
+            "coverage": 0.942,
+            "max_y": 749.0
+          },
+          {
+            "page": 25,
+            "coverage": 0.729,
+            "max_y": 598.2
+          },
+          {
+            "page": 26,
+            "coverage": 0.93,
+            "max_y": 740.3
+          },
+          {
+            "page": 27,
+            "coverage": 0.795,
+            "max_y": 644.8
+          },
+          {
+            "page": 28,
+            "coverage": 0.972,
+            "max_y": 769.9
+          },
+          {
+            "page": 29,
+            "coverage": 0.983,
+            "max_y": 777.6
+          },
+          {
+            "page": 30,
+            "coverage": 0.994,
+            "max_y": 785.4
+          },
+          {
+            "page": 31,
+            "coverage": 0.951,
+            "max_y": 755.1
+          },
+          {
+            "page": 32,
+            "coverage": 0.913,
+            "max_y": 728.2
+          },
+          {
+            "page": 33,
+            "coverage": 0.614,
+            "max_y": 517.0
+          }
+        ],
+        "zero_unintended_overlaps": true
+      },
+      "generation": {
+        "file": "qa/full-edge-cases-2-subjects.pdf",
+        "label": "2 subjects · 32 questions · long math and labels",
+        "pages": 33,
+        "sourceValues": 225,
+        "missingValues": [],
+        "sourceValuesOutsideDigest": 0,
+        "dataScope": "Complete canonical source-value preservation.",
+        "flags": [
+          {
+            "report": "full",
+            "source": "Q3",
+            "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+            "reason": "MathJax could not typeset the expression"
+          },
+          {
+            "report": "full",
+            "source": "Q4",
+            "value": "\\frac{1}{2",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q4",
+            "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q7",
+            "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+            "reason": "MathJax could not typeset the expression"
+          },
+          {
+            "report": "full",
+            "source": "Q8",
+            "value": "\\frac{1}{2",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q8",
+            "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q11",
+            "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+            "reason": "MathJax could not typeset the expression"
+          },
+          {
+            "report": "full",
+            "source": "Q12",
+            "value": "\\frac{1}{2",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q12",
+            "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q15",
+            "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+            "reason": "MathJax could not typeset the expression"
+          },
+          {
+            "report": "full",
+            "source": "Q16",
+            "value": "\\frac{1}{2",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q16",
+            "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q19",
+            "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+            "reason": "MathJax could not typeset the expression"
+          },
+          {
+            "report": "full",
+            "source": "Q20",
+            "value": "\\frac{1}{2",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q20",
+            "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q23",
+            "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+            "reason": "MathJax could not typeset the expression"
+          },
+          {
+            "report": "full",
+            "source": "Q24",
+            "value": "\\frac{1}{2",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q24",
+            "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q27",
+            "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+            "reason": "MathJax could not typeset the expression"
+          },
+          {
+            "report": "full",
+            "source": "Q28",
+            "value": "\\frac{1}{2",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q28",
+            "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q31",
+            "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+            "reason": "MathJax could not typeset the expression"
+          },
+          {
+            "report": "full",
+            "source": "Q32",
+            "value": "\\frac{1}{2",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q32",
+            "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+            "reason": "Unbalanced TeX source"
+          }
+        ],
+        "layout": {
+          "componentCount": 428,
+          "boxCount": 5459,
+          "textTextOverlaps": [],
+          "textBarOverlaps": [],
+          "siblingComponentOverlaps": [],
+          "componentBoundaryViolations": [],
+          "footerCollisions": [],
+          "orphanHeadings": [],
+          "repeatedTableHeaderFailures": [],
+          "overflowingComponents": [],
+          "zeroUnintendedOverlaps": true
+        },
+        "synthetic": true
+      }
+    },
+    "intelligence-edge-cases-2-subjects": {
+      "group": "qa",
+      "pages": 4,
+      "pdf": {
+        "file": "deliverables/qa/intelligence-edge-cases-2-subjects.pdf",
+        "pages": 4,
+        "a4_portrait": true,
+        "fonts": [
+          "CZZZZZ+Inter-Regular",
+          "DZZZZZ+Manrope-ExtraLight",
+          "EZZZZZ+STIXTwoMath-Regular",
+          "FZZZZZ+Inter-Regular",
+          "GZZZZZ+Inter-Regular"
+        ],
+        "embedded_fonts": {
+          "Inter": true,
+          "Manrope": true,
+          "STIXTwoMath": true
+        },
+        "logo_images_per_page": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "logo_on_every_page": true,
+        "drawings_per_page": [
+          37,
+          42,
+          44,
+          20
+        ],
+        "header_footer_on_every_page": true,
+        "report_identification_on_every_page": true,
+        "page_numbering_sequential": true,
+        "page_total_on_every_page": true,
+        "blank_pages": [],
+        "out_of_bounds_text_lines": [],
+        "footer_collisions": [],
+        "clipped_text_candidates": [],
+        "rendered_line_overlaps": [],
+        "rendered_text_bar_overlaps": [],
+        "minimum_font_size": 7.8,
+        "maximum_font_size": 28.0,
+        "raw_tex_in_text": false
+      },
+      "manifest": {
+        "component_count": 62,
+        "box_count": 458,
+        "text_text_overlaps": [],
+        "text_bar_overlaps": [],
+        "sibling_component_overlaps": [],
+        "component_boundary_violations": [],
+        "footer_collisions": [],
+        "orphan_headings": [],
+        "repeated_table_header_failures": [],
+        "overflowing_components": [],
+        "page_coverage": [
+          {
+            "page": 1,
+            "coverage": 0.909,
+            "max_y": 725.4
+          },
+          {
+            "page": 2,
+            "coverage": 0.721,
+            "max_y": 592.4
+          },
+          {
+            "page": 3,
+            "coverage": 0.968,
+            "max_y": 767.3
+          },
+          {
+            "page": 4,
+            "coverage": 0.626,
+            "max_y": 525.4
+          }
+        ],
+        "zero_unintended_overlaps": true
+      },
+      "generation": {
+        "file": "qa/intelligence-edge-cases-2-subjects.pdf",
+        "label": "2 subjects · intelligence edge cases",
+        "pages": 4,
+        "sourceValues": 225,
+        "missingValues": [],
+        "sourceValuesOutsideDigest": 130,
+        "dataScope": "Academic briefing; complete source-value preservation is verified against the Full Analysis Report.",
+        "flags": [],
+        "layout": {
+          "componentCount": 62,
+          "boxCount": 458,
+          "textTextOverlaps": [],
+          "textBarOverlaps": [],
+          "siblingComponentOverlaps": [],
+          "componentBoundaryViolations": [],
+          "footerCollisions": [],
+          "orphanHeadings": [],
+          "repeatedTableHeaderFailures": [],
+          "overflowingComponents": [],
+          "zeroUnintendedOverlaps": true
+        },
+        "synthetic": true
+      }
+    },
+    "full-large-revision-3-subjects": {
+      "group": "qa",
+      "pages": 26,
+      "pdf": {
+        "file": "deliverables/qa/full-large-revision-3-subjects.pdf",
+        "pages": 26,
+        "a4_portrait": true,
+        "fonts": [
+          "CZZZZZ+Inter-Regular",
+          "DZZZZZ+Manrope-ExtraLight",
+          "EZZZZZ+STIXTwoMath-Regular",
+          "FZZZZZ+Inter-Regular",
+          "GZZZZZ+Inter-Regular"
+        ],
+        "embedded_fonts": {
+          "Inter": true,
+          "Manrope": true,
+          "STIXTwoMath": true
+        },
+        "logo_images_per_page": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2
+        ],
+        "logo_on_every_page": true,
+        "drawings_per_page": [
+          18,
+          44,
+          51,
+          85,
+          38,
+          28,
+          89,
+          90,
+          120,
+          92,
+          93,
+          92,
+          51,
+          117,
+          143,
+          51,
+          87,
+          92,
+          40,
+          65,
+          55,
+          40,
+          42,
+          28,
+          34,
+          24
+        ],
+        "header_footer_on_every_page": true,
+        "report_identification_on_every_page": true,
+        "page_numbering_sequential": true,
+        "page_total_on_every_page": true,
+        "blank_pages": [],
+        "out_of_bounds_text_lines": [],
+        "footer_collisions": [],
+        "clipped_text_candidates": [],
+        "rendered_line_overlaps": [],
+        "rendered_text_bar_overlaps": [],
+        "minimum_font_size": 7.4,
+        "maximum_font_size": 62.0,
+        "raw_tex_in_text": true
+      },
+      "manifest": {
+        "component_count": 410,
+        "box_count": 4229,
+        "text_text_overlaps": [],
+        "text_bar_overlaps": [],
+        "sibling_component_overlaps": [],
+        "component_boundary_violations": [],
+        "footer_collisions": [],
+        "orphan_headings": [],
+        "repeated_table_header_failures": [],
+        "overflowing_components": [],
+        "page_coverage": [
+          {
+            "page": 1,
+            "coverage": 0.863,
+            "max_y": 693.2
+          },
+          {
+            "page": 2,
+            "coverage": 0.896,
+            "max_y": 716.3
+          },
+          {
+            "page": 3,
+            "coverage": 0.974,
+            "max_y": 771.7
+          },
+          {
+            "page": 4,
+            "coverage": 0.954,
+            "max_y": 757.7
+          },
+          {
+            "page": 5,
+            "coverage": 0.828,
+            "max_y": 668.2
+          },
+          {
+            "page": 6,
+            "coverage": 0.649,
+            "max_y": 541.2
+          },
+          {
+            "page": 7,
+            "coverage": 0.743,
+            "max_y": 608.0
+          },
+          {
+            "page": 8,
+            "coverage": 0.622,
+            "max_y": 522.2
+          },
+          {
+            "page": 9,
+            "coverage": 0.987,
+            "max_y": 781.0
+          },
+          {
+            "page": 10,
+            "coverage": 0.858,
+            "max_y": 689.3
+          },
+          {
+            "page": 11,
+            "coverage": 0.655,
+            "max_y": 545.7
+          },
+          {
+            "page": 12,
+            "coverage": 0.59,
+            "max_y": 499.9
+          },
+          {
+            "page": 13,
+            "coverage": 0.656,
+            "max_y": 546.5
+          },
+          {
+            "page": 14,
+            "coverage": 0.989,
+            "max_y": 781.9
+          },
+          {
+            "page": 15,
+            "coverage": 0.872,
+            "max_y": 699.7
+          },
+          {
+            "page": 16,
+            "coverage": 0.63,
+            "max_y": 528.4
+          },
+          {
+            "page": 17,
+            "coverage": 0.592,
+            "max_y": 500.8
+          },
+          {
+            "page": 18,
+            "coverage": 0.622,
+            "max_y": 522.2
+          },
+          {
+            "page": 19,
+            "coverage": 0.749,
+            "max_y": 612.6
+          },
+          {
+            "page": 20,
+            "coverage": 0.966,
+            "max_y": 765.8
+          },
+          {
+            "page": 21,
+            "coverage": 0.676,
+            "max_y": 560.7
+          },
+          {
+            "page": 22,
+            "coverage": 0.963,
+            "max_y": 763.7
+          },
+          {
+            "page": 23,
+            "coverage": 0.979,
+            "max_y": 775.1
+          },
+          {
+            "page": 24,
+            "coverage": 0.935,
+            "max_y": 743.7
+          },
+          {
+            "page": 25,
+            "coverage": 0.959,
+            "max_y": 761.1
+          },
+          {
+            "page": 26,
+            "coverage": 0.961,
+            "max_y": 762.2
+          }
+        ],
+        "zero_unintended_overlaps": true
+      },
+      "generation": {
+        "file": "qa/full-large-revision-3-subjects.pdf",
+        "label": "3 subjects · 12 priority rows · long derivations",
+        "pages": 26,
+        "sourceValues": 286,
+        "missingValues": [],
+        "sourceValuesOutsideDigest": 0,
+        "dataScope": "Complete canonical source-value preservation.",
+        "flags": [
+          {
+            "report": "full",
+            "source": "Q3",
+            "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+            "reason": "MathJax could not typeset the expression"
+          },
+          {
+            "report": "full",
+            "source": "Q5",
+            "value": "\\frac{1}{2",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q5",
+            "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q18",
+            "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+            "reason": "MathJax could not typeset the expression"
+          },
+          {
+            "report": "full",
+            "source": "Q23",
+            "value": "\\frac{1}{2",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q23",
+            "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q47",
+            "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+            "reason": "MathJax could not typeset the expression"
+          },
+          {
+            "report": "full",
+            "source": "Q58",
+            "value": "\\frac{1}{2",
+            "reason": "Unbalanced TeX source"
+          },
+          {
+            "report": "full",
+            "source": "Q58",
+            "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+            "reason": "Unbalanced TeX source"
+          }
+        ],
+        "layout": {
+          "componentCount": 410,
+          "boxCount": 4229,
+          "textTextOverlaps": [],
+          "textBarOverlaps": [],
+          "siblingComponentOverlaps": [],
+          "componentBoundaryViolations": [],
+          "footerCollisions": [],
+          "orphanHeadings": [],
+          "repeatedTableHeaderFailures": [],
+          "overflowingComponents": [],
+          "zeroUnintendedOverlaps": true
+        },
+        "synthetic": true
+      }
+    },
+    "intelligence-large-revision-3-subjects": {
+      "group": "qa",
+      "pages": 6,
+      "pdf": {
+        "file": "deliverables/qa/intelligence-large-revision-3-subjects.pdf",
+        "pages": 6,
+        "a4_portrait": true,
+        "fonts": [
+          "CZZZZZ+Inter-Regular",
+          "DZZZZZ+Manrope-ExtraLight",
+          "EZZZZZ+STIXTwoMath-Regular",
+          "FZZZZZ+Inter-Regular",
+          "GZZZZZ+Inter-Regular"
+        ],
+        "embedded_fonts": {
+          "Inter": true,
+          "Manrope": true,
+          "STIXTwoMath": true
+        },
+        "logo_images_per_page": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          2
+        ],
+        "logo_on_every_page": true,
+        "drawings_per_page": [
+          47,
+          60,
+          56,
+          57,
+          59,
+          5
+        ],
+        "header_footer_on_every_page": true,
+        "report_identification_on_every_page": true,
+        "page_numbering_sequential": true,
+        "page_total_on_every_page": true,
+        "blank_pages": [],
+        "out_of_bounds_text_lines": [],
+        "footer_collisions": [],
+        "clipped_text_candidates": [],
+        "rendered_line_overlaps": [],
+        "rendered_text_bar_overlaps": [],
+        "minimum_font_size": 7.8,
+        "maximum_font_size": 28.0,
+        "raw_tex_in_text": false
+      },
+      "manifest": {
+        "component_count": 111,
+        "box_count": 907,
+        "text_text_overlaps": [],
+        "text_bar_overlaps": [],
+        "sibling_component_overlaps": [],
+        "component_boundary_violations": [],
+        "footer_collisions": [],
+        "orphan_headings": [],
+        "repeated_table_header_failures": [],
+        "overflowing_components": [],
+        "page_coverage": [
+          {
+            "page": 1,
+            "coverage": 0.973,
+            "max_y": 770.8
+          },
+          {
+            "page": 2,
+            "coverage": 0.889,
+            "max_y": 711.1
+          },
+          {
+            "page": 3,
+            "coverage": 0.984,
+            "max_y": 778.7
+          },
+          {
+            "page": 4,
+            "coverage": 0.965,
+            "max_y": 765.0
+          },
+          {
+            "page": 5,
+            "coverage": 0.92,
+            "max_y": 733.4
+          },
+          {
+            "page": 6,
+            "coverage": 0.982,
+            "max_y": 777.5
+          }
+        ],
+        "zero_unintended_overlaps": true
+      },
+      "generation": {
+        "file": "qa/intelligence-large-revision-3-subjects.pdf",
+        "label": "3 subjects · large revision strategy",
+        "pages": 6,
+        "sourceValues": 286,
+        "missingValues": [],
+        "sourceValuesOutsideDigest": 125,
+        "dataScope": "Academic briefing; complete source-value preservation is verified against the Full Analysis Report.",
+        "flags": [],
+        "layout": {
+          "componentCount": 111,
+          "boxCount": 907,
+          "textTextOverlaps": [],
+          "textBarOverlaps": [],
+          "siblingComponentOverlaps": [],
+          "componentBoundaryViolations": [],
+          "footerCollisions": [],
+          "orphanHeadings": [],
+          "repeatedTableHeaderFailures": [],
+          "overflowingComponents": [],
+          "zeroUnintendedOverlaps": true
+        },
+        "synthetic": true
+      }
+    },
+    "full-minimal-2-subjects": {
+      "group": "qa",
+      "pages": 8,
+      "pdf": {
+        "file": "deliverables/qa/full-minimal-2-subjects.pdf",
+        "pages": 8,
+        "a4_portrait": true,
+        "fonts": [
+          "CZZZZZ+Inter-Regular",
+          "DZZZZZ+Manrope-ExtraLight",
+          "EZZZZZ+STIXTwoMath-Regular",
+          "FZZZZZ+Inter-Regular",
+          "GZZZZZ+Inter-Regular"
+        ],
+        "embedded_fonts": {
+          "Inter": true,
+          "Manrope": true,
+          "STIXTwoMath": true
+        },
+        "logo_images_per_page": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2
+        ],
+        "logo_on_every_page": true,
+        "drawings_per_page": [
+          18,
+          27,
+          47,
+          31,
+          44,
+          33,
+          36,
+          10
+        ],
+        "header_footer_on_every_page": true,
+        "report_identification_on_every_page": true,
+        "page_numbering_sequential": true,
+        "page_total_on_every_page": true,
+        "blank_pages": [],
+        "out_of_bounds_text_lines": [],
+        "footer_collisions": [],
+        "clipped_text_candidates": [],
+        "rendered_line_overlaps": [],
+        "rendered_text_bar_overlaps": [],
+        "minimum_font_size": 7.5,
+        "maximum_font_size": 62.0,
+        "raw_tex_in_text": true
+      },
+      "manifest": {
+        "component_count": 126,
+        "box_count": 979,
+        "text_text_overlaps": [],
+        "text_bar_overlaps": [],
+        "sibling_component_overlaps": [],
+        "component_boundary_violations": [],
+        "footer_collisions": [],
+        "orphan_headings": [],
+        "repeated_table_header_failures": [],
+        "overflowing_components": [],
+        "page_coverage": [
+          {
+            "page": 1,
+            "coverage": 0.844,
+            "max_y": 679.6
+          },
+          {
+            "page": 2,
+            "coverage": 0.648,
+            "max_y": 540.7
+          },
+          {
+            "page": 3,
+            "coverage": 0.827,
+            "max_y": 667.5
+          },
+          {
+            "page": 4,
+            "coverage": 0.899,
+            "max_y": 718.4
+          },
+          {
+            "page": 5,
+            "coverage": 0.919,
+            "max_y": 732.4
+          },
+          {
+            "page": 6,
+            "coverage": 0.899,
+            "max_y": 718.2
+          },
+          {
+            "page": 7,
+            "coverage": 0.989,
+            "max_y": 782.5
+          },
+          {
+            "page": 8,
+            "coverage": 0.541,
+            "max_y": 464.9
+          }
+        ],
+        "zero_unintended_overlaps": true
+      },
+      "generation": {
+        "file": "qa/full-minimal-2-subjects.pdf",
+        "label": "2 subjects · missing fields · short page count",
+        "pages": 8,
+        "sourceValues": 81,
+        "missingValues": [],
+        "sourceValuesOutsideDigest": 0,
+        "dataScope": "Complete canonical source-value preservation.",
+        "flags": [],
+        "layout": {
+          "componentCount": 126,
+          "boxCount": 979,
+          "textTextOverlaps": [],
+          "textBarOverlaps": [],
+          "siblingComponentOverlaps": [],
+          "componentBoundaryViolations": [],
+          "footerCollisions": [],
+          "orphanHeadings": [],
+          "repeatedTableHeaderFailures": [],
+          "overflowingComponents": [],
+          "zeroUnintendedOverlaps": true
+        },
+        "synthetic": true
+      }
+    },
+    "intelligence-minimal-2-subjects": {
+      "group": "qa",
+      "pages": 3,
+      "pdf": {
+        "file": "deliverables/qa/intelligence-minimal-2-subjects.pdf",
+        "pages": 3,
+        "a4_portrait": true,
+        "fonts": [
+          "CZZZZZ+Inter-Regular",
+          "DZZZZZ+Manrope-ExtraLight",
+          "EZZZZZ+STIXTwoMath-Regular",
+          "FZZZZZ+Inter-Regular",
+          "GZZZZZ+Inter-Regular"
+        ],
+        "embedded_fonts": {
+          "Inter": true,
+          "Manrope": true,
+          "STIXTwoMath": true
+        },
+        "logo_images_per_page": [
+          1,
+          1,
+          2
+        ],
+        "logo_on_every_page": true,
+        "drawings_per_page": [
+          21,
+          34,
+          6
+        ],
+        "header_footer_on_every_page": true,
+        "report_identification_on_every_page": true,
+        "page_numbering_sequential": true,
+        "page_total_on_every_page": true,
+        "blank_pages": [],
+        "out_of_bounds_text_lines": [],
+        "footer_collisions": [],
+        "clipped_text_candidates": [],
+        "rendered_line_overlaps": [],
+        "rendered_text_bar_overlaps": [],
+        "minimum_font_size": 7.8,
+        "maximum_font_size": 28.0,
+        "raw_tex_in_text": false
+      },
+      "manifest": {
+        "component_count": 39,
+        "box_count": 224,
+        "text_text_overlaps": [],
+        "text_bar_overlaps": [],
+        "sibling_component_overlaps": [],
+        "component_boundary_violations": [],
+        "footer_collisions": [],
+        "orphan_headings": [],
+        "repeated_table_header_failures": [],
+        "overflowing_components": [],
+        "page_coverage": [
+          {
+            "page": 1,
+            "coverage": 0.683,
+            "max_y": 565.2
+          },
+          {
+            "page": 2,
+            "coverage": 0.933,
+            "max_y": 742.5
+          },
+          {
+            "page": 3,
+            "coverage": 0.509,
+            "max_y": 442.7
+          }
+        ],
+        "zero_unintended_overlaps": true
+      },
+      "generation": {
+        "file": "qa/intelligence-minimal-2-subjects.pdf",
+        "label": "2 subjects · minimal intelligence digest",
+        "pages": 3,
+        "sourceValues": 81,
+        "missingValues": [],
+        "sourceValuesOutsideDigest": 38,
+        "dataScope": "Academic briefing; complete source-value preservation is verified against the Full Analysis Report.",
+        "flags": [],
+        "layout": {
+          "componentCount": 39,
+          "boxCount": 224,
+          "textTextOverlaps": [],
+          "textBarOverlaps": [],
+          "siblingComponentOverlaps": [],
+          "componentBoundaryViolations": [],
+          "footerCollisions": [],
+          "orphanHeadings": [],
+          "repeatedTableHeaderFailures": [],
+          "overflowingComponents": [],
+          "zeroUnintendedOverlaps": true
+        },
+        "synthetic": true
+      }
+    }
   },
   "data_preservation": {
     "missing_source_values_in_full_pdf": [],
-    "missing_source_values_from_generator": [],
     "missing_question_ids": [],
     "question_ids_checked": [
       "Q1",
@@ -222,35 +1581,110 @@
   "sections": {
     "full": {
       "FULL EXAM ANALYSIS REPORT": true,
-      "PERFORMANCE BREAKDOWN": true,
-      "SUBJECT AND CHAPTER INTELLIGENCE": true,
-      "TIME, COMPARISON AND PROJECTION": true,
+      "PERFORMANCE INTELLIGENCE": true,
+      "SUBJECT AND CHAPTER MASTERY": true,
+      "TIME INTELLIGENCE": true,
+      "COMPARISON AND PROJECTION": true,
       "QUESTION-BY-QUESTION ANALYSIS": true,
-      "MISTAKE PATTERN AND EVIDENCE": true,
-      "REVISION STRATEGY": true,
+      "LEARNING INTELLIGENCE": true,
       "SOURCE DATA REGISTER": true
     },
     "intelligence": {
       "EXAM INTELLIGENCE REPORT": true,
-      "OVERALL PERFORMANCE SUMMARY": true,
-      "SUBJECT-WISE PERFORMANCE": true,
+      "SUBJECT PERFORMANCE": true,
       "CHAPTER MASTERY": true,
-      "CHAPTER TIME CONSUMPTION": true,
+      "ERROR PATTERNS AND TOPIC ACCURACY": true,
       "WHAT TO STUDY NEXT": true,
-      "MISTAKE PATTERN ANALYSIS": true,
-      "TOPIC-LEVEL ACCURACY": true,
-      "PRIORITY CLASSIFICATION": true
+      "PRIORITY CLASSIFICATION": true,
+      "PUBLISHED NEXT ACTIONS": true
     }
   },
   "previews": [
-    "deliverables/previews/01-full-analysis-cover.png",
-    "deliverables/previews/02-full-analysis-performance.png",
-    "deliverables/previews/03-full-analysis-question-cards.png",
-    "deliverables/previews/04-full-analysis-revision.png",
-    "deliverables/previews/05-intelligence-page-1.png",
-    "deliverables/previews/06-intelligence-page-2.png",
-    "deliverables/previews/07-math-rendering-qa.png",
-    "deliverables/previews/08-malformed-expression-qa.png",
-    "deliverables/previews/overview.png"
-  ]
+    {
+      "slug": "full",
+      "group": "reports",
+      "pages_rendered": 16,
+      "page_directory": "deliverables/previews/v2/pages/full",
+      "contact_sheets": [
+        "deliverables/previews/v2/contact-sheets/full-contact-sheet-01.png",
+        "deliverables/previews/v2/contact-sheets/full-contact-sheet-02.png",
+        "deliverables/previews/v2/contact-sheets/full-contact-sheet-03.png"
+      ]
+    },
+    {
+      "slug": "intelligence",
+      "group": "reports",
+      "pages_rendered": 4,
+      "page_directory": "deliverables/previews/v2/pages/intelligence",
+      "contact_sheets": [
+        "deliverables/previews/v2/contact-sheets/intelligence-contact-sheet-01.png"
+      ]
+    },
+    {
+      "slug": "full-edge-cases-2-subjects",
+      "group": "qa",
+      "pages_rendered": 33,
+      "page_directory": "deliverables/previews/v2/pages/full-edge-cases-2-subjects",
+      "contact_sheets": [
+        "deliverables/previews/v2/contact-sheets/full-edge-cases-2-subjects-contact-sheet-01.png",
+        "deliverables/previews/v2/contact-sheets/full-edge-cases-2-subjects-contact-sheet-02.png",
+        "deliverables/previews/v2/contact-sheets/full-edge-cases-2-subjects-contact-sheet-03.png",
+        "deliverables/previews/v2/contact-sheets/full-edge-cases-2-subjects-contact-sheet-04.png",
+        "deliverables/previews/v2/contact-sheets/full-edge-cases-2-subjects-contact-sheet-05.png",
+        "deliverables/previews/v2/contact-sheets/full-edge-cases-2-subjects-contact-sheet-06.png"
+      ]
+    },
+    {
+      "slug": "intelligence-edge-cases-2-subjects",
+      "group": "qa",
+      "pages_rendered": 4,
+      "page_directory": "deliverables/previews/v2/pages/intelligence-edge-cases-2-subjects",
+      "contact_sheets": [
+        "deliverables/previews/v2/contact-sheets/intelligence-edge-cases-2-subjects-contact-sheet-01.png"
+      ]
+    },
+    {
+      "slug": "full-large-revision-3-subjects",
+      "group": "qa",
+      "pages_rendered": 26,
+      "page_directory": "deliverables/previews/v2/pages/full-large-revision-3-subjects",
+      "contact_sheets": [
+        "deliverables/previews/v2/contact-sheets/full-large-revision-3-subjects-contact-sheet-01.png",
+        "deliverables/previews/v2/contact-sheets/full-large-revision-3-subjects-contact-sheet-02.png",
+        "deliverables/previews/v2/contact-sheets/full-large-revision-3-subjects-contact-sheet-03.png",
+        "deliverables/previews/v2/contact-sheets/full-large-revision-3-subjects-contact-sheet-04.png",
+        "deliverables/previews/v2/contact-sheets/full-large-revision-3-subjects-contact-sheet-05.png"
+      ]
+    },
+    {
+      "slug": "intelligence-large-revision-3-subjects",
+      "group": "qa",
+      "pages_rendered": 6,
+      "page_directory": "deliverables/previews/v2/pages/intelligence-large-revision-3-subjects",
+      "contact_sheets": [
+        "deliverables/previews/v2/contact-sheets/intelligence-large-revision-3-subjects-contact-sheet-01.png"
+      ]
+    },
+    {
+      "slug": "full-minimal-2-subjects",
+      "group": "qa",
+      "pages_rendered": 8,
+      "page_directory": "deliverables/previews/v2/pages/full-minimal-2-subjects",
+      "contact_sheets": [
+        "deliverables/previews/v2/contact-sheets/full-minimal-2-subjects-contact-sheet-01.png",
+        "deliverables/previews/v2/contact-sheets/full-minimal-2-subjects-contact-sheet-02.png"
+      ]
+    },
+    {
+      "slug": "intelligence-minimal-2-subjects",
+      "group": "qa",
+      "pages_rendered": 3,
+      "page_directory": "deliverables/previews/v2/pages/intelligence-minimal-2-subjects",
+      "contact_sheets": [
+        "deliverables/previews/v2/contact-sheets/intelligence-minimal-2-subjects-contact-sheet-01.png"
+      ]
+    }
+  ],
+  "overview": "deliverables/previews/v2/overview-v2.png",
+  "review_index": "deliverables/previews/v2/REVIEW_INDEX.md"
 }

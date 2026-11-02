@@ -1,915 +1,1076 @@
 /**
- * Reusable publication components.
+ * Reusable, measurement-driven V2 publication components.
  *
- * Every component is a pure drawing function over a ReportContext. None of
- * them reads the API directly; all values arrive through the model. Text is
- * always drawn through ctx.drawText so values are measured, wrapped, embedded
- * with the correct font and recorded for the preservation register.
+ * Flow components reserve their measured height through ReportContext. Static
+ * specs can be placed inside editorial columns; they measure with the exact
+ * width they will receive and draw only inside their frame. Chrome is fixed
+ * and audited separately from content.
  */
 
 import {
-  A4, CONTENT, COLORS, FONTS, TYPE, PAGE,
-  fmt, pct, statusColor, statusSoft, masteryColor, priorityColor,
-  difficultyColor, subjectColor, twoColumns, threeColumns,
+  A4, CONTENT, FOOTER, PAGE, COLORS, FONTS, TYPE,
+  fmt, pct, mix, twoColumns, statusColor, statusSoft, masteryColor, priorityColor,
+  difficultyColor, subjectColor,
 } from './theme.js'
 import { SolutionRenderer } from './math.js'
 
+const HAIRLINE = 0.5
+
+function asColor(value, fallback = COLORS.ink) {
+  if (typeof value === 'function') return value() || fallback
+  return value || fallback
+}
+
+function resolveColor(value, rowValue, row, fallback = COLORS.ink) {
+  if (typeof value === 'function') return value(rowValue, row) || fallback
+  return value || fallback
+}
+
+function equalColumns(count, gap, w, x) {
+  const width = (w - gap * (count - 1)) / count
+  return Array.from({ length: count }, (_, i) => ({ x: x + i * (width + gap), w: width }))
+}
+
+function drawLogo(ctx, x, y, width, role = 'content') {
+  if (!ctx.assets?.logo) return
+  ctx.canvas.image(ctx.assets.logo, x, y, width, width, { role })
+}
+
 /* ------------------------------------------------------------------ *
- * Chrome
+ * Fixed chrome
  * ------------------------------------------------------------------ */
 
-export function drawGrid(ctx) {
-  const doc = ctx.doc
-  doc.save()
-  doc.opacity(0.62).lineWidth(0.3).strokeColor(COLORS.grid)
-  for (let i = 0; i <= 12; i += 1) {
-    const x = CONTENT.x + (CONTENT.w / 12) * i
-    doc.moveTo(x, CONTENT.y - 8).lineTo(x, CONTENT.bottom + 8).stroke()
-  }
-  doc.restore()
+export function drawHeader(ctx, { cover = false } = {}) {
+  ctx.chrome({
+    type: 'header', role: 'header',
+    x: CONTENT.x, y: PAGE.headerTop, w: CONTENT.w, h: 40,
+  }, (frame) => {
+    const logoW = cover ? 24 : 18
+    drawLogo(ctx, frame.x, frame.y + 1, logoW, 'header')
+    const brandX = frame.x + logoW + 9
+    ctx.text('MediXO EduX', brandX, frame.y + 3, 150, {
+      size: cover ? 10 : 8.8, font: FONTS.heading, color: COLORS.midnight,
+      chrome: true, emit: false, role: 'header',
+    })
+    const rightW = 250
+    const rightX = frame.x + frame.w - rightW
+    const rightLabel = ctx.kind === 'intelligence'
+      ? 'EXAM INTELLIGENCE  /  PERFORMANCE BRIEFING'
+      : 'ACADEMIC INTELLIGENCE  /  PUBLICATION'
+    ctx.text(rightLabel, rightX, frame.y + 4, rightW, {
+      size: 7.8, font: FONTS.bodySemi, color: COLORS.muted,
+      align: 'right', characterSpacing: 0.7, chrome: true, emit: false, role: 'header',
+    })
+    if (!cover) {
+      ctx.text(ctx.model.reportId, brandX, frame.y + 16, 200, {
+        size: 7.8, font: FONTS.bodySemi, color: COLORS.muted,
+        characterSpacing: 0.5, chrome: true, emit: false, role: 'header',
+      })
+      ctx.text(ctx.model.examTitleShort, rightX, frame.y + 16, rightW, {
+        size: 7.8, font: FONTS.body, color: COLORS.muted,
+        align: 'right', chrome: true, emit: false, role: 'header',
+      })
+    }
+    ctx.canvas.line(frame.x, frame.y + 38, frame.x + frame.w, frame.y + 38, {
+      color: COLORS.line, width: HAIRLINE, role: 'header',
+    })
+    ctx.canvas.line(frame.x, frame.y + 38, frame.x + 54, frame.y + 38, {
+      color: COLORS.indigo, width: 1.7, role: 'header',
+    })
+  })
 }
 
-function drawLogo(ctx, x, y, width) {
-  if (!ctx.assets?.logo) return false
-  try {
-    ctx.doc.image(ctx.assets.logo, x, y, { width })
-    return true
-  } catch {
-    return false
-  }
-}
-
-export function ReportHeader(ctx, { cover = false } = {}) {
-  const doc = ctx.doc
-  const y = cover ? 22 : 20
-  const logoW = cover ? 27 : 16
-  const logoX = cover ? CONTENT.x : CONTENT.x
-  const hasLogo = drawLogo(ctx, logoX, y, logoW)
-  const brandX = logoX + (hasLogo ? logoW + 8 : 0)
-  const brandSize = cover ? 10 : 8.2
-  ctx.drawText('MediXO EduX', brandX, y + (cover ? 5 : 2), 150, {
-    size: brandSize,
-    font: FONTS.heading,
-    color: COLORS.midnight,
-    characterSpacing: 0.2,
-    chrome: true,
-    emit: false,
-  })
-  if (cover) {
-    ctx.drawText('EXAMINATION INTELLIGENCE  /  PUBLICATION', CONTENT.x + CONTENT.w - 260, y + 6, 260, {
-      size: 7.2,
-      font: FONTS.bodySemi,
-      color: COLORS.slate,
-      align: 'right',
-      characterSpacing: 0.9,
-      chrome: true,
-      emit: false,
+export function drawFooter(ctx, { pageNumber } = {}) {
+  ctx.chrome({
+    type: 'footer', role: 'footer',
+    x: CONTENT.x, y: FOOTER.y, w: CONTENT.w, h: 24,
+  }, (frame) => {
+    ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, {
+      color: COLORS.line, width: HAIRLINE, role: 'footer',
     })
-    doc.lineWidth(1).strokeColor(COLORS.indigo).moveTo(CONTENT.x, y + logoW + 9).lineTo(CONTENT.x + 64, y + logoW + 9).stroke()
-    doc.lineWidth(0.5).strokeColor(COLORS.border).moveTo(CONTENT.x + 64, y + logoW + 9).lineTo(CONTENT.x + CONTENT.w, y + logoW + 9).stroke()
-  } else {
-    ctx.drawText(ctx.model.reportId, CONTENT.x + 122, y + 2, 210, {
-      size: 7.2,
-      font: FONTS.bodySemi,
-      color: COLORS.slate,
-      characterSpacing: 0.8,
-      chrome: true,
-      emit: false,
+    ctx.text('MediXO EduX', frame.x, frame.y + 9, 150, {
+      size: TYPE.folio, font: FONTS.bodySemi, color: COLORS.muted,
+      chrome: true, emit: false, role: 'footer',
     })
-    ctx.drawText(ctx.model.examTitleShort, CONTENT.x + CONTENT.w - 225, y + 2, 225, {
-      size: 7.2,
-      font: FONTS.body,
-      color: COLORS.slate,
-      align: 'right',
-      chrome: true,
-      emit: false,
+    ctx.text(ctx.model.reportId, frame.x + 150, frame.y + 9, frame.w - 300, {
+      size: TYPE.folio, font: FONTS.body, color: COLORS.muted,
+      align: 'center', chrome: true, emit: false, role: 'footer',
     })
-    doc.lineWidth(0.55).strokeColor(COLORS.border)
-      .moveTo(CONTENT.x, y + logoW + 7).lineTo(CONTENT.x + CONTENT.w, y + logoW + 7).stroke()
-    doc.lineWidth(1.6).strokeColor(COLORS.indigo)
-      .moveTo(CONTENT.x, y + logoW + 7).lineTo(CONTENT.x + 52, y + logoW + 7).stroke()
-  }
-}
-
-export function ReportFooter(ctx, { pageNumber } = {}) {
-  const doc = ctx.doc
-  const y = A4.height - 38
-  doc.lineWidth(0.5).strokeColor(COLORS.border)
-    .moveTo(CONTENT.x, y - 7).lineTo(CONTENT.x + CONTENT.w, y - 7).stroke()
-  ctx.drawText('MediXO EduX', CONTENT.x, y, 150, {
-    size: 7.2, font: FONTS.bodySemi, color: COLORS.slate, chrome: true, emit: false,
-  })
-  ctx.drawText(ctx.model.reportId, CONTENT.x + 150, y, CONTENT.w - 300, {
-    size: 7.2, font: FONTS.body, color: COLORS.slate, align: 'center', chrome: true, emit: false,
-  })
-  ctx.drawText('PAGE', CONTENT.x + CONTENT.w - 92, y, 34, {
-    size: 7.2, font: FONTS.bodySemi, color: COLORS.slate, align: 'right', characterSpacing: 0.6, chrome: true, emit: false,
-  })
-  ctx.drawText(String(pageNumber).padStart(2, '0'), CONTENT.x + CONTENT.w - 56, y, 20, {
-    size: 7.2, font: FONTS.bodyBold, color: COLORS.midnight, align: 'right', chrome: true, emit: false,
+    ctx.text(`PAGE ${String(pageNumber).padStart(2, '0')}`, frame.x + frame.w - 110, frame.y + 9, 74, {
+      size: TYPE.folio, font: FONTS.bodySemi, color: COLORS.muted,
+      align: 'right', chrome: true, emit: false, role: 'footer',
+    })
   })
 }
 
 export function drawPageTotal(ctx, total) {
-  ctx.drawText(`/ ${String(total).padStart(2, '0')}`, CONTENT.x + CONTENT.w - 32, A4.height - 38, 32, {
-    size: 7.2, font: FONTS.bodyBold, color: COLORS.midnight, chrome: true, emit: false,
+  ctx.chrome({
+    type: 'page-total', role: 'footer',
+    x: CONTENT.x + CONTENT.w - 34, y: FOOTER.y + 9, w: 34, h: 10,
+  }, (frame) => {
+    ctx.text(`/ ${String(total).padStart(2, '0')}`, frame.x, frame.y, frame.w, {
+      size: TYPE.folio, font: FONTS.bodyBold, color: COLORS.midnight,
+      align: 'right', chrome: true, emit: false, role: 'footer',
+    })
   })
 }
 
-export function FinalBranding(ctx, { reserve = true, y: explicitY } = {}) {
-  const y = reserve ? ctx.reserve(58).y : explicitY ?? ctx.y
-  const doc = ctx.doc
-  doc.lineWidth(0.5).strokeColor(COLORS.border)
-    .moveTo(CONTENT.x, y + 4).lineTo(CONTENT.x + CONTENT.w, y + 4).stroke()
-  const logoW = 22
-  const cx = CONTENT.x + CONTENT.w / 2
-  drawLogo(ctx, cx - logoW / 2, y + 15, logoW)
-  ctx.drawText('MediXO EduX  ·  Examination Intelligence', cx - 180, y + 16, 180, {
-    size: 8.4, font: FONTS.heading, color: COLORS.midnight, align: 'right',
+export function FinalBranding(ctx) {
+  const placed = ctx.bottomFrame(54)
+  return ctx.chrome({
+    type: 'final-branding', role: 'content', label: 'End of report',
+    x: placed.x, y: placed.y, w: placed.w, h: placed.h,
+  }, (frame) => {
+    ctx.canvas.line(frame.x, frame.y + 6, frame.x + frame.w, frame.y + 6, { color: COLORS.line, width: HAIRLINE })
+    const cx = frame.x + frame.w / 2
+    const logoW = 22
+    drawLogo(ctx, cx - logoW / 2, frame.y + 14, logoW, 'content')
+    ctx.text('MediXO EduX  ·  Examination Intelligence', frame.x, frame.y + 16, frame.w / 2 - 24, {
+      size: 8.6, font: FONTS.heading, color: COLORS.midnight, align: 'right',
+    })
+    ctx.text(`End of report  ·  ${ctx.model.reportId}`, cx + 24, frame.y + 17, frame.w / 2 - 24, {
+      size: 8, font: FONTS.body, color: COLORS.muted,
+    })
+    ctx.text('Missing values are shown as —.', frame.x, frame.y + 39, frame.w, {
+      size: TYPE.folio, font: FONTS.body, color: COLORS.muted, align: 'center',
+    })
   })
-  ctx.drawText(`End of report  ·  ${ctx.model.reportId}`, cx + 20, y + 17, 180, {
-    size: 7.6, font: FONTS.body, color: COLORS.slate,
-  })
-  ctx.drawText('Academic data reproduced without inference. Missing values are shown as —.', CONTENT.x, y + 41, CONTENT.w, {
-    size: 7.2, font: FONTS.body, color: COLORS.slate, align: 'center',
-  })
-  return 58
 }
 
 /* ------------------------------------------------------------------ *
- * Primitive components
+ * Editorial primitives
  * ------------------------------------------------------------------ */
 
-export function rule(ctx, x, y, w, color = COLORS.border, width = 0.5) {
-  ctx.doc.lineWidth(width).strokeColor(color).moveTo(x, y).lineTo(x + w, y).stroke()
-}
-
-export function Pill(ctx, { x, y, text, color = COLORS.indigo, soft = COLORS.indigoSoft, width, size = 7.4 } = {}) {
-  const label = fmt(text, '—')
-  const labelW = width || ctx.textEngine.measureRun(label, FONTS.bodyBold, size, {}) + 14
-  const h = size + 7
-  ctx.doc.roundedRect(x, y, labelW, h, h / 2).fill(soft)
-  ctx.drawText(label, x + 7, y + 2.5, labelW - 14, {
-    size, font: FONTS.bodyBold, color, align: 'center',
+export function SectionHeading(ctx, {
+  number, kicker, title, note = '', accent = COLORS.indigo,
+  topSpacing = 4, bottomSpacing = 12, keepWithNext = 78,
+} = {}) {
+  const titleW = CONTENT.w - 52
+  const measure = () => {
+    const kickerH = kicker ? ctx.measureText(kicker, titleW, { size: TYPE.label, font: FONTS.bodySemi, characterSpacing: 1 }) : 0
+    const titleH = ctx.measureText(title, titleW, { size: TYPE.section, font: FONTS.heading, lineHeight: TYPE.section * 1.18 })
+    const noteH = note ? ctx.measureText(note, CONTENT.w, { size: TYPE.bodySmall, font: FONTS.body, color: COLORS.muted }) : 0
+    return 6 + kickerH + 3 + titleH + (note ? 7 + noteH : 0) + 9
+  }
+  return ctx.component({
+    type: 'section-heading', label: title, topSpacing, bottomSpacing, keepWithNext,
+    measure,
+    draw: (frame) => {
+      let cursor = frame.y + 3
+      if (number) {
+        ctx.text(number, frame.x, cursor, 36, {
+          size: 9, font: FONTS.bodyBold, color: accent, characterSpacing: 0.7,
+        })
+      }
+      const tx = frame.x + (number ? 44 : 0)
+      if (kicker) {
+        const h = ctx.text(kicker, tx, cursor, titleW, {
+          size: TYPE.label, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 1,
+        })
+        cursor += h + 2
+      }
+      const titleH = ctx.text(title, tx, cursor, titleW, {
+        size: TYPE.section, font: FONTS.heading, color: COLORS.midnight,
+        lineHeight: TYPE.section * 1.18,
+      })
+      cursor += titleH + 7
+      if (note) {
+        cursor += ctx.text(note, frame.x, cursor, frame.w, {
+          size: TYPE.bodySmall, font: FONTS.body, color: COLORS.muted,
+        })
+      }
+      ctx.canvas.line(frame.x, frame.y + frame.h - 8, frame.x + frame.w, frame.y + frame.h - 8, { color: COLORS.line, width: HAIRLINE })
+      ctx.canvas.line(frame.x, frame.y + frame.h - 8, frame.x + 48, frame.y + frame.h - 8, { color: accent, width: 1.5 })
+    },
   })
-  return { w: labelW, h }
 }
 
-export function ProgressBar(ctx, { x, y, w, value, max = 100, color = COLORS.indigo, track = COLORS.border, height = 4 } = {}) {
+export function Subheading(ctx, { title, note = '', accent = COLORS.indigo, topSpacing = 6, bottomSpacing = 7 } = {}) {
+  const measure = () => {
+    const titleH = ctx.measureText(title, CONTENT.w - 14, { size: TYPE.subsection, font: FONTS.heading })
+    const noteH = note ? ctx.measureText(note, CONTENT.w - 14, { size: 8.5, font: FONTS.body, color: COLORS.muted }) : 0
+    return titleH + (note ? 2 + noteH : 0) + 5
+  }
+  return ctx.component({
+    type: 'subsection-heading', label: title, topSpacing, bottomSpacing, keepWithNext: 30,
+    measure,
+    draw: (frame) => {
+      ctx.canvas.rect(frame.x, frame.y + 3, 2.5, 12, { fill: accent })
+      const h = ctx.text(title, frame.x + 12, frame.y, frame.w - 12, {
+        size: TYPE.subsection, font: FONTS.heading, color: COLORS.midnight,
+      })
+      if (note) {
+        ctx.text(note, frame.x + 12, frame.y + h + 1, frame.w - 12, {
+          size: 8.5, font: FONTS.body, color: COLORS.muted,
+        })
+      }
+      ctx.canvas.line(frame.x, frame.y + frame.h - 3, frame.x + frame.w, frame.y + frame.h - 3, { color: COLORS.line, width: 0.4 })
+    },
+  })
+}
+
+export function Paragraph(ctx, { text, title = '', accent = COLORS.indigo, size = TYPE.body, tone = COLORS.ink, bottomSpacing = 8 } = {}) {
+  const measure = () => {
+    const titleH = title ? ctx.measureText(title, CONTENT.w - 16, { size: TYPE.label, font: FONTS.bodySemi, characterSpacing: 0.8 }) + 4 : 0
+    const bodyH = ctx.measureText(fmt(text, '—'), CONTENT.w - 18, { size, font: FONTS.body, color: tone, paragraphGap: 3 })
+    return 10 + titleH + bodyH + 8
+  }
+  return ctx.component({
+    type: 'editorial-paragraph', label: title || String(text).slice(0, 40), bottomSpacing,
+    measure,
+    draw: (frame) => {
+      ctx.canvas.rect(frame.x, frame.y + 4, 2, frame.h - 12, { fill: accent })
+      let cursor = frame.y + 6
+      if (title) {
+        cursor += ctx.text(title, frame.x + 12, cursor, frame.w - 16, {
+          size: TYPE.label, font: FONTS.bodySemi, color: accent, characterSpacing: 0.8,
+        }) + 3
+      }
+      ctx.text(fmt(text, '—'), frame.x + 12, cursor, frame.w - 18, {
+        size, font: FONTS.body, color: tone, paragraphGap: 3,
+      })
+    },
+  })
+}
+
+export function Pill(ctx, { x, y, text, color = COLORS.indigo, soft = mix(color, COLORS.white, 0.1), width, size = 8, emit = true } = {}) {
+  const label = fmt(text, '—')
+  const measured = ctx.textEngine.measureRun(label, FONTS.bodyBold, size, {})
+  const w = width || measured + 14
+  const h = size + 7
+  ctx.canvas.rect(x, y, w, h, { fill: soft, radius: h / 2, kind: 'shape', role: 'pill' })
+  ctx.text(label, x + 7, y + 2.5, w - 14, {
+    size, font: FONTS.bodyBold, color, align: 'center', emit,
+  })
+  return { w, h }
+}
+
+export function ProgressBar(ctx, { x, y, w, value, max = 100, color = COLORS.indigo, track = COLORS.line, height = 4 } = {}) {
   const v = Math.max(0, Number(value) || 0)
   const m = Math.max(1, Number(max) || 100)
-  ctx.doc.roundedRect(x, y, w, height, height / 2).fill(track)
+  ctx.canvas.bar(x, y, w, height, track, { variant: 'track' })
   const fillW = Math.min(w, (v / m) * w)
-  if (fillW > 0.6) ctx.doc.roundedRect(x, y, fillW, height, height / 2).fill(color)
+  if (fillW > 0.6) ctx.canvas.bar(x, y, fillW, height, color, { variant: 'value' })
   return height
 }
 
-export function MetricCard(ctx, { x, y, w, h = 56, label, value, sub = '', tone = COLORS.indigo, soft = COLORS.white, size = TYPE.metric } = {}) {
-  const doc = ctx.doc
-  doc.roundedRect(x, y, w, h, 4).fill(soft).stroke(COLORS.border)
-  doc.rect(x + 8, y, Math.max(18, w * 0.22), 2).fill(tone)
-  ctx.drawText(String(label).toUpperCase(), x + 8, y + 7, w - 16, {
-    size: TYPE.label, font: FONTS.bodySemi, color: COLORS.slate, characterSpacing: 0.7,
-  })
-  ctx.drawText(fmt(value), x + 8, y + 18, w - 16, {
-    size, font: FONTS.heading, color: tone, features: ['tnum'], lineHeight: size,
-  })
-  if (sub) {
-    ctx.drawText(fmt(sub), x + 8, y + h - 10, w - 16, {
-      size: 7.2, font: FONTS.body, color: COLORS.slate, lineHeight: 9,
-    })
-  }
-  return h
-}
-
-export function SectionHeading(ctx, { number, title, kicker = '', note = '', accent = COLORS.indigo, compact = false } = {}) {
-  const noteH = note ? ctx.measureText(note, CONTENT.w, { size: 8.2, font: FONTS.body, color: COLORS.slate }) + 4 : 0
-  const headingH = compact ? 31 : 40
-  const totalH = headingH + noteH + 8
-  ctx.ensureBlock(totalH + 52)
-  const { y } = ctx.reserve(totalH)
-  if (number) {
-    ctx.drawText(number, CONTENT.x, y, 34, {
-      size: 7.6, font: FONTS.bodyBold, color: accent, characterSpacing: 1.1,
-    })
-  }
-  const titleX = CONTENT.x + (number ? 38 : 0)
-  if (kicker) {
-    ctx.drawText(kicker, titleX, y, CONTENT.w - 38, {
-      size: 7.2, font: FONTS.bodySemi, color: COLORS.slate, characterSpacing: 1.2,
-    })
-  }
-  ctx.drawText(title, titleX, y + (kicker ? 12 : 2), CONTENT.w - 38, {
-    size: compact ? TYPE.subsection + 1 : TYPE.section,
-    font: FONTS.heading,
-    color: COLORS.midnight,
-    lineHeight: (compact ? TYPE.subsection + 1 : TYPE.section) * 1.25,
-  })
-  let lineY = y + headingH - 6
-  rule(ctx, CONTENT.x, lineY, CONTENT.w, COLORS.border, 0.5)
-  ctx.doc.rect(CONTENT.x, lineY - 1, 46, 2).fill(accent)
-  if (note) {
-    ctx.drawText(note, CONTENT.x, lineY + 7, CONTENT.w, {
-      size: 8.2, font: FONTS.body, color: COLORS.slate,
-    })
-  }
-  return totalH
-}
-
-export function SubsectionHeading(ctx, { x = CONTENT.x, y, w = CONTENT.w, title, note = '', accent = COLORS.indigo } = {}) {
-  const noteH = note ? ctx.measureText(note, w - 14, { size: 7.6, font: FONTS.body, color: COLORS.slate }) + 2 : 0
-  const h = 22 + noteH
-  ctx.doc.rect(x, y + 3, 3, 11).fill(accent)
-  ctx.drawText(title, x + 11, y, w - 11, {
-    size: 9.4, font: FONTS.heading, color: COLORS.midnight,
-  })
-  if (note) {
-    ctx.drawText(note, x + 11, y + 13, w - 11, {
-      size: 7.6, font: FONTS.body, color: COLORS.slate,
-    })
-  }
-  rule(ctx, x, y + h - 3, w, COLORS.border, 0.4)
-  return h
-}
-
-export function KeyValueGrid(ctx, { x = CONTENT.x, y, w = CONTENT.w, items = [], columns = 4, gap = 8, cardH = 38, valueSize = 9.2, valueLineHeight = 10.5 } = {}) {
-  const colW = (w - gap * (columns - 1)) / columns
-  let maxH = 0
-  items.forEach((item, index) => {
-    const col = index % columns
-    const row = Math.floor(index / columns)
-    const cx = x + col * (colW + gap)
-    const cy = y + row * (cardH + 6)
-    ctx.doc.roundedRect(cx, cy, colW, cardH, 3).fill(COLORS.ivory).stroke(COLORS.border)
-    ctx.drawText(String(item.label).toUpperCase(), cx + 7, cy + 6, colW - 14, {
-      size: 6.9, font: FONTS.bodySemi, color: COLORS.slate, characterSpacing: 0.5,
-    })
-    ctx.drawText(fmt(item.value), cx + 7, cy + 15, colW - 14, {
-      size: valueSize, font: FONTS.bodyBold, color: item.color || COLORS.midnight,
-      features: ['tnum'], lineHeight: valueLineHeight,
-    })
-  })
-  maxH = Math.ceil(items.length / columns) * (cardH + 6)
-  return maxH
-}
-
 /* ------------------------------------------------------------------ *
- * Charts
+ * Static specs for editorial columns
  * ------------------------------------------------------------------ */
 
-function drawDonut(ctx, { cx, cy, r, slices, centerValue, centerLabel }) {
-  const doc = ctx.doc
-  const total = slices.reduce((sum, s) => sum + (Number(s.value) || 0), 0) || 1
-  doc.save()
-  doc.lineWidth(11).strokeColor(COLORS.border).lineCap('butt')
-    .arc(cx, cy, r, -Math.PI / 2, Math.PI * 1.5).stroke()
-  let angle = -Math.PI / 2
-  doc.lineCap('butt')
-  slices.forEach((slice) => {
-    const sweep = ((Number(slice.value) || 0) / total) * Math.PI * 2
-    if (sweep > 0.001) {
-      doc.lineWidth(11).strokeColor(slice.color || COLORS.indigo)
-        .arc(cx, cy, r, angle, angle + sweep).stroke()
-    }
-    angle += sweep
+function flow(ctx, spec, opts = {}) {
+  const w = opts.w || CONTENT.w
+  const h = spec.measure(w)
+  return ctx.component({
+    type: spec.type,
+    label: spec.label || '',
+    x: opts.x,
+    w,
+    topSpacing: opts.topSpacing,
+    bottomSpacing: opts.bottomSpacing,
+    keepWithNext: opts.keepWithNext,
+    continuationLabel: opts.continuationLabel,
+    allowSplit: opts.allowSplit,
+    measure: () => h,
+    draw: (frame) => spec.draw({ ...frame, w }),
   })
-  doc.restore()
-  if (centerValue) {
-    ctx.drawText(centerValue, cx - 36, cy - 10, 72, {
-      size: 16, font: FONTS.heading, color: COLORS.midnight, align: 'center', features: ['tnum'],
-    })
-  }
-  if (centerLabel) {
-    ctx.drawText(centerLabel, cx - 40, cy + 10, 80, {
-      size: 6.8, font: FONTS.bodySemi, color: COLORS.slate, align: 'center', characterSpacing: 0.5,
-    })
-  }
 }
 
-export function PerformanceChart(ctx, {
-  x, y, w, h = 130, title, subtitle = '', type = 'hbar',
-  bars = [], slices = [], legend = '', centerValue = '', centerLabel = '', accent = COLORS.indigo,
+export function EditorialColumns(ctx, {
+  id, columns, gap = 18, topSpacing = 0, bottomSpacing = 8, keepWithNext = 0,
 } = {}) {
-  const doc = ctx.doc
-  doc.roundedRect(x, y, w, h, 4).fill(COLORS.white).stroke(COLORS.border)
-  doc.rect(x, y, 2.5, h).fill(accent)
-  ctx.drawText(title, x + 11, y + 9, w - 22, {
-    size: 9.2, font: FONTS.heading, color: COLORS.midnight,
+  const frames = equalColumns(columns.length, gap, CONTENT.w, CONTENT.x)
+  const specs = columns.map((entry, index) => (
+    typeof entry === 'function' ? entry(frames[index].w) : entry
+  ))
+  const heights = specs.map((spec, index) => spec.measure(frames[index].w))
+  const h = Math.max(...heights, 1)
+  return ctx.component({
+    type: 'editorial-columns', label: id || '', topSpacing, bottomSpacing, keepWithNext,
+    measure: () => h,
+    draw: (frame) => {
+      const cols = equalColumns(columns.length, gap, frame.w, frame.x)
+      specs.forEach((spec, index) => {
+        const col = cols[index]
+        ctx.child({
+          type: spec.type || 'editorial-column',
+          label: spec.label || '',
+          x: col.x, y: frame.y, w: col.w, h,
+        }, (childFrame) => spec.draw(childFrame))
+      })
+    },
   })
-  if (subtitle) {
-    ctx.drawText(subtitle, x + 11, y + 22, w - 22, {
-      size: 7.4, font: FONTS.body, color: COLORS.slate,
-    })
-  }
-  const top = y + (subtitle ? 38 : 28)
-  const innerW = w - 22
-  const innerX = x + 11
+}
 
-  if (type === 'hbar') {
-    const count = Math.max(1, bars.length)
-    const rowH = Math.min(19, Math.max(12, (h - (top - y) - 14) / count))
-    bars.forEach((bar, index) => {
-      const by = top + index * rowH
-      const labelW = Math.min(112, innerW * 0.42)
-      const valueW = 52
-      const trackX = innerX + labelW + 5
-      const trackW = Math.max(20, innerW - labelW - valueW - 10)
-      ctx.drawText(fmt(bar.label), innerX, by, labelW, {
-        size: 7.4, font: FONTS.bodySemi, color: COLORS.deepInk, lineHeight: rowH,
-      })
-      ProgressBar(ctx, { x: trackX, y: by + (rowH - 4) / 2, w: trackW, value: bar.value, max: bar.max || Math.max(...bars.map((b) => b.value), 1), color: bar.color || accent, height: 4 })
-      ctx.drawText(fmt(bar.valueLabel ?? bar.value), trackX + trackW + 4, by, valueW, {
-        size: 7.4, font: FONTS.bodyBold, color: bar.color || accent, align: 'right', features: ['tnum'], lineHeight: rowH,
-      })
-    })
-  } else if (type === 'donut') {
-    const chartW = Math.min(innerW * 0.48, h - (top - y) - 12)
-    const r = Math.max(20, Math.min(chartW / 2 - 8, 42))
-    const cx = innerX + r + 10
-    const cy = top + (h - (top - y)) / 2 - 4
-    drawDonut(ctx, { cx, cy, r, slices, centerValue, centerLabel })
-    const legendX = innerX + chartW + 22
-    const legendW = Math.max(40, innerW - chartW - 22)
-    const rowH = 13
-    slices.slice(0, 8).forEach((slice, index) => {
-      const ly = top + index * rowH
-      doc.rect(legendX, ly + 2, 6, 6).fill(slice.color || COLORS.indigo)
-      ctx.drawText(`${fmt(slice.label)}  ${fmt(slice.value)}`, legendX + 10, ly, legendW - 10, {
-        size: 7.2, font: FONTS.body, color: COLORS.deepInk, lineHeight: rowH,
-      })
-    })
-  } else if (type === 'stacked') {
-    const total = bars.reduce((sum, bar) => sum + (Number(bar.value) || 0), 0) || 1
-    let cursor = innerX
-    const barY = top + 12
-    const barH = 14
-    bars.forEach((bar) => {
-      const segW = ((Number(bar.value) || 0) / total) * innerW
-      if (segW > 0.5) doc.rect(cursor, barY, segW, barH).fill(bar.color || accent)
-      cursor += segW
-    })
-    const legendY = barY + 24
-    let lx = innerX
-    bars.forEach((bar) => {
-      const text = `${fmt(bar.label)} ${fmt(bar.value)}`
-      const tw = ctx.textEngine.measureRun(text, FONTS.body, 7.2, {}) + 16
-      if (lx + tw > innerX + innerW) {
-        lx = innerX
+export function MetricLedgerSpec(ctx, { label = '', items = [], labelSize = TYPE.label, valueSize = 11, columns = 4, gap = 12 } = {}) {
+  const measure = (w) => {
+    const widths = equalColumns(columns, gap, w, 0)
+    const rows = Math.ceil(items.length / columns)
+    let total = 0
+    for (let row = 0; row < rows; row += 1) {
+      let rowH = 0
+      for (let col = 0; col < columns; col += 1) {
+        const item = items[row * columns + col]
+        if (!item) continue
+        const cw = widths[col].w - 4
+        const labelH = ctx.measureText(String(item.label).toUpperCase(), cw, { size: labelSize, font: FONTS.bodySemi, characterSpacing: 0.5 })
+        const valueH = ctx.measureText(fmt(item.value), cw, { size: valueSize, font: FONTS.bodyBold, color: item.color || COLORS.midnight, features: ['tnum'] })
+        rowH = Math.max(rowH, labelH + valueH + 5)
       }
-      doc.rect(lx, legendY + 2, 6, 6).fill(bar.color || accent)
-      ctx.drawText(text, lx + 10, legendY, tw - 10, { size: 7.2, font: FONTS.body, color: COLORS.deepInk, lineHeight: 12 })
-      lx += tw + 6
+      total += rowH + 8
+    }
+    return total
+  }
+  const draw = (frame) => {
+    const widths = equalColumns(columns, gap, frame.w, frame.x)
+    let cursor = frame.y
+    for (let row = 0; row < Math.ceil(items.length / columns); row += 1) {
+      let rowH = 0
+      const cells = []
+      for (let col = 0; col < columns; col += 1) {
+        const item = items[row * columns + col]
+        if (!item) { cells.push(null); continue }
+        const cw = widths[col].w - 4
+        const labelH = ctx.measureText(String(item.label).toUpperCase(), cw, { size: labelSize, font: FONTS.bodySemi, characterSpacing: 0.5 })
+        const valueH = ctx.measureText(fmt(item.value), cw, { size: valueSize, font: FONTS.bodyBold, color: item.color || COLORS.midnight, features: ['tnum'] })
+        cells.push({ item, labelH, valueH, frame: widths[col] })
+        rowH = Math.max(rowH, labelH + valueH + 5)
+      }
+      cells.forEach((cell) => {
+        if (!cell) return
+        const { item, labelH, frame: c } = cell
+        ctx.text(String(item.label).toUpperCase(), c.x, cursor, c.w - 4, {
+          size: labelSize, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.5,
+        })
+        ctx.text(fmt(item.value), c.x, cursor + labelH + 2, c.w - 4, {
+          size: valueSize, font: FONTS.bodyBold, color: item.color || COLORS.midnight, features: ['tnum'],
+        })
+      })
+      cursor += rowH
+      ctx.canvas.line(frame.x, cursor + 3, frame.x + frame.w, cursor + 3, { color: COLORS.line, width: 0.4 })
+      cursor += 8
+    }
+  }
+  return { type: 'metric-ledger', label, measure, draw }
+}
+
+export function MetricLedger(ctx, opts) {
+  return flow(ctx, MetricLedgerSpec(ctx, opts), opts)
+}
+
+export function BarChartSpec(ctx, {
+  label = '', title, subtitle = '', bars = [], legend = '', accent = COLORS.indigo,
+  labelWidthRatio = 0.42, valueWidth = 54, minRowHeight = 21, rowGap = 3,
+} = {}) {
+  const geometry = (w) => {
+    const pad = 10
+    const innerW = Math.max(40, w - pad * 2)
+    let labelW = Math.max(42, Math.min(165, innerW * labelWidthRatio))
+    const valueW = Math.min(valueWidth, Math.max(34, innerW * 0.28))
+    let barX = labelW + 6
+    const valueX = innerW - valueW
+    let barW = valueX - 6 - barX
+    while (barW < 8 && labelW > 42) {
+      labelW = Math.max(42, labelW - 4)
+      barX = labelW + 6
+      barW = valueX - 6 - barX
+    }
+    return { pad, innerW, labelW, valueW, barX, valueX, barW: Math.max(4, barW) }
+  }
+  const measure = (w) => {
+    const g = geometry(w)
+    const titleH = title ? ctx.measureText(title, g.innerW, { size: TYPE.subsection, font: FONTS.heading }) : 0
+    const subtitleH = subtitle ? ctx.measureText(subtitle, g.innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) : 0
+    const rowHeights = bars.map((bar) => {
+      const labelH = ctx.measureText(fmt(bar.label), g.labelW, { size: TYPE.bodySmall, font: FONTS.bodySemi })
+      const valueH = ctx.measureText(fmt(bar.valueLabel ?? bar.value), g.valueW, { size: TYPE.bodySmall, font: FONTS.bodyBold, align: 'right', features: ['tnum'] })
+      return Math.max(minRowHeight, labelH, valueH) + 6
+    })
+    const legendH = legend ? ctx.measureText(legend, g.innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) : 0
+    return 8 + titleH + (subtitle ? 3 + subtitleH : 0) + 8
+      + rowHeights.reduce((sum, h) => sum + h, 0) + Math.max(0, bars.length - 1) * rowGap
+      + (legend ? 7 + legendH : 0) + 8
+  }
+  const draw = (frame) => {
+    const g = geometry(frame.w)
+    const innerX = frame.x + g.pad
+    const barX = frame.x + g.pad + g.barX
+    const valueX = frame.x + g.pad + g.valueX
+    const max = Math.max(...bars.map((bar) => Number(bar.value) || 0), 1)
+    let cursor = frame.y + 5
+    ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: HAIRLINE })
+    if (title) {
+      cursor += ctx.text(title, innerX, cursor, g.innerW, { size: TYPE.subsection, font: FONTS.heading, color: COLORS.midnight }) + 2
+    }
+    if (subtitle) {
+      cursor += ctx.text(subtitle, innerX, cursor, g.innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) + 6
+    } else cursor += 4
+    bars.forEach((bar) => {
+      const labelH = ctx.measureText(fmt(bar.label), g.labelW, { size: TYPE.bodySmall, font: FONTS.bodySemi })
+      const valueH = ctx.measureText(fmt(bar.valueLabel ?? bar.value), g.valueW, { size: TYPE.bodySmall, font: FONTS.bodyBold, align: 'right', features: ['tnum'] })
+      const rowH = Math.max(minRowHeight, labelH, valueH) + 6
+      ctx.text(fmt(bar.label), innerX, cursor, g.labelW, { size: TYPE.bodySmall, font: FONTS.bodySemi, color: COLORS.ink })
+      const barY = cursor + Math.max(2, (rowH - 5) / 2)
+      ProgressBar(ctx, { x: barX, y: barY, w: g.barW, value: Number(bar.value) || 0, max, color: bar.color || accent, height: 5 })
+      ctx.text(fmt(bar.valueLabel ?? bar.value), valueX, cursor, g.valueW, {
+        size: TYPE.bodySmall, font: FONTS.bodyBold, color: bar.color || accent, align: 'right', features: ['tnum'],
+      })
+      cursor += rowH + rowGap
+    })
+    if (legend) {
+      ctx.text(legend, innerX, cursor, g.innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted })
+    }
+  }
+  return { type: 'bar-chart', label: label || title || '', measure, draw }
+}
+
+export function BarChart(ctx, opts) {
+  return flow(ctx, BarChartSpec(ctx, opts), opts)
+}
+
+export function StackedBarSpec(ctx, { label = '', title, subtitle = '', segments = [], legend = true, height = 12 } = {}) {
+  const measure = (w) => {
+    const innerW = w - 20
+    const titleH = title ? ctx.measureText(title, innerW, { size: TYPE.subsection, font: FONTS.heading }) : 0
+    const subtitleH = subtitle ? ctx.measureText(subtitle, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) : 0
+    const legendH = legend ? segments.reduce((sum, seg) => (
+      sum + ctx.measureText(`${fmt(seg.label)}  ${fmt(seg.value)}`, innerW - 12, { size: TYPE.bodySmall, font: FONTS.body }) + 3
+    ), 0) : 0
+    return 8 + titleH + (subtitle ? 3 + subtitleH : 0) + 10 + height + 12 + legendH + 8
+  }
+  const draw = (frame) => {
+    const innerX = frame.x + 10
+    const innerW = frame.w - 20
+    let cursor = frame.y + 5
+    ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: HAIRLINE })
+    if (title) cursor += ctx.text(title, innerX, cursor, innerW, { size: TYPE.subsection, font: FONTS.heading, color: COLORS.midnight }) + 2
+    if (subtitle) cursor += ctx.text(subtitle, innerX, cursor, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) + 7
+    else cursor += 5
+    const total = segments.reduce((sum, seg) => sum + (Number(seg.value) || 0), 0) || 1
+    let x = innerX
+    segments.forEach((seg) => {
+      const segW = ((Number(seg.value) || 0) / total) * innerW
+      if (segW > 0.5) ctx.canvas.bar(x, cursor, segW, height, seg.color || COLORS.indigo, { variant: 'segment' })
+      x += segW
+    })
+    cursor += height + 11
+    if (legend) {
+      segments.forEach((seg) => {
+        ctx.canvas.rect(innerX, cursor + 3, 7, 7, { fill: seg.color || COLORS.indigo, kind: 'shape', role: 'legend' })
+        const h = ctx.text(`${fmt(seg.label)}  ${fmt(seg.value)}`, innerX + 12, cursor, innerW - 12, {
+          size: TYPE.bodySmall, font: FONTS.body, color: COLORS.ink,
+        })
+        cursor += h + 3
+      })
+    }
+  }
+  return { type: 'stacked-bar', label: label || title || '', measure, draw }
+}
+
+export function StackedBar(ctx, opts) {
+  return flow(ctx, StackedBarSpec(ctx, opts), opts)
+}
+
+export function DonutGaugeSpec(ctx, {
+  label = '', title, subtitle = '', slices = [], centerValue = '', centerLabel = '',
+  accent = COLORS.indigo, ringWidth = 10,
+} = {}) {
+  const measure = (w) => {
+    const innerW = w - 20
+    const titleH = title ? ctx.measureText(title, innerW, { size: TYPE.subsection, font: FONTS.heading }) : 0
+    const subtitleH = subtitle ? ctx.measureText(subtitle, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) : 0
+    const legendH = slices.reduce((sum, slice) => (
+      sum + ctx.measureText(`${fmt(slice.label)}  ${fmt(slice.value)}`, innerW * 0.52, { size: TYPE.bodySmall, font: FONTS.body }) + 5
+    ), 0)
+    const circle = Math.min(132, Math.max(96, w * 0.42))
+    return 8 + titleH + (subtitle ? 3 + subtitleH : 0) + 8 + Math.max(circle, legendH) + 8
+  }
+  const draw = (frame) => {
+    const innerX = frame.x + 10
+    const innerW = frame.w - 20
+    let cursor = frame.y + 5
+    ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: HAIRLINE })
+    if (title) cursor += ctx.text(title, innerX, cursor, innerW, { size: TYPE.subsection, font: FONTS.heading, color: COLORS.midnight }) + 2
+    if (subtitle) cursor += ctx.text(subtitle, innerX, cursor, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) + 7
+    else cursor += 5
+    const radius = Math.min(58, Math.max(42, frame.w * 0.19)) - ringWidth / 2
+    const cx = innerX + radius + ringWidth / 2 + 6
+    const cy = cursor + radius + ringWidth / 2
+    const total = slices.reduce((sum, slice) => sum + (Number(slice.value) || 0), 0) || 1
+    ctx.canvas.arc(cx, cy, radius, -Math.PI / 2, Math.PI * 1.5, { color: COLORS.line, width: ringWidth })
+    let angle = -Math.PI / 2
+    slices.forEach((slice) => {
+      const sweep = ((Number(slice.value) || 0) / total) * Math.PI * 2
+      if (sweep > 0.001) ctx.canvas.arc(cx, cy, radius, angle, angle + sweep, { color: slice.color || accent, width: ringWidth })
+      angle += sweep
+    })
+    if (centerValue) {
+      ctx.text(centerValue, cx - 40, cy - 10, 80, {
+        size: 17, font: FONTS.heading, color: COLORS.midnight, align: 'center', features: ['tnum'],
+      })
+    }
+    if (centerLabel) {
+      ctx.text(centerLabel, cx - 44, cy + 10, 88, {
+        size: TYPE.label, font: FONTS.bodySemi, color: COLORS.muted, align: 'center', characterSpacing: 0.6,
+      })
+    }
+    const legendX = innerX + radius * 2 + ringWidth + 24
+    const legendW = Math.max(40, innerW - (legendX - innerX))
+    let ly = cursor + 4
+    slices.forEach((slice) => {
+      ctx.canvas.rect(legendX, ly + 3, 7, 7, { fill: slice.color || accent, kind: 'shape', role: 'legend' })
+      ly += ctx.text(`${fmt(slice.label)}  ${fmt(slice.value)}`, legendX + 12, ly, legendW - 12, {
+        size: TYPE.bodySmall, font: FONTS.body, color: COLORS.ink,
+      }) + 4
     })
   }
-  if (legend) {
-    ctx.drawText(legend, innerX, y + h - 12, innerW, {
-      size: 6.9, font: FONTS.body, color: COLORS.slate,
-    })
-  }
-  return h
+  return { type: 'donut-gauge', label: label || title || '', measure, draw }
+}
+
+export function DonutGauge(ctx, opts) {
+  return flow(ctx, DonutGaugeSpec(ctx, opts), opts)
 }
 
 /* ------------------------------------------------------------------ *
- * Tables
+ * Tables — measured rows, repeated headers
  * ------------------------------------------------------------------ */
-
-function columnColor(col, value, row, fallback = COLORS.deepInk) {
-  if (typeof col.color === 'function') return col.color(value, row)
-  return col.color || fallback
-}
-
-function columnSoft(col, value, row, fallback = COLORS.indigoSoft) {
-  if (typeof col.soft === 'function') return col.soft(value, row)
-  return col.soft || fallback
-}
 
 function resolveWidths(columns, w) {
-  const widths = columns.map((col) => (col.width || 1))
-  const sum = widths.reduce((a, b) => a + b, 0) || 1
-  return widths.map((n) => (n / sum) * w)
+  const weights = columns.map((col) => Number(col.width) || 1)
+  const sum = weights.reduce((a, b) => a + b, 0) || 1
+  return weights.map((weight) => (weight / sum) * w)
 }
 
-export function SimpleTable(ctx, {
-  x = CONTENT.x, y = ctx.y, w = CONTENT.w, columns = [], rows = [], header = true,
-  fontSize = 7.8, rowPadding = 5, zebra = true, title = '',
-} = {}) {
-  if (!rows.length) return 0
-  const widths = resolveWidths(columns, w)
-  const headerH = header ? 18 : 0
-  const cellTextOpts = (col, row, value) => ({
-    size: col.size || fontSize,
+function cellTextOptions(col, value, row) {
+  return {
+    size: col.size || TYPE.table,
     font: col.font || FONTS.body,
-    color: columnColor(col, value, row),
+    color: resolveColor(col.color, value, row, COLORS.ink),
     align: col.align || 'left',
-    lineHeight: (col.size || fontSize) * 1.35,
-    features: col.features || undefined,
-  })
-  const measureCell = (col, row, value, cw) => {
-    if (col.render === 'bar') return 11
-    if (col.render === 'pill') return 15
-    return ctx.measureText(fmt(value), cw - 8, cellTextOpts(col, row, value))
+    features: col.features,
+    characterSpacing: col.characterSpacing || 0,
   }
-  const rowHeights = rows.map((row) => Math.max(
-    15,
-    ...columns.map((col, i) => measureCell(col, row, row[col.key], widths[i]) + rowPadding * 2),
-  ))
-  const titleH = title ? ctx.measureText(title, w, { size: 8.4, font: FONTS.bodySemi, color: COLORS.slate }) + 5 : 0
-  ctx.ensureBlock(titleH + headerH + (rowHeights[0] || 0) + 10)
-  let total = 0
-  if (title) {
-    const reserved = ctx.reserve(titleH)
-    ctx.drawText(title, x, reserved.y, w, { size: 8.4, font: FONTS.bodySemi, color: COLORS.slate })
-    total += titleH
-  }
-  const paintHeader = (hy) => {
-    if (!header) return
-    ctx.doc.roundedRect(x, hy, w, headerH, 2).fill(COLORS.midnight)
-    let hx = x
-    columns.forEach((col, i) => {
-      ctx.drawText(String(col.label).toUpperCase(), hx + 4, hy + 4, widths[i] - 8, {
-        size: 6.9, font: FONTS.bodySemi, color: COLORS.white, align: col.align || 'left', characterSpacing: 0.5,
-      })
-      hx += widths[i]
-    })
-  }
-  if (header) {
-    const reserved = ctx.reserve(headerH)
-    paintHeader(reserved.y)
-    total += headerH
-  }
-  const paintRow = (row, ry, rowH, index) => {
-    const bg = zebra && index % 2 === 1 ? COLORS.ivory : COLORS.white
-    ctx.doc.rect(x, ry, w, rowH).fill(bg)
-    ctx.doc.lineWidth(0.35).strokeColor(COLORS.border).rect(x, ry, w, rowH).stroke()
-    let cx = x
-    columns.forEach((col, i) => {
-      const cw = widths[i]
-      const value = row[col.key]
-      if (col.render === 'bar') {
-        ctx.drawText(fmt(value), cx + 4, ry + 2, cw - 8, {
-          size: 7, font: FONTS.bodyBold, color: columnColor(col, value, row, COLORS.midnight), align: 'right', features: ['tnum'],
-        })
-        ProgressBar(ctx, { x: cx + 4, y: ry + 12, w: cw - 8, value: Number(String(value).replace('%', '')) || 0, max: 100, color: columnColor(col, value, row, COLORS.indigo), height: 3 })
-      } else if (col.render === 'pill') {
-        const color = columnColor(col, value, row, COLORS.indigo)
-        const soft = columnSoft(col, value, row)
-        Pill(ctx, { x: cx + 4, y: ry + 3, text: value, color, soft, size: 6.8 })
-      } else {
-        ctx.drawText(fmt(value), cx + 4, ry + rowPadding, cw - 8, cellTextOpts(col, row, value))
-      }
-      cx += cw
-    })
-  }
-  for (let r = 0; r < rows.length; r += 1) {
-    const rowH = rowHeights[r]
-    const reserved = ctx.reserve(rowH, {
-      newPageExtra: headerH,
-      onNewPage: (hy) => paintHeader(hy),
-    })
-    paintRow(rows[r], reserved.y, rowH, r)
-    total += rowH + reserved.extra
-  }
-  return total
 }
 
-/**
- * A table drawn at a fixed coordinate without changing ctx.y.
- * Used by the two-page intelligence edition where the complete page is laid
- * out on an editorial grid instead of flowing through the pagination engine.
- */
-export function StaticTable(ctx, {
-  x = CONTENT.x, y, w = CONTENT.w, columns = [], rows = [], header = true,
-  fontSize = 7.6, rowPadding = 4, zebra = true, title = '', accent = COLORS.indigo,
+function sourceTextOptions(col, row, part) {
+  return {
+    size: part === 'path' ? 7.5 : 8.2,
+    font: part === 'path' ? FONTS.bodySemi : FONTS.body,
+    color: part === 'path' ? COLORS.muted : COLORS.ink,
+  }
+}
+
+function measureCell(ctx, col, row, value, cw) {
+  if (col.render === 'source') {
+    const record = value || {}
+    const pathH = ctx.measureText(fmt(record.path), cw - 8, sourceTextOptions(col, row, 'path'))
+    const valueH = ctx.measureText(fmt(record.value), cw - 8, sourceTextOptions(col, row, 'value'))
+    return pathH + valueH + 2
+  }
+  const opts = cellTextOptions(col, fmt(value), row)
+  const textH = ctx.measureText(fmt(value), cw - 8, opts)
+  if (col.render === 'bar') return textH + 8
+  if (col.render === 'pill') return ctx.measureText(fmt(value), cw - 15, { size: 8.2, font: FONTS.bodyBold }) + 2
+  return textH
+}
+
+function drawCell(ctx, col, row, value, x, y, cw, ch, padding) {
+  if (col.render === 'source') {
+    const record = value || {}
+    const pathOpts = sourceTextOptions(col, row, 'path')
+    const valueOpts = sourceTextOptions(col, row, 'value')
+    const pathH = ctx.text(fmt(record.path), x + 4, y + padding, cw - 8, pathOpts)
+    ctx.text(fmt(record.value), x + 4, y + padding + pathH + 1, cw - 8, valueOpts)
+    return
+  }
+  const text = fmt(value)
+  const opts = cellTextOptions(col, text, row)
+  if (col.render === 'pill') {
+    const color = resolveColor(col.color, text, row, COLORS.indigo)
+    ctx.canvas.rect(x + 4, y + padding + 4, 4, 4, { fill: color, kind: 'shape', role: 'marker' })
+    ctx.text(text, x + 11, y + padding, cw - 15, {
+      size: 8.2, font: FONTS.bodyBold, color,
+    })
+    return
+  }
+  const textH = ctx.text(text, x + 4, y + padding, cw - 8, opts)
+  if (col.render === 'bar') {
+    const numeric = Number(String(text).replace('%', '').trim()) || 0
+    const color = resolveColor(col.color, text, row, COLORS.indigo)
+    ProgressBar(ctx, {
+      x: x + 4, y: y + padding + textH + 3, w: cw - 8, value: numeric, max: 100,
+      color, height: 3,
+    })
+  }
+}
+
+export function MeasuredTable(ctx, {
+  id, title = '', rows = [], columns = [], x = CONTENT.x, w = CONTENT.w,
+  rowPadding = 3, fontSize = TYPE.table, zebra = true, header = true,
+  groupKey = '', groupPrefix = '', topSpacing = 0, bottomSpacing = 8, keepWithNext = 0,
 } = {}) {
-  if (!rows.length) return 0
+  if (!rows.length) return null
   const widths = resolveWidths(columns, w)
-  const headerH = header ? 16 : 0
-  const optsFor = (col, row, value) => ({
-    size: col.size || fontSize,
-    font: col.font || FONTS.body,
-    color: columnColor(col, value, row),
-    align: col.align || 'left',
-    lineHeight: (col.size || fontSize) * 1.3,
-    features: col.features || undefined,
+  const headerH = header
+    ? Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, {
+      size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.2,
+    }) + 5))
+    : 0
+  const rowSpecs = rows.map((row) => {
+    const cellHeights = columns.map((col, i) => measureCell(ctx, col, row, row[col.key], widths[i]))
+    return Math.max(18, ...cellHeights) + rowPadding * 2
   })
-  const measureCell = (col, row, value, cw) => {
-    if (col.render === 'bar') return 11
-    if (col.render === 'pill') return 14
-    return ctx.measureText(fmt(value), cw - 8, optsFor(col, row, value))
-  }
-  const rowHeights = rows.map((row) => Math.max(
-    14,
-    ...columns.map((col, i) => measureCell(col, row, row[col.key], widths[i]) + rowPadding * 2),
-  ))
-  let cursor = y
+  const titleH = title ? ctx.measureText(title, w, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 0.7 }) + 4 : 0
+  const tableId = id || `table-${Math.random().toString(36).slice(2)}`
+
   if (title) {
-    const titleH = ctx.measureText(title, w, { size: 8.2, font: FONTS.bodySemi, color: COLORS.slate })
-    ctx.drawText(title, x, cursor, w, { size: 8.2, font: FONTS.bodySemi, color: COLORS.slate })
-    cursor += titleH + 4
+    ctx.component({
+      type: 'table-title', label: title, x, w, topSpacing, bottomSpacing: 2,
+      keepWithNext: Math.max(keepWithNext, headerH + (rowSpecs[0] || 0) + 8),
+      measure: () => titleH,
+      draw: (frame) => {
+        ctx.text(title, frame.x, frame.y, frame.w, {
+          size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 0.7,
+        })
+      },
+    })
   }
-  const paintHeader = (hy) => {
+
+  let headerOnPage = false
+  let lastGroup = null
+  const paintHeader = () => {
     if (!header) return
-    ctx.doc.rect(x, hy, w, headerH).fill(COLORS.midnight)
-    ctx.doc.rect(x, hy, 2, headerH).fill(accent)
-    let hx = x
-    columns.forEach((col, i) => {
-      ctx.drawText(String(col.label).toUpperCase(), hx + 4, hy + 3, widths[i] - 8, {
-        size: 6.5, font: FONTS.bodySemi, color: COLORS.white, align: col.align || 'left', characterSpacing: 0.4,
+    ctx.component({
+      type: 'table-header', tableId, x, w, bottomSpacing: 0,
+      measure: () => headerH,
+      draw: (frame) => {
+        ctx.canvas.rect(frame.x, frame.y - 1, frame.w, 2, { fill: COLORS.midnight, audit: false })
+        ctx.canvas.rect(frame.x, frame.y, frame.w, headerH - 2, { fill: COLORS.midnight, audit: false })
+        ctx.canvas.rect(frame.x, frame.y, 2, headerH - 2, { fill: COLORS.indigo, audit: false })
+        let cx = frame.x
+        columns.forEach((col, i) => {
+          ctx.text(String(col.label).toUpperCase(), cx + 4, frame.y + 2, widths[i] - 8, {
+            size: 7.8, font: FONTS.bodySemi, color: COLORS.white,
+            align: col.align || 'left', characterSpacing: 0.2,
+          })
+          cx += widths[i]
+        })
+      },
+    })
+    headerOnPage = true
+  }
+
+  rowSpecs.forEach((rowH, index) => {
+    const row = rows[index]
+    const groupValue = groupKey ? fmt(row[groupKey], '') : ''
+    const groupChanged = groupKey && groupValue !== lastGroup
+    const groupH = groupChanged ? ctx.measureText(`${groupPrefix}${groupValue}`, w, { size: TYPE.label, font: FONTS.bodyBold, color: COLORS.indigo, characterSpacing: 0.7 }) + 6 : 0
+    const required = rowH + groupH
+    if (ctx.y + required + (headerOnPage ? 0 : headerH) > CONTENT.bottom) {
+      ctx.newPage()
+      headerOnPage = false
+      lastGroup = null
+    }
+    if (!headerOnPage) paintHeader()
+    if (groupChanged) {
+      ctx.component({
+        type: 'table-group', tableId, x, w, label: groupValue, bottomSpacing: 0,
+        measure: () => groupH,
+        draw: (frame) => {
+          ctx.canvas.rect(frame.x, frame.y + 2, 2, 10, { fill: subjectColor(groupValue), audit: false })
+          ctx.text(`${groupPrefix}${groupValue}`, frame.x + 10, frame.y, frame.w - 10, {
+            size: TYPE.label, font: FONTS.bodyBold, color: COLORS.indigo, characterSpacing: 0.7,
+          })
+        },
       })
-      hx += widths[i]
+      lastGroup = groupValue
+    }
+    ctx.component({
+      type: 'table-row', tableId, x, w, bottomSpacing: 0,
+      measure: () => rowH,
+      draw: (frame) => {
+        if (zebra && index % 2 === 1) {
+          ctx.canvas.rect(frame.x, frame.y, frame.w, frame.h, { fill: COLORS.paper, audit: false })
+        }
+        ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: 0.35 })
+        let cx = frame.x
+        columns.forEach((col, i) => {
+          drawCell(ctx, col, row, row[col.key], cx, frame.y, widths[i], frame.h, rowPadding)
+          cx += widths[i]
+        })
+      },
+    })
+  })
+  ctx.y += bottomSpacing
+  return tableId
+}
+
+export function StaticTableSpec(ctx, {
+  label = '', title = '', rows = [], columns = [], rowPadding = 2.5, zebra = true, header = true,
+} = {}) {
+  const measure = (w) => {
+    const widths = resolveWidths(columns, w)
+    const headerH = header ? Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.2 }) + 5)) : 0
+    const titleH = title ? ctx.measureText(title, w, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo }) + 4 : 0
+    const rowsH = rows.reduce((sum, row) => (
+      sum + Math.max(18, ...columns.map((col, i) => measureCell(ctx, col, row, row[col.key], widths[i]))) + rowPadding * 2
+    ), 0)
+    return titleH + headerH + rowsH
+  }
+  const draw = (frame) => {
+    const widths = resolveWidths(columns, frame.w)
+    let cursor = frame.y
+    if (title) {
+      cursor += ctx.text(title, frame.x, cursor, frame.w, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo }) + 4
+    }
+    if (header) {
+      const headerH = Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.2 }) + 5))
+      ctx.canvas.rect(frame.x, cursor, frame.w, headerH, { fill: COLORS.midnight, audit: false })
+      let hx = frame.x
+      columns.forEach((col, i) => {
+        ctx.text(String(col.label).toUpperCase(), hx + 4, cursor + 2, widths[i] - 8, {
+          size: 7.8, font: FONTS.bodySemi, color: COLORS.white, align: col.align || 'left', characterSpacing: 0.2,
+        })
+        hx += widths[i]
+      })
+      cursor += headerH
+    }
+    rows.forEach((row, index) => {
+      const rowH = Math.max(18, ...columns.map((col, i) => measureCell(ctx, col, row, row[col.key], widths[i]))) + rowPadding * 2
+      if (zebra && index % 2 === 1) ctx.canvas.rect(frame.x, cursor, frame.w, rowH, { fill: COLORS.paper, audit: false })
+      ctx.canvas.line(frame.x, cursor, frame.x + frame.w, cursor, { color: COLORS.line, width: 0.35 })
+      let cx = frame.x
+      columns.forEach((col, i) => {
+        drawCell(ctx, col, row, row[col.key], cx, cursor, widths[i], rowH, rowPadding)
+        cx += widths[i]
+      })
+      cursor += rowH
     })
   }
-  paintHeader(cursor)
-  cursor += headerH
-  rows.forEach((row, index) => {
-    const rowH = rowHeights[index]
-    ctx.doc.rect(x, cursor, w, rowH).fill(zebra && index % 2 === 1 ? COLORS.ivory : COLORS.white)
-    ctx.doc.lineWidth(0.3).strokeColor(COLORS.border).rect(x, cursor, w, rowH).stroke()
-    let cx = x
-    columns.forEach((col, i) => {
-      const cw = widths[i]
-      const value = row[col.key]
-      if (col.render === 'bar') {
-        ctx.drawText(fmt(value), cx + 4, cursor + 2, cw - 8, {
-          size: 6.8, font: FONTS.bodyBold, color: columnColor(col, value, row, COLORS.midnight), align: 'right', features: ['tnum'],
-        })
-        ProgressBar(ctx, { x: cx + 4, y: cursor + 11, w: cw - 8, value: Number(String(value).replace('%', '')) || 0, max: 100, color: columnColor(col, value, row, COLORS.indigo), height: 3 })
-      } else if (col.render === 'pill') {
-        Pill(ctx, {
-          x: cx + 4, y: cursor + 2, text: value, size: 6.5,
-          color: columnColor(col, value, row, COLORS.indigo),
-          soft: columnSoft(col, value, row),
-        })
-      } else {
-        ctx.drawText(fmt(value), cx + 4, cursor + rowPadding, cw - 8, optsFor(col, row, value))
-      }
-      cx += cw
-    })
-    cursor += rowH
-  })
-  return cursor - y
+  return { type: 'static-table', label, measure, draw }
 }
 
-export function SubjectPerformance(ctx, { x = CONTENT.x, y, w = CONTENT.w, subjects = [] } = {}) {
-  if (!subjects.length) return 0
-  const rows = subjects.map((s, i) => ({
-    subject: fmt(s.name),
-    score: `${fmt(s.score)} / ${fmt(s.maxMarks)}`,
-    accuracy: pct(s.accuracy),
-    time: fmt(s.time),
-    rank: fmt(s.rank),
-    difficulty: fmt(s.difficulty),
-    attempted: fmt(s.attempted),
-    correct: fmt(s.correct),
-    weak: (s.weakAreas || []).join(' · ') || '—',
-    strong: (s.strongAreas || []).join(' · ') || '—',
-    color: subjectColor(s.name, i),
-  }))
-  return SimpleTable(ctx, {
-    x, y, w, rows,
-    title: 'Subject performance — marks, accuracy, pace and evidence areas',
-    columns: [
-      { key: 'subject', label: 'Subject', width: 1.25, font: FONTS.bodyBold },
-      { key: 'score', label: 'Marks', width: 0.95, align: 'right', features: ['tnum'] },
-      { key: 'accuracy', label: 'Accuracy', width: 0.85, render: 'bar', color: (v) => masteryColor(v) },
-      { key: 'time', label: 'Time', width: 0.75, align: 'right' },
-      { key: 'attempted', label: 'Att.', width: 0.6, align: 'right' },
-      { key: 'correct', label: 'Corr.', width: 0.6, align: 'right' },
-      { key: 'rank', label: 'Rank', width: 0.6, align: 'right' },
-      { key: 'difficulty', label: 'Level', width: 0.8, render: 'pill', color: (v) => difficultyColor(v), soft: () => COLORS.ivory },
-      { key: 'weak', label: 'Weak areas', width: 1.7 },
-      { key: 'strong', label: 'Strong areas', width: 1.7 },
-    ],
-    fontSize: 7.4,
-  })
-}
-
-export function ChapterMastery(ctx, { x = CONTENT.x, y, w = CONTENT.w, chapters = [], compact = false } = {}) {
-  if (!chapters.length) return 0
-  const rows = chapters.map((c) => ({
-    chapter: fmt(c.chapter || c.name),
-    subject: fmt(c.subject),
-    accuracy: fmt(c.accuracy),
-    marks: fmt(c.marks),
-    time: fmt(c.time),
-    attempted: fmt(c.attempted, '—'),
-    mastery: fmt(c.mastery),
-  }))
-  return SimpleTable(ctx, {
-    x, y, w, rows,
-    title: compact ? 'Chapter mastery' : 'Chapter mastery — accuracy, marks and time',
-    columns: [
-      { key: 'chapter', label: 'Chapter', width: 2.3, font: FONTS.bodySemi },
-      { key: 'subject', label: 'Subject', width: 1.25 },
-      { key: 'accuracy', label: 'Accuracy', width: 1.05, render: 'bar', color: (v) => masteryColor(v) },
-      { key: 'marks', label: 'Marks', width: 0.75, align: 'right', features: ['tnum'] },
-      { key: 'time', label: 'Time', width: 0.85, align: 'right' },
-      { key: 'attempted', label: 'Att. %', width: 0.8, align: 'right' },
-      { key: 'mastery', label: 'Mastery', width: 1.0, render: 'pill', color: (v) => masteryColor(v), soft: (v) => (v === 'Strong' ? COLORS.successSoft : v === 'Critical' ? COLORS.errorSoft : v === 'Weak' ? COLORS.warningSoft : COLORS.infoSoft) },
-    ],
-    fontSize: 7.3,
-  })
-}
-
-export function ChapterTime(ctx, { x = CONTENT.x, y = ctx.y, w = CONTENT.w, chapters = [] } = {}) {
-  if (!chapters.length) return 0
-  const max = Math.max(...chapters.map((c) => Number(c.timeMinutes) || 0), 1)
-  const bars = chapters.map((c) => ({
-    label: `${fmt(c.chapter)}  ·  ${fmt(c.subject)}`,
-    value: Number(c.timeMinutes) || 0,
-    max,
-    valueLabel: `${fmt(c.time)}  (${fmt(c.share)})`,
-    color: subjectColor(c.subject),
-  }))
-  const h = Math.min(220, 46 + bars.length * 11)
-  const reserved = ctx.reserve(h)
-  return PerformanceChart(ctx, {
-    x, y: reserved.y, w, h, type: 'hbar', title: 'Chapter time consumption',
-    subtitle: 'Recorded time and share of total chapter time',
-    bars,
-    legend: ctx.model.hasChapterTime ? 'Values are reproduced from the attempt payload.' : 'Chapter timing was not recorded for this attempt.',
-    accent: COLORS.info,
-  })
+export function StaticTable(ctx, opts) {
+  return flow(ctx, StaticTableSpec(ctx, opts), opts)
 }
 
 /* ------------------------------------------------------------------ *
- * Question analysis
+ * Question intelligence
  * ------------------------------------------------------------------ */
 
-export function AnswerComparison(ctx, { x, y, w, question }) {
-  const doc = ctx.doc
-  const gap = 8
-  const boxW = (w - gap * 2) / 3
-  const h = 38
-  const status = fmt(question.status)
-  const statusC = statusColor(status)
-  const boxes = [
-    { label: 'STUDENT ANSWER', value: question.selected, color: status === 'Correct' ? COLORS.success : status === 'Incorrect' ? COLORS.error : COLORS.slate, soft: statusSoft(status) },
-    { label: 'CORRECT ANSWER', value: question.correct, color: COLORS.success, soft: COLORS.successSoft },
-    { label: 'MARKS  ·  TIME', value: `${question.marks}  ·  ${question.time}`, color: COLORS.midnight, soft: COLORS.ivory },
-  ]
-  boxes.forEach((box, i) => {
-    const bx = x + i * (boxW + gap)
-    doc.roundedRect(bx, y, boxW, h, 3).fill(box.soft).stroke(COLORS.border)
-    doc.rect(bx, y, 2, h).fill(box.color)
-    ctx.drawText(box.label, bx + 8, y + 5, boxW - 16, {
-      size: 6.7, font: FONTS.bodySemi, color: COLORS.slate, characterSpacing: 0.6,
-    })
-    ctx.drawText(box.value, bx + 8, y + 17, boxW - 16, {
-      size: 11, font: FONTS.heading, color: box.color, features: ['tnum'], lineHeight: 13,
-    })
-  })
-  if (question.mistakeCategory && question.mistakeCategory !== '—') {
-    ctx.drawText(`Mistake category  ·  ${question.mistakeCategory}`, x, y + h + 3, w, {
-      size: 7.2, font: FONTS.bodySemi, color: COLORS.error,
-    })
-    return h + 12
-  }
-  return h
+function prepareSolution(ctx, source, fontSize, width, sourceLabel = '') {
+  const renderer = new SolutionRenderer(ctx, { fontSize, maxWidth: width, sourceLabel })
+  const lines = renderer.layout(source)
+  return { renderer, lines, height: lines.reduce((sum, line) => sum + line.height, 0) }
 }
 
-function metaLine(ctx, question, x, y, w) {
-  const chips = [
-    ['SUBJECT', question.subject],
-    ['CHAPTER', question.chapter],
-    ['TOPIC', question.topic],
-    ['DIFFICULTY', question.difficulty],
-    ['TYPE', question.type],
-  ]
-  const gap = 6
-  const chipW = (w - gap * (chips.length - 1)) / chips.length
-  chips.forEach(([label, value], i) => {
-    const cx = x + i * (chipW + gap)
-    ctx.drawText(label, cx, y, chipW, {
-      size: 6.4, font: FONTS.bodySemi, color: COLORS.slate, characterSpacing: 0.5,
-    })
-    ctx.drawText(value, cx, y + 9, chipW, {
-      size: 7.8, font: FONTS.bodySemi, color: COLORS.deepInk, lineHeight: 10,
-    })
-  })
-  return metaMeasure(ctx, { subject: chips[0][1], chapter: chips[1][1], topic: chips[2][1], difficulty: chips[3][1], type: chips[4][1] }, w)
-}
-
-function solutionSource(question) {
-  if (question.solutionParts.length) {
-    return question.solutionParts.map((part) => `${part.label}: ${part.text}`).join('\n')
-  }
-  return 'No explanation was supplied in the source payload.'
-}
-
-function questionTextSource(question) {
+function questionSource(question) {
+  if (!question.questionText && !question.options.length) return '—'
   const parts = []
-  if (question.questionText) parts.push(`Question: ${question.questionText}`)
-  else parts.push('Question text: —')
-  if (question.options.length) {
-    parts.push(`Options: ${question.options.map((option, i) => `${String.fromCharCode(65 + i)} · ${option}`).join('   ')}`)
-  } else {
-    parts.push('Options: —')
-  }
-  return parts.join('   ')
+  parts.push(`Question: ${question.questionText || '—'}`)
+  parts.push(`Options: ${question.options.length ? question.options.map((option, i) => `${String.fromCharCode(65 + i)} · ${option}`).join('   ') : '—'}`)
+  return parts.join('\n')
 }
 
-export function QuestionAnalysisCard(ctx, { question, x = CONTENT.x, w = CONTENT.w } = {}) {
-  const doc = ctx.doc
-  const pad = 12
+function prepareQuestion(ctx, question, w) {
+  const pad = 16
   const innerW = w - pad * 2
-  const innerX = x + pad
   const status = fmt(question.status)
   const accent = statusColor(status)
-  const solution = new SolutionRenderer(ctx, { fontSize: 8.5, maxWidth: innerW, sourceLabel: question.q })
-  const questionSolution = new SolutionRenderer(ctx, { fontSize: 8.4, maxWidth: innerW, sourceLabel: question.q })
-  const qSource = questionTextSource(question)
   const headerH = 26
-  const metaH = metaMeasure(ctx, question, innerW)
-  const answerH = 38 + (question.mistakeCategory && question.mistakeCategory !== '—' ? 12 : 0)
-  const qTextH = questionSolution.measure(qSource)
-  const qSectionH = 12 + qTextH + 2
-  const answerSectionH = answerH + 4
-  const solutionParts = question.solutionParts.length
-    ? question.solutionParts.map((part) => ({ label: part.label, text: part.text, height: solution.measure(part.text) }))
-    : [{ label: 'Solution', text: 'No explanation was supplied in the source payload.', height: solution.measure('No explanation was supplied in the source payload.') }]
-  const solutionBodyH = solutionParts.reduce((sum, part) => sum + 10 + part.height + 3, 0)
-  const solutionSectionH = 14 + solutionBodyH + 2
-  const cardH = headerH + metaH + qSectionH + answerSectionH + solutionSectionH + 12
-  const capacity = CONTENT.h - 24
-
-  ctx.ensureBlock(Math.min(cardH, capacity) + 16)
-  const headerBlock = ctx.reserve(headerH + metaH, { continuationLabel: `${question.q} · question continued` })
-  let hy = headerBlock.y
-  doc.rect(x, hy, 3, headerH + metaH).fill(accent)
-  doc.roundedRect(x + 3, hy, w - 3, headerH + metaH, 3).fill(COLORS.white).stroke(COLORS.border)
-  doc.roundedRect(innerX, hy + 8, 28, 22, 2).fill(COLORS.midnight)
-  ctx.drawText(question.q, innerX, hy + 13, 28, {
-    size: 8.4, font: FONTS.heading, color: COLORS.white, align: 'center',
-  })
-  ctx.drawText(`${question.q}  ·  ${status}`, innerX + 36, hy + 9, 210, {
-    size: 9.2, font: FONTS.heading, color: COLORS.midnight,
-  })
-  Pill(ctx, {
-    x: x + w - 92, y: hy + 9, text: status, color: accent,
-    soft: statusSoft(status), width: 78, size: 7.2,
-  })
-  metaLine(ctx, question, innerX, hy + headerH, innerW)
-
-  const qReserved = ctx.reserve(qSectionH, { continuationLabel: `${question.q} · question text continued` })
-  const qy = qReserved.y
-  doc.rect(x, qy, 3, qSectionH).fill(COLORS.border)
-  doc.roundedRect(x + 3, qy, w - 3, qSectionH, 3).fill(COLORS.white).stroke(COLORS.border)
-  ctx.drawText('QUESTION  /  OPTIONS', innerX, qy + 2, innerW, {
-    size: 6.7, font: FONTS.bodySemi, color: COLORS.slate, characterSpacing: 0.7,
-  })
-  questionSolution.renderAt(qSource, innerX, qy + 12, innerW)
-
-  const aReserved = ctx.reserve(answerSectionH, { continuationLabel: `${question.q} · answer comparison continued` })
-  const ay = aReserved.y
-  doc.rect(x, ay, 3, answerSectionH).fill(accent)
-  AnswerComparison(ctx, { x: innerX, y: ay + 3, w: innerW, question })
-
-  const sReserved = ctx.reserve(solutionSectionH, { continuationLabel: `${question.q} · solution continued` })
-  let sy = sReserved.y
-  doc.rect(x, sy, 3, solutionSectionH).fill(accent)
-  doc.roundedRect(x + 3, sy, w - 3, solutionSectionH, 3).fill(COLORS.ivory).stroke(COLORS.border)
-  ctx.drawText('SOLUTION  /  EXPLANATION', innerX, sy + 3, innerW, {
-    size: 6.9, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 0.8,
-  })
-  sy += 14
-  for (const part of solutionParts) {
-    ctx.drawText(part.label.toUpperCase(), innerX, sy, innerW, {
-      size: 6.7, font: FONTS.bodySemi, color: COLORS.slate, characterSpacing: 0.6,
-    })
-    solution.renderAt(part.text, innerX, sy + 8, innerW)
-    sy += 10 + part.height + 3
+  const metaItems = [
+    ['Subject', question.subject], ['Chapter', question.chapter], ['Topic', question.topic],
+    ['Difficulty', question.difficulty], ['Type', question.type], ['Status', status],
+  ]
+  const metaCols = equalColumns(3, 10, innerW, 0)
+  const metaRows = []
+  for (let i = 0; i < metaItems.length; i += 3) {
+    let rowH = 0
+    for (let j = 0; j < 3; j += 1) {
+      const item = metaItems[i + j]
+      if (!item) continue
+      const cw = metaCols[j].w - 4
+      const labelH = ctx.measureText(item[0].toUpperCase(), cw, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.4 })
+      const valueH = ctx.measureText(fmt(item[1]), cw, { size: TYPE.bodySmall, font: FONTS.bodySemi })
+      rowH = Math.max(rowH, labelH + valueH + 2)
+    }
+    metaRows.push(rowH + 4)
   }
-  ctx.space(12)
-  return cardH
-}
+  const metaH = metaRows.reduce((a, b) => a + b, 0)
 
-function metaMeasure(ctx, question, w) {
-  const gap = 6
-  const chipW = (w - gap * 4) / 5
-  const values = [question.subject, question.chapter, question.topic, question.difficulty, question.type]
-  const valueH = Math.max(...values.map((value) => ctx.measureText(value, chipW, {
-    size: 7.8, font: FONTS.bodySemi, color: COLORS.deepInk, lineHeight: 10,
-  })))
-  return 9 + valueH + 4
-}
-
-function drawCardContinuation(ctx, x, w, y, question) {
-  ctx.doc.rect(x, y, 3, 16).fill(statusColor(question.status))
-  ctx.drawText(`${question.q}  ·  continued`, x + 12, y, w - 12, {
-    size: 7.4, font: FONTS.bodySemi, color: COLORS.slate, characterSpacing: 0.5, chrome: true, emit: false,
+  const answerItems = [
+    ['Student answer', question.selected], ['Correct answer', question.correct],
+    ['Marks', question.marks], ['Time', question.time],
+  ]
+  const answerCols = equalColumns(4, 10, innerW, 0)
+  let answerH = 0
+  answerItems.forEach((item, i) => {
+    const cw = answerCols[i].w - 4
+    const labelH = ctx.measureText(item[0].toUpperCase(), cw, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.4 })
+    const valueH = ctx.measureText(fmt(item[1]), cw, { size: 10.4, font: FONTS.bodyBold, features: ['tnum'] })
+    answerH = Math.max(answerH, labelH + valueH + 3)
   })
+
+  const mistakeText = question.mistakeCategory && question.mistakeCategory !== '—'
+    ? `Mistake category  ·  ${question.mistakeCategory}`
+    : ''
+  const mistakeH = mistakeText ? ctx.measureText(mistakeText, innerW, { size: TYPE.bodySmall, font: FONTS.bodySemi, color: COLORS.error }) + 5 : 0
+
+  const qSource = questionSource(question)
+  const questionText = prepareSolution(ctx, qSource, 9.4, innerW, question.q)
+  const qLabelH = ctx.measureText('QUESTION / OPTIONS', innerW, { size: TYPE.label, font: FONTS.bodySemi, characterSpacing: 0.7 }) + 2
+  const qBlockH = qLabelH + questionText.height + 4
+
+  const parts = question.solutionParts.length
+    ? question.solutionParts.map((part) => ({
+      label: part.label,
+      ...prepareSolution(ctx, part.text, 10.2, innerW, question.q),
+    }))
+    : [{ label: 'Explanation', ...prepareSolution(ctx, '—', 10.2, innerW, question.q) }]
+  const solutionLabelH = ctx.measureText('SOLUTION / EXPLANATION', innerW, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 0.7 }) + 2
+  const partsH = parts.reduce((sum, part) => (
+    sum + ctx.measureText(part.label.toUpperCase(), innerW, { size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4 }) + 2 + part.height + 3
+  ), 0)
+  const solutionH = 6 + solutionLabelH + partsH + 6
+
+  const totalH = 6 + headerH + metaH + 4 + qBlockH + 4 + answerH + 3 + mistakeH + solutionH + 6
+  const introH = 6 + headerH + metaH + 4 + qBlockH + 4 + answerH + 3 + mistakeH + 2
+  return {
+    question, pad, innerW, status, accent, headerH, metaItems, metaCols, metaRows, metaH,
+    answerItems, answerCols, answerH, mistakeText, mistakeH, qSource, questionText, qLabelH, qBlockH,
+    parts, solutionLabelH, solutionH, totalH, introH,
+  }
 }
 
-/* ------------------------------------------------------------------ *
- * Revision intelligence
- * ------------------------------------------------------------------ */
-
-export function SubjectSection(ctx, { subject, x = CONTENT.x, y, w = CONTENT.w, index = 0, note = '' } = {}) {
-  const accent = subjectColor(subject, index)
-  const h = 26 + (note ? 12 : 0)
-  ctx.doc.roundedRect(x, y, w, h, 3).fill(COLORS.ivory).stroke(COLORS.border)
-  ctx.doc.rect(x, y, 3, h).fill(accent)
-  ctx.drawText(String(index + 1).padStart(2, '0'), x + 10, y + 7, 22, {
-    size: 8.4, font: FONTS.bodyBold, color: accent, features: ['tnum'],
+function drawQuestionHeader(ctx, p, x, y, w) {
+  ctx.canvas.rect(x, y + 3, 2.5, 20, { fill: p.accent, audit: false })
+  ctx.text(p.question.q, x + 12, y, 52, {
+    size: 15, font: FONTS.heading, color: COLORS.midnight, features: ['tnum'],
   })
-  ctx.drawText(subject, x + 34, y + 5, w - 44, {
+  ctx.text(`${p.question.q}  ·  ${p.status}`, x + 70, y + 2, w - 175, {
     size: 11, font: FONTS.heading, color: COLORS.midnight,
   })
-  if (note) {
-    ctx.drawText(note, x + 34, y + 17, w - 44, {
-      size: 7.2, font: FONTS.body, color: COLORS.slate,
-    })
-  }
-  return h
+  Pill(ctx, {
+    x: x + w - 92, y: y + 1, text: p.status, color: p.accent,
+    soft: statusSoft(p.status), width: 88, size: 8,
+  })
 }
 
-export function RevisionPriorityTable(ctx, { groups = [], x = CONTENT.x, y = ctx.y, w = CONTENT.w, emphasis = false } = {}) {
-  if (!groups.length) return 0
-  let total = 0
-  groups.forEach((group, index) => {
-    const note = group.accuracyLabel && group.accuracyLabel !== '—'
-      ? `${group.accuracyLabel} subject accuracy  ·  ${group.mastery || 'Review'}`
-      : `${group.mastery || 'Review'}  ·  ordered by lowest accuracy`
-    const subjectH = 26 + (note ? 12 : 0)
-    const reserved = ctx.reserve(subjectH + 5, { continuationLabel: `${group.subject} · revision priorities continued` })
-    SubjectSection(ctx, { subject: group.subject, x, y: reserved.y, w, index, note })
-    total += subjectH + 5 + reserved.extra
-    const rows = group.topics.map((topic) => ({
-      topic: fmt(topic.name),
-      chapter: fmt(topic.chapter),
-      accuracy: fmt(topic.accuracyLabel),
-      priority: fmt(topic.priority),
-    }))
-    const tableH = SimpleTable(ctx, {
-      x, y: ctx.y, w, rows,
-      columns: [
-        { key: 'topic', label: emphasis ? 'Priority topic' : 'Topic', width: 2.5, font: FONTS.bodySemi },
-        { key: 'chapter', label: 'Chapter', width: 2.0 },
-        { key: 'accuracy', label: 'Accuracy', width: 1.0, align: 'right', color: (v) => masteryColor(v) },
-        { key: 'priority', label: 'Classification', width: 1.15, render: 'pill', color: (v) => priorityColor(v), soft: (v) => (v === 'Critical' ? COLORS.errorSoft : v === 'Weak' ? COLORS.warningSoft : COLORS.infoSoft) },
-      ],
-      fontSize: 7.6,
-    })
-    total += tableH + 10
-    ctx.space(10)
+function drawQuestionIntro(ctx, p, frame, continuation = false) {
+  const x = frame.x + p.pad
+  const w = p.innerW
+  let cursor = frame.y + 6
+  drawQuestionHeader(ctx, p, x, cursor, w)
+  cursor += p.headerH + 2
+  if (continuation) {
+    // The label itself is part of the reserved intro height.
+    cursor += 2
+  }
+  for (let row = 0; row < p.metaRows.length; row += 1) {
+    const rowH = p.metaRows[row]
+    for (let col = 0; col < 3; col += 1) {
+      const item = p.metaItems[row * 3 + col]
+      if (!item) continue
+      const c = p.metaCols[col]
+      const cx = x + c.x
+      const labelH = ctx.text(item[0].toUpperCase(), cx, cursor, c.w - 4, {
+        size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4,
+      })
+      ctx.text(fmt(item[1]), cx, cursor + labelH + 2, c.w - 4, {
+        size: TYPE.bodySmall, font: FONTS.bodySemi, color: COLORS.ink,
+      })
+    }
+    cursor += rowH
+  }
+  ctx.canvas.line(x, cursor - 2, x + w, cursor - 2, { color: COLORS.line, width: 0.4 })
+  cursor += 4
+
+  ctx.text('QUESTION / OPTIONS', x, cursor, w, {
+    size: TYPE.label, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.7,
   })
-  return total
+  cursor += p.qLabelH
+  p.questionText.renderer.maxWidth = w
+  p.questionText.lines.forEach((line) => {
+    p.questionText.renderer.drawLine(line, x, cursor, w)
+    cursor += line.height
+  })
+  cursor += 4
+  ctx.canvas.line(x, cursor - 2, x + w, cursor - 2, { color: COLORS.line, width: 0.4 })
+
+  p.answerItems.forEach((item, i) => {
+    const c = p.answerCols[i]
+    const cx = x + c.x
+    const labelH = ctx.text(item[0].toUpperCase(), cx, cursor, c.w - 4, {
+      size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4,
+    })
+    ctx.text(fmt(item[1]), cx, cursor + labelH + 2, c.w - 4, {
+      size: 10.4, font: FONTS.bodyBold, color: i === 0 ? statusColor(p.status) : COLORS.midnight, features: ['tnum'],
+    })
+  })
+  cursor += p.answerH + 3
+  if (p.mistakeText) {
+    ctx.canvas.rect(x, cursor + 3, 5, 5, { fill: COLORS.error, kind: 'shape', role: 'marker' })
+    ctx.text(p.mistakeText, x + 10, cursor, w - 10, {
+      size: TYPE.bodySmall, font: FONTS.bodySemi, color: COLORS.error,
+    })
+    cursor += p.mistakeH
+  }
+}
+
+function drawSolutionBackground(ctx, x, y, w, h) {
+  ctx.canvas.rect(x, y, w, h, { fill: COLORS.paper, audit: false })
+  ctx.canvas.rect(x, y, 2.5, h, { fill: COLORS.indigo, audit: false })
+}
+
+export function QuestionCard(ctx, { question } = {}) {
+  const p = prepareQuestion(ctx, question, CONTENT.w)
+  const capacity = CONTENT.h - 16
+  const remaining = CONTENT.bottom - ctx.y
+  // Normal cards are kept together. An unusually long solution uses the
+  // labelled continuation flow when the current page cannot hold the whole
+  // card, instead of leaving a half-used page behind.
+  const longCard = p.totalH > CONTENT.h * 0.52
+  const keepTogether = p.totalH <= capacity && (!longCard || remaining >= p.totalH + 2)
+  if (keepTogether) {
+    return ctx.component({
+      type: 'question-card', label: `${question.q} · complete`, allowSplit: false,
+      bottomSpacing: 2,
+      measure: () => p.totalH,
+      draw: (frame) => {
+        drawQuestionIntro(ctx, p, frame)
+        const sy = frame.y + p.introH
+        drawSolutionBackground(ctx, frame.x + p.pad, sy, p.innerW, p.solutionH)
+        let cursor = sy + 6
+        cursor += ctx.text('SOLUTION / EXPLANATION', frame.x + p.pad + 10, cursor, p.innerW - 20, {
+          size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 0.7,
+        }) + 2
+        p.parts.forEach((part) => {
+          cursor += ctx.text(part.label.toUpperCase(), frame.x + p.pad + 10, cursor, p.innerW - 20, {
+            size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4,
+          }) + 2
+          part.renderer.maxWidth = p.innerW - 20
+          part.lines.forEach((line) => {
+            part.renderer.drawLine(line, frame.x + p.pad + 10, cursor, p.innerW - 20)
+            cursor += line.height
+          })
+          cursor += 3
+        })
+        ctx.canvas.line(frame.x, frame.y + frame.h - 2, frame.x + frame.w, frame.y + frame.h - 2, { color: COLORS.line, width: 0.4 })
+      },
+    })
+  }
+
+  // Unusually long solution: keep the question's identity, metadata and answer
+  // comparison together, then flow the source solution with explicit labels.
+  ctx.component({
+    type: 'question-card-intro', label: `${question.q} · question statement`, allowSplit: false,
+    keepWithNext: 34, bottomSpacing: 0,
+    measure: () => p.introH,
+    draw: (frame) => drawQuestionIntro(ctx, p, frame),
+  })
+  p.parts.forEach((part) => {
+    ctx.component({
+      type: 'solution-label', label: `${question.q} · ${part.label}`,
+      continuationLabel: `${question.q} · solution continued`,
+      keepWithNext: 20, bottomSpacing: 0,
+      measure: () => ctx.measureText(part.label.toUpperCase(), p.innerW - 20, {
+        size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4,
+      }) + 5,
+      draw: (frame) => {
+        drawSolutionBackground(ctx, frame.x + p.pad, frame.y, p.innerW, frame.h)
+        ctx.text(part.label.toUpperCase(), frame.x + p.pad + 10, frame.y + 3, p.innerW - 20, {
+          size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4,
+        })
+      },
+    })
+    part.renderer.maxWidth = p.innerW - 20
+    part.lines.forEach((line, index) => {
+      ctx.component({
+        type: 'question-solution-line', label: `${question.q} · solution line ${index + 1}`,
+        allowSplit: true,
+        continuationLabel: `${question.q} · solution continued`,
+        bottomSpacing: index === part.lines.length - 1 ? 6 : 0,
+        measure: () => line.height + 4,
+        draw: (frame) => {
+          drawSolutionBackground(ctx, frame.x + p.pad, frame.y, p.innerW, frame.h)
+          part.renderer.drawLine(line, frame.x + p.pad + 10, frame.y + 2, p.innerW - 20)
+        },
+      })
+    })
+  })
+  return { type: 'split-question-card', label: question.q }
 }
 
 /* ------------------------------------------------------------------ *
- * Source data register
+ * Revision + source register
  * ------------------------------------------------------------------ */
 
-export function SourceRegister(ctx, { rows = [], x = CONTENT.x, y = ctx.y, w = CONTENT.w } = {}) {
-  if (!rows.length) return 0
-  const gap = 12
-  const colW = (w - gap) / 2
-  const headerH = 18
-  let total = 0
-  const paintColumnHeaders = (cy) => {
-    ctx.doc.rect(x, cy, w, headerH).fill(COLORS.midnight)
-    ctx.drawText('SOURCE FIELD', x + 6, cy + 4, colW - 12, {
-      size: 6.7, font: FONTS.bodySemi, color: COLORS.white, characterSpacing: 0.6, chrome: true, emit: false,
-    })
-    ctx.drawText('SOURCE VALUE', x + colW + gap + 6, cy + 4, colW - 12, {
-      size: 6.7, font: FONTS.bodySemi, color: COLORS.white, characterSpacing: 0.6, chrome: true, emit: false,
-    })
+export function SubjectBand(ctx, { subject, index = 0, note = '', x = CONTENT.x, w = CONTENT.w, bottomSpacing = 7 } = {}) {
+  const accent = subjectColor(subject, index)
+  const measure = () => {
+    const titleH = ctx.measureText(subject, w - 42, { size: 13, font: FONTS.heading })
+    const noteH = note ? ctx.measureText(note, w - 42, { size: 8.5, font: FONTS.body, color: COLORS.muted }) : 0
+    return 5 + titleH + (note ? 2 + noteH : 0) + 5
   }
-  const firstHeader = ctx.reserve(headerH + 4)
-  paintColumnHeaders(firstHeader.y)
-  total += headerH + 4
-  for (let i = 0; i < rows.length; i += 2) {
-    const left = rows[i]
-    const right = rows[i + 1]
-    const measure = (row) => {
-      if (!row) return 22
-      const pathH = ctx.measureText(row.path, colW - 12, { size: 6.5, font: FONTS.bodySemi, color: COLORS.slate, lineHeight: 8 })
-      const valueH = ctx.measureText(row.value, colW - 12, { size: 7.6, font: FONTS.body, color: COLORS.deepInk, lineHeight: 10 })
-      return Math.max(22, pathH + valueH + 7)
-    }
-    const rowH = Math.max(measure(left), measure(right))
-    const reserved = ctx.reserve(rowH, {
-      newPageExtra: headerH + 4,
-      onNewPage: (hy) => paintColumnHeaders(hy),
-    })
-    drawPair(left, right, reserved.y, rowH)
-    total += rowH + reserved.extra
-  }
-  function drawPair(left, right, ry, rowH) {
-    const drawCell = (row, cx) => {
-      if (!row) return
-      ctx.doc.lineWidth(0.3).strokeColor(COLORS.border).rect(cx, ry, colW, rowH).stroke()
-      ctx.drawText(row.path, cx + 6, ry + 3, colW - 12, {
-        size: 6.5, font: FONTS.bodySemi, color: COLORS.slate, lineHeight: 8,
+  return ctx.component({
+    type: 'subject-band', label: subject, x, w, bottomSpacing, keepWithNext: 30,
+    measure,
+    draw: (frame) => {
+      ctx.canvas.rect(frame.x, frame.y + 3, 2.5, 16, { fill: accent, audit: false })
+      ctx.text(String(index + 1).padStart(2, '0'), frame.x + 8, frame.y + 3, 24, {
+        size: 9, font: FONTS.bodyBold, color: accent, features: ['tnum'],
       })
-      ctx.drawText(row.value, cx + 6, ry + 12, colW - 12, {
-        size: 7.6, font: FONTS.body, color: COLORS.deepInk, lineHeight: 10,
+      const h = ctx.text(subject, frame.x + 36, frame.y, frame.w - 42, {
+        size: 13, font: FONTS.heading, color: COLORS.midnight,
       })
-    }
-    drawCell(left, x)
-    drawCell(right, x + colW + gap)
-  }
-  return total
+      if (note) {
+        ctx.text(note, frame.x + 36, frame.y + h + 1, frame.w - 42, {
+          size: 8.5, font: FONTS.body, color: COLORS.muted,
+        })
+      }
+      ctx.canvas.line(frame.x, frame.y + frame.h - 3, frame.x + frame.w, frame.y + frame.h - 3, { color: COLORS.line, width: 0.4 })
+    },
+  })
 }
 
+export function SourceRegister(ctx, { rows = [] } = {}) {
+  if (!rows.length) return null
+  const isLong = (row) => (
+    String(row?.value ?? '').length > 80 || String(row?.path ?? '').length > 58
+  )
+  const shortRows = rows.filter((row) => !isLong(row))
+  const longRows = rows.filter(isLong)
+  const pack = (list, count) => {
+    const packed = []
+    for (let i = 0; i < list.length; i += count) {
+      const record = {}
+      for (let col = 0; col < count; col += 1) record[`col${col}`] = list[i + col] || null
+      packed.push(record)
+    }
+    return packed
+  }
+  const sourceColumns = (count) => Array.from({ length: count }, (_, index) => ({
+    key: `col${index}`, label: 'Source / value', width: 1, render: 'source',
+  }))
+  if (shortRows.length) {
+    MeasuredTable(ctx, {
+      id: 'source-register-short',
+      title: `Source data register  ·  ${rows.length} canonical payload values`,
+      rows: pack(shortRows, 4),
+      columns: sourceColumns(4),
+      rowPadding: 0.5,
+      bottomSpacing: 6,
+    })
+  }
+  if (longRows.length) {
+    MeasuredTable(ctx, {
+      id: 'source-register-extended',
+      title: `Extended source values  ·  ${longRows.length} verbatim entries`,
+      rows: pack(longRows, 2),
+      columns: sourceColumns(2),
+      rowPadding: 0.5,
+      bottomSpacing: 8,
+    })
+  }
+  return true
+}

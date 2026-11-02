@@ -312,6 +312,14 @@ export class MathRenderer {
     } finally {
       this.doc.restore()
     }
+    // Vector mathematics is an auditable layout box even though it contains
+    // no extractable PDF text.
+    this.ctx.recordBox('math', x, y, info.width, info.height, {
+      tex: info.tex,
+      role: 'math',
+      font: FONTS.math,
+      display: !!info.display,
+    })
   }
 }
 
@@ -378,6 +386,7 @@ export class SolutionRenderer {
 
     for (const segment of segments) {
       if (segment.type === 'text') {
+        this.ctx.emit(segment.value)
         const parts = segment.value.match(/\s+|\S+/gu) || []
         for (const part of parts) {
           if (/^\s+$/u.test(part)) {
@@ -399,6 +408,7 @@ export class SolutionRenderer {
 
       if (segment.type === 'malformed') {
         this.flag(segment.raw, segment.reason)
+        this.ctx.emit(segment.raw)
         finish()
         const label = 'EXPRESSION FLAGGED FOR VERIFICATION — SOURCE SHOWN VERBATIM'
         const labelH = this.text.measure(label, this.maxWidth, { size: 7.4, font: FONTS.bodyBold, color: COLORS.error, lineHeight: 10 })
@@ -432,11 +442,15 @@ export class SolutionRenderer {
         })
         continue
       }
+      // Inline SVG baselines can shift below the text baseline. Reserve the
+      // shift on both sides of the line so the measured line height contains
+      // the full vector expression and cannot overprint the following line.
+      const usedShift = Math.min(Math.max(0, Number(info.shift) || 0), this.fontSize * 0.8)
       addItem({
         kind: 'math',
         info,
         width: info.width + 2,
-        height: Math.max(info.height, this.fontSize * 1.5),
+        height: Math.max(this.fontSize * 1.5, info.height + usedShift * 2 + 3),
       })
     }
     finish()
@@ -450,20 +464,26 @@ export class SolutionRenderer {
   drawLine(line, x, y, width, opts = {}) {
     const drawY = y
     if (line.kind === 'malformed') {
-      this.ctx.doc.roundedRect(x, drawY, width, line.height - 4, 3).fill(COLORS.errorSoft)
-      this.ctx.doc.roundedRect(x, drawY, 2.5, line.height - 4, 1).fill(COLORS.error)
-      this.ctx.drawText(line.label, x + 9, drawY + 5, width - 18, {
+      this.ctx.canvas.rect(x, drawY, width, line.height - 4, {
+        fill: COLORS.errorSoft, radius: 3, kind: 'shape', role: 'flag',
+      })
+      this.ctx.canvas.rect(x, drawY, 2.5, line.height - 4, {
+        fill: COLORS.error, radius: 1, kind: 'shape', role: 'flag',
+      })
+      this.ctx.text(line.label, x + 9, drawY + 5, width - 18, {
         size: 7.4,
         font: FONTS.bodyBold,
         color: COLORS.error,
         characterSpacing: 0.4,
         lineHeight: 10,
+        role: 'text',
       })
-      this.ctx.drawText(line.raw, x + 9, drawY + 15, width - 18, {
+      this.ctx.text(line.raw, x + 9, drawY + 15, width - 18, {
         size: this.fontSize,
         font: FONTS.body,
         mathFont: FONTS.math,
         color: COLORS.deepInk,
+        role: 'text',
       })
       return line.height
     }
@@ -472,6 +492,9 @@ export class SolutionRenderer {
       this.math.draw(line.info, mathX, drawY + 3, COLORS.midnight)
       return line.height
     }
+    const natural = this.ctx.textEngine.lineNatural({
+      size: this.fontSize, font: FONTS.body, mathFont: FONTS.math,
+    })
     let cursor = x + (opts.align === 'center' ? Math.max(0, (width - line.width) / 2) : 0)
     for (const item of line.items) {
       if (item.kind === 'space') {
@@ -481,8 +504,18 @@ export class SolutionRenderer {
       if (item.kind === 'text') {
         for (const run of item.token.runs) {
           if (!run.text) continue
-          this.ctx.doc.font(run.font).fontSize(this.fontSize).fillColor(COLORS.deepInk)
-          this.ctx.doc.text(run.text, cursor, drawY, { lineBreak: false })
+          this.ctx.canvas.textRun(run.text, cursor, drawY, {
+            font: run.font,
+            size: this.fontSize,
+            color: COLORS.deepInk,
+            audit: false,
+          })
+          this.ctx.recordBox('text', cursor, drawY, run.width, natural, {
+            text: run.text,
+            font: run.font,
+            size: this.fontSize,
+            role: 'text',
+          })
           cursor += run.width
         }
         continue
@@ -514,10 +547,19 @@ export class SolutionRenderer {
     const lines = this.layout(source)
     let total = 0
     for (const line of lines) {
-      const reserved = this.ctx.reserve(line.height, { continuationLabel: opts.continuationLabel })
-      this.drawLine(line, x, reserved.y, width, opts)
-      total += line.height + reserved.extra
+      ctxLine(this.ctx, this, line, x, width, opts)
+      total += line.height
     }
     return total
   }
+}
+
+function ctxLine(ctx, renderer, line, x, width, opts) {
+  ctx.component({
+    type: 'solution-line',
+    continuationLabel: opts.continuationLabel,
+    allowSplit: false,
+    measure: () => line.height,
+    draw: (frame) => renderer.drawLine(line, x, frame.y, width, opts),
+  })
 }

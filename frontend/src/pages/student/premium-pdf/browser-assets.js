@@ -37,7 +37,7 @@ export async function loadBrowserAssets() {
       InterBold: interBold,
       Manrope: manrope,
       STIXMath: stixMath,
-      STIXTwoText: stixText,
+      STIXText: stixText,
     },
   }
 }
