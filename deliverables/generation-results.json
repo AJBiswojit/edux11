@@ -1,36 +1,91 @@
 {
   "generatedAt": "2026-11-02T09:00:00.000Z",
+  "engine": "premium-academic-editorial-v2",
   "source": "backend/app/data/spa/student-portal.json :: examAnalysis",
-  "note": "The two content-reference PDFs named in the brief were not present in the workspace; these deliverables preserve the canonical in-app analysis payload that feeds the same export workflow.",
+  "note": "The two named content-reference PDFs were not present in the workspace. These V2 deliverables preserve the canonical in-app analysis payload that feeds the same export workflow; no examination values were invented.",
   "reports": {
     "full": {
       "file": "MediXO_EduX_Full_Exam_Analysis_Report.pdf",
-      "pages": 14,
+      "label": "Full Exam Analysis Report",
+      "pages": 16,
       "sourceValues": 247,
       "missingValues": [],
-      "flags": []
+      "sourceValuesOutsideDigest": 0,
+      "dataScope": "Complete canonical source-value preservation.",
+      "flags": [],
+      "layout": {
+        "componentCount": 258,
+        "boxCount": 2585,
+        "textTextOverlaps": [],
+        "textBarOverlaps": [],
+        "siblingComponentOverlaps": [],
+        "componentBoundaryViolations": [],
+        "footerCollisions": [],
+        "orphanHeadings": [],
+        "repeatedTableHeaderFailures": [],
+        "overflowingComponents": [],
+        "zeroUnintendedOverlaps": true
+      },
+      "synthetic": false
     },
     "intelligence": {
       "file": "MediXO_EduX_Exam_Intelligence_Report.pdf",
-      "pages": 2,
+      "label": "Exam Intelligence Report",
+      "pages": 4,
       "sourceValues": 247,
       "missingValues": [],
-      "sourceValuesOutsideTwoPageDigest": 115,
-      "dataScope": "Two-page digest; complete source-value preservation is verified against the Full Analysis Report.",
-      "flags": []
+      "sourceValuesOutsideDigest": 108,
+      "dataScope": "Academic briefing; complete source-value preservation is verified against the Full Analysis Report.",
+      "flags": [],
+      "layout": {
+        "componentCount": 81,
+        "boxCount": 657,
+        "textTextOverlaps": [],
+        "textBarOverlaps": [],
+        "siblingComponentOverlaps": [],
+        "componentBoundaryViolations": [],
+        "footerCollisions": [],
+        "orphanHeadings": [],
+        "repeatedTableHeaderFailures": [],
+        "overflowingComponents": [],
+        "zeroUnintendedOverlaps": true
+      },
+      "synthetic": false
     }
   },
   "qa": {
-    "full": {
-      "file": "qa/premium-pdf-stress-test.pdf",
-      "pages": 24,
+    "full-edge-cases-2-subjects": {
+      "file": "qa/full-edge-cases-2-subjects.pdf",
+      "label": "2 subjects · 32 questions · long math and labels",
+      "pages": 33,
+      "sourceValues": 225,
       "missingValues": [],
+      "sourceValuesOutsideDigest": 0,
+      "dataScope": "Complete canonical source-value preservation.",
       "flags": [
+        {
+          "report": "full",
+          "source": "Q3",
+          "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+          "reason": "MathJax could not typeset the expression"
+        },
         {
           "report": "full",
           "source": "Q4",
           "value": "\\frac{1}{2",
           "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q4",
+          "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q7",
+          "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+          "reason": "MathJax could not typeset the expression"
         },
         {
           "report": "full",
@@ -40,9 +95,33 @@
         },
         {
           "report": "full",
+          "source": "Q8",
+          "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q11",
+          "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+          "reason": "MathJax could not typeset the expression"
+        },
+        {
+          "report": "full",
           "source": "Q12",
           "value": "\\frac{1}{2",
           "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q12",
+          "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q15",
+          "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+          "reason": "MathJax could not typeset the expression"
         },
         {
           "report": "full",
@@ -52,9 +131,33 @@
         },
         {
           "report": "full",
+          "source": "Q16",
+          "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q19",
+          "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+          "reason": "MathJax could not typeset the expression"
+        },
+        {
+          "report": "full",
           "source": "Q20",
           "value": "\\frac{1}{2",
           "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q20",
+          "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q23",
+          "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+          "reason": "MathJax could not typeset the expression"
         },
         {
           "report": "full",
@@ -64,19 +167,236 @@
         },
         {
           "report": "full",
+          "source": "Q24",
+          "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q27",
+          "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+          "reason": "MathJax could not typeset the expression"
+        },
+        {
+          "report": "full",
           "source": "Q28",
           "value": "\\frac{1}{2",
           "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q28",
+          "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q31",
+          "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+          "reason": "MathJax could not typeset the expression"
+        },
+        {
+          "report": "full",
+          "source": "Q32",
+          "value": "\\frac{1}{2",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q32",
+          "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+          "reason": "Unbalanced TeX source"
         }
-      ]
+      ],
+      "layout": {
+        "componentCount": 428,
+        "boxCount": 5459,
+        "textTextOverlaps": [],
+        "textBarOverlaps": [],
+        "siblingComponentOverlaps": [],
+        "componentBoundaryViolations": [],
+        "footerCollisions": [],
+        "orphanHeadings": [],
+        "repeatedTableHeaderFailures": [],
+        "overflowingComponents": [],
+        "zeroUnintendedOverlaps": true
+      },
+      "synthetic": true
     },
-    "intelligence": {
-      "file": "qa/intelligence-edge-cases.pdf",
-      "pages": 2,
+    "intelligence-edge-cases-2-subjects": {
+      "file": "qa/intelligence-edge-cases-2-subjects.pdf",
+      "label": "2 subjects · intelligence edge cases",
+      "pages": 4,
+      "sourceValues": 225,
       "missingValues": [],
-      "sourceValuesOutsideTwoPageDigest": 133,
-      "dataScope": "Synthetic two-page QA digest; not a source-of-truth document.",
-      "flags": []
+      "sourceValuesOutsideDigest": 130,
+      "dataScope": "Academic briefing; complete source-value preservation is verified against the Full Analysis Report.",
+      "flags": [],
+      "layout": {
+        "componentCount": 62,
+        "boxCount": 458,
+        "textTextOverlaps": [],
+        "textBarOverlaps": [],
+        "siblingComponentOverlaps": [],
+        "componentBoundaryViolations": [],
+        "footerCollisions": [],
+        "orphanHeadings": [],
+        "repeatedTableHeaderFailures": [],
+        "overflowingComponents": [],
+        "zeroUnintendedOverlaps": true
+      },
+      "synthetic": true
+    },
+    "full-large-revision-3-subjects": {
+      "file": "qa/full-large-revision-3-subjects.pdf",
+      "label": "3 subjects · 12 priority rows · long derivations",
+      "pages": 26,
+      "sourceValues": 286,
+      "missingValues": [],
+      "sourceValuesOutsideDigest": 0,
+      "dataScope": "Complete canonical source-value preservation.",
+      "flags": [
+        {
+          "report": "full",
+          "source": "Q3",
+          "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+          "reason": "MathJax could not typeset the expression"
+        },
+        {
+          "report": "full",
+          "source": "Q5",
+          "value": "\\frac{1}{2",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q5",
+          "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q18",
+          "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+          "reason": "MathJax could not typeset the expression"
+        },
+        {
+          "report": "full",
+          "source": "Q23",
+          "value": "\\frac{1}{2",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q23",
+          "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q47",
+          "value": "\\begin{aligned} a &= b + c + \\frac{1}{2} \\\\ d &= e + f - \\sqrt{\\lambda} \\\\ \\therefore\\; a+d &= b+c+e+f \\\\end{aligned}",
+          "reason": "MathJax could not typeset the expression"
+        },
+        {
+          "report": "full",
+          "source": "Q58",
+          "value": "\\frac{1}{2",
+          "reason": "Unbalanced TeX source"
+        },
+        {
+          "report": "full",
+          "source": "Q58",
+          "value": "\\int_0^1 \\frac{x}{\\sqrt{1-x^2}",
+          "reason": "Unbalanced TeX source"
+        }
+      ],
+      "layout": {
+        "componentCount": 410,
+        "boxCount": 4229,
+        "textTextOverlaps": [],
+        "textBarOverlaps": [],
+        "siblingComponentOverlaps": [],
+        "componentBoundaryViolations": [],
+        "footerCollisions": [],
+        "orphanHeadings": [],
+        "repeatedTableHeaderFailures": [],
+        "overflowingComponents": [],
+        "zeroUnintendedOverlaps": true
+      },
+      "synthetic": true
+    },
+    "intelligence-large-revision-3-subjects": {
+      "file": "qa/intelligence-large-revision-3-subjects.pdf",
+      "label": "3 subjects · large revision strategy",
+      "pages": 6,
+      "sourceValues": 286,
+      "missingValues": [],
+      "sourceValuesOutsideDigest": 125,
+      "dataScope": "Academic briefing; complete source-value preservation is verified against the Full Analysis Report.",
+      "flags": [],
+      "layout": {
+        "componentCount": 111,
+        "boxCount": 907,
+        "textTextOverlaps": [],
+        "textBarOverlaps": [],
+        "siblingComponentOverlaps": [],
+        "componentBoundaryViolations": [],
+        "footerCollisions": [],
+        "orphanHeadings": [],
+        "repeatedTableHeaderFailures": [],
+        "overflowingComponents": [],
+        "zeroUnintendedOverlaps": true
+      },
+      "synthetic": true
+    },
+    "full-minimal-2-subjects": {
+      "file": "qa/full-minimal-2-subjects.pdf",
+      "label": "2 subjects · missing fields · short page count",
+      "pages": 8,
+      "sourceValues": 81,
+      "missingValues": [],
+      "sourceValuesOutsideDigest": 0,
+      "dataScope": "Complete canonical source-value preservation.",
+      "flags": [],
+      "layout": {
+        "componentCount": 126,
+        "boxCount": 979,
+        "textTextOverlaps": [],
+        "textBarOverlaps": [],
+        "siblingComponentOverlaps": [],
+        "componentBoundaryViolations": [],
+        "footerCollisions": [],
+        "orphanHeadings": [],
+        "repeatedTableHeaderFailures": [],
+        "overflowingComponents": [],
+        "zeroUnintendedOverlaps": true
+      },
+      "synthetic": true
+    },
+    "intelligence-minimal-2-subjects": {
+      "file": "qa/intelligence-minimal-2-subjects.pdf",
+      "label": "2 subjects · minimal intelligence digest",
+      "pages": 3,
+      "sourceValues": 81,
+      "missingValues": [],
+      "sourceValuesOutsideDigest": 38,
+      "dataScope": "Academic briefing; complete source-value preservation is verified against the Full Analysis Report.",
+      "flags": [],
+      "layout": {
+        "componentCount": 39,
+        "boxCount": 224,
+        "textTextOverlaps": [],
+        "textBarOverlaps": [],
+        "siblingComponentOverlaps": [],
+        "componentBoundaryViolations": [],
+        "footerCollisions": [],
+        "orphanHeadings": [],
+        "repeatedTableHeaderFailures": [],
+        "overflowingComponents": [],
+        "zeroUnintendedOverlaps": true
+      },
+      "synthetic": true
     }
   }
 }

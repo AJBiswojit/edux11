@@ -1,79 +1,113 @@
-# MediXO EduX — Premium PDF Reporting Implementation Report
+# MediXO EduX — Premium PDF Redesign V2
 
-## Important source note
+## Outcome
 
-The two content-reference PDFs named in the brief (**JEE Main Mock Test – Phase 2 – Full Analysis Report**, 9 pages, and **Exam Intelligence Report**, 2 pages) were **not present in the workspace**, and no attachment list was available. No separate official-logo attachment was present either. To avoid inventing a single examination datum, the deliverables were generated from the canonical in-app analysis payload at `backend/app/data/spa/student-portal.json` (`examAnalysis`) — the same shape consumed by `/student/exam-analysis/{id}` and by the existing export workflow. The official repository logo asset `frontend/src/assets/logo.png` is embedded unchanged, with its original proportions, colours and transparency.
+The V1 PDF reporting system was rejected and replaced with a measurement-driven editorial publication engine. Both student-facing reports were regenerated, geometrically validated, rendered page-by-page and visually inspected.
 
-If the two reference PDFs are supplied, the same renderer can be run against their extracted JSON without changing the presentation layer.
+- `MediXO_EduX_Full_Exam_Analysis_Report.pdf` — **16 A4 pages**.
+- `MediXO_EduX_Exam_Intelligence_Report.pdf` — **4 A4 pages**.
+- Canonical examination payload values preserved: **247 / 247**.
+- Independent verification checks passed: **26 / 26**.
+- Unintended text, chart, component and footer collisions: **0**.
+- Minimum rendered type size: **7.5 pt** full report, **7.8 pt** intelligence report.
 
-## Deliverables
+## Source note
 
-| Deliverable | File |
-| --- | --- |
-| Full Exam Analysis Report | `deliverables/MediXO_EduX_Full_Exam_Analysis_Report.pdf` |
-| Exam Intelligence Report | `deliverables/MediXO_EduX_Exam_Intelligence_Report.pdf` |
-| Generation / QA metadata | `deliverables/generation-results.json` |
-| Verification results | `deliverables/VERIFICATION_RESULTS.md`, `deliverables/verification-results.json` |
-| Representative previews | `deliverables/previews/*.png` and `deliverables/previews/overview.png` |
-| Synthetic QA PDFs | `deliverables/qa/premium-pdf-stress-test.pdf`, `deliverables/qa/intelligence-edge-cases.pdf` |
-| Source code | `frontend/src/pages/student/premium-pdf/`, updated `exam-analysis-pdf.js`, `frontend/scripts/generate-report-pdfs.mjs`, `scripts/verify_report_pdfs.py` |
-| Fonts + licences | `frontend/src/assets/fonts/*.ttf`, `OFL-*.txt` |
-| Tests | `frontend/tests/pages/premium-pdf.test.js` |
+The two named content-reference PDFs were not present in the workspace. No examination values were invented. The deliverables use the repository's canonical `backend/app/data/spa/student-portal.json :: examAnalysis` payload that feeds the same export workflow, and the untouched `frontend/src/assets/logo.png`. Exact page/data parity against those absent reference PDFs remains unverified.
 
-## What was found before modification
+## Creative direction
 
-- `frontend/src/pages/student/exam-analysis-pdf.js` contained a hand-written **PDF 1.4 byte-stream writer**, not a third-party library. It used Helvetica Type1 fonts only, stripped non-ASCII text, flattened Unicode, truncated long explanations, and had no mathematical typesetting.
-- The file also contained an unused HTML/print template and a raster-logo fallback that recreated branding as text.
-- Export entry points were `exportAnalysisPDF(data, subject, user)` and `exportFullAnalysisPDF(data, subject, user)`, called from `ExamAnalysis.jsx` and `FacultyAttemptAnalysis.jsx`.
-- Dynamic data comes from `backend/app/services/spa_exams.py` through `/student/exam-analysis`, `/student/exam-analysis/options` and `/student/exam-analysis/{analysis_id}`; frontend hooks live in `frontend/src/services/extra.js`.
-- `frontend/package.json` already had KaTeX/Recharts for on-screen math and charts, but no server/browser PDF library capable of embedded fonts and vector equations.
+The reports now use a premium academic-editorial identity rather than a dashboard:
 
-**Library decision.** The hand-rolled writer was retained as a deprecated compatibility export so existing helpers/tests continue to work, but production downloads now use **PDFKit**. This was necessary, not cosmetic: the old writer could not embed Inter/Manrope/STIX fonts, preserve Unicode, render vector mathematics, or support reliable paged buffers with repeated headers. No API contract changed and no call site was rewritten.
+- Exact palette: `#101B30`, `#FFFFFF`, `#FAFAF7`, `#202B3D`, `#7A8493`, `#5146D8`, `#168568`, `#C58A35`, `#C64D5B`.
+- Manrope for major headings, Inter for body/tables, STIX Two Math for mathematical notation; all fonts are embedded.
+- The original official logo appears unchanged on the cover, compact internal headers and final branding, with transparency and proportions intact.
+- No full-page grid, no repeated dark banner, no every-component-as-card treatment.
+- Whitespaces, hairlines, typography and restrained semantic colour establish hierarchy.
+- The Full Analysis Report uses a white page with a single dark-navy executive score feature. The Intelligence Report uses warm paper, a typographic masthead and an open score band, giving it a distinct briefing personality.
 
-## Architecture
+## Report structures
 
-The implementation is split cleanly into data, typography, mathematics, layout, components and document composition:
+### Full Exam Analysis Report
 
-- `premium-pdf/model.js` — pure data normalisation: exam/student identity, metrics, subjects, chapters, topics, mistakes, recommendations, comparison, prediction, all question-review rows, missing-value handling, and a flattened source-value register with a deterministic payload fingerprint.
-- `premium-pdf/text.js` — measured rich-text wrapping; breaks long words, never ellipsises, applies Inter / STIX Two Math per Unicode run and records every emitted value.
-- `premium-pdf/math.js` — `parseSolution`, `MathRenderer`, `SolutionRenderer`; MathJax TeX → SVG → PDFKit vector paths; malformed expressions are flagged and shown verbatim.
-- `premium-pdf/layout.js` — A4 paged context, intelligent `reserve()`, repeated table headers, continuation labels, page numbering and final page totals.
-- `premium-pdf/components.js` — the reusable named components: `ReportHeader`, `ReportFooter`, `MetricCard`, `SectionHeading`, `PerformanceChart`, `SubjectPerformance`, `ChapterMastery`, `QuestionAnalysisCard`, `AnswerComparison`, `SolutionRenderer` integration, `RevisionPriorityTable`, `SubjectSection`, `SimpleTable`, `StaticTable`, `SourceRegister` and `FinalBranding`.
-- `premium-pdf/full-analysis.js` / `intelligence.js` — the two distinct editorial compositions.
-- `premium-pdf/renderer.js` — PDFKit document setup, font registration, asset loading, source-data register and QA result object.
-- `premium-pdf/browser-assets.js` / `index.js` — lazy Vite asset loading; heavy PDF/MathJax code is dynamically imported only when a user downloads a report.
+1. Executive cover: logo, report identity, examination/student/date/total marks, dominant score, accuracy, correct/incorrect/skipped counts and one composite performance visual.
+2. Performance intelligence: response composition, difficulty, mistake distribution, subject performance and important signals.
+3. Subject and chapter mastery: subject marks/accuracy, strong/weak/critical chapters, and a grouped chapter-mastery register.
+4. Time intelligence: one measured row per chapter, grouped by subject, with horizontal bars, recorded time and share; separate time-management metrics.
+5. Comparison and projection: benchmarks, score changes, trajectory, prediction and readiness.
+6. Question intelligence: consistent question cards with number/status, classifications, answer comparison, marks/time, mistake category and the most readable solution area. Normal cards stay together; unusually long solutions use labelled continuations.
+7. Learning intelligence: revision priorities, subject-grouped topics, published actions, mistake evidence, topic accuracy and weak lists.
+8. Complete source data register with compact short-value columns and full-width verbatim long values, followed by final branding.
 
-## Design system
+### Exam Intelligence Report
 
-- Exact palette: Midnight Navy `#101B30`, Deep Ink `#17243A`, EduX Indigo `#5146D8`, Soft Ivory `#FAFAF7`, Cool White `#FFFFFF`, Muted Slate `#788397`, Border Grey `#E5E8EF`, Success Green `#168568`, Warning Amber `#C58A35`, Error Crimson `#C64D5B`, Information Blue `#4778C7`.
-- Embedded fonts: Inter Regular / SemiBold / Bold for body and tabular numerals, Manrope Bold for headings, STIX Two Math and STIX Two Text for mathematical/scientific glyphs. All OFL licences are included.
-- A4 portrait, 42 pt side margins, a subtle 12-column grid, compact internal header with the small official logo, report/exam identification, restrained footer with `PAGE NN / NN`, and quiet final-page branding.
-- Report One uses a navy executive score band, eight metric cards, three at-a-glance charts, an editorial brief, a report map, performance/mastery/time/comparison sections, full question cards, mistake evidence, revision strategy and a source register.
-- Report Two is a tighter two-page briefing: gauges, compact subject/chapter/time tables, a dominant “What to study next” revision board grouped by subject, mistake evidence, topic accuracy, weak topics and priority classification.
-- Question cards keep identification, answer comparison, marks/time, mistake category and a separate explanation area. Correct/incorrect/skipped use subtle semantic tints only. Long cards start on a fresh page; only truly oversized cards continue, with explicit continuation labels.
-- Mathematics supports fractions, integrals, sums, roots, scripts, Greek symbols, chemical notation, scientific notation and multi-line `aligned` derivations as vector paths. Malformed TeX is never guessed.
+1. Performance snapshot: premium briefing identity, candidate/exam information, score/accuracy, subject performance and chapter mastery.
+2. Learning intelligence: mistake pattern, topic-level accuracy, subject-wise weak topics, source evidence and priority classification.
+3. Revision strategy: dominant priority board, classification counts, subject-wise revision sections and timeframe.
+4. Published next actions and detailed evidence, with final branding.
 
-## Content preservation and QA
+## Engine architecture
 
-The canonical payload yields **247 unique source primitive values**. The Full Exam Analysis Report contains **all 247**: zero missing values, zero malformed-expression flags, and all **14 supplied question-review identifiers**. Its source register lists any value not already drawn in the main editorial sections. The two-page Intelligence Report is intentionally a digest; complete source-value preservation is verified against the Full Analysis Report.
+- `theme.js` — exact palette, A4 geometry, type scale, fonts and formatting helpers.
+- `text.js` — font-metric-aware wrapping and drawing; `measure()` and `draw()` share one layout.
+- `math.js` — MathJax TeX → SVG → vector PDF, malformed-expression flags, Unicode/math text runs and audited math boxes.
+- `layout.js` — `ReportContext`, page-aware cursor, `component()`, `sectionBreak()`, `bottomFrame()`, fixed chrome and `LayoutAudit`.
+- `components.js` — named reusable components: section/subsection headings, editorial columns, metric ledgers, measured bar/stacked/donut charts, measured tables, question cards, subject bands and source register.
+- `full-analysis.js` / `intelligence.js` — distinct report compositions.
+- `model.js` — unchanged data-normalisation layer; no presentation code.
+- `renderer.js` — PDFKit orchestration, font registration, source register, final branding and audit output.
+- `browser-assets.js` and `index.js` — Vite asset loading and lazy browser entry point; existing `exportAnalysisPDF` and `exportFullAnalysisPDF` API contracts remain intact.
 
-Generated document sizes: **14 pages** for the redesigned Full Analysis Report and **exactly 2 pages** for the Exam Intelligence Report. The full report is longer than the 9-page reference because the brief explicitly prioritises readability over shrinking content; every canonical field is preserved.
+Every component declares required width, required height, actual rendered height, top/bottom spacing and split policy. Every rendered box is recorded. Intentional parent-child containment is allowed; unintended sibling/independent intersections are rejected.
 
-Synthetic QA fixtures (clearly labelled, stored separately under `deliverables/qa/`) exercised long mathematical explanations, a 118-character chapter name, missing optional values, a different score, a two-subject combination, 30 question rows, multiple question-analysis pages, and malformed TeX. The QA full report is 24 pages, preserves all its source values, and produced **7 malformed-expression flags** rather than guesses.
+## Layout corrections
 
-Verification (`scripts/verify_report_pdfs.py`, requiring PyMuPDF + Pillow) confirms: A4 geometry, embedded Inter/Manrope/STIX subsets, logo image on every page, header/footer/report-identification consistency, sequential page numbering and totals, no blank pages, no out-of-bounds text spans, minimum type size 6.4 pt (full) / 6.5 pt (intelligence), vector chart/equation drawings, no raw TeX in student-facing PDFs, all required sections, all source values and all question IDs. **Every automated check passes.** Eight representative-page previews plus the contact sheet are in `deliverables/previews/`.
+The audit root causes and fixes are documented in `V2_TECHNICAL_AUDIT.md`. In brief: fixed chart row heights, fixed metric/heading boxes, independent question-card slices, local hard-coded intelligence-page coordinates, manual final-branding placement and non-metric line heights were all removed. Charts and tables now measure labels, values, rows, legends and headers; pagination reserves fixed header/footer regions and repeats table headers.
 
-`npm run build` succeeds. The two PDF-specific Vitest suites (`premium-pdf.test.js`, `exam-analysis-pdf.test.js`) pass all 17 tests. The full Vitest suite still reports 27 failures in unrelated dashboard/assessment modules; those are outside this PDF work.
+## Content preservation
 
-## Regeneration
+- The Full Analysis Report retains all 247 unique canonical primitive values and every supplied question identifier.
+- Missing optional values are shown as `—`; no dummy or inferred academic values are introduced.
+- Malformed TeX is flagged and shown verbatim; it is never silently corrected.
+- Dynamic backend `questionReview` fields, comparison/prediction payloads and recommendation structures remain supported.
+- The raw legacy PDF builder remains exported for compatibility; production exports use the V2 engine.
+
+## Verification and QA
+
+`scripts/verify_report_pdfs.py` validates:
+
+- A4 geometry, embedded Inter/Manrope/STIX Two Math fonts and logo on every page.
+- Header/footer/report identification, sequential page numbers and final totals.
+- No blank pages, no out-of-bounds or clipped text, no footer collisions.
+- Manifest-level sibling-component, text/text, text/math, text/chart-bar, component-overflow, repeated-header and orphan-heading checks.
+- Actual PyMuPDF line-box intersections against each other and against chart bars.
+- Content preservation and required sections.
+- Balanced page composition and distinct visual identities.
+
+Every page of every PDF was rendered to PNG at 105–120 dpi. Contact sheets and a review index are in `deliverables/previews/v2/`; `overview-v2.png` shows both publication covers.
+
+Synthetic QA fixtures cover 2 subjects, 3 subjects, long chapter/topic names, long mathematical explanations, multi-line derivations, missing optional fields, 32 question-review rows, different score combinations, large revision-priority lists and different page counts. Malformed expressions are deliberately flagged. They are clearly marked as non-student data in `qa/QA_NOTICE.txt`.
+
+## Commands
 
 ```bash
 cd frontend
 npm install
 npm run pdf:generate
-cd ..
-# Verification/previews require PyMuPDF and Pillow in the Python environment:
-python3 scripts/verify_report_pdfs.py
+npm run pdf:verify          # requires pymupdf + pillow
+npm run build
+npx vitest run tests/pages/premium-pdf.test.js \
+  tests/pages/exam-analysis-pdf.test.js \
+  tests/pages/premium-pdf-layout.test.js
 ```
 
-Browser downloads continue to work through the unchanged `exportAnalysisPDF` and `exportFullAnalysisPDF` APIs.
+The combined PDF-specific Vitest suites pass **22 / 22**. `npm run build` succeeds with the repository's existing large-chunk warning. The full Vitest suite reports **417 passed / 26 failed**; the failures are in unrelated dashboard, navigation, filter, paper-generator, student-360 and adapter modules, not in the PDF engine.
+
+## Key files
+
+- PDFs: `deliverables/MediXO_EduX_Full_Exam_Analysis_Report.pdf`, `deliverables/MediXO_EduX_Exam_Intelligence_Report.pdf`
+- Verification: `deliverables/VERIFICATION_RESULTS.md`, `deliverables/verification-results.json`
+- Layout manifest: `deliverables/layout-audit.json`
+- Generation metadata: `deliverables/generation-results.json`
+- Visual review: `deliverables/previews/v2/REVIEW_INDEX.md`, `deliverables/previews/v2/overview-v2.png`
+- Technical audit: `deliverables/V2_TECHNICAL_AUDIT.md`

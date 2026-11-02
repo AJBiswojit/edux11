@@ -1,13 +1,15 @@
 /**
- * Premium PDF renderer — shared by the browser export workflow and the Node
- * deliverable/QA scripts. The library is PDFKit: it embeds the licensed Inter,
- * Manrope and STIX Two Math/Text fonts, supports vector SVG equations and
- * paged buffers for consistent headers, footers and page numbering.
+ * V2 premium PDF renderer — shared by browser exports and Node deliverables.
+ *
+ * PDFKit embeds Inter, Manrope and STIX Two fonts; all placement goes through
+ * ReportContext. The returned audit manifest is used by the independent
+ * geometric verifier. Data-generation remains in model.js; this module only
+ * orchestrates presentation.
  */
 
 import PDFDocument from 'pdfkit'
 
-import { A4, COLORS, FONTS, FONT_FILES, normalizeForMatch } from './theme.js'
+import { A4, FONTS, FONT_FILES, COLORS, normalizeForMatch } from './theme.js'
 import { ReportContext } from './layout.js'
 import { SectionHeading, SourceRegister, FinalBranding } from './components.js'
 import { renderFullAnalysis } from './full-analysis.js'
@@ -20,7 +22,7 @@ function registerFonts(doc, assets) {
     if (!bytes) throw new Error(`Premium PDF font missing: ${name} (${file})`)
     doc.registerFont(name, bytes)
   })
-  doc.font(FONTS.body).fontSize(9)
+  doc.font(FONTS.body).fontSize(10)
 }
 
 function concat(chunks) {
@@ -48,10 +50,6 @@ function collectBytes(doc) {
   })
 }
 
-/**
- * Render a report. Returns PDF bytes plus QA metadata.
- * assets = { logo: Uint8Array, fonts: { Inter: Uint8Array, ... } }
- */
 export async function renderPremiumPdf({ kind = 'full', model, assets } = {}) {
   if (!model) throw new Error('A report model is required')
   const doc = new PDFDocument({
@@ -64,51 +62,50 @@ export async function renderPremiumPdf({ kind = 'full', model, assets } = {}) {
       Title: model.reportTitle,
       Author: 'MediXO EduX',
       Subject: `${model.examName} · ${model.reportId}`,
-      Keywords: `MediXO EduX, exam analysis, ${model.examId}, ${model.sourceHash}`,
-      Creator: 'MediXO EduX Premium Report Engine',
+      Keywords: `MediXO EduX, academic intelligence, ${model.examId}, ${model.sourceHash}`,
+      Creator: 'MediXO EduX Premium Academic Editorial Engine V2',
       Producer: 'MediXO EduX / PDFKit',
     },
   })
   registerFonts(doc, assets)
   const done = collectBytes(doc)
-  const ctx = new ReportContext({ doc, theme: COLORS, assets, model, kind })
+  const ctx = new ReportContext({ doc, assets, model, kind })
 
-  ctx.startPage({ cover: true })
+  ctx.startPage({ cover: kind === 'full' })
   if (kind === 'intelligence') renderIntelligenceReport(ctx)
   else renderFullAnalysis(ctx)
 
   if (kind === 'full') {
+    ctx.sectionBreak(0.62)
+    SectionHeading(ctx, {
+      number: '08', kicker: 'DATA INTEGRITY', title: 'Source data register',
+      note: '',
+      accent: COLORS.indigo,
+    })
+    SourceRegister(ctx, { rows: model.sourceValues || [] })
     let missing = ctx.missingSourceValues()
     if (missing.length) {
-      ctx.startFreshPage()
+      ctx.sectionBreak(0.62)
       SectionHeading(ctx, {
-        number: '07', kicker: 'DATA INTEGRITY', title: 'Source data register',
-        note: `${missing.length} unique source values are listed below with their payload paths. This register guarantees that no field was lost in the redesign.`,
-        accent: COLORS.info,
-      })
-      SourceRegister(ctx, { rows: missing })
-      missing = ctx.missingSourceValues()
-    }
-    // Defensive second pass for values whose normalisation did not match the
-    // first emission (for example short numeric tokens).
-    if (missing.length) {
-      ctx.startFreshPage()
-      SectionHeading(ctx, {
-        number: '07A', kicker: 'DATA INTEGRITY', title: 'Source value addendum',
-        note: 'Additional source values shown verbatim for verification.', accent: COLORS.info, compact: true,
+        number: '08A', kicker: 'DATA INTEGRITY', title: 'Source value addendum',
+        note: '',
+        accent: COLORS.indigo,
       })
       SourceRegister(ctx, { rows: missing })
     }
   }
 
   FinalBranding(ctx)
-  const pageCount = ctx.finalize()
+  const finalization = ctx.finalize()
+  const remaining = ctx.missingSourceValues().map((row) => row.value)
   doc.end()
   const bytes = await done
-  const remaining = ctx.missingSourceValues().map((row) => row.value)
+
   return {
     bytes,
-    pageCount,
+    pageCount: finalization.pageCount,
+    layoutAudit: finalization.audit,
+    auditSummary: finalization.summary,
     flags: ctx.flags,
     sourceValueCount: (model.sourceValues || []).length,
     missingValues: remaining,
