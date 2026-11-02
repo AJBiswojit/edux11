@@ -1234,13 +1234,27 @@ export function analysisPdfUser(data, fallbackUser) {
   return { fullName, rollNo }
 }
 
+/**
+ * Exam Intelligence Report — premium two-page publication.
+ *
+ * The legacy raw PDF writer below remains exported for backward compatibility
+ * and unit tests. The production download path now uses the reusable premium
+ * engine, which embeds fonts, preserves Unicode/LaTeX and supports the full
+ * dynamic analysis payload.
+ */
 export async function exportAnalysisPDF(data, subject, user) {
   if (!data || typeof window === 'undefined') return
-  const model = buildReportModel({ data, subject, user, generatedAt: new Date() })
-  const logo = await loadBrandLogo()
-  const bytes = buildReportPdf(model, logo)
-  const blob = new Blob([bytes], { type: 'application/pdf' })
-  triggerDownload(blob, `${fileStub(model.examName)}_${fileStub(model.subjectText)}_analysis.pdf`)
+  const generatedAt = new Date()
+  const [{ buildPremiumIntelligenceModel }, { createPremiumPdf }] = await Promise.all([
+    import('./premium-pdf/model.js'),
+    import('./premium-pdf/index.js'),
+  ])
+  const model = buildPremiumIntelligenceModel({ data, subject, user, generatedAt })
+  const result = await createPremiumPdf({ kind: 'intelligence', model })
+  if (result.flags.length) console.warn('[MediXO EduX] expressions flagged for verification', result.flags)
+  const blob = new Blob([result.bytes], { type: 'application/pdf' })
+  triggerDownload(blob, `MediXO_EduX_${fileStub(model.examName)}_Exam_Intelligence_Report.pdf`)
+  return result
 }
 
 /* ============================================================
@@ -2146,12 +2160,18 @@ export function buildFullAnalysisPdf(model, logo) {
   return out
 }
 
-/** Entry point: export the full multi-section analysis PDF. */
+/** Entry point: export the premium full exam analysis publication. */
 export async function exportFullAnalysisPDF(data, subject, user) {
   if (!data || typeof window === 'undefined') return
-  const model = buildFullModel({ data, subject, user, generatedAt: new Date() })
-  const logo  = await loadBrandLogo()
-  const bytes = buildFullAnalysisPdf(model, logo)
-  const blob  = new Blob([bytes], { type: 'application/pdf' })
-  triggerDownload(blob, `${fileStub(model.examName)}_${fileStub(model.subjectText)}_full_analysis.pdf`)
+  const generatedAt = new Date()
+  const [{ buildPremiumFullModel }, { createPremiumPdf }] = await Promise.all([
+    import('./premium-pdf/model.js'),
+    import('./premium-pdf/index.js'),
+  ])
+  const model = buildPremiumFullModel({ data, subject, user, generatedAt })
+  const result = await createPremiumPdf({ kind: 'full', model })
+  if (result.flags.length) console.warn('[MediXO EduX] expressions flagged for verification', result.flags)
+  const blob = new Blob([result.bytes], { type: 'application/pdf' })
+  triggerDownload(blob, `MediXO_EduX_${fileStub(model.examName)}_Full_Exam_Analysis_Report.pdf`)
+  return result
 }
