@@ -233,6 +233,17 @@ export function buildRevisionGroups({
     .sort((a, b) => worst(a) - worst(b))
 }
 
+function logPdfExportReady(label, result, blob, filename) {
+  if (import.meta.env?.DEV) {
+    console.info(`[EduX PDF Export] ${label} blob created and download initiated`, {
+      filename,
+      bytes: blob.size,
+      pageCount: result?.pageCount,
+      flags: result?.flags?.length ?? 0,
+    })
+  }
+}
+
 function triggerDownload(blob, filename) {
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
@@ -1253,7 +1264,9 @@ export async function exportAnalysisPDF(data, subject, user) {
   const result = await createPremiumPdf({ kind: 'intelligence', model })
   if (result.flags.length) console.warn('[MediXO EduX] expressions flagged for verification', result.flags)
   const blob = new Blob([result.bytes], { type: 'application/pdf' })
-  triggerDownload(blob, `MediXO_EduX_${fileStub(model.examName)}_Exam_Intelligence_Report.pdf`)
+  const filename = `MediXO_EduX_${fileStub(model.examName)}_Exam_Intelligence_Report.pdf`
+  triggerDownload(blob, filename)
+  logPdfExportReady('Report', result, blob, filename)
   return result
 }
 
@@ -2172,6 +2185,8 @@ export async function exportFullAnalysisPDF(data, subject, user) {
   const result = await createPremiumPdf({ kind: 'full', model })
   if (result.flags.length) console.warn('[MediXO EduX] expressions flagged for verification', result.flags)
   const blob = new Blob([result.bytes], { type: 'application/pdf' })
-  triggerDownload(blob, `MediXO_EduX_${fileStub(model.examName)}_Full_Exam_Analysis_Report.pdf`)
+  const filename = `MediXO_EduX_${fileStub(model.examName)}_Full_Exam_Analysis_Report.pdf`
+  triggerDownload(blob, filename)
+  logPdfExportReady('Full Analysis', result, blob, filename)
   return result
 }
