@@ -1,0 +1,768 @@
+{
+  "config": {
+    "patterns": [
+      "JEE Main",
+      "JEE Advanced",
+      "NEET",
+      "Board / Custom"
+    ],
+    "examModes": [
+      "University",
+      "Competitive"
+    ],
+    "universityTypes": [
+      "Mid Semester",
+      "End Semester",
+      "Unit Test",
+      "Internal Assessment",
+      "Model Examination"
+    ],
+    "competitiveTypes": [
+      "Full Mock Test",
+      "Subject Test",
+      "Chapter Test",
+      "PYQ Practice Paper",
+      "Mixed Practice Test"
+    ],
+    "competitiveExams": [
+      "JEE",
+      "NEET"
+    ],
+    "competitiveSubjects": {
+      "JEE": [
+        "Physics",
+        "Mathematics",
+        "Chemistry"
+      ],
+      "NEET": [
+        "Physics",
+        "Chemistry",
+        "Biology"
+      ]
+    },
+    "negativeMarking": [
+      "None",
+      "−1 per incorrect answer",
+      "−0.25 per incorrect answer"
+    ],
+    "pyqPreferences": [
+      "No preference",
+      "Prefer PYQ questions",
+      "PYQ only"
+    ],
+    "departments": [
+      "Computer Science",
+      "Electronics & Comm.",
+      "Mechanical",
+      "Mathematics",
+      "Business School"
+    ],
+    "programs": [
+      "B.Tech — CSE",
+      "B.Tech — ECE",
+      "B.Tech — ME",
+      "M.Sc — Data Science",
+      "MBA"
+    ],
+    "semesters": [
+      "Sem 1",
+      "Sem 2",
+      "Sem 3",
+      "Sem 4",
+      "Sem 5",
+      "Sem 6",
+      "Sem 7",
+      "Sem 8"
+    ],
+    "courses": [
+      "CS501 — DSA",
+      "CS502 — DBMS",
+      "CS503 — OS",
+      "CS504 — Networks",
+      "CS505 — ML",
+      "CS506 — ToC"
+    ],
+    "subjects": [
+      "Data Structures & Algorithms",
+      "Database Management Systems",
+      "Operating Systems",
+      "Computer Networks",
+      "Machine Learning",
+      "Theory of Computation"
+    ],
+    "chapters": [
+      "Graph Algorithms",
+      "Dynamic Programming",
+      "Sorting & Searching",
+      "Trees & Heaps",
+      "Complexity Analysis",
+      "String Algorithms"
+    ],
+    "topics": [
+      "Dijkstra & shortest paths",
+      "MST (Kruskal/Prim)",
+      "Topological sort",
+      "0/1 Knapsack",
+      "Big-O analysis",
+      "AVL rotations",
+      "KMP string matching"
+    ],
+    "durations": [
+      60,
+      90,
+      120,
+      150,
+      180
+    ],
+    "difficulties": [
+      "Easy",
+      "Medium",
+      "Hard",
+      "Mixed"
+    ],
+    "blooms": [
+      "Remember",
+      "Understand",
+      "Apply",
+      "Analyze",
+      "Evaluate",
+      "Create"
+    ],
+    "questionTypes": [
+      "MCQ",
+      "Assertion Reason",
+      "Case Based",
+      "Diagram Based",
+      "Integer",
+      "Numerical",
+      "Statement Based",
+      "Short Answer",
+      "Long Answer"
+    ]
+  },
+  "generatedPapers": [
+    {
+      "id": "gp1",
+      "paperCode": "PAPER-UNI-001",
+      "mode": "University",
+      "examType": "Mid Semester",
+      "faculty": "Dr. Meera Krishnan",
+      "versions": 2,
+      "archived": false,
+      "title": "Midsem — DSA (Paper A)",
+      "course": "CS501",
+      "totalMarks": 50,
+      "duration": 180,
+      "difficulty": "Mixed",
+      "questions": 0,
+      "status": "Ready",
+      "generated": "2026-08-01",
+      "created": "2026-08-01",
+      "modified": "2026-08-02",
+      "coverage": 92,
+      "sets": 1,
+      "downloads": 3,
+      "downloadStatus": "PDF & DOCX exported",
+      "deleteStatus": "Active",
+      "questionList": [],
+      "blooms": {
+        "Remember": 15,
+        "Understand": 20,
+        "Apply": 30,
+        "Analyze": 20,
+        "Evaluate": 10,
+        "Create": 5
+      }
+    },
+    {
+      "id": "gp2",
+      "paperCode": "PAPER-UNI-002",
+      "mode": "University",
+      "examType": "Mid Semester",
+      "faculty": "Dr. Meera Krishnan",
+      "versions": 1,
+      "archived": false,
+      "title": "Midsem — DSA (Paper B)",
+      "course": "CS501",
+      "totalMarks": 50,
+      "duration": 180,
+      "difficulty": "Mixed",
+      "questions": 0,
+      "status": "Ready",
+      "generated": "2026-08-01",
+      "created": "2026-08-01",
+      "modified": "2026-08-02",
+      "coverage": 94,
+      "sets": 1,
+      "downloads": 2,
+      "downloadStatus": "PDF exported",
+      "deleteStatus": "Active",
+      "questionList": [],
+      "blooms": {
+        "Remember": 10,
+        "Understand": 20,
+        "Apply": 35,
+        "Analyze": 20,
+        "Evaluate": 10,
+        "Create": 5
+      }
+    },
+    {
+      "id": "gp3",
+      "paperCode": "PAPER-UNI-003",
+      "mode": "University",
+      "examType": "MCQ Test",
+      "faculty": "Dr. Meera Krishnan",
+      "versions": 1,
+      "archived": false,
+      "title": "Quiz — Transactions & Concurrency",
+      "course": "CS502",
+      "totalMarks": 10,
+      "duration": 15,
+      "difficulty": "Medium",
+      "questions": 0,
+      "status": "Draft",
+      "generated": "2026-08-03",
+      "created": "2026-08-03",
+      "modified": "2026-08-03",
+      "coverage": 100,
+      "sets": 1,
+      "downloads": 0,
+      "downloadStatus": "Not exported",
+      "deleteStatus": "Active",
+      "questionList": [],
+      "blooms": {
+        "Remember": 20,
+        "Understand": 30,
+        "Apply": 40,
+        "Analyze": 10
+      }
+    },
+    {
+      "id": "gp4",
+      "paperCode": "PAPER-UNI-004",
+      "mode": "University",
+      "examType": "Internal Assessment",
+      "faculty": "Dr. Meera Krishnan",
+      "versions": 3,
+      "archived": false,
+      "title": "Class Test — Memory Management",
+      "course": "CS503",
+      "totalMarks": 20,
+      "duration": 45,
+      "difficulty": "Easy",
+      "questions": 0,
+      "status": "In Review",
+      "generated": "2026-08-02",
+      "created": "2026-08-02",
+      "modified": "2026-08-04",
+      "coverage": 85,
+      "sets": 2,
+      "downloads": 1,
+      "downloadStatus": "DOCX exported",
+      "deleteStatus": "Active",
+      "questionList": [],
+      "blooms": {
+        "Remember": 25,
+        "Understand": 35,
+        "Apply": 30,
+        "Analyze": 10
+      }
+    },
+    {
+      "id": "gp5",
+      "paperCode": "PAPER-JEE-001",
+      "mode": "Competitive",
+      "exam": "JEE",
+      "subject": "Physics",
+      "topic": "Mechanics",
+      "paperType": "Full Mock Test",
+      "examType": "Full Mock Test",
+      "faculty": "Dr. Meera Krishnan",
+      "versions": 1,
+      "archived": false,
+      "title": "JEE Main Physics — Mechanics Mock Test 01",
+      "course": "JEE · Physics",
+      "totalMarks": 100,
+      "duration": 60,
+      "difficulty": "Mixed",
+      "questions": 0,
+      "status": "Ready",
+      "generated": "2026-08-04",
+      "created": "2026-08-04",
+      "modified": "2026-08-05",
+      "coverage": 96,
+      "sets": 1,
+      "downloads": 4,
+      "downloadStatus": "PDF & DOCX exported",
+      "deleteStatus": "Active",
+      "negativeMarking": "−1 per incorrect answer",
+      "pyqPreference": "PYQ Balanced",
+      "questionList": []
+    },
+    {
+      "id": "gp6",
+      "paperCode": "PAPER-JEE-002",
+      "mode": "Competitive",
+      "exam": "JEE",
+      "subject": "Mathematics",
+      "topic": "Calculus",
+      "paperType": "Subject Test",
+      "examType": "Subject Test",
+      "faculty": "Dr. Meera Krishnan",
+      "versions": 1,
+      "archived": false,
+      "title": "JEE Main Mathematics — Calculus Practice Paper",
+      "course": "JEE · Mathematics",
+      "totalMarks": 100,
+      "duration": 60,
+      "difficulty": "Mixed",
+      "questions": 0,
+      "status": "Ready",
+      "generated": "2026-08-04",
+      "created": "2026-08-04",
+      "modified": "2026-08-05",
+      "coverage": 95,
+      "sets": 1,
+      "downloads": 3,
+      "downloadStatus": "PDF exported",
+      "deleteStatus": "Active",
+      "negativeMarking": "−1 per incorrect answer",
+      "pyqPreference": "Include PYQs",
+      "questionList": []
+    },
+    {
+      "id": "gp7",
+      "paperCode": "PAPER-JEE-003",
+      "mode": "Competitive",
+      "exam": "JEE",
+      "subject": "Chemistry",
+      "topic": "Physical Chemistry",
+      "paperType": "Subject Test",
+      "examType": "Subject Test",
+      "faculty": "Dr. Meera Krishnan",
+      "versions": 1,
+      "archived": false,
+      "title": "JEE Main Chemistry — Physical Chemistry Mock",
+      "course": "JEE · Chemistry",
+      "totalMarks": 100,
+      "duration": 60,
+      "difficulty": "Mixed",
+      "questions": 0,
+      "status": "Ready",
+      "generated": "2026-08-05",
+      "created": "2026-08-05",
+      "modified": "2026-08-05",
+      "coverage": 94,
+      "sets": 1,
+      "downloads": 2,
+      "downloadStatus": "PDF exported",
+      "deleteStatus": "Active",
+      "negativeMarking": "−1 per incorrect answer",
+      "pyqPreference": "PYQ Balanced",
+      "questionList": []
+    },
+    {
+      "id": "gp8",
+      "paperCode": "PAPER-NEET-001",
+      "mode": "Competitive",
+      "exam": "NEET",
+      "subject": "Biology",
+      "topic": "Human Physiology",
+      "paperType": "Subject Mock",
+      "examType": "Full Mock Test",
+      "faculty": "Dr. Meera Krishnan",
+      "versions": 1,
+      "archived": false,
+      "title": "NEET Biology — Human Physiology Mock Test",
+      "course": "NEET · Biology",
+      "totalMarks": 100,
+      "duration": 60,
+      "difficulty": "Mixed",
+      "questions": 0,
+      "status": "Ready",
+      "generated": "2026-08-05",
+      "created": "2026-08-05",
+      "modified": "2026-08-06",
+      "coverage": 97,
+      "sets": 1,
+      "downloads": 5,
+      "downloadStatus": "PDF & DOCX exported",
+      "deleteStatus": "Active",
+      "negativeMarking": "−1 per incorrect answer",
+      "pyqPreference": "PYQ Heavy",
+      "questionList": []
+    },
+    {
+      "id": "gp9",
+      "paperCode": "PAPER-NEET-002",
+      "mode": "Competitive",
+      "exam": "NEET",
+      "subject": "Chemistry",
+      "topic": "Organic Chemistry",
+      "paperType": "Subject Test",
+      "examType": "Subject Test",
+      "faculty": "Dr. Meera Krishnan",
+      "versions": 1,
+      "archived": false,
+      "title": "NEET Chemistry — Organic Chemistry Practice",
+      "course": "NEET · Chemistry",
+      "totalMarks": 100,
+      "duration": 60,
+      "difficulty": "Mixed",
+      "questions": 0,
+      "status": "Ready",
+      "generated": "2026-08-06",
+      "created": "2026-08-06",
+      "modified": "2026-08-06",
+      "coverage": 95,
+      "sets": 1,
+      "downloads": 2,
+      "downloadStatus": "PDF exported",
+      "deleteStatus": "Active",
+      "negativeMarking": "−1 per incorrect answer",
+      "pyqPreference": "Include PYQs",
+      "questionList": []
+    },
+    {
+      "id": "gp10",
+      "paperCode": "PAPER-NEET-003",
+      "mode": "Competitive",
+      "exam": "NEET",
+      "subject": "Physics",
+      "topic": "Mechanics / Electrodynamics",
+      "paperType": "Subject Mock",
+      "examType": "Full Mock Test",
+      "faculty": "Dr. Meera Krishnan",
+      "versions": 1,
+      "archived": false,
+      "title": "NEET Physics — Mechanics & Electrodynamics",
+      "course": "NEET · Physics",
+      "totalMarks": 100,
+      "duration": 60,
+      "difficulty": "Mixed",
+      "questions": 0,
+      "status": "Ready",
+      "generated": "2026-08-06",
+      "created": "2026-08-06",
+      "modified": "2026-08-07",
+      "coverage": 96,
+      "sets": 1,
+      "downloads": 3,
+      "downloadStatus": "PDF & DOCX exported",
+      "deleteStatus": "Active",
+      "negativeMarking": "−1 per incorrect answer",
+      "pyqPreference": "PYQ Balanced",
+      "questionList": []
+    }
+  ],
+  "questionIntelligence": {
+    "difficultyDistribution": [
+      {
+        "level": "Easy",
+        "count": 7,
+        "marks": 14
+      },
+      {
+        "level": "Medium",
+        "count": 10,
+        "marks": 24
+      },
+      {
+        "level": "Hard",
+        "count": 5,
+        "marks": 12
+      }
+    ],
+    "bloomDistribution": [
+      {
+        "level": "Remember",
+        "count": 3,
+        "marks": 6
+      },
+      {
+        "level": "Understand",
+        "count": 4,
+        "marks": 9
+      },
+      {
+        "level": "Apply",
+        "count": 7,
+        "marks": 15
+      },
+      {
+        "level": "Analyze",
+        "count": 4,
+        "marks": 10
+      },
+      {
+        "level": "Evaluate",
+        "count": 2,
+        "marks": 6
+      },
+      {
+        "level": "Create",
+        "count": 2,
+        "marks": 4
+      }
+    ],
+    "chapterCoverage": [
+      {
+        "chapter": "Graph Algorithms",
+        "questions": 6,
+        "marks": 14,
+        "coverage": 100
+      },
+      {
+        "chapter": "Dynamic Programming",
+        "questions": 4,
+        "marks": 10,
+        "coverage": 90
+      },
+      {
+        "chapter": "Sorting & Searching",
+        "questions": 3,
+        "marks": 6,
+        "coverage": 75
+      },
+      {
+        "chapter": "Trees & Heaps",
+        "questions": 3,
+        "marks": 7,
+        "coverage": 80
+      },
+      {
+        "chapter": "Complexity Analysis",
+        "questions": 3,
+        "marks": 6,
+        "coverage": 70
+      },
+      {
+        "chapter": "String Algorithms",
+        "questions": 3,
+        "marks": 7,
+        "coverage": 65
+      }
+    ],
+    "topicCoverage": [
+      {
+        "topic": "Dijkstra",
+        "q": 2,
+        "marks": 5
+      },
+      {
+        "topic": "MST",
+        "q": 2,
+        "marks": 4
+      },
+      {
+        "topic": "Knapsack",
+        "q": 2,
+        "marks": 5
+      },
+      {
+        "topic": "AVL",
+        "q": 1,
+        "marks": 2
+      },
+      {
+        "topic": "Big-O",
+        "q": 2,
+        "marks": 4
+      },
+      {
+        "topic": "KMP",
+        "q": 1,
+        "marks": 3
+      }
+    ],
+    "marksDistribution": [
+      {
+        "type": "MCQ",
+        "count": 10,
+        "marks": 10
+      },
+      {
+        "type": "Short Answer",
+        "count": 5,
+        "marks": 15
+      },
+      {
+        "type": "Long Answer",
+        "count": 2,
+        "marks": 25
+      }
+    ],
+    "questionCount": 22
+  },
+  "paperPreview": [],
+  "markingScheme": [
+    {
+      "type": "MCQ",
+      "marks": 4,
+      "negative": 1
+    },
+    {
+      "type": "Integer",
+      "marks": 4,
+      "negative": 0
+    },
+    {
+      "type": "Numerical",
+      "marks": 4,
+      "negative": 0
+    },
+    {
+      "type": "Assertion Reason",
+      "marks": 4,
+      "negative": 1
+    },
+    {
+      "type": "Case Based",
+      "marks": 4,
+      "negative": 0
+    },
+    {
+      "type": "Diagram Based",
+      "marks": 4,
+      "negative": 0
+    },
+    {
+      "type": "Statement Based",
+      "marks": 4,
+      "negative": 1
+    }
+  ],
+  "answerKey": [
+    {
+      "q": 1,
+      "type": "MCQ",
+      "answer": "Option B"
+    },
+    {
+      "q": 2,
+      "type": "MCQ",
+      "answer": "Option C"
+    },
+    {
+      "q": 3,
+      "type": "MCQ",
+      "answer": "Option A"
+    },
+    {
+      "q": 4,
+      "type": "MCQ",
+      "answer": "Option D"
+    },
+    {
+      "q": 5,
+      "type": "Short Answer",
+      "answer": "A-C-B-D-E paths with distances"
+    },
+    {
+      "q": 6,
+      "type": "Short Answer",
+      "answer": "LL, RR, LR, RL rotations"
+    },
+    {
+      "q": 7,
+      "type": "Short Answer",
+      "answer": "Cache locality vs stability"
+    },
+    {
+      "q": 8,
+      "type": "Long Answer",
+      "answer": "DP table + fractional variant"
+    },
+    {
+      "q": 9,
+      "type": "Long Answer",
+      "answer": "Bellman-Ford + proof"
+    },
+    {
+      "q": 10,
+      "type": "Programming",
+      "answer": "Merge sort code + test"
+    }
+  ],
+  "templates": [
+    {
+      "id": "t1",
+      "name": "Standard Midsem Blueprint",
+      "duration": 180,
+      "marks": 50,
+      "sections": "MCQ 10 · Short 5 · Long 2"
+    },
+    {
+      "id": "t2",
+      "name": "Quiz Quick Template",
+      "duration": 15,
+      "marks": 10,
+      "sections": "MCQ 10"
+    },
+    {
+      "id": "t3",
+      "name": "Class Test Template",
+      "duration": 45,
+      "marks": 20,
+      "sections": "MCQ 8 · Short 4 · Long 1"
+    },
+    {
+      "id": "t4",
+      "name": "End-Sem Comprehensive",
+      "duration": 180,
+      "marks": 100,
+      "sections": "MCQ 20 · Short 10 · Long 4 · Case 1"
+    }
+  ],
+  "versionHistory": {
+    "gp1": [
+      {
+        "version": "v1.0",
+        "date": "2026-08-01",
+        "note": "Initial draft"
+      },
+      {
+        "version": "v1.1",
+        "date": "2026-08-02",
+        "note": "Coverage 92% → rebalanced CO2 weight"
+      }
+    ],
+    "gp2": [
+      {
+        "version": "v1.0",
+        "date": "2026-08-01",
+        "note": "Initial draft"
+      },
+      {
+        "version": "v1.1",
+        "date": "2026-08-02",
+        "note": "Added 2 hard MCQs, coverage 94%"
+      }
+    ],
+    "gp3": [
+      {
+        "version": "v1.0",
+        "date": "2026-08-03",
+        "note": "Initial draft"
+      }
+    ],
+    "gp4": [
+      {
+        "version": "v1.0",
+        "date": "2026-08-02",
+        "note": "Initial draft"
+      },
+      {
+        "version": "v1.1",
+        "date": "2026-08-03",
+        "note": "Difficulty lowered to Easy"
+      },
+      {
+        "version": "v1.2",
+        "date": "2026-08-04",
+        "note": "2 sets generated"
+      }
+    ]
+  }
+}

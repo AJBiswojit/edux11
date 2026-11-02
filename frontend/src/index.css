@@ -1,0 +1,242 @@
+/* KaTeX math rendering */
+@import 'katex/dist/katex.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  ::selection {
+    @apply bg-indigo-500/20 text-indigo-900 dark:text-indigo-100;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  /* ---------- Glassmorphism ---------- */
+  .glass {
+    @apply border border-white/50 bg-white/70 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/60;
+  }
+
+  .glass-strong {
+    @apply border border-white/60 bg-white/85 backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/80;
+  }
+
+  .glass-nav {
+    @apply border-b border-slate-200/60 bg-white/75 backdrop-blur-2xl dark:border-white/5 dark:bg-slate-950/70;
+  }
+
+  /* ---------- Gradient text ---------- */
+  .text-gradient {
+    @apply bg-gradient-to-r from-indigo-600 via-blue-600 to-teal-500 bg-clip-text text-transparent dark:from-indigo-400 dark:via-blue-400 dark:to-teal-300;
+  }
+
+  .text-gradient-emerald {
+    @apply bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-warm {
+    @apply bg-gradient-to-r from-amber-500 via-rose-500 to-fuchsia-500 bg-clip-text text-transparent;
+  }
+
+  /* ---------- Surfaces ---------- */
+  .bg-grid {
+    background-image: linear-gradient(to right, rgba(100,116,139,0.09) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(100,116,139,0.09) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .dark .bg-grid {
+    background-image: linear-gradient(to right, rgba(148,163,184,0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148,163,184,0.06) 1px, transparent 1px);
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(rgba(100,116,139,0.18) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .dark .bg-dots {
+    background-image: radial-gradient(rgba(148,163,184,0.14) 1px, transparent 1px);
+  }
+
+  .mask-fade-y {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent);
+    mask-image: linear-gradient(to bottom, black 60%, transparent);
+  }
+
+  /* ---------- Cards ---------- */
+  .card-hover {
+    @apply transition-all duration-300 ease-spring hover:-translate-y-1 hover:shadow-lift;
+  }
+
+  .gradient-border {
+    position: relative;
+    background-clip: padding-box;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(99,102,241,0.55), rgba(59,130,246,0.2), rgba(20,184,166,0.55));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* ---------- Scrollbar ---------- */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(100,116,139,0.35) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-300 dark:bg-slate-700;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* ---------- Shimmer skeleton ---------- */
+  .shimmer {
+    background: linear-gradient(90deg, rgba(148,163,184,0.10) 25%, rgba(148,163,184,0.22) 50%, rgba(148,163,184,0.10) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.8s linear infinite;
+  }
+
+  .dark .shimmer {
+    background: linear-gradient(90deg, rgba(148,163,184,0.08) 25%, rgba(148,163,184,0.18) 50%, rgba(148,163,184,0.08) 75%);
+    background-size: 200% 100%;
+  }
+
+  /* ---------- Inputs ---------- */
+  .input-focus {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:border-indigo-400 dark:focus-visible:ring-indigo-400/40;
+  }
+
+  /* ---------- Ring avatars ---------- */
+  .avatar-ring {
+    box-shadow: 0 0 0 2px var(--ring-color, #fff), 0 4px 12px rgba(15,23,42,0.12);
+  }
+
+  .dark .avatar-ring {
+    --ring-color: #0f172a;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+}
+
+/* ---------- Accessibility helpers ---------- */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 12px 32px -8px rgba(79, 70, 229, 0.5);
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+}
+
+/* App-level reduced-motion: neutralises CSS animations & transitions.
+   Framer Motion is handled separately via MotionConfig. */
+.reduced-motion *,
+.reduced-motion *::before,
+.reduced-motion *::after {
+  animation-duration: 0.001s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001s !important;
+  scroll-behavior: auto !important;
+}
+
+/* ================= Phase 31 — Progress Report print (A4) ================= */
+@media print {
+  @page { size: A4 portrait; margin: 14mm; }
+  body { background: #fff !important; }
+  aside, header, footer, [data-print-hide], .print\:hidden { display: none !important; }
+  #root { padding: 0 !important; }
+  main { padding: 0 !important; max-width: none !important; }
+  .report-doc {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    color: #0f172a !important;
+    background: #fff !important;
+  }
+  .report-doc * { color: #0f172a !important; background: transparent !important; box-shadow: none !important; }
+  .report-doc table { page-break-inside: auto; }
+  .report-doc tr { page-break-inside: avoid; }
+  .report-doc h1, .report-doc h2, .report-doc h3 { page-break-after: avoid; }
+  .report-doc section, .report-doc > div { page-break-inside: avoid; }
+}

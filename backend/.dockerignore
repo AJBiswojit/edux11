@@ -1,0 +1,30 @@
+# Keep secrets, caches, and local artifacts out of the backend image/context.
+.git
+.gitignore
+Dockerfile
+.dockerignore
+docker-compose.yml
+docker-compose.*.yml
+
+# Secrets and local env — never bake into the image.
+.env
+.env.*
+!.env.example
+
+# Python caches / virtualenvs
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Logs and local data
+logs/
+*.log
+
+# Dev/test scratch
+api_test.py
+test/
+.idea
+.vscode
+.DS_Store

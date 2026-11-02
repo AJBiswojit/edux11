@@ -1,0 +1,39 @@
+# LOCAL DEV stack only — spins up a throwaway Postgres + Redis + the API.
+# For the EC2 single-box deploy use the ROOT ../docker-compose.yml instead
+# (that one builds backend + frontend + nginx and points at the remote RDS).
+#
+#   Local dev:   docker compose -f backend/docker-compose.yml up -d --build
+#   Deploy:      docker compose up -d --build            (from repo root)
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: medixo
+      POSTGRES_PASSWORD: medixo
+      POSTGRES_DB: medixo_edux
+    ports:
+      - "5432:5432"
+    volumes:
+      - medixo_pg:/var/lib/postgresql/data
+      - ./sql/init-edux.sql:/docker-entrypoint-initdb.d/01-edux.sql:ro
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file: .env
+    depends_on:
+      - db
+      - redis
+    environment:
+      # Overrides .env RDS URL so this stack uses the local `db` service.
+      DATABASE_URL: postgresql+psycopg2://medixo:medixo@db:5432/medixo_edux
+      DB_SCHEMA: edux
+      REDIS_URL: redis://redis:6379/0
+
+volumes:
+  medixo_pg:

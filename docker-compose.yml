@@ -1,0 +1,33 @@
+# EduX — single-box deployment (EC2).
+#
+#   frontend (nginx :80)  ── serves the SPA
+#                          ├── proxies /v1    ─▶  api (uvicorn :8000)
+#                          └── proxies /media ─▶  api /media (question crops)
+#   api                   ── connects to the remote RDS Postgres (from backend/.env)
+#                          ── serves crops from /app/media (Docker COPY of backend/media)
+#
+# One-command deploy:   docker compose up -d --build
+#
+# In backend/.env on the server set PUBLIC_ORIGIN empty (or https://your-domain)
+# so image URLs are /media/... on the same host nginx exposes.
+
+services:
+  api:
+    build:
+      context: ./backend
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped
+    # Not published to the host — only the frontend (nginx) reaches it over the
+    # internal docker network. Exposed for clarity/inter-container use only.
+    expose:
+      - "8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+    restart: unless-stopped

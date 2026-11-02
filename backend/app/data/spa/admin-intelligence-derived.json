@@ -1,0 +1,1504 @@
+{
+  "profile": {
+    "name": "Meridian Institute of Technology",
+    "shortName": "MIT-P",
+    "address": "Knowledge Park, Pune 411044, Maharashtra",
+    "phone": "+91 20 4010 2200",
+    "email": "info@meridian.edu.in",
+    "timezone": "IST (UTC+5:30)",
+    "fiscalYear": "Apr – Mar",
+    "academicYear": "2026–27",
+    "currentSemester": "Sem 5 · 2026-27"
+  },
+  "masterProfile": {
+    "id": "inst_mit_p",
+    "name": "Meridian Institute of Technology",
+    "shortName": "MIT-P",
+    "type": "Private Engineering & Management Institute",
+    "tagline": "Empowering Smarter Learning Through AI",
+    "address": "Knowledge Park, Pune 411044, Maharashtra",
+    "phone": "+91 20 4010 2200",
+    "email": "info@meridian.edu.in",
+    "timezone": "IST (UTC+5:30)",
+    "fiscalYear": "Apr – Mar",
+    "campuses": [
+      {
+        "id": "cmp1",
+        "name": "Main Campus — Knowledge Park",
+        "city": "Pune",
+        "students": 10480
+      },
+      {
+        "id": "cmp2",
+        "name": "Innovation Campus — Hinjewadi",
+        "city": "Pune",
+        "students": 2000
+      }
+    ],
+    "branches": [
+      "Pune (2 campuses)"
+    ],
+    "academicYear": "2026–27",
+    "currentSemester": {
+      "id": "sem5_2026_27",
+      "name": "Semester 5",
+      "label": "Sem 5 · 2026-27",
+      "system": "Semester",
+      "gradingScale": "10-point CGPA",
+      "attendanceThreshold": 75,
+      "passMark": 40
+    },
+    "academicCalendarContext": "Midsem examinations Aug 19–23 · Semester break begins Sep 1 · Fee 2nd installment due Sep 15",
+    "totals": {
+      "students": 12480,
+      "faculty": 640,
+      "courses": 214,
+      "departments": 8,
+      "programs": 8,
+      "activeBatches": 8,
+      "listedDepartmentStudents": 11480,
+      "otherProgramStudents": 1000,
+      "listedDepartmentFaculty": 450,
+      "otherFaculty": 190
+    },
+    "leadership": {
+      "director": "Dr. Anil Menon",
+      "deanAcademics": "Dr. S. Raghavan",
+      "registrar": "Registrar Office",
+      "cfo": "Accounts Office"
+    },
+    "departments": [
+      {
+        "code": "CSE",
+        "name": "Computer Science & Engineering",
+        "students": 2480,
+        "faculty": 82,
+        "programs": 4,
+        "hod": "Dr. Meera Krishnan",
+        "placement": 96.2
+      },
+      {
+        "code": "ECE",
+        "name": "Electronics & Communication",
+        "students": 1930,
+        "faculty": 71,
+        "programs": 3,
+        "hod": "Prof. Vikram Rao",
+        "placement": 91.8
+      },
+      {
+        "code": "ME",
+        "name": "Mechanical Engineering",
+        "students": 1640,
+        "faculty": 64,
+        "programs": 3,
+        "hod": "Prof. Sunita Bose",
+        "placement": 86.4
+      },
+      {
+        "code": "EE",
+        "name": "Electrical Engineering",
+        "students": 1420,
+        "faculty": 58,
+        "programs": 3,
+        "hod": "Dr. Farhan Ali",
+        "placement": 89.1
+      },
+      {
+        "code": "CE",
+        "name": "Civil Engineering",
+        "students": 1180,
+        "faculty": 49,
+        "programs": 2,
+        "hod": "Prof. James Thomas",
+        "placement": 78.6
+      },
+      {
+        "code": "MATH",
+        "name": "Mathematics & Sciences",
+        "students": 860,
+        "faculty": 41,
+        "programs": 2,
+        "hod": "Dr. Priya Nair",
+        "placement": 84.9
+      },
+      {
+        "code": "MBA",
+        "name": "School of Business",
+        "students": 1240,
+        "faculty": 52,
+        "programs": 3,
+        "hod": "Dr. Ritu Agarwal",
+        "placement": 93.5
+      },
+      {
+        "code": "DES",
+        "name": "School of Design & Media",
+        "students": 730,
+        "faculty": 33,
+        "programs": 2,
+        "hod": "Prof. Aditi Sen",
+        "placement": 88.2
+      }
+    ],
+    "programs": [
+      {
+        "code": "BT-CSE",
+        "name": "B.Tech — Computer Science",
+        "dept": "CSE",
+        "duration": "4 yrs",
+        "students": 2480
+      },
+      {
+        "code": "BT-ECE",
+        "name": "B.Tech — Electronics & Communication",
+        "dept": "ECE",
+        "duration": "4 yrs",
+        "students": 1930
+      },
+      {
+        "code": "BT-ME",
+        "name": "B.Tech — Mechanical",
+        "dept": "ME",
+        "duration": "4 yrs",
+        "students": 1640
+      },
+      {
+        "code": "BT-EE",
+        "name": "B.Tech — Electrical",
+        "dept": "EE",
+        "duration": "4 yrs",
+        "students": 1420
+      },
+      {
+        "code": "MBA",
+        "name": "MBA — General Management",
+        "dept": "MBA",
+        "duration": "2 yrs",
+        "students": 1240
+      },
+      {
+        "code": "BDES",
+        "name": "B.Des — Design & Media",
+        "dept": "DES",
+        "duration": "4 yrs",
+        "students": 730
+      },
+      {
+        "code": "BT-CE",
+        "name": "B.Tech — Civil",
+        "dept": "CE",
+        "duration": "4 yrs",
+        "students": 1180
+      },
+      {
+        "code": "MSC-DS",
+        "name": "M.Sc — Data Science",
+        "dept": "MATH",
+        "duration": "2 yrs",
+        "students": 860
+      },
+      {
+        "code": "OTHER",
+        "name": "Other programs",
+        "dept": null,
+        "duration": "—",
+        "students": 1000
+      }
+    ],
+    "aiContext": {
+      "aiTutorModel": "MediXO Tutor LLM v4.2",
+      "gradingModel": "Grading Assistant v2.7",
+      "aiAdoptionSessions": 71000
+    }
+  },
+  "totals": {
+    "students": 12480,
+    "faculty": 640,
+    "courses": 214,
+    "departments": 8,
+    "programs": 8,
+    "activeBatches": 8,
+    "listedDepartmentStudents": 11480,
+    "otherProgramStudents": 1000,
+    "listedDepartmentFaculty": 450,
+    "otherFaculty": 190
+  },
+  "institutionHealth": {
+    "score": 87.9,
+    "grade": "Excellent",
+    "pillars": [
+      {
+        "label": "Academic health",
+        "value": 88.3,
+        "grade": "Excellent"
+      },
+      {
+        "label": "Student success",
+        "value": 92.1,
+        "grade": "Excellent"
+      },
+      {
+        "label": "Attendance health",
+        "value": 89.2,
+        "grade": "Excellent"
+      },
+      {
+        "label": "Assessment health",
+        "value": 83.3,
+        "grade": "Good"
+      },
+      {
+        "label": "Faculty health",
+        "value": 82.9,
+        "grade": "Good"
+      },
+      {
+        "label": "Outcomes",
+        "value": 90.6,
+        "grade": "Excellent"
+      }
+    ]
+  },
+  "departments": {
+    "list": [
+      {
+        "code": "CSE",
+        "name": "Computer Science & Engineering",
+        "students": 2480,
+        "faculty": 82,
+        "programs": 4,
+        "hod": "Dr. Meera Krishnan",
+        "passRate": 93.1,
+        "attendance": 92.1,
+        "placement": 96.2,
+        "score": 93.9,
+        "grade": "Excellent"
+      },
+      {
+        "code": "MBA",
+        "name": "School of Business",
+        "students": 1240,
+        "faculty": 52,
+        "programs": 3,
+        "hod": "Dr. Ritu Agarwal",
+        "passRate": 94.2,
+        "attendance": 93.8,
+        "placement": 93.5,
+        "score": 93.9,
+        "grade": "Excellent"
+      },
+      {
+        "code": "DES",
+        "name": "School of Design & Media",
+        "students": 730,
+        "faculty": 33,
+        "programs": 2,
+        "hod": "Prof. Aditi Sen",
+        "passRate": 96.1,
+        "attendance": 94.1,
+        "placement": 88.2,
+        "score": 92.8,
+        "grade": "Excellent"
+      },
+      {
+        "code": "ECE",
+        "name": "Electronics & Communication",
+        "students": 1930,
+        "faculty": 71,
+        "programs": 3,
+        "hod": "Prof. Vikram Rao",
+        "passRate": 89.4,
+        "attendance": 91.4,
+        "placement": 91.8,
+        "score": 90.7,
+        "grade": "Excellent"
+      },
+      {
+        "code": "EE",
+        "name": "Electrical Engineering",
+        "students": 1420,
+        "faculty": 58,
+        "programs": 3,
+        "hod": "Dr. Farhan Ali",
+        "passRate": 87.8,
+        "attendance": 90.2,
+        "placement": 89.1,
+        "score": 88.9,
+        "grade": "Excellent"
+      },
+      {
+        "code": "MATH",
+        "name": "Mathematics & Sciences",
+        "students": 860,
+        "faculty": 41,
+        "programs": 2,
+        "hod": "Dr. Priya Nair",
+        "passRate": 88.9,
+        "attendance": 90.7,
+        "placement": 84.9,
+        "score": 88,
+        "grade": "Excellent"
+      },
+      {
+        "code": "ME",
+        "name": "Mechanical Engineering",
+        "students": 1640,
+        "faculty": 64,
+        "programs": 3,
+        "hod": "Prof. Sunita Bose",
+        "passRate": 85.2,
+        "attendance": 89.6,
+        "placement": 86.4,
+        "score": 86.7,
+        "grade": "Excellent"
+      },
+      {
+        "code": "CE",
+        "name": "Civil Engineering",
+        "students": 1180,
+        "faculty": 49,
+        "programs": 2,
+        "hod": "Prof. James Thomas",
+        "passRate": 82.6,
+        "attendance": 88.4,
+        "placement": 78.6,
+        "score": 82.7,
+        "grade": "Good"
+      }
+    ],
+    "best": {
+      "code": "CSE",
+      "name": "Computer Science & Engineering",
+      "students": 2480,
+      "faculty": 82,
+      "programs": 4,
+      "hod": "Dr. Meera Krishnan",
+      "passRate": 93.1,
+      "attendance": 92.1,
+      "placement": 96.2,
+      "score": 93.9,
+      "grade": "Excellent"
+    },
+    "worst": {
+      "code": "CE",
+      "name": "Civil Engineering",
+      "students": 1180,
+      "faculty": 49,
+      "programs": 2,
+      "hod": "Prof. James Thomas",
+      "passRate": 82.6,
+      "attendance": 88.4,
+      "placement": 78.6,
+      "score": 82.7,
+      "grade": "Good"
+    },
+    "avgScore": 89.7
+  },
+  "students": {
+    "totals": {
+      "totalStudents": 12480,
+      "activeRisk": 736,
+      "improvingStudents": 168,
+      "flagged": 214,
+      "recoveryRate": 78.5,
+      "avgWeeksToRecover": 4.2
+    },
+    "riskTrend": [
+      {
+        "month": "Mar",
+        "atRisk": 8.4
+      },
+      {
+        "month": "Apr",
+        "atRisk": 7.9
+      },
+      {
+        "month": "May",
+        "atRisk": 7.1
+      },
+      {
+        "month": "Jun",
+        "atRisk": 6.8
+      },
+      {
+        "month": "Jul",
+        "atRisk": 6.2
+      },
+      {
+        "month": "Aug",
+        "atRisk": 5.9
+      }
+    ],
+    "riskSummary": {
+      "latestRate": 5.9,
+      "firstRate": 8.4,
+      "trendDelta": -2.5,
+      "trendReduction": 29.8
+    },
+    "distribution": [
+      {
+        "grade": "A+",
+        "pct": 12.4
+      },
+      {
+        "grade": "A",
+        "pct": 24.8
+      },
+      {
+        "grade": "B+",
+        "pct": 27.6
+      },
+      {
+        "grade": "B",
+        "pct": 19.2
+      },
+      {
+        "grade": "C",
+        "pct": 11.3
+      },
+      {
+        "grade": "D/F",
+        "pct": 4.7
+      }
+    ],
+    "distributionSummary": {
+      "topBand": 12.4,
+      "bottomBand": 4.7,
+      "healthyBand": 82.89999999999999
+    },
+    "highPerformers": [
+      {
+        "name": "Divya Krishnan",
+        "dept": "CSE",
+        "cgpa": 9.3
+      },
+      {
+        "name": "Ishita Gupta",
+        "dept": "CSE",
+        "cgpa": 9.1
+      },
+      {
+        "name": "Kavya Menon",
+        "dept": "CSE",
+        "cgpa": 9
+      },
+      {
+        "name": "Aditi Rao",
+        "dept": "MBA",
+        "cgpa": 8.9
+      },
+      {
+        "name": "Sneha Patil",
+        "dept": "CSE",
+        "cgpa": 8.9
+      },
+      {
+        "name": "Rahul Iyer",
+        "dept": "ECE",
+        "cgpa": 8.8
+      }
+    ],
+    "attendanceRisk": [
+      {
+        "name": "Nikhil Joshi",
+        "roll": "21CS108",
+        "dept": "CSE",
+        "attendance": 74.6,
+        "classesMissed": 6
+      },
+      {
+        "name": "Karan Mehta",
+        "roll": "21CS104",
+        "dept": "CSE",
+        "attendance": 78.5,
+        "classesMissed": 4
+      },
+      {
+        "name": "Sanjay Patel",
+        "roll": "21CS115",
+        "dept": "CSE",
+        "attendance": 79.8,
+        "classesMissed": 3
+      },
+      {
+        "name": "Rohan Verma",
+        "roll": "21CS102",
+        "dept": "CSE",
+        "attendance": 84.2,
+        "classesMissed": 2
+      },
+      {
+        "name": "Arjun Nair",
+        "roll": "21CS112",
+        "dept": "CSE",
+        "attendance": 86.4,
+        "classesMissed": 2
+      }
+    ],
+    "retention": 92.1,
+    "cgpaAvg": 7.7
+  },
+  "faculty": {
+    "totals": 640,
+    "health": {
+      "score": 82.9,
+      "grade": "Good",
+      "teachingSatisfaction": 86,
+      "publicationsPerFaculty": 1.9,
+      "factors": [
+        {
+          "label": "Teaching satisfaction",
+          "value": 86
+        },
+        {
+          "label": "Digital satisfaction",
+          "value": 92
+        },
+        {
+          "label": "Research output",
+          "value": 64.6
+        }
+      ]
+    },
+    "rosterCount": 10,
+    "byDept": [
+      {
+        "code": "CSE",
+        "count": 3
+      },
+      {
+        "code": "ECE",
+        "count": 1
+      },
+      {
+        "code": "MATH",
+        "count": 1
+      },
+      {
+        "code": "ME",
+        "count": 1
+      },
+      {
+        "code": "EE",
+        "count": 1
+      },
+      {
+        "code": "MBA",
+        "count": 1
+      },
+      {
+        "code": "CE",
+        "count": 1
+      },
+      {
+        "code": "DES",
+        "count": 1
+      }
+    ]
+  },
+  "academics": {
+    "programs": [
+      {
+        "code": "BT-CSE",
+        "name": "B.Tech — Computer Science",
+        "dept": "CSE",
+        "duration": "4 yrs",
+        "students": 2480
+      },
+      {
+        "code": "BT-ECE",
+        "name": "B.Tech — Electronics & Communication",
+        "dept": "ECE",
+        "duration": "4 yrs",
+        "students": 1930
+      },
+      {
+        "code": "BT-ME",
+        "name": "B.Tech — Mechanical",
+        "dept": "ME",
+        "duration": "4 yrs",
+        "students": 1640
+      },
+      {
+        "code": "BT-EE",
+        "name": "B.Tech — Electrical",
+        "dept": "EE",
+        "duration": "4 yrs",
+        "students": 1420
+      },
+      {
+        "code": "MBA",
+        "name": "MBA — General Management",
+        "dept": "MBA",
+        "duration": "2 yrs",
+        "students": 1240
+      },
+      {
+        "code": "BDES",
+        "name": "B.Des — Design & Media",
+        "dept": "DES",
+        "duration": "4 yrs",
+        "students": 730
+      },
+      {
+        "code": "BT-CE",
+        "name": "B.Tech — Civil",
+        "dept": "CE",
+        "duration": "4 yrs",
+        "students": 1180
+      },
+      {
+        "code": "MSC-DS",
+        "name": "M.Sc — Data Science",
+        "dept": "MATH",
+        "duration": "2 yrs",
+        "students": 860
+      },
+      {
+        "code": "OTHER",
+        "name": "Other programs",
+        "dept": null,
+        "duration": "—",
+        "students": 1000
+      }
+    ],
+    "courses": 10,
+    "subjects": 12,
+    "batches": 8,
+    "calendar": [
+      {
+        "id": "ac1",
+        "date": "2026-08-06",
+        "title": "DSA Assignment 4 due",
+        "type": "Deadline",
+        "scope": "CSE Sem 5"
+      },
+      {
+        "id": "ac2",
+        "date": "2026-08-08",
+        "title": "Smart Campus Hackathon",
+        "type": "Event",
+        "scope": "All"
+      },
+      {
+        "id": "ac3",
+        "date": "2026-08-14",
+        "title": "DBMS Quiz 3",
+        "type": "Exam",
+        "scope": "CSE Sem 5"
+      },
+      {
+        "id": "ac4",
+        "date": "2026-08-15",
+        "title": "Midsem timetable release",
+        "type": "Academic",
+        "scope": "All"
+      },
+      {
+        "id": "ac5",
+        "date": "2026-08-16",
+        "title": "Mid-term progress reports",
+        "type": "Academic",
+        "scope": "All"
+      },
+      {
+        "id": "ac6",
+        "date": "2026-08-18",
+        "title": "Microsoft placement drive",
+        "type": "Placement",
+        "scope": "Final year"
+      },
+      {
+        "id": "ac7",
+        "date": "2026-08-19",
+        "title": "Midsem examinations begin",
+        "type": "Exam",
+        "scope": "All"
+      },
+      {
+        "id": "ac8",
+        "date": "2026-08-23",
+        "title": "Midsem examinations end",
+        "type": "Exam",
+        "scope": "All"
+      },
+      {
+        "id": "ac9",
+        "date": "2026-08-24",
+        "title": "Parent–Teacher Meeting",
+        "type": "Event",
+        "scope": "All"
+      },
+      {
+        "id": "ac10",
+        "date": "2026-08-28",
+        "title": "Research symposium abstracts due",
+        "type": "Research",
+        "scope": "Faculty"
+      },
+      {
+        "id": "ac11",
+        "date": "2026-09-01",
+        "title": "Semester break begins",
+        "type": "Academic",
+        "scope": "All"
+      },
+      {
+        "id": "ac12",
+        "date": "2026-09-15",
+        "title": "Fee — 2nd installment due",
+        "type": "Finance",
+        "scope": "All"
+      }
+    ],
+    "deptHodMap": {
+      "CSE": "Dr. Meera Krishnan",
+      "ECE": "Prof. Vikram Rao",
+      "ME": "Prof. Sunita Bose",
+      "EE": "Dr. Farhan Ali",
+      "CE": "Prof. James Thomas",
+      "MATH": "Dr. Priya Nair",
+      "MBA": "Dr. Ritu Agarwal",
+      "DES": "Prof. Aditi Sen"
+    }
+  },
+  "assessments": {
+    "exams": {
+      "total": 42,
+      "averageScore": 71.4,
+      "passRate": 89.7,
+      "malpractice": 3,
+      "scoreDistribution": [
+        {
+          "range": "90–100",
+          "count": 14.2
+        },
+        {
+          "range": "80–89",
+          "count": 26.8
+        },
+        {
+          "range": "70–79",
+          "count": 28.4
+        },
+        {
+          "range": "60–69",
+          "count": 15.6
+        },
+        {
+          "range": "Below 60",
+          "count": 15
+        }
+      ],
+      "bySubject": [
+        {
+          "subject": "DSA",
+          "avg": 81
+        },
+        {
+          "subject": "DBMS",
+          "avg": 76
+        },
+        {
+          "subject": "OS",
+          "avg": 74
+        },
+        {
+          "subject": "Networks",
+          "avg": 71
+        },
+        {
+          "subject": "ML",
+          "avg": 78
+        },
+        {
+          "subject": "ToC",
+          "avg": 64
+        }
+      ],
+      "upcoming": [
+        {
+          "title": "Midsem — DSA",
+          "date": "2026-08-19",
+          "students": 142,
+          "status": "Ready"
+        },
+        {
+          "title": "Midsem — ML",
+          "date": "2026-08-20",
+          "students": 142,
+          "status": "Ready"
+        },
+        {
+          "title": "Midsem — OS",
+          "date": "2026-08-21",
+          "students": 136,
+          "status": "In Review"
+        },
+        {
+          "title": "Midsem — DBMS",
+          "date": "2026-08-22",
+          "students": 128,
+          "status": "Drafting"
+        },
+        {
+          "title": "Midsem — Networks",
+          "date": "2026-08-23",
+          "students": 118,
+          "status": "Drafting"
+        }
+      ],
+      "readiness": {
+        "total": 5,
+        "ready": 2,
+        "inReview": 1,
+        "drafting": 2
+      }
+    },
+    "assignments": {
+      "total": 184,
+      "submissionRate": "93.2%",
+      "onTimeRate": "87.6%",
+      "aiGradedShare": "64%",
+      "byDept": [
+        {
+          "dept": "CSE",
+          "submitted": 96
+        },
+        {
+          "dept": "ECE",
+          "submitted": 92
+        },
+        {
+          "dept": "ME",
+          "submitted": 89
+        },
+        {
+          "dept": "EE",
+          "submitted": 91
+        },
+        {
+          "dept": "MBA",
+          "submitted": 97
+        },
+        {
+          "dept": "CE",
+          "submitted": 87
+        },
+        {
+          "dept": "DES",
+          "submitted": 95
+        },
+        {
+          "dept": "MATH",
+          "submitted": 90
+        }
+      ],
+      "monthly": [
+        {
+          "month": "Mar",
+          "assignments": 28
+        },
+        {
+          "month": "Apr",
+          "assignments": 34
+        },
+        {
+          "month": "May",
+          "assignments": 30
+        },
+        {
+          "month": "Jun",
+          "assignments": 22
+        },
+        {
+          "month": "Jul",
+          "assignments": 38
+        },
+        {
+          "month": "Aug",
+          "assignments": 32
+        }
+      ],
+      "plagiarism": {
+        "total": 24,
+        "resolved": 19,
+        "underReview": 5,
+        "trend": "-12% vs last term"
+      }
+    },
+    "questionBank": {
+      "total": 0,
+      "aiGenerated": 0,
+      "approved": 0,
+      "flagged": 0,
+      "byType": {}
+    }
+  },
+  "attendance": {
+    "overall": 91.2,
+    "trend": [
+      {
+        "month": "Mar",
+        "pct": 90.1
+      },
+      {
+        "month": "Apr",
+        "pct": 89.4
+      },
+      {
+        "month": "May",
+        "pct": 90.8
+      },
+      {
+        "month": "Jun",
+        "pct": 91.5
+      },
+      {
+        "month": "Jul",
+        "pct": 91.9
+      },
+      {
+        "month": "Aug",
+        "pct": 91.2
+      }
+    ],
+    "weekly": [
+      {
+        "week": "W1",
+        "pct": 91
+      },
+      {
+        "week": "W2",
+        "pct": 90
+      },
+      {
+        "week": "W3",
+        "pct": 92
+      },
+      {
+        "week": "W4",
+        "pct": 89
+      },
+      {
+        "week": "W5",
+        "pct": 91
+      },
+      {
+        "week": "W6",
+        "pct": 93
+      },
+      {
+        "week": "W7",
+        "pct": 90
+      },
+      {
+        "week": "W8",
+        "pct": 92
+      }
+    ],
+    "byDept": [
+      {
+        "dept": "CSE",
+        "pct": 92.1
+      },
+      {
+        "dept": "ECE",
+        "pct": 91.4
+      },
+      {
+        "dept": "ME",
+        "pct": 89.6
+      },
+      {
+        "dept": "EE",
+        "pct": 90.2
+      },
+      {
+        "dept": "MBA",
+        "pct": 93.8
+      },
+      {
+        "dept": "CE",
+        "pct": 88.4
+      },
+      {
+        "dept": "DES",
+        "pct": 94.1
+      },
+      {
+        "dept": "MATH",
+        "pct": 90.7
+      }
+    ],
+    "best": {
+      "dept": "DES",
+      "pct": 94.1
+    },
+    "worst": {
+      "dept": "CE",
+      "pct": 88.4
+    },
+    "belowThreshold": [
+      {
+        "name": "Nikhil Joshi",
+        "roll": "21CS108",
+        "dept": "CSE",
+        "attendance": 74.6,
+        "classesMissed": 6
+      },
+      {
+        "name": "Karan Mehta",
+        "roll": "21CS104",
+        "dept": "CSE",
+        "attendance": 78.5,
+        "classesMissed": 4
+      },
+      {
+        "name": "Sanjay Patel",
+        "roll": "21CS115",
+        "dept": "CSE",
+        "attendance": 79.8,
+        "classesMissed": 3
+      },
+      {
+        "name": "Rohan Verma",
+        "roll": "21CS102",
+        "dept": "CSE",
+        "attendance": 84.2,
+        "classesMissed": 2
+      },
+      {
+        "name": "Arjun Nair",
+        "roll": "21CS112",
+        "dept": "CSE",
+        "attendance": 86.4,
+        "classesMissed": 2
+      }
+    ],
+    "belowThresholdCount": 5
+  },
+  "interventions": {
+    "list": [
+      {
+        "id": "aint_risk",
+        "priority": "Critical",
+        "category": "Student Risk",
+        "reason": "At-risk rate 5.9% · 736 students estimated",
+        "action": "Sustain weekly intervention reviews; escalate top 10% to counsellors",
+        "expected": "1 pt reduction before the midsem window"
+      },
+      {
+        "id": "aint_att",
+        "priority": "High",
+        "category": "Attendance",
+        "reason": "5 students below the 75% floor (CE needs most attention at 88.4%)",
+        "action": "Trigger attendance reminders + HOD review of flagged sections",
+        "expected": "2–3 pt recovery within 2 weeks"
+      },
+      {
+        "id": "aint_exam",
+        "priority": "High",
+        "category": "Assessment",
+        "reason": "2 exam draft(s) still drafting — midsem begins Aug 19",
+        "action": "Finalize OS, DBMS & Networks papers this week",
+        "expected": "100% readiness by Aug 18"
+      },
+      {
+        "id": "aint_fin",
+        "priority": "Medium",
+        "category": "Finance",
+        "reason": "₹4.7 Cr outstanding · 342 invoices overdue >45 days (44% MBA, 31% ECE)",
+        "action": "Batch reminder with instalment options to MBA & ECE cohorts",
+        "expected": "₹1.6 Cr recovery within 30 days"
+      },
+      {
+        "id": "aint_ops",
+        "priority": "Medium",
+        "category": "Operations",
+        "reason": "Fee & Invoice API degraded — latency above SLA",
+        "action": "Restart workers and monitor after next deploy",
+        "expected": "Latency back under 200ms"
+      }
+    ],
+    "critical": 1,
+    "high": 2
+  },
+  "reports": {
+    "institution": {
+      "headline": "Institution health 87.9/100 (Excellent)",
+      "body": "12480 students · 640 faculty across 8 departments. Strongest pillar: Student success (92.1/100). Priority: Faculty health (82.9/100). At-risk rate 5.9% (29.8% reduction since Mar).",
+      "highlights": [
+        "736 active-risk students · 168 recovered",
+        "Exam pass rate 89.7% · attendance —%",
+        "AI adoption 71000 sessions this month"
+      ]
+    },
+    "departments": {
+      "headline": "8 departments · average health 89.7/100",
+      "body": "Best: Computer Science & Engineering (93.9/100 — pass 93.1%, attendance 92.1%, placement 96.2%). Need attention: Civil Engineering (82.7/100).",
+      "list": [
+        {
+          "code": "CSE",
+          "name": "Computer Science & Engineering",
+          "score": 93.9,
+          "grade": "Excellent",
+          "passRate": 93.1,
+          "attendance": 92.1,
+          "placement": 96.2
+        },
+        {
+          "code": "MBA",
+          "name": "School of Business",
+          "score": 93.9,
+          "grade": "Excellent",
+          "passRate": 94.2,
+          "attendance": 93.8,
+          "placement": 93.5
+        },
+        {
+          "code": "DES",
+          "name": "School of Design & Media",
+          "score": 92.8,
+          "grade": "Excellent",
+          "passRate": 96.1,
+          "attendance": 94.1,
+          "placement": 88.2
+        },
+        {
+          "code": "ECE",
+          "name": "Electronics & Communication",
+          "score": 90.7,
+          "grade": "Excellent",
+          "passRate": 89.4,
+          "attendance": 91.4,
+          "placement": 91.8
+        },
+        {
+          "code": "EE",
+          "name": "Electrical Engineering",
+          "score": 88.9,
+          "grade": "Excellent",
+          "passRate": 87.8,
+          "attendance": 90.2,
+          "placement": 89.1
+        },
+        {
+          "code": "MATH",
+          "name": "Mathematics & Sciences",
+          "score": 88,
+          "grade": "Excellent",
+          "passRate": 88.9,
+          "attendance": 90.7,
+          "placement": 84.9
+        },
+        {
+          "code": "ME",
+          "name": "Mechanical Engineering",
+          "score": 86.7,
+          "grade": "Excellent",
+          "passRate": 85.2,
+          "attendance": 89.6,
+          "placement": 86.4
+        },
+        {
+          "code": "CE",
+          "name": "Civil Engineering",
+          "score": 82.7,
+          "grade": "Good",
+          "passRate": 82.6,
+          "attendance": 88.4,
+          "placement": 78.6
+        }
+      ]
+    },
+    "studentRisk": {
+      "headline": "At-risk rate 5.9% · 736 students",
+      "body": "6-month trend from 8.4% to 5.9% (-2.5 pts). 168 students recovered via interventions; 214 flagged this term.",
+      "attendanceRisk": [
+        {
+          "name": "Nikhil Joshi",
+          "roll": "21CS108",
+          "dept": "CSE",
+          "attendance": 74.6
+        },
+        {
+          "name": "Karan Mehta",
+          "roll": "21CS104",
+          "dept": "CSE",
+          "attendance": 78.5
+        },
+        {
+          "name": "Sanjay Patel",
+          "roll": "21CS115",
+          "dept": "CSE",
+          "attendance": 79.8
+        },
+        {
+          "name": "Rohan Verma",
+          "roll": "21CS102",
+          "dept": "CSE",
+          "attendance": 84.2
+        },
+        {
+          "name": "Arjun Nair",
+          "roll": "21CS112",
+          "dept": "CSE",
+          "attendance": 86.4
+        }
+      ],
+      "distribution": [
+        {
+          "grade": "A+",
+          "pct": 12.4
+        },
+        {
+          "grade": "A",
+          "pct": 24.8
+        },
+        {
+          "grade": "B+",
+          "pct": 27.6
+        },
+        {
+          "grade": "B",
+          "pct": 19.2
+        },
+        {
+          "grade": "C",
+          "pct": 11.3
+        },
+        {
+          "grade": "D/F",
+          "pct": 4.7
+        }
+      ]
+    },
+    "faculty": {
+      "headline": "640 faculty · health 82.9/100",
+      "body": "Teaching satisfaction 86/100 · publications per faculty 1.9. 10 faculty in the sample roster across 8 departments.",
+      "byDept": [
+        {
+          "code": "CSE",
+          "count": 3
+        },
+        {
+          "code": "ECE",
+          "count": 1
+        },
+        {
+          "code": "MATH",
+          "count": 1
+        },
+        {
+          "code": "ME",
+          "count": 1
+        },
+        {
+          "code": "EE",
+          "count": 1
+        },
+        {
+          "code": "MBA",
+          "count": 1
+        },
+        {
+          "code": "CE",
+          "count": 1
+        },
+        {
+          "code": "DES",
+          "count": 1
+        }
+      ]
+    },
+    "assessment": {
+      "headline": "Assessment health 83.3/100 (Good)",
+      "body": "Exam average 71.4% · pass rate 89.7% · assignment submission 93.2%% · 2 drafts pending before midsem.",
+      "readiness": {
+        "total": 5,
+        "ready": 2,
+        "inReview": 1,
+        "drafting": 2
+      },
+      "questionBank": {
+        "total": 0,
+        "aiGenerated": 0,
+        "approved": 0,
+        "flagged": 0,
+        "byType": {}
+      }
+    }
+  },
+  "ai": {
+    "insights": [
+      {
+        "id": "ei1",
+        "tone": "positive",
+        "title": "Retention is at a 4-year high",
+        "body": "Overall retention reached 92.1% (2025 intake) — first-year retention 94.8%. Continue the first-year mentorship programme."
+      },
+      {
+        "id": "ei2",
+        "tone": "warning",
+        "title": "CSE Sec B attendance below threshold",
+        "body": "3-week average 86.4% — 14 students flagged. The CSE department leads attendance (92.1%) but this section trails."
+      },
+      {
+        "id": "ei3",
+        "tone": "neutral",
+        "title": "AI adoption growing steadily",
+        "body": "71,000 tutor + copilot sessions in August — the strongest month this term. Faculty AI grading covers 64% of assignments."
+      },
+      {
+        "id": "ei4",
+        "tone": "warning",
+        "title": "Outstanding fees concentrated in MBA & ECE",
+        "body": "342 invoices pending >45 days — 44% MBA, 31% ECE. Targeted nudges could recover ₹1.6 Cr."
+      },
+      {
+        "id": "ei5",
+        "tone": "positive",
+        "title": "Placement season is on track",
+        "body": "92.4% placement rate with average CTC ₹11.8 LPA (+9.2%). Microsoft & Flipkart drives scheduled this month."
+      },
+      {
+        "id": "ei6",
+        "tone": "warning",
+        "title": "At-risk rate improving institution-wide",
+        "body": "8.4% (Mar) → 5.9% (Aug) — a 29.8% reduction. The intervention pipeline is working; sustain weekly reviews."
+      }
+    ],
+    "recommendations": [
+      {
+        "id": "ai1",
+        "type": "Attendance",
+        "priority": "High",
+        "reason": "5 students below the 75% attendance floor (all CSE)",
+        "action": "Trigger attendance reminder + HOD review of the flagged section",
+        "expected": "2–3 pt recovery within 2 weeks"
+      },
+      {
+        "id": "ai2",
+        "type": "Academic Risk",
+        "priority": "Critical",
+        "reason": "At-risk rate 5.9% · 214 students flagged this term",
+        "action": "Continue weekly intervention reviews; escalate top 10% to counsellors",
+        "expected": "Further 1 pt reduction before midsem"
+      },
+      {
+        "id": "ai3",
+        "type": "Finance",
+        "priority": "Medium",
+        "reason": "342 invoices overdue >45 days (₹4.7 Cr outstanding)",
+        "action": "Batch reminder to MBA & ECE cohorts with instalment options",
+        "expected": "₹1.6 Cr recovery within 30 days"
+      },
+      {
+        "id": "ai4",
+        "type": "Assessment",
+        "priority": "High",
+        "reason": "3 exam drafts still in drafting — midsem begins Aug 19",
+        "action": "Finalize OS, DBMS & Networks papers this week",
+        "expected": "100% readiness by Aug 18"
+      }
+    ],
+    "reportTemplates": [
+      {
+        "id": "art_inst",
+        "name": "Institution Health Report",
+        "category": "Executive",
+        "includes": [
+          "Institution health score",
+          "Academic / attendance / assessment health",
+          "Student success & at-risk",
+          "AI adoption",
+          "Recommendations"
+        ]
+      },
+      {
+        "id": "art_dept",
+        "name": "Department Scorecard",
+        "category": "Academic",
+        "includes": [
+          "Pass rate",
+          "Attendance",
+          "Placement rate",
+          "Faculty load",
+          "Department health score"
+        ]
+      },
+      {
+        "id": "art_risk",
+        "name": "Institution Risk Register",
+        "category": "Students",
+        "includes": [
+          "At-risk rate & trend",
+          "Below-threshold cohort",
+          "Top risk departments",
+          "Intervention status"
+        ]
+      },
+      {
+        "id": "art_fac",
+        "name": "Faculty Summary",
+        "category": "Academic",
+        "includes": [
+          "Faculty count & load",
+          "Teaching satisfaction",
+          "Research output",
+          "Department distribution"
+        ]
+      },
+      {
+        "id": "art_assess",
+        "name": "Assessment Health Report",
+        "category": "Academic",
+        "includes": [
+          "Exam average & pass rate",
+          "Readiness status",
+          "Question bank coverage",
+          "Assignment completion"
+        ]
+      },
+      {
+        "id": "art_fin",
+        "name": "Finance & Aid Summary",
+        "category": "Finance",
+        "includes": [
+          "Revenue vs target",
+          "Outstanding",
+          "Scholarship disbursement",
+          "Sources & departments"
+        ]
+      }
+    ],
+    "promptSeeds": [
+      {
+        "id": "ep1",
+        "label": "Summarise institution health",
+        "prompt": "Summarise the current institution health with its strongest and weakest factors."
+      },
+      {
+        "id": "ep2",
+        "label": "Department comparison",
+        "prompt": "Compare all departments on pass rate, attendance and placement — who needs attention?"
+      },
+      {
+        "id": "ep3",
+        "label": "Risk briefing",
+        "prompt": "Brief me on the institution at-risk register and the top 3 interventions."
+      },
+      {
+        "id": "ep4",
+        "label": "Board report",
+        "prompt": "Draft a one-page board report on this term: academics, finance, placements and AI."
+      }
+    ],
+    "aiAdoption": {
+      "sessions": 71000
+    }
+  },
+  "generatedAt": "2026-08-26T05:20:38.883Z"
+}

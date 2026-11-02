@@ -1,0 +1,666 @@
+{
+  "tutorThreads": [
+    {
+      "id": "t1",
+      "title": "Graph algorithms — shortest paths",
+      "subject": "DSA",
+      "updated": "2h ago",
+      "messages": [
+        {
+          "id": "m1",
+          "role": "user",
+          "text": "Can you explain Dijkstra’s algorithm with an analogy? I keep mixing it up with BFS."
+        },
+        {
+          "id": "m2",
+          "role": "assistant",
+          "text": "Great question — and the confusion is very common. Let’s rebuild it from first principles.\n\n**The core idea**\nDijkstra is *weighted* BFS. BFS spreads like a wave across water — every hop costs the same. Dijkstra spreads like a GPS routing through city streets — every street has a different length.\n\n**The analogy: package delivery**\nImagine you’re a courier at a central depot, delivering to 5 neighbourhoods. You don’t drive each route fully; instead you always extend the *shortest known route so far*.\n\n1. Mark the depot as settled (distance 0).\n2. Look at all roads from settled areas, take the shortest one.\n3. Settle that area, update distances to its neighbours.\n4. Repeat until every area is settled.\n\n**Why a priority queue?**\n“Take the shortest known route” is exactly `extract-min` — a min-heap gives O(log V) per operation, making the whole algorithm O((V+E) log V).\n\n**Self-check question:** In a graph with negative edge weights, why does this greedy “settle first” strategy break? *(Answer: settling a node early assumes its distance can never improve — a negative edge could improve it later.)*\n\nWant me to walk through a worked example with actual numbers?"
+        },
+        {
+          "id": "m3",
+          "role": "user",
+          "text": "Yes, please — worked example with numbers!"
+        },
+        {
+          "id": "m4",
+          "role": "assistant",
+          "text": "Let’s trace Dijkstra on this small graph.\n\n**Graph** (nodes A–E):\n- A→B: 4, A→C: 2\n- B→C: 1, B→D: 5\n- C→D: 8, C→E: 10\n- D→E: 2\n\n**Start: A (dist 0)**\n\n| Step | Settled | Distances |\n|---|---|---|\n| 1 | A | B:4, C:2, D:∞, E:∞ |\n| 2 | A,C | B:3 (via C!), D:10, E:12 |\n| 3 | A,C,B | D:8 (via B), E:12 |\n| 4 | A,C,B,D | E:10 (via D!) |\n| 5 | A,C,B,D,E | done |\n\n**Key insight:** the second step is the heart of Dijkstra — B’s distance *improved* from 4 to 3 via C. We never re-settle nodes, but we always *relax* (improve) their neighbours.\n\n**Shortest paths from A:**\n- A→B: **3** (A–C–B)\n- A→C: **2**\n- A→D: **8** (A–C–B–D)\n- A→E: **10** (A–C–B–D–E)\n\nTry one yourself: swap edge C→D to weight 2. What happens to the shortest path to E? *(Answer: A–C–D–E = 6, beating the old route.)*\n\nShall I generate 3 practice problems at your current level?"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "title": "DBMS — isolation levels",
+      "subject": "DBMS",
+      "updated": "Yesterday",
+      "messages": [
+        {
+          "id": "m1",
+          "role": "user",
+          "text": "What’s the practical difference between READ COMMITTED and REPEATABLE READ?"
+        },
+        {
+          "id": "m2",
+          "role": "assistant",
+          "text": "Excellent question — this trips up most students.\n\n**READ COMMITTED** guarantees you only see *committed* data, but two reads in the same transaction can see *different* values (a concurrent commit slips in between). That’s a **non-repeatable read**.\n\n**REPEATABLE READ** adds one guarantee: once you read a row, re-reading it in the same transaction gives the same value — the database holds the row stable for you.\n\n**The trade-off** — REPEATABLE READ still allows **phantom reads**: a new row inserted by another transaction can appear in your second query’s result set. Only SERIALIZABLE prevents that (often with range locks).\n\n**PostgreSQL note:** PG’s REPEATABLE READ uses snapshots, so it actually prevents phantoms too — but the SQL standard doesn’t require it.\n\n**Quick recall table:**\n| Level | Dirty read | Non-repeatable | Phantom |\n|---|---|---|---|\n| Read Uncommitted | ✅ allowed | ✅ | ✅ |\n| Read Committed | ❌ | ✅ | ✅ |\n| Repeatable Read | ❌ | ❌ | ✅ |\n| Serializable | ❌ | ❌ | ❌ |\n\nWant a quiz on this? I can generate 5 questions with explanations."
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "title": "Networks — TCP congestion control",
+      "subject": "Networks",
+      "updated": "2 days ago",
+      "messages": [
+        {
+          "id": "m1",
+          "role": "user",
+          "text": "Why does TCP half its congestion window on loss? Isn’t that wasteful?"
+        },
+        {
+          "id": "m2",
+          "role": "assistant",
+          "text": "It looks wasteful, but it’s a deliberate *conservation* choice — the AIMD strategy.\n\n**Why half?** When loss occurs, TCP can’t tell if the network is lightly congested or heavily congested. Cutting in half is a compromise: aggressive enough to relieve congestion quickly, gentle enough not to collapse throughput. It’s like easing off the accelerator when traffic slows rather than slamming the brakes or ignoring it.\n\n**The sawtooth** — additive increase (+1 MSS per RTT) probes capacity slowly; multiplicative decrease (×½) responds to loss fast. Over time this converges to fair sharing between flows (they oscillate around the same average).\n\n**Why not just retransmit?** You do retransmit — the window cut is about *rate*, not reliability.\n\n**Modern variants:** CUBIC (Linux default) grows the window with a cubic function, which recovers much faster on high-bandwidth links; BBR replaces loss-signalling with bandwidth estimation entirely.\n\nShall I draw the sawtooth diagram for you and annotate the phases?"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "title": "ML — bias-variance tradeoff",
+      "subject": "ML",
+      "updated": "3 days ago",
+      "messages": [
+        {
+          "id": "m1",
+          "role": "user",
+          "text": "Explain bias vs variance like I’m 12."
+        },
+        {
+          "id": "m2",
+          "role": "assistant",
+          "text": "Imagine you’re learning to throw darts at a target.\n\n**Bias** = how far your *average* throw lands from the bullseye. High bias means you consistently miss in the same direction — you’re aiming wrong. A linear model on a curved relationship has high bias: no matter how much data, it can’t capture the curve.\n\n**Variance** = how scattered your throws are. High variance means every throw lands somewhere different — you’re guessing. A deep decision tree has high variance: change a few training rows and the whole tree changes.\n\n**The tradeoff:**\n- Too simple (high bias, low variance) → **underfitting** — wrong aim, tight group.\n- Too complex (low bias, high variance) → **overfitting** — right aim, wild scatter.\n\nThe sweet spot is where total error (bias² + variance + irreducible noise) is smallest — usually found with **cross-validation**.\n\n**Memory hook:** BIAS = BLUNT (can’t aim). VARIANCE = VOLATILE (never consistent).\n\nWant me to show this with a small experiment you can run in the coding lab?"
+        }
+      ]
+    }
+  ],
+  "quickPrompts": [
+    "Explain recursion with an analogy",
+    "Generate 3 DSA practice problems",
+    "Quiz me on TCP congestion control",
+    "Compare Dijkstra vs Bellman-Ford",
+    "Help me plan revision for midsems"
+  ],
+  "copilotSuggestions": {
+    "/student": [
+      "Summarise my week and flag risks",
+      "Which assignment should I start first?",
+      "Explain my weakest topic right now"
+    ],
+    "/faculty": [
+      "Draft a quiz on today’s topic",
+      "Who needs intervention in my class?",
+      "Summarise the last 20 submissions"
+    ],
+    "/admin": [
+      "Trend of at-risk students this term",
+      "Draft the academic quality section",
+      "Which department needs support?"
+    ],
+    "/parent": [
+      "Is my ward on track this month?",
+      "Translate this report into simple language",
+      "What should I ask the teacher?"
+    ]
+  },
+  "assistantThreads": [
+    {
+      "id": "ta1",
+      "title": "Draft quiz — Network flows",
+      "subject": "CS501",
+      "updated": "1h ago",
+      "messages": [
+        {
+          "id": "m1",
+          "role": "user",
+          "text": "Draft a 10-question quiz on network flows, medium difficulty, with answer key."
+        },
+        {
+          "id": "m2",
+          "role": "assistant",
+          "text": "Here’s a draft quiz shell on **network flows** (10 slots, medium difficulty). Pick questions from your question bank to fill it — I can assemble the answer key once the questions are selected."
+        },
+        {
+          "id": "m3",
+          "role": "user",
+          "text": "Yes — make a 5-question easy version for Sec C, then add it to the bank."
+        }
+      ]
+    },
+    {
+      "id": "ta2",
+      "title": "Grade batch — DSA Assignment 4",
+      "subject": "CS501",
+      "updated": "3h ago",
+      "messages": [
+        {
+          "id": "m1",
+          "role": "user",
+          "text": "Pre-grade the 34 ungraded submissions of Assignment 4 using the rubric."
+        },
+        {
+          "id": "m2",
+          "role": "assistant",
+          "text": "✅ Pre-grading complete — 34 submissions analysed.\n\n**Summary**\n- Mean score: **14.8/20** (class mean 15.2)\n- Distribution: A: 6 · B+: 9 · B: 11 · C: 6 · D: 2\n- **Plagiarism flags:** 3 submissions share >60% similarity (I’ve marked them for your review)\n- **AI-suspicious:** 2 submissions show perfect structure with unusual time gaps\n\n**Top insight:** Question 4 (Bellman-Ford application) explains most variance — 21 students lost ≥3 marks there. Consider a follow-up tutorial.\n\nAll 34 drafts are attached with per-criterion comments. Approve in bulk, or review individually — your call. I’ll apply your edits to the bank of grading decisions."
+        }
+      ]
+    },
+    {
+      "id": "ta3",
+      "title": "Lesson plan — Memory management",
+      "subject": "CS503",
+      "updated": "1d ago",
+      "messages": [
+        {
+          "id": "m1",
+          "role": "user",
+          "text": "Build a 50-minute lesson plan on paging for Sec B (weaker batch)."
+        },
+        {
+          "id": "m2",
+          "role": "assistant",
+          "text": "Here’s a 50-minute plan calibrated to Sec B (avg internal 66):\n\n**0–8 min — Hook:** “Why does your phone ‘run out of memory’ when you’re not using apps?” → introduce virtual memory with a live demo app.\n\n**8–22 min — Core:** Page tables & address translation. Use the *book-index analogy* (page = chapter, offset = line). 3 worked examples on the board, class attempts the 4th.\n\n**22–34 min — Hands-on:** Worksheet with 6 small translations; pair work. I can generate the worksheet — say the word.\n\n**34–44 min — Common errors:** TLB misses, multi-level tables. Show 3 wrong answers from last year and crowdsource the fix.\n\n**44–50 min — Exit ticket:** 2 MCQs (I’ll auto-generate and mark).\n\n**Differentiation:** 4 extension questions for fast finishers; the worksheet has a scaffolded version.\n\nWant the worksheet + exit ticket generated now?"
+        }
+      ]
+    }
+  ],
+  "learningPath": {
+    "overall": 74,
+    "nextSteps": [
+      {
+        "id": "lp1",
+        "title": "Master: TCP congestion control",
+        "subject": "Networks",
+        "reason": "Biggest active gap (12 pts below your average). Unlocks 3 related topics.",
+        "effort": "2 sessions",
+        "impact": "High",
+        "status": "Recommended"
+      },
+      {
+        "id": "lp2",
+        "title": "Complete: Network flows module",
+        "subject": "DSA",
+        "reason": "Required before midsem (worth ~8 marks in Paper A).",
+        "effort": "2 sessions",
+        "impact": "High",
+        "status": "Recommended"
+      },
+      {
+        "id": "lp3",
+        "title": "Reinforce: Pumping lemma proofs",
+        "subject": "ToC",
+        "reason": "Internal score 64 — lowest subject. Spaced review scheduled.",
+        "effort": "3 sessions",
+        "impact": "Medium",
+        "status": "Planned"
+      },
+      {
+        "id": "lp4",
+        "title": "Advance: DP patterns (tree DP)",
+        "subject": "DSA",
+        "reason": "You’re 84% toward the Graph Master badge; tree DP is the last frontier.",
+        "effort": "1 session",
+        "impact": "Medium",
+        "status": "Optional"
+      }
+    ],
+    "milestones": [
+      {
+        "id": "m1",
+        "title": "Networks mastery ≥ 75",
+        "progress": 69,
+        "due": "2026-08-25"
+      },
+      {
+        "id": "m2",
+        "title": "ToC internals ≥ 70",
+        "progress": 64,
+        "due": "2026-08-30"
+      },
+      {
+        "id": "m3",
+        "title": "Projected CGPA 8.9",
+        "progress": 87,
+        "due": "2026-12-20"
+      }
+    ],
+    "history": [
+      {
+        "date": "2026-07-25",
+        "action": "Path re-routed",
+        "detail": "Networks prioritized over optional ML topics after mock test"
+      },
+      {
+        "date": "2026-07-18",
+        "action": "Milestone met",
+        "detail": "ML mastery crossed 80 — 2 bonus sessions unlocked"
+      },
+      {
+        "date": "2026-07-02",
+        "action": "Planner adjusted",
+        "detail": "2 sessions moved to protect OS assignment week"
+      }
+    ]
+  },
+  "recommendations": {
+    "courses": [
+      {
+        "id": "r1",
+        "title": "System Design Interview Prep",
+        "by": "MediXO + Meta alumni",
+        "match": 94,
+        "hours": 8,
+        "why": "Matches your 87% match with Flipkart SDE-1"
+      },
+      {
+        "id": "r2",
+        "title": "Advanced SQL & Query Tuning",
+        "by": "Dr. Arvind Kulkarni",
+        "match": 88,
+        "hours": 5,
+        "why": "Fills the gap between your DBMS internals and real systems"
+      },
+      {
+        "id": "r3",
+        "title": "Intro to Kubernetes",
+        "by": "MediXO Labs",
+        "match": 81,
+        "hours": 6,
+        "why": "Top skill requested in 23% of your job matches"
+      }
+    ],
+    "resources": [
+      {
+        "id": "r4",
+        "title": "Graph algorithms — visual guide",
+        "type": "Interactive",
+        "subject": "DSA",
+        "why": "3 of your weak areas have visual guides here"
+      },
+      {
+        "id": "r5",
+        "title": "CMU 15-445 Database Systems",
+        "type": "Course",
+        "subject": "DBMS",
+        "why": "Top-rated resource for transaction chapters"
+      },
+      {
+        "id": "r6",
+        "title": "Paper: Attention is All You Need",
+        "type": "Paper",
+        "subject": "ML",
+        "why": "Cited in your ML project — recommended read"
+      }
+    ],
+    "peers": [
+      {
+        "id": "r7",
+        "name": "Ishita Gupta",
+        "match": "Similar pace",
+        "action": "Group study invite"
+      },
+      {
+        "id": "r8",
+        "name": "Divya Krishnan",
+        "match": "Complements your gaps",
+        "action": "Study buddy"
+      }
+    ]
+  },
+  "weaknesses": {
+    "radar": [
+      {
+        "axis": "DSA",
+        "value": 86
+      },
+      {
+        "axis": "DBMS",
+        "value": 78
+      },
+      {
+        "axis": "OS",
+        "value": 74
+      },
+      {
+        "axis": "Networks",
+        "value": 69
+      },
+      {
+        "axis": "ML",
+        "value": 82
+      },
+      {
+        "axis": "ToC",
+        "value": 64
+      }
+    ],
+    "list": [
+      {
+        "id": "w1",
+        "topic": "TCP congestion control",
+        "subject": "Networks",
+        "severity": "High",
+        "mastery": 58,
+        "trend": "Rising",
+        "evidence": "Missed in 2/3 recent quizzes"
+      },
+      {
+        "id": "w2",
+        "topic": "Network flows",
+        "subject": "DSA",
+        "severity": "High",
+        "mastery": 61,
+        "trend": "Stable",
+        "evidence": "Assignment Q4 avg −3 marks"
+      },
+      {
+        "id": "w3",
+        "topic": "Pumping lemma proofs",
+        "subject": "ToC",
+        "mastery": 55,
+        "severity": "Medium",
+        "trend": "Rising",
+        "evidence": "Test score 12/20"
+      },
+      {
+        "id": "w4",
+        "topic": "Deadlock detection",
+        "subject": "OS",
+        "mastery": 66,
+        "severity": "Medium",
+        "trend": "Improving",
+        "evidence": "Practice accuracy up 14 pts"
+      },
+      {
+        "id": "w5",
+        "topic": "Regularisation intuition",
+        "subject": "ML",
+        "mastery": 78,
+        "severity": "Low",
+        "trend": "Improving",
+        "evidence": "Quiz 1 — 8.5/10"
+      }
+    ]
+  },
+  "prediction": {
+    "currentCgpa": 8.72,
+    "projected": 8.9,
+    "confidence": 87,
+    "series": [
+      {
+        "label": "Sem 4 (actual)",
+        "value": 8.6,
+        "type": "actual"
+      },
+      {
+        "label": "Sem 5 (current)",
+        "value": 8.72,
+        "type": "actual"
+      },
+      {
+        "label": "Sem 6 (projected)",
+        "value": 8.82,
+        "type": "projected"
+      },
+      {
+        "label": "Sem 7 (projected)",
+        "value": 8.87,
+        "type": "projected"
+      },
+      {
+        "label": "Sem 8 (projected)",
+        "value": 8.9,
+        "type": "projected"
+      }
+    ],
+    "factors": [
+      {
+        "name": "Consistency (12-day streak)",
+        "effect": "+0.09",
+        "weight": 24
+      },
+      {
+        "name": "Networks recovery",
+        "effect": "+0.08",
+        "weight": 18
+      },
+      {
+        "name": "ToC gap",
+        "effect": "-0.03",
+        "weight": 12
+      },
+      {
+        "name": "Assignment punctuality",
+        "effect": "+0.02",
+        "weight": 10
+      }
+    ],
+    "scenarioUp": "If Networks mastery crosses 75 before midsem: projected 8.95",
+    "scenarioDown": "If ToC remains below 65 through August: projected 8.82"
+  },
+  "graphSearch": {
+    "results": [
+      {
+        "id": "gs1",
+        "title": "TCP congestion control — MediXO Lecture Notes (CS504, L12)",
+        "snippet": "…AIMD grows cwnd by 1 MSS per RTT and halves it on loss…",
+        "source": "Lecture Notes",
+        "subject": "CS504",
+        "relevance": 98,
+        "citations": [
+          "CS504 L12",
+          "Textbook ch.6"
+        ]
+      },
+      {
+        "id": "gs2",
+        "title": "Kurose & Ross — Computer Networking, 8th Ed., §3.7",
+        "snippet": "Congestion control algorithms: Tahoe, Reno, CUBIC…",
+        "source": "Textbook",
+        "subject": "CS504",
+        "relevance": 95,
+        "citations": [
+          "K&R §3.7"
+        ]
+      },
+      {
+        "id": "gs3",
+        "title": "Video — “Why is the internet slow?” (ML lab group)",
+        "snippet": "Explains bufferbloat and how cwnd interacts with router queues…",
+        "source": "Video",
+        "subject": "CS504",
+        "relevance": 88,
+        "citations": [
+          "ML Lab 2025"
+        ]
+      },
+      {
+        "id": "gs4",
+        "title": "Past exam — End-Sem 2025 Q6",
+        "snippet": "Compare TCP Reno and CUBIC behaviour on high-BDP links…",
+        "source": "Past Paper",
+        "subject": "CS504",
+        "relevance": 84,
+        "citations": [
+          "ES-2025 CS504"
+        ]
+      },
+      {
+        "id": "gs5",
+        "title": "Paper — “BBR: Congestion-Based Congestion Control”",
+        "snippet": "Google’s model-based alternative to loss-based control…",
+        "source": "Paper",
+        "subject": "CS504",
+        "relevance": 79,
+        "citations": [
+          "ACM Queue 2016"
+        ]
+      }
+    ],
+    "graph": {
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "TCP Congestion Control",
+          "group": "topic",
+          "x": 50,
+          "y": 30
+        },
+        {
+          "id": "n2",
+          "label": "CS504 L12",
+          "group": "lecture",
+          "x": 22,
+          "y": 55
+        },
+        {
+          "id": "n3",
+          "label": "K&R §3.7",
+          "group": "book",
+          "x": 78,
+          "y": 55
+        },
+        {
+          "id": "n4",
+          "label": "AIMD",
+          "group": "concept",
+          "x": 35,
+          "y": 78
+        },
+        {
+          "id": "n5",
+          "label": "Bufferbloat",
+          "group": "concept",
+          "x": 65,
+          "y": 78
+        },
+        {
+          "id": "n6",
+          "label": "ES-2025 Q6",
+          "group": "exam",
+          "x": 85,
+          "y": 18
+        },
+        {
+          "id": "n7",
+          "label": "BBR Paper",
+          "group": "paper",
+          "x": 12,
+          "y": 18
+        }
+      ],
+      "links": [
+        {
+          "source": "n1",
+          "target": "n2"
+        },
+        {
+          "source": "n1",
+          "target": "n3"
+        },
+        {
+          "source": "n1",
+          "target": "n6"
+        },
+        {
+          "source": "n2",
+          "target": "n4"
+        },
+        {
+          "source": "n3",
+          "target": "n4"
+        },
+        {
+          "source": "n3",
+          "target": "n5"
+        },
+        {
+          "source": "n1",
+          "target": "n7"
+        },
+        {
+          "source": "n7",
+          "target": "n4"
+        },
+        {
+          "source": "n5",
+          "target": "n6"
+        }
+      ]
+    }
+  },
+  "stats": {
+    "totalSessions": 86,
+    "avgRating": 4.8,
+    "topicsCovered": 34,
+    "hoursSavedEstimate": 41,
+    "weekly": [
+      {
+        "week": "W1",
+        "sessions": 9
+      },
+      {
+        "week": "W2",
+        "sessions": 12
+      },
+      {
+        "week": "W3",
+        "sessions": 10
+      },
+      {
+        "week": "W4",
+        "sessions": 14
+      },
+      {
+        "week": "W5",
+        "sessions": 11
+      },
+      {
+        "week": "W6",
+        "sessions": 16
+      }
+    ]
+  },
+  "quizGeneratorSample": {
+    "title": "AI quiz generator",
+    "questions": []
+  },
+  "examGeneratorSample": {
+    "title": "Blueprint preview — Midsem DSA (50 marks)",
+    "sections": [
+      {
+        "part": "Part A — MCQs",
+        "questions": 10,
+        "marks": 10,
+        "coverage": "Modules 1–3"
+      },
+      {
+        "part": "Part B — Short answers",
+        "questions": 5,
+        "marks": 15,
+        "coverage": "CO1–CO2"
+      },
+      {
+        "part": "Part C — Long answers",
+        "questions": 2,
+        "marks": 25,
+        "coverage": "CO2–CO4, with choice"
+      }
+    ],
+    "stats": {
+      "difficulty": "Balanced",
+      "predictedMean": 34,
+      "coverage": 92,
+      "plagiarismCheck": "Clean"
+    }
+  }
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MediXO EduX — Architecture diagrams</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --line: #334155;
+      --accent: #6366f1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    header {
+      padding: 2.5rem 1.5rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 1.6rem; font-weight: 650; margin: 0 0 0.5rem; }
+    p { color: var(--muted); margin: 0; }
+    .cards {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      padding: 0 1.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+    @media (min-width: 720px) {
+      .cards { grid-template-columns: 1fr 1fr; }
+    }
+    a.card {
+      display: block;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+      color: inherit;
+      text-decoration: none;
+    }
+    a.card:hover { border-color: var(--accent); }
+    a.card h2 { margin: 0 0 0.4rem; font-size: 1.1rem; color: #c7d2fe; }
+    a.card p { font-size: 0.92rem; }
+    footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem 2rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MediXO EduX architecture</h1>
+    <p>HTML diagrams for the Vite SPA, FastAPI backend, data stores, and AI/intelligence flows. Open either file in a browser — no build step.</p>
+  </header>
+  <div class="cards">
+    <a class="card" href="../../docs/architecture-high-level.html">
+      <h2>High-level diagram (HLD)</h2>
+      <p>Actors, portals, API, mock fallback, database, AI gateway, and how University vs Competitive stay separated.</p>
+    </a>
+    <a class="card" href="../../docs/architecture-low-level.html">
+      <h2>Low-level diagram (LLD)</h2>
+      <p>Folders, request path, JWT, exam-attempt pipeline, schema domains, and intelligence vs LLM boundaries.</p>
+    </a>
+  </div>
+  <footer>
+    Source of truth: <code>frontend/</code>, <code>backend/</code>, <code>backend/sql/schema.sql</code>. Local OLTP is SQLite; production target is PostgreSQL 16.
+  </footer>
+</body>
+</html>

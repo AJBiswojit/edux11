@@ -1,0 +1,38 @@
+# env (keep .env.example)
+.env
+.env.local
+
+backend/.venv
+backend/var/
+backend/test/_exam_core.sqlite
+backend/test/__pycache__/
+backend/scripts/__pycache__/
+
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# build
+dist
+dist-ssr
+*.local
+
+# logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# editor / os
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
