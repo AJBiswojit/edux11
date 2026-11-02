@@ -9,6 +9,7 @@
 
 import PDFDocument from 'pdfkit'
 
+import { ensurePdfKitStandardFonts } from './pdfkit-standard-fonts.js'
 import { A4, FONTS, FONT_FILES, COLORS, normalizeForMatch } from './theme.js'
 import { ReportContext } from './layout.js'
 import { SectionHeading, SourceRegister, FinalBranding } from './components.js'
@@ -52,6 +53,10 @@ function collectBytes(doc) {
 
 export async function renderPremiumPdf({ kind = 'full', model, assets } = {}) {
   if (!model) throw new Error('A report model is required')
+  // The Vite browser build of PDFKit does not preload Base 14 font metrics.
+  // PDFDocument resolves Helvetica in its constructor, before our embedded
+  // fonts are registered, so this must happen first.
+  await ensurePdfKitStandardFonts()
   const doc = new PDFDocument({
     size: 'A4',
     margin: 0,

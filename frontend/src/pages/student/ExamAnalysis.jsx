@@ -29,6 +29,13 @@ const MASTERY_STYLES = { Strong: 'success', Average: 'info', Weak: 'warning', Cr
 // const PRIORITY_STYLES = { Critical: 'danger', High: 'warning', Medium: 'info' }
 const MISTAKE_COLORS = ['#f43f5e', '#f59e0b', '#8b5cf6', '#3b82f6', '#14b8a6', '#6366f1', '#94a3b8']
 
+function logPdfExportError(label, error) {
+  if (import.meta.env?.DEV) {
+    console.error(`[EduX PDF Export] ${label} failed`, error)
+    if (error?.stack) console.error(`[EduX PDF Export] ${label} stack`, error.stack)
+  }
+}
+
 function ComingSoonNotice() {
   return (
     <div className="flex min-h-[160px] items-center justify-center px-2 py-4">
@@ -906,7 +913,10 @@ function ExamAnalysis() {
     setReportBusy(true)
     exportAnalysisPDF(analysisData, subject, user)
       .then(() => toast.success('Report downloaded', 'The marks report was saved to your downloads.'))
-      .catch(() => toast.error('PDF failed', 'Could not create the report. Please try again.'))
+      .catch((error) => {
+        logPdfExportError('Report', error)
+        toast.error('PDF failed', 'Could not create the report. Please try again.')
+      })
       .finally(() => setReportBusy(false))
   }
 
@@ -914,7 +924,10 @@ function ExamAnalysis() {
     setFullBusy(true)
     exportFullAnalysisPDF(analysisData, subject, user)
       .then(() => toast.success('Full analysis downloaded', 'Your complete analysis PDF was saved to downloads.'))
-      .catch(() => toast.error('PDF failed', 'Could not create the full analysis. Please try again.'))
+      .catch((error) => {
+        logPdfExportError('Full Analysis', error)
+        toast.error('PDF failed', 'Could not create the full analysis. Please try again.')
+      })
       .finally(() => setFullBusy(false))
   }
 
