@@ -1,0 +1,578 @@
+{
+  "meta": {
+    "examId": "OVERSIZED-TOPIC-LOCAL-01",
+    "examName": "Oversized single topic entry (synthetic local reproduction)",
+    "course": "JEE Main 2027 · Full Syllabus Mock",
+    "pattern": "JEE Main (Paper 1)",
+    "student": "Oversized Topic Fixture",
+    "rollNo": "OVERSIZE-001",
+    "date": "2026-11-03",
+    "totalMarks": 300,
+    "duration": "3 hrs",
+    "sections": [
+      "Physics",
+      "Chemistry",
+      "Mathematics"
+    ]
+  },
+  "hero": {
+    "score": 182,
+    "maxScore": 300,
+    "percentage": 60.7,
+    "grade": "B+",
+    "rank": 2480,
+    "percentile": 91.4,
+    "batchRank": 12,
+    "cohortSize": 180,
+    "overallAccuracy": 68.3,
+    "overallSpeed": 4.1,
+    "confidenceIndex": 87,
+    "readinessScore": 78,
+    "healthScore": 82,
+    "badge": "Top 10% — National",
+    "aiSummary": "Strong conceptual grip in Physical Chemistry and Mechanics, with excellent speed in numericals. Accuracy dips in Mathematics (calculus-heavy set) and in assertion-reason questions under time pressure. 7 questions were left unattempted — an estimated +18 marks are recoverable with better time allocation and guess discipline. Overall a top-decile performance with clear headroom to 200+."
+  },
+  "questionIntelligence": {
+    "total": 75,
+    "attempted": 68,
+    "correct": 47,
+    "incorrect": 14,
+    "skipped": 7,
+    "negativeMarks": 5.25,
+    "guessAttempts": 6,
+    "accuracy": 69.1,
+    "successRate": 65.3,
+    "attemptRatio": 90.7
+  },
+  "subjects": [
+    {
+      "name": "Physics",
+      "maxMarks": 100,
+      "score": 64,
+      "accuracy": 71.4,
+      "time": 41,
+      "rank": 8,
+      "difficulty": "Medium",
+      "attempted": 23,
+      "correct": 16,
+      "weakAreas": [
+        "Ray Optics",
+        "Semiconductors"
+      ],
+      "strongAreas": [
+        "Mechanics",
+        "Electrostatics",
+        "Modern Physics"
+      ]
+    },
+    {
+      "name": "Chemistry",
+      "maxMarks": 100,
+      "score": 72,
+      "accuracy": 76.2,
+      "time": 38,
+      "rank": 4,
+      "difficulty": "Easy",
+      "attempted": 24,
+      "correct": 18,
+      "weakAreas": [
+        "Coordination Compounds (NCERT details)"
+      ],
+      "strongAreas": [
+        "Physical Chemistry",
+        "Organic Reactions",
+        "Mole Concept"
+      ]
+    },
+    {
+      "name": "Mathematics",
+      "maxMarks": 100,
+      "score": 46,
+      "accuracy": 54.3,
+      "time": 44,
+      "rank": 22,
+      "difficulty": "Hard",
+      "attempted": 21,
+      "correct": 13,
+      "weakAreas": [
+        "Integral Calculus",
+        "3D Geometry",
+        "Probability"
+      ],
+      "strongAreas": [
+        "Algebra",
+        "Coordinate Geometry",
+        "Matrices"
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "chapter": "Mechanics",
+      "subject": "Physics",
+      "accuracy": 78,
+      "marks": 28,
+      "time": 9,
+      "attempted": 95,
+      "mastery": "Strong"
+    },
+    {
+      "chapter": "Electrostatics",
+      "subject": "Physics",
+      "accuracy": 74,
+      "marks": 18,
+      "time": 6,
+      "attempted": 92,
+      "mastery": "Strong"
+    },
+    {
+      "chapter": "Modern Physics",
+      "subject": "Physics",
+      "accuracy": 76,
+      "marks": 14,
+      "time": 5,
+      "attempted": 90,
+      "mastery": "Strong"
+    },
+    {
+      "chapter": "Ray Optics",
+      "subject": "Physics",
+      "accuracy": 55,
+      "marks": 8,
+      "time": 4,
+      "attempted": 80,
+      "mastery": "Weak"
+    },
+    {
+      "chapter": "Physical Chemistry",
+      "subject": "Chemistry",
+      "accuracy": 82,
+      "marks": 26,
+      "time": 8,
+      "attempted": 96,
+      "mastery": "Strong"
+    },
+    {
+      "chapter": "Organic Chemistry",
+      "subject": "Chemistry",
+      "accuracy": 74,
+      "marks": 24,
+      "time": 7,
+      "attempted": 92,
+      "mastery": "Average"
+    },
+    {
+      "chapter": "Inorganic Chemistry",
+      "subject": "Chemistry",
+      "accuracy": 64,
+      "marks": 14,
+      "time": 6,
+      "attempted": 85,
+      "mastery": "Average"
+    },
+    {
+      "chapter": "Coordination Compounds",
+      "subject": "Chemistry",
+      "accuracy": 52,
+      "marks": 8,
+      "time": 5,
+      "attempted": 78,
+      "mastery": "Weak"
+    },
+    {
+      "chapter": "Algebra",
+      "subject": "Mathematics",
+      "accuracy": 80,
+      "marks": 22,
+      "time": 8,
+      "attempted": 94,
+      "mastery": "Strong"
+    },
+    {
+      "chapter": "Coordinate Geometry",
+      "subject": "Mathematics",
+      "accuracy": 76,
+      "marks": 16,
+      "time": 7,
+      "attempted": 90,
+      "mastery": "Average"
+    },
+    {
+      "chapter": "Calculus",
+      "subject": "Mathematics",
+      "accuracy": 48,
+      "marks": 14,
+      "time": 10,
+      "attempted": 72,
+      "mastery": "Critical"
+    },
+    {
+      "chapter": "Probability & Stats",
+      "subject": "Mathematics",
+      "accuracy": 45,
+      "marks": 8,
+      "time": 6,
+      "attempted": 68,
+      "mastery": "Critical"
+    }
+  ],
+  "topics": [
+    {
+      "topic": "Single oversized topic calibration entry: multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence  END-OF-OVERSIZED-TOPIC",
+      "subject": "Physics",
+      "mastery": 31,
+      "level": "Critical"
+    },
+    {
+      "topic": "Short companion topic",
+      "subject": "Chemistry",
+      "mastery": 74,
+      "level": "Strong"
+    }
+  ],
+  "mistakes": [
+    {
+      "category": "Concept Error",
+      "count": 3
+    }
+  ],
+  "mistakeList": [
+    {
+      "q": "Q1",
+      "subject": "Physics",
+      "category": "Concept Error",
+      "topic": "Single oversized topic calibration entry: multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence  END-OF-OVERSIZED-TOPIC",
+      "detail": "Single oversized source evidence: the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation the complete derivation and its boundary conditions must remain readable across continuation pages without truncation  END-OF-OVERSIZED-EVIDENCE"
+    }
+  ],
+  "difficulty": [
+    {
+      "level": "Easy",
+      "questions": 30,
+      "accuracy": 82,
+      "attempted": 29,
+      "time": 3.1
+    },
+    {
+      "level": "Medium",
+      "questions": 30,
+      "accuracy": 66,
+      "attempted": 27,
+      "time": 4.4
+    },
+    {
+      "level": "Hard",
+      "questions": 15,
+      "accuracy": 41,
+      "attempted": 12,
+      "time": 6.2
+    }
+  ],
+  "timeIntelligence": {
+    "avgTimePerQuestion": 4.1,
+    "fastestQuestion": {
+      "q": "Q3 — Mole Concept",
+      "time": 0.8
+    },
+    "slowestQuestion": {
+      "q": "Q58 — Definite Integration",
+      "time": 8.9
+    },
+    "navigationCount": 8,
+    "timeManagementScore": 76,
+    "distribution": [
+      {
+        "section": "Physics",
+        "allocated": 60,
+        "used": 52,
+        "efficiency": 115
+      },
+      {
+        "section": "Chemistry",
+        "allocated": 55,
+        "used": 47,
+        "efficiency": 117
+      },
+      {
+        "section": "Mathematics",
+        "allocated": 65,
+        "used": 71,
+        "efficiency": 92
+      }
+    ]
+  },
+  "comparison": {
+    "previousTest": {
+      "label": "Previous test",
+      "score": 168,
+      "percentile": 87.2,
+      "grade": "B"
+    },
+    "previousMonth": {
+      "label": "Previous month avg",
+      "score": 171,
+      "percentile": 88.1
+    },
+    "batchAverage": {
+      "label": "Batch average",
+      "score": 154,
+      "percentile": 82.6
+    },
+    "instituteAverage": {
+      "label": "Institute average",
+      "score": 149,
+      "percentile": 80.4
+    },
+    "topPerformer": {
+      "label": "Top performer",
+      "score": 254,
+      "percentile": 99.6,
+      "name": "Divya Krishnan"
+    },
+    "deltas": [
+      {
+        "label": "vs previous test",
+        "value": "+14",
+        "up": true
+      },
+      {
+        "label": "vs previous month",
+        "value": "+11",
+        "up": true
+      },
+      {
+        "label": "vs batch average",
+        "value": "+28",
+        "up": true
+      },
+      {
+        "label": "vs institute average",
+        "value": "+33",
+        "up": true
+      }
+    ]
+  },
+  "recommendations": {
+    "weakChapters": [
+      "Calculus (48%)",
+      "Probability & Stats (45%)",
+      "Ray Optics (55%)",
+      "Coordination Compounds (52%)"
+    ],
+    "weakTopics": [
+      "Single oversized topic calibration entry: multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence  END-OF-OVERSIZED-TOPIC",
+      "Short companion topic"
+    ],
+    "priorityRevision": [
+      {
+        "topic": "Single oversized topic calibration entry: multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence multi-stage reversible non-equilibrium thermodynamic reasoning with extended boundary conditions and repeated diagnostic evidence  END-OF-OVERSIZED-TOPIC",
+        "priority": "Critical",
+        "timeframe": "48 hours"
+      }
+    ],
+    "suggestedPYQs": [
+      {
+        "title": "JEE Main 2024 — Definite Integration (5 Qs)",
+        "source": "PYQ Bank"
+      },
+      {
+        "title": "JEE Main 2023 — Ray Optics (4 Qs)",
+        "source": "PYQ Bank"
+      },
+      {
+        "title": "JEE Advanced 2022 — Coordination Compounds",
+        "source": "PYQ Bank"
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "title": "20-question drill — Integration by substitution",
+        "count": 20,
+        "difficulty": "Medium"
+      },
+      {
+        "title": "10-question drill — Lens formula applications",
+        "count": 10,
+        "difficulty": "Medium"
+      }
+    ],
+    "mockTests": [
+      {
+        "title": "Sectional mock — Mathematics (60 min)",
+        "mode": "Sectional"
+      },
+      {
+        "title": "Full syllabus mock — JEE Main pattern",
+        "mode": "Full"
+      }
+    ],
+    "lectures": [
+      {
+        "title": "Integral Calculus — Masterclass (45 min)",
+        "type": "Video"
+      },
+      {
+        "title": "Ray Optics — Sign Convention Simplified",
+        "type": "Video"
+      }
+    ]
+  },
+  "prediction": {
+    "jeePercentile": 96.2,
+    "neetScore": null,
+    "expectedAIR": 11800,
+    "riskLevel": "Low",
+    "expectedImprovement": "+4.2%",
+    "targetProbability": 84,
+    "trajectory": [
+      {
+        "exam": "ATS 1",
+        "score": 148
+      },
+      {
+        "exam": "ATS 2",
+        "score": 158
+      },
+      {
+        "exam": "ATS 3",
+        "score": 168
+      },
+      {
+        "exam": "ATS 4 (latest)",
+        "score": 182
+      },
+      {
+        "exam": "JEE Main (predicted)",
+        "score": 198
+      }
+    ]
+  },
+  "questionReview": [
+    {
+      "q": "Q1",
+      "subject": "Physics",
+      "topic": "Mechanics",
+      "type": "MCQ",
+      "status": "Correct",
+      "marks": 4,
+      "time": 2.1
+    },
+    {
+      "q": "Q2",
+      "subject": "Physics",
+      "topic": "Electrostatics",
+      "type": "MCQ",
+      "status": "Correct",
+      "marks": 4,
+      "time": 2.8
+    },
+    {
+      "q": "Q3",
+      "subject": "Chemistry",
+      "topic": "Mole Concept",
+      "type": "Numerical",
+      "status": "Correct",
+      "marks": 4,
+      "time": 0.8
+    },
+    {
+      "q": "Q5",
+      "subject": "Chemistry",
+      "topic": "Organic",
+      "type": "Assertion Reason",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 3.2
+    },
+    {
+      "q": "Q7",
+      "subject": "Mathematics",
+      "topic": "Algebra",
+      "type": "MCQ",
+      "status": "Correct",
+      "marks": 4,
+      "time": 3
+    },
+    {
+      "q": "Q14",
+      "subject": "Mathematics",
+      "topic": "Definite Integration",
+      "type": "MCQ",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 5.6
+    },
+    {
+      "q": "Q18",
+      "subject": "Physics",
+      "topic": "Ray Optics",
+      "type": "MCQ",
+      "status": "Skipped",
+      "marks": 0,
+      "time": 4.4
+    },
+    {
+      "q": "Q23",
+      "subject": "Physics",
+      "topic": "Electrostatics",
+      "type": "Integer",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 4.9
+    },
+    {
+      "q": "Q31",
+      "subject": "Chemistry",
+      "topic": "Coordination",
+      "type": "MCQ",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 3.8
+    },
+    {
+      "q": "Q44",
+      "subject": "Mathematics",
+      "topic": "Coordinate Geometry",
+      "type": "MCQ",
+      "status": "Correct",
+      "marks": 4,
+      "time": 4
+    },
+    {
+      "q": "Q47",
+      "subject": "Mathematics",
+      "topic": "3D Geometry",
+      "type": "Numerical",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 5.4
+    },
+    {
+      "q": "Q58",
+      "subject": "Mathematics",
+      "topic": "Definite Integration",
+      "type": "MCQ",
+      "status": "Skipped",
+      "marks": 0,
+      "time": 8.9
+    },
+    {
+      "q": "Q63",
+      "subject": "Mathematics",
+      "topic": "Probability",
+      "type": "MCQ",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 4.2
+    },
+    {
+      "q": "Q71",
+      "subject": "Chemistry",
+      "topic": "Organic Reactions",
+      "type": "MCQ",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 3.6
+    }
+  ]
+}

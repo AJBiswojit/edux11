@@ -1,0 +1,743 @@
+{
+  "meta": {
+    "examId": "JEE-PHASE2-2026-10-31-LOCAL-EQUIVALENT",
+    "examName": "JEE Main Mock Test - Phase 2 - 2026-10-31 (calibrated local equivalent)",
+    "course": "JEE Main",
+    "pattern": "JEE Main (Paper 1)",
+    "student": "Calibrated Local Student",
+    "rollNo": "PAGINATION-001",
+    "date": "2026-10-31",
+    "totalMarks": 300,
+    "duration": "3 hrs",
+    "sections": [
+      "Physics",
+      "Chemistry",
+      "Mathematics"
+    ],
+    "examStatus": "Synthetic local reproduction"
+  },
+  "hero": {
+    "score": 182,
+    "maxScore": 300,
+    "percentage": 60.7,
+    "grade": "B+",
+    "rank": 2480,
+    "percentile": 91.4,
+    "batchRank": 12,
+    "cohortSize": 180,
+    "overallAccuracy": 68.3,
+    "overallSpeed": 4.1,
+    "confidenceIndex": 87,
+    "readinessScore": 78,
+    "healthScore": 82,
+    "badge": "Top 10% — National",
+    "aiSummary": "Strong conceptual grip in Physical Chemistry and Mechanics, with excellent speed in numericals. Accuracy dips in Mathematics (calculus-heavy set) and in assertion-reason questions under time pressure. 7 questions were left unattempted — an estimated +18 marks are recoverable with better time allocation and guess discipline. Overall a top-decile performance with clear headroom to 200+."
+  },
+  "questionIntelligence": {
+    "total": 75,
+    "attempted": 68,
+    "correct": 47,
+    "incorrect": 14,
+    "skipped": 7,
+    "negativeMarks": 5.25,
+    "guessAttempts": 6,
+    "accuracy": 69.1,
+    "successRate": 65.3,
+    "attemptRatio": 90.7
+  },
+  "subjects": [
+    {
+      "name": "Physics",
+      "maxMarks": 100,
+      "score": 64,
+      "accuracy": 71.4,
+      "time": 41,
+      "rank": 8,
+      "difficulty": "Medium",
+      "attempted": 23,
+      "correct": 16,
+      "weakAreas": [
+        "Ray Optics",
+        "Semiconductors"
+      ],
+      "strongAreas": [
+        "Mechanics",
+        "Electrostatics",
+        "Modern Physics"
+      ]
+    },
+    {
+      "name": "Chemistry",
+      "maxMarks": 100,
+      "score": 72,
+      "accuracy": 76.2,
+      "time": 38,
+      "rank": 4,
+      "difficulty": "Easy",
+      "attempted": 24,
+      "correct": 18,
+      "weakAreas": [
+        "Coordination Compounds (NCERT details)"
+      ],
+      "strongAreas": [
+        "Physical Chemistry",
+        "Organic Reactions",
+        "Mole Concept"
+      ]
+    },
+    {
+      "name": "Mathematics",
+      "maxMarks": 100,
+      "score": 46,
+      "accuracy": 54.3,
+      "time": 44,
+      "rank": 22,
+      "difficulty": "Hard",
+      "attempted": 21,
+      "correct": 13,
+      "weakAreas": [
+        "Integral Calculus",
+        "3D Geometry",
+        "Probability"
+      ],
+      "strongAreas": [
+        "Algebra",
+        "Coordinate Geometry",
+        "Matrices"
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "chapter": "Mechanics",
+      "subject": "Physics",
+      "accuracy": 78,
+      "marks": 28,
+      "time": 9,
+      "attempted": 95,
+      "mastery": "Strong"
+    },
+    {
+      "chapter": "Electrostatics",
+      "subject": "Physics",
+      "accuracy": 74,
+      "marks": 18,
+      "time": 6,
+      "attempted": 92,
+      "mastery": "Strong"
+    },
+    {
+      "chapter": "Modern Physics",
+      "subject": "Physics",
+      "accuracy": 76,
+      "marks": 14,
+      "time": 5,
+      "attempted": 90,
+      "mastery": "Strong"
+    },
+    {
+      "chapter": "Ray Optics",
+      "subject": "Physics",
+      "accuracy": 55,
+      "marks": 8,
+      "time": 4,
+      "attempted": 80,
+      "mastery": "Weak"
+    },
+    {
+      "chapter": "Physical Chemistry",
+      "subject": "Chemistry",
+      "accuracy": 82,
+      "marks": 26,
+      "time": 8,
+      "attempted": 96,
+      "mastery": "Strong"
+    },
+    {
+      "chapter": "Organic Chemistry",
+      "subject": "Chemistry",
+      "accuracy": 74,
+      "marks": 24,
+      "time": 7,
+      "attempted": 92,
+      "mastery": "Average"
+    },
+    {
+      "chapter": "Inorganic Chemistry",
+      "subject": "Chemistry",
+      "accuracy": 64,
+      "marks": 14,
+      "time": 6,
+      "attempted": 85,
+      "mastery": "Average"
+    },
+    {
+      "chapter": "Coordination Compounds",
+      "subject": "Chemistry",
+      "accuracy": 52,
+      "marks": 8,
+      "time": 5,
+      "attempted": 78,
+      "mastery": "Weak"
+    },
+    {
+      "chapter": "Algebra",
+      "subject": "Mathematics",
+      "accuracy": 80,
+      "marks": 22,
+      "time": 8,
+      "attempted": 94,
+      "mastery": "Strong"
+    },
+    {
+      "chapter": "Coordinate Geometry",
+      "subject": "Mathematics",
+      "accuracy": 76,
+      "marks": 16,
+      "time": 7,
+      "attempted": 90,
+      "mastery": "Average"
+    },
+    {
+      "chapter": "Calculus",
+      "subject": "Mathematics",
+      "accuracy": 48,
+      "marks": 14,
+      "time": 10,
+      "attempted": 72,
+      "mastery": "Critical"
+    },
+    {
+      "chapter": "Probability & Stats",
+      "subject": "Mathematics",
+      "accuracy": 45,
+      "marks": 8,
+      "time": 6,
+      "attempted": 68,
+      "mastery": "Critical"
+    }
+  ],
+  "topics": [
+    {
+      "topic": "Non-equilibrium reversible heat transfer with variable coefficients  ·  calibration-000-1 calibration-000-2 calibration-000-3 calibration-000-4 calibration-000-5 calibration-000-6 calibration-000-7",
+      "subject": "Physics",
+      "mastery": 30,
+      "level": "Critical"
+    },
+    {
+      "topic": "Rotational dynamics of coupled rigid bodies and constrained axes  ·  calibration-001-1 calibration-001-2 calibration-001-3 calibration-001-4 calibration-001-5 calibration-001-6 calibration-001-7",
+      "subject": "Chemistry",
+      "mastery": 37,
+      "level": "Weak"
+    },
+    {
+      "topic": "Electromagnetic induction in time-varying multilayer geometries  ·  calibration-002-1 calibration-002-2 calibration-002-3 calibration-002-4 calibration-002-5 calibration-002-6 calibration-002-7",
+      "subject": "Mathematics",
+      "mastery": 44,
+      "level": "Average"
+    },
+    {
+      "topic": "Bayesian classification of multi-stage stochastic processes  ·  calibration-003-1 calibration-003-2 calibration-003-3 calibration-003-4 calibration-003-5 calibration-003-6 calibration-003-7",
+      "subject": "Physics",
+      "mastery": 51,
+      "level": "Strong"
+    },
+    {
+      "topic": "Coordination chemistry of extended ligand field transitions  ·  calibration-004-1 calibration-004-2 calibration-004-3 calibration-004-4 calibration-004-5 calibration-004-6 calibration-004-7",
+      "subject": "Chemistry",
+      "mastery": 58,
+      "level": "Critical"
+    },
+    {
+      "topic": "Vector calculus in non-uniform curvilinear coordinate systems  ·  calibration-005-1 calibration-005-2 calibration-005-3 calibration-005-4 calibration-005-5 calibration-005-6 calibration-005-7",
+      "subject": "Mathematics",
+      "mastery": 65,
+      "level": "Weak"
+    },
+    {
+      "topic": "Non-equilibrium reversible heat transfer with variable coefficients  ·  calibration-006-1 calibration-006-2 calibration-006-3 calibration-006-4 calibration-006-5 calibration-006-6 calibration-006-7",
+      "subject": "Physics",
+      "mastery": 72,
+      "level": "Average"
+    },
+    {
+      "topic": "Rotational dynamics of coupled rigid bodies and constrained axes  ·  calibration-007-1 calibration-007-2 calibration-007-3 calibration-007-4 calibration-007-5 calibration-007-6 calibration-007-7",
+      "subject": "Chemistry",
+      "mastery": 79,
+      "level": "Strong"
+    },
+    {
+      "topic": "Electromagnetic induction in time-varying multilayer geometries  ·  calibration-008-1 calibration-008-2 calibration-008-3 calibration-008-4 calibration-008-5 calibration-008-6 calibration-008-7",
+      "subject": "Mathematics",
+      "mastery": 86,
+      "level": "Critical"
+    },
+    {
+      "topic": "Bayesian classification of multi-stage stochastic processes  ·  calibration-009-1 calibration-009-2 calibration-009-3 calibration-009-4 calibration-009-5 calibration-009-6 calibration-009-7",
+      "subject": "Physics",
+      "mastery": 93,
+      "level": "Weak"
+    },
+    {
+      "topic": "Coordination chemistry of extended ligand field transitions  ·  calibration-010-1 calibration-010-2 calibration-010-3 calibration-010-4 calibration-010-5 calibration-010-6 calibration-010-7",
+      "subject": "Chemistry",
+      "mastery": 35,
+      "level": "Average"
+    },
+    {
+      "topic": "Vector calculus in non-uniform curvilinear coordinate systems  ·  calibration-011-1 calibration-011-2 calibration-011-3 calibration-011-4 calibration-011-5 calibration-011-6 calibration-011-7",
+      "subject": "Mathematics",
+      "mastery": 42,
+      "level": "Strong"
+    },
+    {
+      "topic": "Non-equilibrium reversible heat transfer with variable coefficients  ·  calibration-012-1 calibration-012-2 calibration-012-3 calibration-012-4 calibration-012-5 calibration-012-6 calibration-012-7",
+      "subject": "Physics",
+      "mastery": 49,
+      "level": "Critical"
+    },
+    {
+      "topic": "Rotational dynamics of coupled rigid bodies and constrained axes  ·  calibration-013-1 calibration-013-2 calibration-013-3 calibration-013-4 calibration-013-5 calibration-013-6 calibration-013-7",
+      "subject": "Chemistry",
+      "mastery": 56,
+      "level": "Weak"
+    }
+  ],
+  "mistakes": [
+    {
+      "category": "Calibration mistake pattern 01 with extended diagnostic wording",
+      "count": 1
+    },
+    {
+      "category": "Calibration mistake pattern 02 with extended diagnostic wording",
+      "count": 2
+    },
+    {
+      "category": "Calibration mistake pattern 03 with extended diagnostic wording",
+      "count": 3
+    },
+    {
+      "category": "Calibration mistake pattern 04 with extended diagnostic wording",
+      "count": 4
+    }
+  ],
+  "mistakeList": [
+    {
+      "q": "Q1",
+      "subject": "Physics",
+      "category": "Calibration mistake pattern 01 with extended diagnostic wording",
+      "topic": "Non-equilibrium reversible heat transfer with variable coefficients  ·  calibration-000-1 calibration-000-2 calibration-000-3 calibration-000-4 calibration-000-5 calibration-000-6 calibration-000-7",
+      "detail": "Source evidence 1: the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. "
+    },
+    {
+      "q": "Q2",
+      "subject": "Chemistry",
+      "category": "Calibration mistake pattern 02 with extended diagnostic wording",
+      "topic": "Rotational dynamics of coupled rigid bodies and constrained axes  ·  calibration-001-1 calibration-001-2 calibration-001-3 calibration-001-4 calibration-001-5 calibration-001-6 calibration-001-7",
+      "detail": "Source evidence 2: the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. "
+    },
+    {
+      "q": "Q3",
+      "subject": "Mathematics",
+      "category": "Calibration mistake pattern 03 with extended diagnostic wording",
+      "topic": "Electromagnetic induction in time-varying multilayer geometries  ·  calibration-002-1 calibration-002-2 calibration-002-3 calibration-002-4 calibration-002-5 calibration-002-6 calibration-002-7",
+      "detail": "Source evidence 3: the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. "
+    },
+    {
+      "q": "Q4",
+      "subject": "Physics",
+      "category": "Calibration mistake pattern 04 with extended diagnostic wording",
+      "topic": "Bayesian classification of multi-stage stochastic processes  ·  calibration-003-1 calibration-003-2 calibration-003-3 calibration-003-4 calibration-003-5 calibration-003-6 calibration-003-7",
+      "detail": "Source evidence 4: the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. "
+    },
+    {
+      "q": "Q5",
+      "subject": "Chemistry",
+      "category": "Calibration mistake pattern 01 with extended diagnostic wording",
+      "topic": "Coordination chemistry of extended ligand field transitions  ·  calibration-004-1 calibration-004-2 calibration-004-3 calibration-004-4 calibration-004-5 calibration-004-6 calibration-004-7",
+      "detail": "Source evidence 5: the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. "
+    },
+    {
+      "q": "Q6",
+      "subject": "Mathematics",
+      "category": "Calibration mistake pattern 02 with extended diagnostic wording",
+      "topic": "Vector calculus in non-uniform curvilinear coordinate systems  ·  calibration-005-1 calibration-005-2 calibration-005-3 calibration-005-4 calibration-005-5 calibration-005-6 calibration-005-7",
+      "detail": "Source evidence 6: the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. "
+    },
+    {
+      "q": "Q7",
+      "subject": "Physics",
+      "category": "Calibration mistake pattern 03 with extended diagnostic wording",
+      "topic": "Non-equilibrium reversible heat transfer with variable coefficients  ·  calibration-006-1 calibration-006-2 calibration-006-3 calibration-006-4 calibration-006-5 calibration-006-6 calibration-006-7",
+      "detail": "Source evidence 7: the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. "
+    },
+    {
+      "q": "Q8",
+      "subject": "Chemistry",
+      "category": "Calibration mistake pattern 04 with extended diagnostic wording",
+      "topic": "Rotational dynamics of coupled rigid bodies and constrained axes  ·  calibration-007-1 calibration-007-2 calibration-007-3 calibration-007-4 calibration-007-5 calibration-007-6 calibration-007-7",
+      "detail": "Source evidence 8: the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. the student applied an inconsistent boundary condition and propagated the sign error through the final derivation. "
+    }
+  ],
+  "difficulty": [
+    {
+      "level": "Easy",
+      "questions": 30,
+      "accuracy": 82,
+      "attempted": 29,
+      "time": 3.1
+    },
+    {
+      "level": "Medium",
+      "questions": 30,
+      "accuracy": 66,
+      "attempted": 27,
+      "time": 4.4
+    },
+    {
+      "level": "Hard",
+      "questions": 15,
+      "accuracy": 41,
+      "attempted": 12,
+      "time": 6.2
+    }
+  ],
+  "timeIntelligence": {
+    "avgTimePerQuestion": 4.1,
+    "fastestQuestion": {
+      "q": "Q3 — Mole Concept",
+      "time": 0.8
+    },
+    "slowestQuestion": {
+      "q": "Q58 — Definite Integration",
+      "time": 8.9
+    },
+    "navigationCount": 8,
+    "timeManagementScore": 76,
+    "distribution": [
+      {
+        "section": "Physics",
+        "allocated": 60,
+        "used": 52,
+        "efficiency": 115
+      },
+      {
+        "section": "Chemistry",
+        "allocated": 55,
+        "used": 47,
+        "efficiency": 117
+      },
+      {
+        "section": "Mathematics",
+        "allocated": 65,
+        "used": 71,
+        "efficiency": 92
+      }
+    ]
+  },
+  "comparison": {
+    "previousTest": {
+      "label": "Previous test",
+      "score": 168,
+      "percentile": 87.2,
+      "grade": "B"
+    },
+    "previousMonth": {
+      "label": "Previous month avg",
+      "score": 171,
+      "percentile": 88.1
+    },
+    "batchAverage": {
+      "label": "Batch average",
+      "score": 154,
+      "percentile": 82.6
+    },
+    "instituteAverage": {
+      "label": "Institute average",
+      "score": 149,
+      "percentile": 80.4
+    },
+    "topPerformer": {
+      "label": "Top performer",
+      "score": 254,
+      "percentile": 99.6,
+      "name": "Divya Krishnan"
+    },
+    "deltas": [
+      {
+        "label": "vs previous test",
+        "value": "+14",
+        "up": true
+      },
+      {
+        "label": "vs previous month",
+        "value": "+11",
+        "up": true
+      },
+      {
+        "label": "vs batch average",
+        "value": "+28",
+        "up": true
+      },
+      {
+        "label": "vs institute average",
+        "value": "+33",
+        "up": true
+      }
+    ]
+  },
+  "recommendations": {
+    "weakChapters": [
+      "Calculus (48%)",
+      "Probability & Stats (45%)",
+      "Ray Optics (55%)",
+      "Coordination Compounds (52%)"
+    ],
+    "weakTopics": [
+      "Coordination chemistry of extended ligand field transitions  ·  calibration-1000-1 calibration-1000-2 calibration-1000-3 calibration-1000-4 calibration-1000-5 calibration-1000-6 calibration-1000-7",
+      "Vector calculus in non-uniform curvilinear coordinate systems  ·  calibration-1001-1 calibration-1001-2 calibration-1001-3 calibration-1001-4 calibration-1001-5 calibration-1001-6 calibration-1001-7",
+      "Non-equilibrium reversible heat transfer with variable coefficients  ·  calibration-1002-1 calibration-1002-2 calibration-1002-3 calibration-1002-4 calibration-1002-5 calibration-1002-6 calibration-1002-7",
+      "Rotational dynamics of coupled rigid bodies and constrained axes  ·  calibration-1003-1 calibration-1003-2 calibration-1003-3 calibration-1003-4 calibration-1003-5 calibration-1003-6 calibration-1003-7",
+      "Electromagnetic induction in time-varying multilayer geometries  ·  calibration-1004-1 calibration-1004-2 calibration-1004-3 calibration-1004-4 calibration-1004-5 calibration-1004-6 calibration-1004-7",
+      "Bayesian classification of multi-stage stochastic processes  ·  calibration-1005-1 calibration-1005-2 calibration-1005-3 calibration-1005-4 calibration-1005-5 calibration-1005-6 calibration-1005-7",
+      "Coordination chemistry of extended ligand field transitions  ·  calibration-1006-1 calibration-1006-2 calibration-1006-3 calibration-1006-4 calibration-1006-5 calibration-1006-6 calibration-1006-7",
+      "Vector calculus in non-uniform curvilinear coordinate systems  ·  calibration-1007-1 calibration-1007-2 calibration-1007-3 calibration-1007-4 calibration-1007-5 calibration-1007-6 calibration-1007-7"
+    ],
+    "priorityRevision": [
+      {
+        "topic": "Electromagnetic induction in time-varying multilayer geometries  ·  calibration-2000-1 calibration-2000-2 calibration-2000-3",
+        "priority": "Critical",
+        "timeframe": "48 hours"
+      },
+      {
+        "topic": "Bayesian classification of multi-stage stochastic processes  ·  calibration-2001-1 calibration-2001-2 calibration-2001-3",
+        "priority": "High",
+        "timeframe": "5 days"
+      },
+      {
+        "topic": "Coordination chemistry of extended ligand field transitions  ·  calibration-2002-1 calibration-2002-2 calibration-2002-3",
+        "priority": "Medium",
+        "timeframe": "7 days"
+      },
+      {
+        "topic": "Vector calculus in non-uniform curvilinear coordinate systems  ·  calibration-2003-1 calibration-2003-2 calibration-2003-3",
+        "priority": "Critical",
+        "timeframe": "48 hours"
+      },
+      {
+        "topic": "Non-equilibrium reversible heat transfer with variable coefficients  ·  calibration-2004-1 calibration-2004-2 calibration-2004-3",
+        "priority": "High",
+        "timeframe": "5 days"
+      },
+      {
+        "topic": "Rotational dynamics of coupled rigid bodies and constrained axes  ·  calibration-2005-1 calibration-2005-2 calibration-2005-3",
+        "priority": "Medium",
+        "timeframe": "7 days"
+      }
+    ],
+    "suggestedPYQs": [
+      {
+        "title": "JEE Main 2024 — Definite Integration (5 Qs)",
+        "source": "PYQ Bank"
+      },
+      {
+        "title": "JEE Main 2023 — Ray Optics (4 Qs)",
+        "source": "PYQ Bank"
+      },
+      {
+        "title": "JEE Advanced 2022 — Coordination Compounds",
+        "source": "PYQ Bank"
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "title": "20-question drill — Integration by substitution",
+        "count": 20,
+        "difficulty": "Medium"
+      },
+      {
+        "title": "10-question drill — Lens formula applications",
+        "count": 10,
+        "difficulty": "Medium"
+      }
+    ],
+    "mockTests": [
+      {
+        "title": "Sectional mock — Mathematics (60 min)",
+        "mode": "Sectional"
+      },
+      {
+        "title": "Full syllabus mock — JEE Main pattern",
+        "mode": "Full"
+      }
+    ],
+    "lectures": [
+      {
+        "title": "Integral Calculus — Masterclass (45 min)",
+        "type": "Video"
+      },
+      {
+        "title": "Ray Optics — Sign Convention Simplified",
+        "type": "Video"
+      }
+    ]
+  },
+  "prediction": {
+    "jeePercentile": 96.2,
+    "neetScore": null,
+    "expectedAIR": 11800,
+    "riskLevel": "Low",
+    "expectedImprovement": "+4.2%",
+    "targetProbability": 84,
+    "trajectory": [
+      {
+        "exam": "ATS 1",
+        "score": 148
+      },
+      {
+        "exam": "ATS 2",
+        "score": 158
+      },
+      {
+        "exam": "ATS 3",
+        "score": 168
+      },
+      {
+        "exam": "ATS 4 (latest)",
+        "score": 182
+      },
+      {
+        "exam": "JEE Main (predicted)",
+        "score": 198
+      }
+    ]
+  },
+  "questionReview": [
+    {
+      "q": "Q1",
+      "subject": "Physics",
+      "topic": "Mechanics",
+      "type": "MCQ",
+      "status": "Correct",
+      "marks": 4,
+      "time": 2.1
+    },
+    {
+      "q": "Q2",
+      "subject": "Physics",
+      "topic": "Electrostatics",
+      "type": "MCQ",
+      "status": "Correct",
+      "marks": 4,
+      "time": 2.8
+    },
+    {
+      "q": "Q3",
+      "subject": "Chemistry",
+      "topic": "Mole Concept",
+      "type": "Numerical",
+      "status": "Correct",
+      "marks": 4,
+      "time": 0.8
+    },
+    {
+      "q": "Q5",
+      "subject": "Chemistry",
+      "topic": "Organic",
+      "type": "Assertion Reason",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 3.2
+    },
+    {
+      "q": "Q7",
+      "subject": "Mathematics",
+      "topic": "Algebra",
+      "type": "MCQ",
+      "status": "Correct",
+      "marks": 4,
+      "time": 3
+    },
+    {
+      "q": "Q14",
+      "subject": "Mathematics",
+      "topic": "Definite Integration",
+      "type": "MCQ",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 5.6
+    },
+    {
+      "q": "Q18",
+      "subject": "Physics",
+      "topic": "Ray Optics",
+      "type": "MCQ",
+      "status": "Skipped",
+      "marks": 0,
+      "time": 4.4
+    },
+    {
+      "q": "Q23",
+      "subject": "Physics",
+      "topic": "Electrostatics",
+      "type": "Integer",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 4.9
+    },
+    {
+      "q": "Q31",
+      "subject": "Chemistry",
+      "topic": "Coordination",
+      "type": "MCQ",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 3.8
+    },
+    {
+      "q": "Q44",
+      "subject": "Mathematics",
+      "topic": "Coordinate Geometry",
+      "type": "MCQ",
+      "status": "Correct",
+      "marks": 4,
+      "time": 4
+    },
+    {
+      "q": "Q47",
+      "subject": "Mathematics",
+      "topic": "3D Geometry",
+      "type": "Numerical",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 5.4
+    },
+    {
+      "q": "Q58",
+      "subject": "Mathematics",
+      "topic": "Definite Integration",
+      "type": "MCQ",
+      "status": "Skipped",
+      "marks": 0,
+      "time": 8.9
+    },
+    {
+      "q": "Q63",
+      "subject": "Mathematics",
+      "topic": "Probability",
+      "type": "MCQ",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 4.2
+    },
+    {
+      "q": "Q71",
+      "subject": "Chemistry",
+      "topic": "Organic Reactions",
+      "type": "MCQ",
+      "status": "Incorrect",
+      "marks": 0,
+      "time": 3.6
+    }
+  ]
+}

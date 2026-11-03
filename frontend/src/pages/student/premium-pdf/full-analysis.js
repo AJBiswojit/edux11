@@ -16,6 +16,7 @@ import {
   SectionHeading, Subheading, Paragraph, EditorialColumns, MetricLedger,
   MetricLedgerSpec, BarChartSpec, StackedBarSpec, DonutGaugeSpec,
   StaticTable, StaticTableSpec, MeasuredTable, SubjectBand, QuestionCard, Pill,
+  StackSpec, TextFlowSpec,
 } from './components.js'
 
 function text(value) {
@@ -51,48 +52,14 @@ function numeric(value) {
 
 /** A vertical stack of static specs, each with its own measured boundary. */
 function stackSpecs(ctx, builders, gap = 10) {
-  return {
-    type: 'column-stack',
-    label: 'Editorial column stack',
-    measure: (w) => {
-      const heights = builders.map((build) => build(w).measure(w))
-      return heights.reduce((sum, h) => sum + h, 0) + gap * Math.max(0, heights.length - 1)
-    },
-    draw: (frame) => {
-      let y = frame.y
-      builders.forEach((build, index) => {
-        const spec = build(frame.w)
-        const h = spec.measure(frame.w)
-        ctx.child({
-          type: spec.type || 'stack-item',
-          label: spec.label || '',
-          x: frame.x, y, w: frame.w, h,
-        }, (childFrame) => spec.draw(childFrame))
-        y += h + (index < builders.length - 1 ? gap : 0)
-      })
-    },
-  }
+  return StackSpec(ctx, { builders, gap, label: 'Editorial column stack' })
 }
 
 function ParagraphSpec(ctx, { label = '', title = '', text = '', size = TYPE.body, accent = COLORS.indigo } = {}) {
-  const measure = (w) => {
-    const titleH = title ? ctx.measureText(title, w - 14, { size: TYPE.label, font: FONTS.bodySemi, characterSpacing: 0.7 }) + 3 : 0
-    const bodyH = ctx.measureText(fmt(text, '—'), w - 16, { size, font: FONTS.body, paragraphGap: 2 })
-    return 8 + titleH + bodyH + 8
-  }
-  const draw = (frame) => {
-    ctx.canvas.rect(frame.x, frame.y + 3, 2, frame.h - 10, { fill: accent, audit: false })
-    let cursor = frame.y + 5
-    if (title) {
-      cursor += ctx.text(title, frame.x + 12, cursor, frame.w - 14, {
-        size: TYPE.label, font: FONTS.bodySemi, color: accent, characterSpacing: 0.7,
-      }) + 3
-    }
-    ctx.text(fmt(text, '—'), frame.x + 12, cursor, frame.w - 16, {
-      size, font: FONTS.body, color: COLORS.ink, paragraphGap: 2,
-    })
-  }
-  return { type: 'static-paragraph', label: label || title, measure, draw }
+  return TextFlowSpec(ctx, {
+    label: label || title, title, text, size, accent,
+    widthPadding: 16, paragraphGap: 2, topPad: 5, bottomPad: 8,
+  })
 }
 
 function signals(m) {
@@ -219,13 +186,15 @@ function CoverScoreFeature(ctx) {
 
 function CoverCoordinates(ctx) {
   const m = ctx.model
+  const coordinates = `${m.reportId}   ·   ${m.examId}   ·   Source fingerprint ${m.sourceHash}   ·   ${m.generatedAtISO}`
+  const textOpts = {
+    size: TYPE.folio, font: FONTS.body, color: COLORS.muted, align: 'center',
+  }
   return ctx.component({
     type: 'cover-coordinates', label: 'Report coordinates', bottomSpacing: 0,
-    measure: () => 18,
+    measure: () => ctx.measureText(coordinates, CONTENT.w, textOpts) + 4,
     draw: (frame) => {
-      ctx.text(`${m.reportId}   ·   ${m.examId}   ·   Source fingerprint ${m.sourceHash}   ·   ${m.generatedAtISO}`, frame.x, frame.y + 2, frame.w, {
-        size: TYPE.folio, font: FONTS.body, color: COLORS.muted, align: 'center',
-      })
+      ctx.text(coordinates, frame.x, frame.y + 2, frame.w, textOpts)
     },
   })
 }
@@ -284,7 +253,7 @@ function renderPerformanceIntelligence(ctx) {
     color: subjectColor(row.name, index),
   }))
   EditorialColumns(ctx, {
-    id: 'performance-charts', gap: 20, bottomSpacing: 8,
+    id: 'performance-charts', sectionTitle: 'Performance intelligence', gap: 20, bottomSpacing: 8,
     columns: [
       stackSpecs(ctx, [
         (w) => StackedBarSpec(ctx, {
@@ -415,7 +384,7 @@ function renderTimeIntelligence(ctx) {
   })
   Subheading(ctx, { title: 'Time-management metrics', accent: COLORS.indigo })
   EditorialColumns(ctx, {
-    id: 'time-metrics-columns', gap: 18, bottomSpacing: 4,
+    id: 'time-metrics-columns', sectionTitle: 'Time intelligence', gap: 18, bottomSpacing: 4,
     columns: [
       (w) => MetricLedgerSpec(ctx, {
         label: 'Time-management metrics',
@@ -463,7 +432,7 @@ function renderComparisonAndProjection(ctx) {
   }))
   Subheading(ctx, { title: 'Comparative performance', note: '', accent: COLORS.indigo })
   EditorialColumns(ctx, {
-    id: 'comparison-columns', gap: 18, bottomSpacing: 6,
+    id: 'comparison-columns', sectionTitle: 'Comparison intelligence', gap: 18, bottomSpacing: 6,
     columns: [
       (w) => BarChartSpec(ctx, {
         label: 'Benchmark score comparison', title: 'Benchmark scores',
@@ -497,7 +466,7 @@ function renderComparisonAndProjection(ctx) {
   Subheading(ctx, { title: 'Projection and readiness', note: '', accent: COLORS.success })
   const trajectoryRows = (pred.trajectory || []).map((row) => ({ exam: text(row.exam), score: text(row.score) }))
   EditorialColumns(ctx, {
-    id: 'projection-columns', gap: 18, bottomSpacing: 6,
+    id: 'projection-columns', sectionTitle: 'Projection intelligence', gap: 18, bottomSpacing: 6,
     columns: [
       (w) => BarChartSpec(ctx, {
         label: 'Score trajectory', title: 'Score trajectory',
@@ -558,7 +527,27 @@ function renderQuestionIntelligence(ctx) {
     text: 'Correct  ·  Incorrect  ·  Skipped     Each question presents its identity, classifications, answer comparison, marks, time, mistake category and complete solution.',
     size: TYPE.bodySmall, accent: COLORS.indigo, bottomSpacing: 10,
   })
-  m.questions.forEach((question) => QuestionCard(ctx, { question }))
+  const subjectCounts = new Map()
+  m.questions.forEach((question) => {
+    const key = fmt(question.subject)
+    subjectCounts.set(key, (subjectCounts.get(key) || 0) + 1)
+  })
+  let lastSubject = null
+  let subjectIndex = 0
+  m.questions.forEach((question) => {
+    const subject = fmt(question.subject)
+    if (subject !== lastSubject) {
+      SubjectBand(ctx, {
+        subject,
+        index: subjectIndex,
+        note: `${subjectCounts.get(subject) || 1} question-review blocks · complete explanations retained`,
+        bottomSpacing: 8,
+      })
+      subjectIndex += 1
+      lastSubject = subject
+    }
+    QuestionCard(ctx, { question })
+  })
 }
 
 function actionRows(rec) {
@@ -597,7 +586,7 @@ function renderLearningIntelligence(ctx) {
   const weakChapters = (rec.weakChapters || []).map((value, index) => ({ index: String(index + 1), value: text(value) }))
   const weakTopics = (rec.weakTopics || []).map((value, index) => ({ index: String(index + 1), value: text(value) }))
   EditorialColumns(ctx, {
-    id: 'learning-evidence-columns', gap: 16, bottomSpacing: 8,
+    id: 'learning-evidence-columns', sectionTitle: 'Learning evidence', gap: 16, bottomSpacing: 8,
     columns: [
       (w) => StaticTableSpec(ctx, {
         label: 'Topic-level accuracy', title: 'Topic-level accuracy', rows: topicRows,
@@ -656,7 +645,7 @@ function renderLearningIntelligence(ctx) {
     rowPadding: 1, bottomSpacing: 6,
   })
   EditorialColumns(ctx, {
-    id: 'weak-topics-list', gap: 18, bottomSpacing: 4,
+    id: 'weak-topics-list', sectionTitle: 'Published revision priorities', gap: 18, bottomSpacing: 4,
     columns: [
       (w) => StaticTableSpec(ctx, {
         label: 'Weak topics', title: 'Weak topics  /  published list', rows: weakTopics,

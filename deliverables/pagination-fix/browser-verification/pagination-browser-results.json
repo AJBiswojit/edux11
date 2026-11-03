@@ -1,0 +1,1797 @@
+{
+  "generatedAt": "2026-11-03T08:31:34.122Z",
+  "browser": "HeadlessChrome/131.0.6778.0",
+  "backend": "Real FastAPI uvicorn app.main:app :8000 + documented local SQLite dev DB, /v1 proxied by Vite",
+  "frontend": "Vite dev server :5173 (/home/user/edux11/frontend), VITE_API_BASE_URL=/v1, HEAD 29f53a5c6210a157e12916d9829c7755f58f198a",
+  "data": {
+    "paperId": "paper-live-neet-01",
+    "paperTitle": "NEET UG · Full Mock 01",
+    "questionCount": 15,
+    "attemptId": "e389c240-cbe7-4c11-a491-e05b178dbb97",
+    "studentId": "u_dev_student",
+    "score": 32,
+    "maxScore": 60,
+    "correct": 8,
+    "incorrect": 4,
+    "skipped": 3,
+    "source": "Local SQLite development DB seeded through real backend ORM/services for pagination-fix browser verification",
+    "exactProductionDataAvailable": false
+  },
+  "routes": {
+    "student": "http://127.0.0.1:5173/student/exam-analysis",
+    "faculty": "http://127.0.0.1:5173/faculty/my-students/u_dev_student/exams/e389c240-cbe7-4c11-a491-e05b178dbb97",
+    "admin": "http://127.0.0.1:5173/admin/students/u_dev_student/exams/e389c240-cbe7-4c11-a491-e05b178dbb97"
+  },
+  "freshness": {
+    "head": "29f53a5c6210a157e12916d9829c7755f58f198a",
+    "viteCwd": "/home/user/edux11/frontend",
+    "browserVersion": "HeadlessChrome/131.0.6778.0",
+    "profiles": [
+      "/tmp/edux-impl-chrome-1793694639113-student",
+      "/tmp/edux-impl-chrome-1793694639113-faculty",
+      "/tmp/edux-impl-chrome-1793694639113-admin"
+    ],
+    "dedicatedBrowserProcessPerRole": true,
+    "cacheDisabled": true,
+    "networkResponses": 936,
+    "moduleResponses": 627,
+    "fromDiskCacheResponses": 0,
+    "serviceWorkerResponses": 0,
+    "notModified304": 0
+  },
+  "results": [
+    {
+      "role": "student",
+      "route": "http://127.0.0.1:5173/student/exam-analysis",
+      "account": {
+        "email": "student@edux.dev",
+        "label": "Student"
+      },
+      "login": {
+        "submitButtonText": "Sign in as Student",
+        "status": "ok",
+        "pathAfterLogin": "/student",
+        "user": {
+          "id": "u_dev_student",
+          "role": "student",
+          "email": "student@edux.dev",
+          "fullName": "Dev Student",
+          "firstName": "Dev",
+          "institution": "EduX Local Development",
+          "department": null,
+          "program": null,
+          "semester": null,
+          "rollNo": "DEV-STU-001",
+          "phone": null,
+          "designation": null
+        }
+      },
+      "ui": {
+        "subjectPicked": "Physics",
+        "buttons": [
+          "Search anything…K",
+          "DSDev Student",
+          "Report",
+          "Full Analysis",
+          "All",
+          "NEET",
+          "🎯 NEET UG · Full Mock 01 · 2026-11-03",
+          "Physics",
+          "Regenerate analysis",
+          "Change selection"
+        ],
+        "reportButton": true,
+        "fullAnalysisButton": true,
+        "pdfButton": false,
+        "headings": [
+          "AI Exam Analysis",
+          "Generate your exam intelligence report",
+          "32/60 marks",
+          "Question-by-question review",
+          "Topic intelligence",
+          "Mistake classification",
+          "Top mistakes to fix",
+          "Difficulty analysis"
+        ]
+      },
+      "actions": [
+        {
+          "action": "Report",
+          "duplicateClicks": 2,
+          "loading": {
+            "disabled": true,
+            "spinner": true
+          },
+          "independentFullEnabled": true,
+          "downloadsAfterAction": 1,
+          "duplicateClickBlocked": true,
+          "toastsAfterAction": [
+            "Report downloadedThe marks report was saved to your downloads."
+          ]
+        },
+        {
+          "action": "Full Analysis",
+          "loading": {
+            "disabled": true,
+            "spinner": true
+          },
+          "toastsAfterAction": [
+            "Full analysis downloadedYour complete analysis PDF was saved to downloads."
+          ]
+        }
+      ],
+      "downloads": [
+        {
+          "type": "blob-created",
+          "href": "blob:http://127.0.0.1:5173/2a59c564-480c-4961-bd91-4be81f475eb9",
+          "size": 6485,
+          "mime": "text/javascript",
+          "at": 1793694646697
+        },
+        {
+          "type": "blob-created",
+          "href": "blob:http://127.0.0.1:5173/28a623de-436f-4115-ae55-82dd1535f11d",
+          "size": 309085,
+          "mime": "application/pdf",
+          "at": 1793694648838
+        },
+        {
+          "type": "download-initiated",
+          "href": "blob:http://127.0.0.1:5173/28a623de-436f-4115-ae55-82dd1535f11d",
+          "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+          "size": 309085,
+          "at": 1793694648838
+        },
+        {
+          "type": "blob-revoked",
+          "href": "blob:http://127.0.0.1:5173/28a623de-436f-4115-ae55-82dd1535f11d",
+          "at": 1793694648838
+        },
+        {
+          "type": "blob-created",
+          "href": "blob:http://127.0.0.1:5173/cf656a67-4ebf-4388-a6f1-e7bde7f52852",
+          "size": 1124901,
+          "mime": "application/pdf",
+          "at": 1793694656025
+        },
+        {
+          "type": "download-initiated",
+          "href": "blob:http://127.0.0.1:5173/cf656a67-4ebf-4388-a6f1-e7bde7f52852",
+          "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+          "size": 1124901,
+          "at": 1793694656039
+        },
+        {
+          "type": "blob-revoked",
+          "href": "blob:http://127.0.0.1:5173/cf656a67-4ebf-4388-a6f1-e7bde7f52852",
+          "at": 1793694656040
+        }
+      ],
+      "files": [
+        {
+          "name": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+          "size": "309085"
+        },
+        {
+          "name": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+          "size": "1124901"
+        }
+      ],
+      "puppeteerConsole": [
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_CONNECTION_CLOSED"
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "level": "info",
+          "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+        },
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_CONNECTION_CLOSED"
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "level": "info",
+          "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+        },
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Report blob created and download initiated JSHandle@object"
+        },
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Full Analysis blob created and download initiated JSHandle@object"
+        }
+      ],
+      "pageErrors": [],
+      "failedRequests": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "failure": "net::ERR_CONNECTION_CLOSED"
+        },
+        {
+          "url": "http://127.0.0.1:5173/v1/intelligence/summary",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "failure": "net::ERR_CONNECTION_CLOSED"
+        }
+      ],
+      "cache": {
+        "profile": "/tmp/edux-impl-chrome-1793694639113-student",
+        "dedicatedBrowserProcess": true,
+        "cacheDisabled": true
+      },
+      "preLoginToken": null,
+      "forensic": {
+        "console": [
+          {
+            "level": "debug",
+            "at": 1793694641567,
+            "args": [
+              "[vite] connecting..."
+            ],
+            "text": "[vite] connecting..."
+          },
+          {
+            "level": "debug",
+            "at": 1793694641609,
+            "args": [
+              "[vite] connected."
+            ],
+            "text": "[vite] connected."
+          },
+          {
+            "level": "info",
+            "at": 1793694642078,
+            "args": [
+              "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools",
+              "font-weight:bold"
+            ],
+            "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+          },
+          {
+            "level": "warn",
+            "at": 1793694642235,
+            "args": [
+              "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+            ],
+            "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+          },
+          {
+            "level": "warn",
+            "at": 1793694642236,
+            "args": [
+              "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+            ],
+            "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+          },
+          {
+            "level": "info",
+            "at": 1793694648838,
+            "args": [
+              "[EduX PDF Export] Report blob created and download initiated",
+              {
+                "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+                "bytes": 309085,
+                "pageCount": 3,
+                "flags": 0
+              }
+            ],
+            "text": "[EduX PDF Export] Report blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf\",\"bytes\":309085,\"pageCount\":3,\"flags\":0}"
+          },
+          {
+            "level": "info",
+            "at": 1793694656040,
+            "args": [
+              "[EduX PDF Export] Full Analysis blob created and download initiated",
+              {
+                "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+                "bytes": 1124901,
+                "pageCount": 14,
+                "flags": 0
+              }
+            ],
+            "text": "[EduX PDF Export] Full Analysis blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf\",\"bytes\":1124901,\"pageCount\":14,\"flags\":0}"
+          }
+        ],
+        "errors": [
+          {
+            "error": null
+          }
+        ],
+        "rejections": [],
+        "fetch": [
+          {
+            "url": "/src/assets/logo.png",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-SemiBold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Manrope-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoMath-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoText-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/logo.png",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-SemiBold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Manrope-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoMath-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoText-Regular.ttf",
+            "status": 200
+          }
+        ],
+        "resourceEntries": [
+          "http://127.0.0.1:5173/@vite/client",
+          "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "http://127.0.0.1:5173/src/main.jsx",
+          "http://127.0.0.1:5173/@react-refresh",
+          "http://127.0.0.1:5173/node_modules/vite/dist/client/env.mjs",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=ea90d013",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react.js?v=ea90d013",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=27cd1b2d",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=b86678fc",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=9017faec",
+          "http://127.0.0.1:5173/src/App.jsx",
+          "http://127.0.0.1:5173/src/contexts/theme-context.jsx",
+          "http://127.0.0.1:5173/src/components/ui/toast.jsx",
+          "http://127.0.0.1:5173/src/contexts/auth-context.jsx",
+          "http://127.0.0.1:5173/src/contexts/exam-mode-context.jsx",
+          "http://127.0.0.1:5173/src/components/shared/error-boundary.jsx",
+          "http://127.0.0.1:5173/src/api/index.js",
+          "http://127.0.0.1:5173/src/index.css",
+          "http://127.0.0.1:5173/src/routes/index.jsx",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-QCHXOAYK.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-WOOG5QLI.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-KBTYAULA.js?v=98295bab",
+          "http://127.0.0.1:5173/src/config/index.js",
+          "http://127.0.0.1:5173/src/services/auth.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom.js?v=ea90d013",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/framer-motion.js?v=9552e86c",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/lucide-react.js?v=225fb29d",
+          "http://127.0.0.1:5173/src/utils/cn.js",
+          "http://127.0.0.1:5173/src/api/axios.js",
+          "http://127.0.0.1:5173/src/api/client.js",
+          "http://127.0.0.1:5173/src/routes/ProtectedRoute.jsx",
+          "http://127.0.0.1:5173/src/components/layout/LandingLayout.jsx",
+          "http://127.0.0.1:5173/src/components/layout/AuthLayout.jsx",
+          "http://127.0.0.1:5173/src/components/layout/AppLayout.jsx",
+          "http://127.0.0.1:5173/src/components/shared/loading.jsx",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/clsx.js?v=f839336a",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/tailwind-merge.js?v=ea31508e",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/axios.js?v=91b42135",
+          "http://127.0.0.1:5173/src/api/errors.js",
+          "http://127.0.0.1:5173/src/components/landing/navbar.jsx",
+          "http://127.0.0.1:5173/src/components/landing/footer.jsx",
+          "http://127.0.0.1:5173/src/components/shared/logo.jsx",
+          "http://127.0.0.1:5173/src/services/admin-prefetch.js",
+          "http://127.0.0.1:5173/src/components/ui/index.js",
+          "http://127.0.0.1:5173/src/components/layout/sidebar.jsx",
+          "http://127.0.0.1:5173/src/components/layout/topbar.jsx",
+          "http://127.0.0.1:5173/src/components/layout/ai-copilot.jsx",
+          "http://127.0.0.1:5173/src/components/layout/command-palette.jsx",
+          "http://127.0.0.1:5173/src/hooks/use-media-query.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-U7P2NEEE.js?v=98295bab",
+          "http://127.0.0.1:5173/src/components/ui/skeleton.jsx",
+          "http://127.0.0.1:5173/src/datasets/platform/content.js",
+          "http://127.0.0.1:5173/src/components/ui/button.jsx",
+          "http://127.0.0.1:5173/src/components/ui/sheet.jsx",
+          "http://127.0.0.1:5173/src/assets/logo.png?import",
+          "http://127.0.0.1:5173/src/components/ui/input.jsx",
+          "http://127.0.0.1:5173/src/components/ui/badge.jsx",
+          "http://127.0.0.1:5173/src/components/ui/progress.jsx",
+          "http://127.0.0.1:5173/src/components/ui/avatar.jsx",
+          "http://127.0.0.1:5173/src/components/ui/card.jsx",
+          "http://127.0.0.1:5173/src/components/ui/switch.jsx",
+          "http://127.0.0.1:5173/src/components/ui/tabs.jsx",
+          "http://127.0.0.1:5173/src/components/ui/dialog.jsx",
+          "http://127.0.0.1:5173/src/components/ui/dropdown-menu.jsx",
+          "http://127.0.0.1:5173/src/components/ui/tooltip.jsx",
+          "http://127.0.0.1:5173/src/components/ui/select.jsx",
+          "http://127.0.0.1:5173/src/components/ui/table.jsx",
+          "http://127.0.0.1:5173/src/components/ui/accordion.jsx",
+          "http://127.0.0.1:5173/src/components/ui/command.jsx",
+          "http://127.0.0.1:5173/src/components/ui/calendar.jsx",
+          "http://127.0.0.1:5173/src/services/admin-intelligence.js",
+          "http://127.0.0.1:5173/src/services/index.js",
+          "http://127.0.0.1:5173/src/components/shared/chat-message.jsx",
+          "http://127.0.0.1:5173/src/components/ui/slot.jsx",
+          "http://127.0.0.1:5173/src/hooks/use-focus-trap.js",
+          "http://127.0.0.1:5173/src/utils/format.js",
+          "http://127.0.0.1:5173/src/theme/index.js",
+          "http://127.0.0.1:5173/src/hooks/use-anchored-dropdown.js",
+          "http://127.0.0.1:5173/src/utils/select-option.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/date-fns.js?v=0d6f4efd",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-markdown.js?v=e112bd47",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/remark-gfm.js?v=341ac55a",
+          "http://127.0.0.1:5173/src/services/query.js",
+          "http://127.0.0.1:5173/src/services/faculty-questions.js",
+          "http://127.0.0.1:5173/src/api/ai/tutor-reply.js",
+          "http://127.0.0.1:5173/src/constants/ui/z-index.js",
+          "http://127.0.0.1:5173/src/utils/dropdown-position.js",
+          "http://127.0.0.1:5173/src/utils/dropdown-portal.js",
+          "http://127.0.0.1:5173/src/api/adapters/questions.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-Y7LV7UOF.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-XD6XXXFZ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-ZQD2Y7UY.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-S4WLQQAR.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-YF5BJLTO.js?v=98295bab",
+          "http://127.0.0.1:5173/src/utils/media.js",
+          "http://127.0.0.1:5173/src/pages/student/ExamAnalysis.jsx",
+          "http://127.0.0.1:5173/src/assets/logo.png",
+          "http://127.0.0.1:5173/src/services/extra.js",
+          "http://127.0.0.1:5173/src/components/shared/page-header.jsx",
+          "http://127.0.0.1:5173/src/components/shared/chart-card.jsx",
+          "http://127.0.0.1:5173/src/components/shared/stat-card.jsx",
+          "http://127.0.0.1:5173/src/components/shared/progress-ring.jsx",
+          "http://127.0.0.1:5173/src/components/charts/index.jsx",
+          "http://127.0.0.1:5173/src/hooks/use-filter-cascade.js",
+          "http://127.0.0.1:5173/src/components/shared/math-text.jsx",
+          "http://127.0.0.1:5173/src/pages/student/exam-analysis-filters.js",
+          "http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js",
+          "http://127.0.0.1:5173/src/pages/student/exam-analysis-stats.js",
+          "http://127.0.0.1:5173/src/utils/filter-cascade.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/remark-math.js?v=efe8d09b",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/rehype-katex.js?v=1360d5b9",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/recharts.js?v=ef3236ca",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-TPJJNNEF.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-E7MZOYDI.js?v=98295bab",
+          "http://127.0.0.1:5173/v1/student/exam-analysis/options",
+          "http://127.0.0.1:5173/v1/student/exam-analysis/e389c240-cbe7-4c11-a491-e05b178dbb97",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/model.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/base-model.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/theme.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/renderer.js",
+          "http://127.0.0.1:5173/src/assets/logo.png?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Regular.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-SemiBold.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Bold.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoMath-Regular.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoText-Regular.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/Manrope-Bold.ttf?import&url",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit.js?v=41ff2d6b",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/pdfkit-standard-fonts.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/layout.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/components.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/full-analysis.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/intelligence.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_Courier.js?v=c21e028e",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_CourierBold.js?v=99990de3",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_CourierBoldOblique.js?v=95ebb1fd",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_CourierOblique.js?v=db54d5fe",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_Helvetica.js?v=1f9c4834",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_HelveticaBold.js?v=49a373a4",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_HelveticaBoldOblique.js?v=db3bbefb",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_HelveticaOblique.js?v=dc07e3fb",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_Symbol.js?v=f52884e2",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesBold.js?v=dde9501f",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesBoldItalic.js?v=f8b6e1d9",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesItalic.js?v=ea09369c",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesRoman.js?v=e819d73d",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_ZapfDingbats.js?v=bc5bce0b",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/text.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/math.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/pagination.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-6DVC2K2M.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-5RK2YBK3.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_mathjax__js.js?v=3dfbe170",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_input_tex__js.js?v=a95001a1",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_adaptors_liteAdaptor__js.js?v=9b878c19",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_output_svg__js.js?v=9eef664e",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_handlers_html__js.js?v=c44a1f39",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/svg-to-pdfkit.js?v=4bfa7647",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_input_tex_AllPackages__js.js?v=9c80cb4e",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-3EN4IM2A.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-7YECHRI7.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-UWVXZNSP.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JXAMKRZQ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-YPYOWNCQ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-T2D7V24N.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-MN3LWMUY.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-D7APLFUB.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-GI7VOCMZ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-2EZYO7KB.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-TJ44Q7BG.js?v=98295bab",
+          "http://127.0.0.1:5173/src/assets/logo.png",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-SemiBold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Manrope-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoMath-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoText-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/logo.png",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-SemiBold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Manrope-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoMath-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoText-Regular.ttf"
+        ]
+      },
+      "exactExceptions": [],
+      "resourceErrors": [
+        {
+          "error": null
+        }
+      ],
+      "toasts": [
+        "Full analysis downloadedYour complete analysis PDF was saved to downloads."
+      ],
+      "exportLogs": [
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Report blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf\",\"bytes\":309085,\"pageCount\":3,\"flags\":0}"
+        },
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Full Analysis blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf\",\"bytes\":1124901,\"pageCount\":14,\"flags\":0}"
+        }
+      ],
+      "network": {
+        "responses": 306,
+        "v1Responses": 3,
+        "non2xx": [],
+        "analysisFetches": 1,
+        "profile360Fetches": 0,
+        "fromDiskCache": 0
+      },
+      "ok": true
+    },
+    {
+      "role": "faculty",
+      "route": "http://127.0.0.1:5173/faculty/my-students/u_dev_student/exams/e389c240-cbe7-4c11-a491-e05b178dbb97",
+      "account": {
+        "email": "faculty@edux.dev",
+        "label": "Faculty"
+      },
+      "login": {
+        "submitButtonText": "Sign in as Faculty",
+        "status": "ok",
+        "pathAfterLogin": "/faculty",
+        "user": {
+          "id": "u_dev_faculty",
+          "role": "faculty",
+          "email": "faculty@edux.dev",
+          "fullName": "Dev Faculty",
+          "firstName": "Dev",
+          "institution": "EduX Local Development",
+          "department": null,
+          "program": null,
+          "semester": null,
+          "rollNo": null,
+          "phone": null,
+          "designation": "Local Development Faculty"
+        }
+      },
+      "ui": {
+        "buttons": [
+          "Search anything…K",
+          "DFDev Faculty",
+          "Report",
+          "Full Analysis"
+        ],
+        "reportButton": true,
+        "fullAnalysisButton": true,
+        "pdfButton": false,
+        "headings": [
+          "NEET UG · Full Mock 01",
+          "32/60 marks",
+          "Question-by-question review",
+          "Topic intelligence",
+          "Mistake classification",
+          "Top mistakes to fix",
+          "Difficulty analysis",
+          "Time intelligence"
+        ]
+      },
+      "actions": [
+        {
+          "action": "Report",
+          "duplicateClicks": 2,
+          "loading": {
+            "disabled": true,
+            "spinner": true
+          },
+          "independentFullEnabled": true,
+          "downloadsAfterAction": 1,
+          "duplicateClickBlocked": true,
+          "toastsAfterAction": [
+            "Report downloadedThe marks report was saved to your downloads."
+          ]
+        },
+        {
+          "action": "Full Analysis",
+          "loading": {
+            "disabled": true,
+            "spinner": true
+          },
+          "toastsAfterAction": [
+            "Full analysis downloadedYour complete analysis PDF was saved to downloads."
+          ]
+        }
+      ],
+      "downloads": [
+        {
+          "type": "blob-created",
+          "href": "blob:http://127.0.0.1:5173/c74fcdd9-de96-43c1-a62a-dfc63cae6597",
+          "size": 6485,
+          "mime": "text/javascript",
+          "at": 1793694662009
+        },
+        {
+          "type": "blob-created",
+          "href": "blob:http://127.0.0.1:5173/520a6a70-464f-4bab-a6be-3041e400e6ce",
+          "size": 310136,
+          "mime": "application/pdf",
+          "at": 1793694664296
+        },
+        {
+          "type": "download-initiated",
+          "href": "blob:http://127.0.0.1:5173/520a6a70-464f-4bab-a6be-3041e400e6ce",
+          "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+          "size": 310136,
+          "at": 1793694664297
+        },
+        {
+          "type": "blob-revoked",
+          "href": "blob:http://127.0.0.1:5173/520a6a70-464f-4bab-a6be-3041e400e6ce",
+          "at": 1793694664297
+        },
+        {
+          "type": "blob-created",
+          "href": "blob:http://127.0.0.1:5173/ce6ae92f-5a8d-42d7-93c5-fbd5e6842375",
+          "size": 1637410,
+          "mime": "application/pdf",
+          "at": 1793694673839
+        },
+        {
+          "type": "download-initiated",
+          "href": "blob:http://127.0.0.1:5173/ce6ae92f-5a8d-42d7-93c5-fbd5e6842375",
+          "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+          "size": 1637410,
+          "at": 1793694673839
+        },
+        {
+          "type": "blob-revoked",
+          "href": "blob:http://127.0.0.1:5173/ce6ae92f-5a8d-42d7-93c5-fbd5e6842375",
+          "at": 1793694673840
+        }
+      ],
+      "files": [
+        {
+          "name": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+          "size": "310136"
+        },
+        {
+          "name": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+          "size": "1637410"
+        }
+      ],
+      "puppeteerConsole": [
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_CONNECTION_CLOSED"
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "level": "info",
+          "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+        },
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_CONNECTION_CLOSED"
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "level": "info",
+          "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+        },
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Report blob created and download initiated JSHandle@object"
+        },
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Full Analysis blob created and download initiated JSHandle@object"
+        }
+      ],
+      "pageErrors": [],
+      "failedRequests": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "failure": "net::ERR_CONNECTION_CLOSED"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "failure": "net::ERR_CONNECTION_CLOSED"
+        }
+      ],
+      "cache": {
+        "profile": "/tmp/edux-impl-chrome-1793694639113-faculty",
+        "dedicatedBrowserProcess": true,
+        "cacheDisabled": true
+      },
+      "preLoginToken": null,
+      "forensic": {
+        "console": [
+          {
+            "level": "debug",
+            "at": 1793694660251,
+            "args": [
+              "[vite] connecting..."
+            ],
+            "text": "[vite] connecting..."
+          },
+          {
+            "level": "debug",
+            "at": 1793694660285,
+            "args": [
+              "[vite] connected."
+            ],
+            "text": "[vite] connected."
+          },
+          {
+            "level": "info",
+            "at": 1793694660588,
+            "args": [
+              "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools",
+              "font-weight:bold"
+            ],
+            "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+          },
+          {
+            "level": "warn",
+            "at": 1793694660729,
+            "args": [
+              "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+            ],
+            "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+          },
+          {
+            "level": "warn",
+            "at": 1793694660729,
+            "args": [
+              "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+            ],
+            "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+          },
+          {
+            "level": "info",
+            "at": 1793694664297,
+            "args": [
+              "[EduX PDF Export] Report blob created and download initiated",
+              {
+                "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+                "bytes": 310136,
+                "pageCount": 3,
+                "flags": 0
+              }
+            ],
+            "text": "[EduX PDF Export] Report blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf\",\"bytes\":310136,\"pageCount\":3,\"flags\":0}"
+          },
+          {
+            "level": "info",
+            "at": 1793694673840,
+            "args": [
+              "[EduX PDF Export] Full Analysis blob created and download initiated",
+              {
+                "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+                "bytes": 1637410,
+                "pageCount": 21,
+                "flags": 0
+              }
+            ],
+            "text": "[EduX PDF Export] Full Analysis blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf\",\"bytes\":1637410,\"pageCount\":21,\"flags\":0}"
+          }
+        ],
+        "errors": [
+          {
+            "error": null
+          }
+        ],
+        "rejections": [],
+        "fetch": [
+          {
+            "url": "/src/assets/logo.png",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-SemiBold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Manrope-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoMath-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoText-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/logo.png",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-SemiBold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Manrope-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoMath-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoText-Regular.ttf",
+            "status": 200
+          }
+        ],
+        "resourceEntries": [
+          "http://127.0.0.1:5173/@vite/client",
+          "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "http://127.0.0.1:5173/src/main.jsx",
+          "http://127.0.0.1:5173/@react-refresh",
+          "http://127.0.0.1:5173/node_modules/vite/dist/client/env.mjs",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=ea90d013",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react.js?v=ea90d013",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=27cd1b2d",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=b86678fc",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=9017faec",
+          "http://127.0.0.1:5173/src/App.jsx",
+          "http://127.0.0.1:5173/src/contexts/theme-context.jsx",
+          "http://127.0.0.1:5173/src/components/ui/toast.jsx",
+          "http://127.0.0.1:5173/src/contexts/auth-context.jsx",
+          "http://127.0.0.1:5173/src/contexts/exam-mode-context.jsx",
+          "http://127.0.0.1:5173/src/components/shared/error-boundary.jsx",
+          "http://127.0.0.1:5173/src/api/index.js",
+          "http://127.0.0.1:5173/src/index.css",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-WOOG5QLI.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-QCHXOAYK.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-KBTYAULA.js?v=98295bab",
+          "http://127.0.0.1:5173/src/routes/index.jsx",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/framer-motion.js?v=9552e86c",
+          "http://127.0.0.1:5173/src/config/index.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom.js?v=ea90d013",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/lucide-react.js?v=225fb29d",
+          "http://127.0.0.1:5173/src/utils/cn.js",
+          "http://127.0.0.1:5173/src/services/auth.js",
+          "http://127.0.0.1:5173/src/api/axios.js",
+          "http://127.0.0.1:5173/src/api/client.js",
+          "http://127.0.0.1:5173/src/routes/ProtectedRoute.jsx",
+          "http://127.0.0.1:5173/src/components/layout/LandingLayout.jsx",
+          "http://127.0.0.1:5173/src/components/layout/AuthLayout.jsx",
+          "http://127.0.0.1:5173/src/components/layout/AppLayout.jsx",
+          "http://127.0.0.1:5173/src/components/shared/loading.jsx",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/clsx.js?v=f839336a",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/tailwind-merge.js?v=ea31508e",
+          "http://127.0.0.1:5173/src/api/errors.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/axios.js?v=91b42135",
+          "http://127.0.0.1:5173/src/components/landing/navbar.jsx",
+          "http://127.0.0.1:5173/src/components/landing/footer.jsx",
+          "http://127.0.0.1:5173/src/services/admin-prefetch.js",
+          "http://127.0.0.1:5173/src/components/ui/index.js",
+          "http://127.0.0.1:5173/src/components/layout/sidebar.jsx",
+          "http://127.0.0.1:5173/src/components/layout/topbar.jsx",
+          "http://127.0.0.1:5173/src/components/layout/ai-copilot.jsx",
+          "http://127.0.0.1:5173/src/components/layout/command-palette.jsx",
+          "http://127.0.0.1:5173/src/components/shared/logo.jsx",
+          "http://127.0.0.1:5173/src/hooks/use-media-query.js",
+          "http://127.0.0.1:5173/src/components/ui/skeleton.jsx",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-U7P2NEEE.js?v=98295bab",
+          "http://127.0.0.1:5173/src/components/ui/button.jsx",
+          "http://127.0.0.1:5173/src/datasets/platform/content.js",
+          "http://127.0.0.1:5173/src/components/ui/sheet.jsx",
+          "http://127.0.0.1:5173/src/services/admin-intelligence.js",
+          "http://127.0.0.1:5173/src/components/ui/badge.jsx",
+          "http://127.0.0.1:5173/src/components/ui/input.jsx",
+          "http://127.0.0.1:5173/src/components/ui/progress.jsx",
+          "http://127.0.0.1:5173/src/components/ui/avatar.jsx",
+          "http://127.0.0.1:5173/src/components/ui/card.jsx",
+          "http://127.0.0.1:5173/src/components/ui/switch.jsx",
+          "http://127.0.0.1:5173/src/components/ui/tabs.jsx",
+          "http://127.0.0.1:5173/src/components/ui/dialog.jsx",
+          "http://127.0.0.1:5173/src/components/ui/dropdown-menu.jsx",
+          "http://127.0.0.1:5173/src/components/ui/tooltip.jsx",
+          "http://127.0.0.1:5173/src/components/ui/select.jsx",
+          "http://127.0.0.1:5173/src/components/ui/table.jsx",
+          "http://127.0.0.1:5173/src/components/ui/accordion.jsx",
+          "http://127.0.0.1:5173/src/components/ui/command.jsx",
+          "http://127.0.0.1:5173/src/components/ui/calendar.jsx",
+          "http://127.0.0.1:5173/src/services/index.js",
+          "http://127.0.0.1:5173/src/components/shared/chat-message.jsx",
+          "http://127.0.0.1:5173/src/assets/logo.png?import",
+          "http://127.0.0.1:5173/src/components/ui/slot.jsx",
+          "http://127.0.0.1:5173/src/hooks/use-focus-trap.js",
+          "http://127.0.0.1:5173/src/utils/format.js",
+          "http://127.0.0.1:5173/src/theme/index.js",
+          "http://127.0.0.1:5173/src/hooks/use-anchored-dropdown.js",
+          "http://127.0.0.1:5173/src/utils/select-option.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/date-fns.js?v=0d6f4efd",
+          "http://127.0.0.1:5173/src/services/query.js",
+          "http://127.0.0.1:5173/src/services/faculty-questions.js",
+          "http://127.0.0.1:5173/src/api/ai/tutor-reply.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/remark-gfm.js?v=341ac55a",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-markdown.js?v=e112bd47",
+          "http://127.0.0.1:5173/src/constants/ui/z-index.js",
+          "http://127.0.0.1:5173/src/utils/dropdown-position.js",
+          "http://127.0.0.1:5173/src/utils/dropdown-portal.js",
+          "http://127.0.0.1:5173/src/api/adapters/questions.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-Y7LV7UOF.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-ZQD2Y7UY.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-XD6XXXFZ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-S4WLQQAR.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-YF5BJLTO.js?v=98295bab",
+          "http://127.0.0.1:5173/src/utils/media.js",
+          "http://127.0.0.1:5173/src/pages/faculty/FacultyAttemptAnalysis.jsx",
+          "http://127.0.0.1:5173/src/assets/logo.png",
+          "http://127.0.0.1:5173/src/components/shared/page-header.jsx",
+          "http://127.0.0.1:5173/src/pages/student/ExamAnalysis.jsx",
+          "http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js",
+          "http://127.0.0.1:5173/src/services/faculty-students.js",
+          "http://127.0.0.1:5173/src/services/extra.js",
+          "http://127.0.0.1:5173/src/components/shared/chart-card.jsx",
+          "http://127.0.0.1:5173/src/components/shared/stat-card.jsx",
+          "http://127.0.0.1:5173/src/components/charts/index.jsx",
+          "http://127.0.0.1:5173/src/components/shared/progress-ring.jsx",
+          "http://127.0.0.1:5173/src/hooks/use-filter-cascade.js",
+          "http://127.0.0.1:5173/src/components/shared/math-text.jsx",
+          "http://127.0.0.1:5173/src/pages/student/exam-analysis-filters.js",
+          "http://127.0.0.1:5173/src/pages/student/exam-analysis-stats.js",
+          "http://127.0.0.1:5173/src/intelligence/faculty/engine/student-360.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/recharts.js?v=ef3236ca",
+          "http://127.0.0.1:5173/src/utils/filter-cascade.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/remark-math.js?v=efe8d09b",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/rehype-katex.js?v=1360d5b9",
+          "http://127.0.0.1:5173/src/intelligence/faculty/engine/scores.js",
+          "http://127.0.0.1:5173/src/intelligence/engine/exam-attempt-intelligence.js",
+          "http://127.0.0.1:5173/src/intelligence/engine/exam-agent.js",
+          "http://127.0.0.1:5173/src/intelligence/faculty/engine/students-directory.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-TPJJNNEF.js?v=98295bab",
+          "http://127.0.0.1:5173/src/intelligence/engine/scores.js",
+          "http://127.0.0.1:5173/src/intelligence/engine/exam-accuracy.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-E7MZOYDI.js?v=98295bab",
+          "http://127.0.0.1:5173/v1/faculty/students/u_dev_student/exams/e389c240-cbe7-4c11-a491-e05b178dbb97/analysis",
+          "http://127.0.0.1:5173/v1/faculty/students/u_dev_student/360",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/model.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/base-model.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/theme.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/renderer.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit.js?v=41ff2d6b",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/pdfkit-standard-fonts.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/layout.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/components.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/full-analysis.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/intelligence.js",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Regular.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/logo.png?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-SemiBold.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Bold.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/Manrope-Bold.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoMath-Regular.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoText-Regular.ttf?import&url",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_Courier.js?v=c21e028e",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_CourierBold.js?v=99990de3",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_CourierOblique.js?v=db54d5fe",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_CourierBoldOblique.js?v=95ebb1fd",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_Helvetica.js?v=1f9c4834",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_HelveticaBold.js?v=49a373a4",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_HelveticaBoldOblique.js?v=db3bbefb",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_HelveticaOblique.js?v=dc07e3fb",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_Symbol.js?v=f52884e2",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesBold.js?v=dde9501f",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesBoldItalic.js?v=f8b6e1d9",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesItalic.js?v=ea09369c",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesRoman.js?v=e819d73d",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_ZapfDingbats.js?v=bc5bce0b",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/text.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/math.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/pagination.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-6DVC2K2M.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-5RK2YBK3.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_mathjax__js.js?v=3dfbe170",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_input_tex__js.js?v=a95001a1",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_output_svg__js.js?v=9eef664e",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_adaptors_liteAdaptor__js.js?v=9b878c19",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_handlers_html__js.js?v=c44a1f39",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/svg-to-pdfkit.js?v=4bfa7647",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_input_tex_AllPackages__js.js?v=9c80cb4e",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-7YECHRI7.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-3EN4IM2A.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-UWVXZNSP.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JXAMKRZQ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-YPYOWNCQ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-T2D7V24N.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-MN3LWMUY.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-GI7VOCMZ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-D7APLFUB.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-2EZYO7KB.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-TJ44Q7BG.js?v=98295bab",
+          "http://127.0.0.1:5173/src/assets/logo.png",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-SemiBold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Manrope-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoMath-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoText-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/logo.png",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-SemiBold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Manrope-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoMath-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoText-Regular.ttf"
+        ]
+      },
+      "exactExceptions": [],
+      "resourceErrors": [
+        {
+          "error": null
+        }
+      ],
+      "toasts": [
+        "Full analysis downloadedYour complete analysis PDF was saved to downloads."
+      ],
+      "exportLogs": [
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Report blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf\",\"bytes\":310136,\"pageCount\":3,\"flags\":0}"
+        },
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Full Analysis blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf\",\"bytes\":1637410,\"pageCount\":21,\"flags\":0}"
+        }
+      ],
+      "network": {
+        "responses": 317,
+        "v1Responses": 4,
+        "non2xx": [],
+        "analysisFetches": 1,
+        "profile360Fetches": 1,
+        "fromDiskCache": 0
+      },
+      "ok": true
+    },
+    {
+      "role": "admin",
+      "route": "http://127.0.0.1:5173/admin/students/u_dev_student/exams/e389c240-cbe7-4c11-a491-e05b178dbb97",
+      "account": {
+        "email": "admin@edux.dev",
+        "label": "Admin"
+      },
+      "login": {
+        "submitButtonText": "Sign in as Admin",
+        "status": "ok",
+        "pathAfterLogin": "/admin",
+        "user": {
+          "id": "u_dev_admin",
+          "role": "admin",
+          "email": "admin@edux.dev",
+          "fullName": "Dev Admin",
+          "firstName": "Dev",
+          "institution": "EduX Local Development",
+          "department": null,
+          "program": null,
+          "semester": null,
+          "rollNo": null,
+          "phone": null,
+          "designation": null
+        }
+      },
+      "ui": {
+        "buttons": [
+          "Search anything…K",
+          "DADev Admin",
+          "Report",
+          "Full Analysis"
+        ],
+        "reportButton": true,
+        "fullAnalysisButton": true,
+        "pdfButton": false,
+        "headings": [
+          "NEET UG · Full Mock 01",
+          "32/60 marks",
+          "Question-by-question review",
+          "Topic intelligence",
+          "Mistake classification",
+          "Top mistakes to fix",
+          "Difficulty analysis",
+          "Time intelligence"
+        ]
+      },
+      "actions": [
+        {
+          "action": "Report",
+          "duplicateClicks": 2,
+          "loading": {
+            "disabled": true,
+            "spinner": true
+          },
+          "independentFullEnabled": true,
+          "downloadsAfterAction": 1,
+          "duplicateClickBlocked": true,
+          "toastsAfterAction": [
+            "Report downloadedThe marks report was saved to your downloads."
+          ]
+        },
+        {
+          "action": "Full Analysis",
+          "loading": {
+            "disabled": true,
+            "spinner": true
+          },
+          "toastsAfterAction": [
+            "Full analysis downloadedYour complete analysis PDF was saved to downloads."
+          ]
+        }
+      ],
+      "downloads": [
+        {
+          "type": "blob-created",
+          "href": "blob:http://127.0.0.1:5173/73bc0f1b-7d30-476f-98cf-d311459f496f",
+          "size": 6485,
+          "mime": "text/javascript",
+          "at": 1793694680044
+        },
+        {
+          "type": "blob-created",
+          "href": "blob:http://127.0.0.1:5173/c246457d-a40b-4039-9ab4-cd4c19aa5214",
+          "size": 310136,
+          "mime": "application/pdf",
+          "at": 1793694682199
+        },
+        {
+          "type": "download-initiated",
+          "href": "blob:http://127.0.0.1:5173/c246457d-a40b-4039-9ab4-cd4c19aa5214",
+          "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+          "size": 310136,
+          "at": 1793694682199
+        },
+        {
+          "type": "blob-revoked",
+          "href": "blob:http://127.0.0.1:5173/c246457d-a40b-4039-9ab4-cd4c19aa5214",
+          "at": 1793694682201
+        },
+        {
+          "type": "blob-created",
+          "href": "blob:http://127.0.0.1:5173/e4509dc9-35be-4df7-a81a-70e000ecb001",
+          "size": 1637409,
+          "mime": "application/pdf",
+          "at": 1793694691442
+        },
+        {
+          "type": "download-initiated",
+          "href": "blob:http://127.0.0.1:5173/e4509dc9-35be-4df7-a81a-70e000ecb001",
+          "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+          "size": 1637409,
+          "at": 1793694691442
+        },
+        {
+          "type": "blob-revoked",
+          "href": "blob:http://127.0.0.1:5173/e4509dc9-35be-4df7-a81a-70e000ecb001",
+          "at": 1793694691443
+        }
+      ],
+      "files": [
+        {
+          "name": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+          "size": "310136"
+        },
+        {
+          "name": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+          "size": "1637409"
+        }
+      ],
+      "puppeteerConsole": [
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_CONNECTION_CLOSED"
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "level": "info",
+          "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+        },
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_CONNECTION_CLOSED"
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connecting..."
+        },
+        {
+          "level": "debug",
+          "text": "[vite] connected."
+        },
+        {
+          "level": "info",
+          "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+        },
+        {
+          "level": "warn",
+          "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+        },
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Report blob created and download initiated JSHandle@object"
+        },
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Full Analysis blob created and download initiated JSHandle@object"
+        }
+      ],
+      "pageErrors": [],
+      "failedRequests": [
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "failure": "net::ERR_CONNECTION_CLOSED"
+        },
+        {
+          "url": "http://127.0.0.1:5173/src/components/admin-dashboard/faculty-health.jsx",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:5173/src/components/admin-dashboard/intervention-center.jsx",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:5173/src/components/shared/chart-card.jsx",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:5173/src/components/admin-dashboard/assessment-intelligence.jsx",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:5173/src/components/shared/progress-ring.jsx",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:5173/src/components/admin-dashboard/performance-trend.jsx",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:5173/src/components/admin-dashboard/quick-actions.jsx",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:5173/v1/admin-intelligence/summary",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:5173/src/components/admin-dashboard/priorities.jsx",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "failure": "net::ERR_CONNECTION_CLOSED"
+        }
+      ],
+      "cache": {
+        "profile": "/tmp/edux-impl-chrome-1793694639113-admin",
+        "dedicatedBrowserProcess": true,
+        "cacheDisabled": true
+      },
+      "preLoginToken": null,
+      "forensic": {
+        "console": [
+          {
+            "level": "debug",
+            "at": 1793694678173,
+            "args": [
+              "[vite] connecting..."
+            ],
+            "text": "[vite] connecting..."
+          },
+          {
+            "level": "debug",
+            "at": 1793694678192,
+            "args": [
+              "[vite] connected."
+            ],
+            "text": "[vite] connected."
+          },
+          {
+            "level": "info",
+            "at": 1793694678582,
+            "args": [
+              "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools",
+              "font-weight:bold"
+            ],
+            "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+          },
+          {
+            "level": "warn",
+            "at": 1793694678727,
+            "args": [
+              "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+            ],
+            "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+          },
+          {
+            "level": "warn",
+            "at": 1793694678727,
+            "args": [
+              "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+            ],
+            "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+          },
+          {
+            "level": "info",
+            "at": 1793694682202,
+            "args": [
+              "[EduX PDF Export] Report blob created and download initiated",
+              {
+                "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+                "bytes": 310136,
+                "pageCount": 3,
+                "flags": 0
+              }
+            ],
+            "text": "[EduX PDF Export] Report blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf\",\"bytes\":310136,\"pageCount\":3,\"flags\":0}"
+          },
+          {
+            "level": "info",
+            "at": 1793694691443,
+            "args": [
+              "[EduX PDF Export] Full Analysis blob created and download initiated",
+              {
+                "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+                "bytes": 1637409,
+                "pageCount": 21,
+                "flags": 0
+              }
+            ],
+            "text": "[EduX PDF Export] Full Analysis blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf\",\"bytes\":1637409,\"pageCount\":21,\"flags\":0}"
+          }
+        ],
+        "errors": [
+          {
+            "error": null
+          }
+        ],
+        "rejections": [],
+        "fetch": [
+          {
+            "url": "/src/assets/logo.png",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-SemiBold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Manrope-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoMath-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoText-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/logo.png",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-SemiBold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Inter-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/Manrope-Bold.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoMath-Regular.ttf",
+            "status": 200
+          },
+          {
+            "url": "/src/assets/fonts/STIXTwoText-Regular.ttf",
+            "status": 200
+          }
+        ],
+        "resourceEntries": [
+          "http://127.0.0.1:5173/@vite/client",
+          "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
+          "http://127.0.0.1:5173/src/main.jsx",
+          "http://127.0.0.1:5173/@react-refresh",
+          "http://127.0.0.1:5173/node_modules/vite/dist/client/env.mjs",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=ea90d013",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react.js?v=ea90d013",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=27cd1b2d",
+          "http://127.0.0.1:5173/src/App.jsx",
+          "http://127.0.0.1:5173/src/contexts/theme-context.jsx",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=b86678fc",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=9017faec",
+          "http://127.0.0.1:5173/src/components/ui/toast.jsx",
+          "http://127.0.0.1:5173/src/contexts/auth-context.jsx",
+          "http://127.0.0.1:5173/src/contexts/exam-mode-context.jsx",
+          "http://127.0.0.1:5173/src/api/index.js",
+          "http://127.0.0.1:5173/src/components/shared/error-boundary.jsx",
+          "http://127.0.0.1:5173/src/index.css",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-QCHXOAYK.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-WOOG5QLI.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=98295bab",
+          "http://127.0.0.1:5173/src/routes/index.jsx",
+          "http://127.0.0.1:5173/src/config/index.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/framer-motion.js?v=9552e86c",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom.js?v=ea90d013",
+          "http://127.0.0.1:5173/src/utils/cn.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/lucide-react.js?v=225fb29d",
+          "http://127.0.0.1:5173/src/services/auth.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-KBTYAULA.js?v=98295bab",
+          "http://127.0.0.1:5173/src/api/axios.js",
+          "http://127.0.0.1:5173/src/api/client.js",
+          "http://127.0.0.1:5173/src/routes/ProtectedRoute.jsx",
+          "http://127.0.0.1:5173/src/components/layout/LandingLayout.jsx",
+          "http://127.0.0.1:5173/src/components/layout/AuthLayout.jsx",
+          "http://127.0.0.1:5173/src/components/layout/AppLayout.jsx",
+          "http://127.0.0.1:5173/src/components/shared/loading.jsx",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/clsx.js?v=f839336a",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/tailwind-merge.js?v=ea31508e",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/axios.js?v=91b42135",
+          "http://127.0.0.1:5173/src/api/errors.js",
+          "http://127.0.0.1:5173/src/components/landing/navbar.jsx",
+          "http://127.0.0.1:5173/src/components/landing/footer.jsx",
+          "http://127.0.0.1:5173/src/services/admin-prefetch.js",
+          "http://127.0.0.1:5173/src/components/ui/index.js",
+          "http://127.0.0.1:5173/src/components/layout/sidebar.jsx",
+          "http://127.0.0.1:5173/src/components/layout/topbar.jsx",
+          "http://127.0.0.1:5173/src/components/layout/ai-copilot.jsx",
+          "http://127.0.0.1:5173/src/components/layout/command-palette.jsx",
+          "http://127.0.0.1:5173/src/components/shared/logo.jsx",
+          "http://127.0.0.1:5173/src/hooks/use-media-query.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-U7P2NEEE.js?v=98295bab",
+          "http://127.0.0.1:5173/src/components/ui/skeleton.jsx",
+          "http://127.0.0.1:5173/src/datasets/platform/content.js",
+          "http://127.0.0.1:5173/src/components/ui/button.jsx",
+          "http://127.0.0.1:5173/src/components/ui/sheet.jsx",
+          "http://127.0.0.1:5173/src/services/admin-intelligence.js",
+          "http://127.0.0.1:5173/src/components/ui/input.jsx",
+          "http://127.0.0.1:5173/src/components/ui/badge.jsx",
+          "http://127.0.0.1:5173/src/components/ui/progress.jsx",
+          "http://127.0.0.1:5173/src/components/ui/avatar.jsx",
+          "http://127.0.0.1:5173/src/components/ui/card.jsx",
+          "http://127.0.0.1:5173/src/components/ui/switch.jsx",
+          "http://127.0.0.1:5173/src/components/ui/tabs.jsx",
+          "http://127.0.0.1:5173/src/components/ui/dialog.jsx",
+          "http://127.0.0.1:5173/src/components/ui/dropdown-menu.jsx",
+          "http://127.0.0.1:5173/src/components/ui/tooltip.jsx",
+          "http://127.0.0.1:5173/src/components/ui/select.jsx",
+          "http://127.0.0.1:5173/src/components/ui/table.jsx",
+          "http://127.0.0.1:5173/src/components/ui/accordion.jsx",
+          "http://127.0.0.1:5173/src/components/ui/command.jsx",
+          "http://127.0.0.1:5173/src/components/ui/calendar.jsx",
+          "http://127.0.0.1:5173/src/services/index.js",
+          "http://127.0.0.1:5173/src/components/shared/chat-message.jsx",
+          "http://127.0.0.1:5173/src/assets/logo.png?import",
+          "http://127.0.0.1:5173/src/components/ui/slot.jsx",
+          "http://127.0.0.1:5173/src/hooks/use-focus-trap.js",
+          "http://127.0.0.1:5173/src/utils/format.js",
+          "http://127.0.0.1:5173/src/theme/index.js",
+          "http://127.0.0.1:5173/src/hooks/use-anchored-dropdown.js",
+          "http://127.0.0.1:5173/src/utils/select-option.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/date-fns.js?v=0d6f4efd",
+          "http://127.0.0.1:5173/src/services/query.js",
+          "http://127.0.0.1:5173/src/services/faculty-questions.js",
+          "http://127.0.0.1:5173/src/api/ai/tutor-reply.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/react-markdown.js?v=e112bd47",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/remark-gfm.js?v=341ac55a",
+          "http://127.0.0.1:5173/src/constants/ui/z-index.js",
+          "http://127.0.0.1:5173/src/utils/dropdown-position.js",
+          "http://127.0.0.1:5173/src/utils/dropdown-portal.js",
+          "http://127.0.0.1:5173/src/api/adapters/questions.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-YF5BJLTO.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-XD6XXXFZ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-ZQD2Y7UY.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-S4WLQQAR.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-Y7LV7UOF.js?v=98295bab",
+          "http://127.0.0.1:5173/src/utils/media.js",
+          "http://127.0.0.1:5173/src/pages/faculty/FacultyAttemptAnalysis.jsx",
+          "http://127.0.0.1:5173/src/assets/logo.png",
+          "http://127.0.0.1:5173/v1/admin-intelligence/summary",
+          "http://127.0.0.1:5173/src/components/shared/page-header.jsx",
+          "http://127.0.0.1:5173/src/pages/student/ExamAnalysis.jsx",
+          "http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js",
+          "http://127.0.0.1:5173/src/services/faculty-students.js",
+          "http://127.0.0.1:5173/v1/admin/students",
+          "http://127.0.0.1:5173/v1/admin/faculty",
+          "http://127.0.0.1:5173/v1/admin/reports",
+          "http://127.0.0.1:5173/v1/admin/users",
+          "http://127.0.0.1:5173/v1/admin/departments",
+          "http://127.0.0.1:5173/v1/admin/programs",
+          "http://127.0.0.1:5173/v1/admin/support",
+          "http://127.0.0.1:5173/src/services/extra.js",
+          "http://127.0.0.1:5173/src/components/shared/chart-card.jsx",
+          "http://127.0.0.1:5173/src/components/shared/stat-card.jsx",
+          "http://127.0.0.1:5173/src/components/charts/index.jsx",
+          "http://127.0.0.1:5173/src/components/shared/progress-ring.jsx",
+          "http://127.0.0.1:5173/src/hooks/use-filter-cascade.js",
+          "http://127.0.0.1:5173/src/components/shared/math-text.jsx",
+          "http://127.0.0.1:5173/src/pages/student/exam-analysis-filters.js",
+          "http://127.0.0.1:5173/src/pages/student/exam-analysis-stats.js",
+          "http://127.0.0.1:5173/src/intelligence/faculty/engine/student-360.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/recharts.js?v=ef3236ca",
+          "http://127.0.0.1:5173/src/utils/filter-cascade.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/rehype-katex.js?v=1360d5b9",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/remark-math.js?v=efe8d09b",
+          "http://127.0.0.1:5173/src/intelligence/faculty/engine/scores.js",
+          "http://127.0.0.1:5173/src/intelligence/engine/exam-attempt-intelligence.js",
+          "http://127.0.0.1:5173/src/intelligence/engine/exam-agent.js",
+          "http://127.0.0.1:5173/src/intelligence/faculty/engine/students-directory.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-TPJJNNEF.js?v=98295bab",
+          "http://127.0.0.1:5173/src/intelligence/engine/scores.js",
+          "http://127.0.0.1:5173/src/intelligence/engine/exam-accuracy.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-E7MZOYDI.js?v=98295bab",
+          "http://127.0.0.1:5173/v1/faculty/students/u_dev_student/exams/e389c240-cbe7-4c11-a491-e05b178dbb97/analysis",
+          "http://127.0.0.1:5173/v1/faculty/students/u_dev_student/360",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/model.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/base-model.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/theme.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/renderer.js",
+          "http://127.0.0.1:5173/src/assets/logo.png?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Regular.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-SemiBold.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Bold.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/Manrope-Bold.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoMath-Regular.ttf?import&url",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoText-Regular.ttf?import&url",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit.js?v=41ff2d6b",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/pdfkit-standard-fonts.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/layout.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/components.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/full-analysis.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/intelligence.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_Courier.js?v=c21e028e",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_CourierBold.js?v=99990de3",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_CourierBoldOblique.js?v=95ebb1fd",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_CourierOblique.js?v=db54d5fe",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_Helvetica.js?v=1f9c4834",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_HelveticaBold.js?v=49a373a4",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_HelveticaBoldOblique.js?v=db3bbefb",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_HelveticaOblique.js?v=dc07e3fb",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_Symbol.js?v=f52884e2",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesBold.js?v=dde9501f",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesBoldItalic.js?v=f8b6e1d9",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesItalic.js?v=ea09369c",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_TimesRoman.js?v=e819d73d",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/pdfkit_standard-fonts_ZapfDingbats.js?v=bc5bce0b",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/text.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-6DVC2K2M.js?v=98295bab",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/math.js",
+          "http://127.0.0.1:5173/src/pages/student/premium-pdf/pagination.js",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-5RK2YBK3.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_input_tex__js.js?v=a95001a1",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_mathjax__js.js?v=3dfbe170",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_output_svg__js.js?v=9eef664e",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_adaptors_liteAdaptor__js.js?v=9b878c19",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_handlers_html__js.js?v=c44a1f39",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/svg-to-pdfkit.js?v=4bfa7647",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/mathjax-full_js_input_tex_AllPackages__js.js?v=9c80cb4e",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-UWVXZNSP.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-JXAMKRZQ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-YPYOWNCQ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-3EN4IM2A.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-T2D7V24N.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-MN3LWMUY.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-GI7VOCMZ.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-7YECHRI7.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-D7APLFUB.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-2EZYO7KB.js?v=98295bab",
+          "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-TJ44Q7BG.js?v=98295bab",
+          "http://127.0.0.1:5173/src/assets/logo.png",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-SemiBold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Manrope-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoMath-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoText-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/logo.png",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-SemiBold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Inter-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/Manrope-Bold.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoMath-Regular.ttf",
+          "http://127.0.0.1:5173/src/assets/fonts/STIXTwoText-Regular.ttf"
+        ]
+      },
+      "exactExceptions": [],
+      "resourceErrors": [
+        {
+          "error": null
+        }
+      ],
+      "toasts": [
+        "Full analysis downloadedYour complete analysis PDF was saved to downloads."
+      ],
+      "exportLogs": [
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Report blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf\",\"bytes\":310136,\"pageCount\":3,\"flags\":0}"
+        },
+        {
+          "level": "info",
+          "text": "[EduX PDF Export] Full Analysis blob created and download initiated {\"filename\":\"MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf\",\"bytes\":1637409,\"pageCount\":21,\"flags\":0}"
+        }
+      ],
+      "network": {
+        "responses": 313,
+        "v1Responses": 11,
+        "non2xx": [],
+        "analysisFetches": 1,
+        "profile360Fetches": 1,
+        "fromDiskCache": 0
+      },
+      "ok": true
+    }
+  ]
+}

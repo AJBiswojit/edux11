@@ -1,0 +1,242 @@
+
+> medixo-edux-platform@1.0.0 build
+> vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 4775 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                           1.35 kB │ gzip:   0.62 kB
+dist/assets/KaTeX_Size3-Regular-CTq5MqoE.woff             4.42 kB
+dist/assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2            4.93 kB
+dist/assets/KaTeX_Size2-Regular-Dy4dx90m.woff2            5.21 kB
+dist/assets/KaTeX_Size1-Regular-mCD8mA8B.woff2            5.47 kB
+dist/assets/KaTeX_Size4-Regular-BF-4gkZK.woff             5.98 kB
+dist/assets/KaTeX_Size2-Regular-oD1tc_U0.woff             6.19 kB
+dist/assets/KaTeX_Size1-Regular-C195tn64.woff             6.50 kB
+dist/assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2      6.91 kB
+dist/assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2         6.91 kB
+dist/assets/KaTeX_Size3-Regular-DgpXs0kz.ttf              7.59 kB
+dist/assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff       7.66 kB
+dist/assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff          7.72 kB
+dist/assets/KaTeX_Script-Regular-D3wIWfF6.woff2           9.64 kB
+dist/assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2       10.34 kB
+dist/assets/KaTeX_Size4-Regular-DWFBv043.ttf             10.36 kB
+dist/assets/KaTeX_Script-Regular-D5yQViql.woff           10.59 kB
+dist/assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2         11.32 kB
+dist/assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2            11.35 kB
+dist/assets/KaTeX_Size2-Regular-B7gKUWhC.ttf             11.51 kB
+dist/assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2        12.03 kB
+dist/assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2          12.22 kB
+dist/assets/KaTeX_Size1-Regular-Dbsnue_I.ttf             12.23 kB
+dist/assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff        12.32 kB
+dist/assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf       12.34 kB
+dist/assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf          12.37 kB
+dist/assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff          13.21 kB
+dist/assets/KaTeX_Fraktur-Bold-BsDP51OF.woff             13.30 kB
+dist/assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2      13.57 kB
+dist/assets/KaTeX_SansSerif-Italic-DN2j7dab.woff         14.11 kB
+dist/assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff           14.41 kB
+dist/assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff       16.03 kB
+dist/assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2         16.40 kB
+dist/assets/KaTeX_Math-Italic-t53AETM-.woff2             16.44 kB
+dist/assets/KaTeX_Script-Regular-C5JkGWo-.ttf            16.65 kB
+dist/assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2         16.78 kB
+dist/assets/KaTeX_Main-Italic-NWA7e6Wa.woff2             16.99 kB
+dist/assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff          18.67 kB
+dist/assets/KaTeX_Math-Italic-DA0__PXp.woff              18.75 kB
+dist/assets/KaTeX_Main-BoldItalic-SpSLRI95.woff          19.41 kB
+dist/assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf         19.44 kB
+dist/assets/KaTeX_Fraktur-Regular-CB_wures.ttf           19.57 kB
+dist/assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf              19.58 kB
+dist/assets/KaTeX_Main-Italic-BMLOBm91.woff              19.68 kB
+dist/assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf          22.36 kB
+dist/assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf            24.50 kB
+dist/assets/KaTeX_Main-Bold-Cx986IdX.woff2               25.32 kB
+dist/assets/KaTeX_Main-Regular-B22Nviop.woff2            26.27 kB
+dist/assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf        27.56 kB
+dist/assets/KaTeX_AMS-Regular-BQhdFMY1.woff2             28.08 kB
+dist/assets/KaTeX_Main-Bold-Jm3AIy58.woff                29.91 kB
+dist/assets/KaTeX_Main-Regular-Dr94JaBh.woff             30.77 kB
+dist/assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf           31.20 kB
+dist/assets/KaTeX_Math-Italic-flOr_0UB.ttf               31.31 kB
+dist/assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf           32.97 kB
+dist/assets/KaTeX_AMS-Regular-DMm9YOAa.woff              33.52 kB
+dist/assets/KaTeX_Main-Italic-3WenGoN9.ttf               33.58 kB
+dist/assets/KaTeX_Main-Bold-waoOVXN0.ttf                 51.34 kB
+dist/assets/KaTeX_Main-Regular-ypZvNtVU.ttf              53.58 kB
+dist/assets/KaTeX_AMS-Regular-DRggAlZN.ttf               63.63 kB
+dist/assets/Manrope-Bold-DRUIzo1v.ttf                    97.52 kB
+dist/assets/logo-w_xWZIBz.png                           109.10 kB
+dist/assets/STIXTwoText-Regular-DDny1XoM.ttf            299.86 kB
+dist/assets/Inter-Regular-IQ_QJtIm.ttf                  341.40 kB
+dist/assets/Inter-SemiBold-7d1w2OWn.ttf                 342.66 kB
+dist/assets/Inter-Bold-C67Cz4SP.ttf                     343.10 kB
+dist/assets/STIXTwoMath-Regular-H8e7c03E.ttf          1,517.98 kB
+dist/assets/index-DYtC4sQw.css                          178.86 kB │ gzip:  30.10 kB
+dist/assets/query-CGS_F_cb.js                             0.14 kB │ gzip:   0.15 kB
+dist/assets/faculty-intelligence-BI1LLcVB.js              0.18 kB │ gzip:   0.15 kB
+dist/assets/intelligence-DCQRlEGS.js                      0.26 kB │ gzip:   0.18 kB
+dist/assets/scores-ChCJe232.js                            0.31 kB │ gzip:   0.22 kB
+dist/assets/scores-B5wLa6Vc.js                            0.31 kB │ gzip:   0.22 kB
+dist/assets/index-pzTZiUaM.js                             0.39 kB │ gzip:   0.27 kB
+dist/assets/use-in-view-BIOi-mNu.js                       0.44 kB │ gzip:   0.31 kB
+dist/assets/use-count-up-BJxNH7Xn.js                      0.48 kB │ gzip:   0.34 kB
+dist/assets/tslib.es6-CTYbIaVE.js                         0.65 kB │ gzip:   0.38 kB
+dist/assets/chart-card-CHVKbC1s.js                        0.71 kB │ gzip:   0.41 kB
+dist/assets/use-chat-assistant-COOuLCXU.js                0.84 kB │ gzip:   0.47 kB
+dist/assets/use-filter-cascade-Dk_7NA5X.js                0.89 kB │ gzip:   0.48 kB
+dist/assets/timeline-DA3CsOi_.js                          0.93 kB │ gzip:   0.49 kB
+dist/assets/student-examinations-DOsMkILj.js              1.03 kB │ gzip:   0.50 kB
+dist/assets/index-DXkq3yja.js                             1.23 kB │ gzip:   0.53 kB
+dist/assets/empty-state-Dgn0lRpQ.js                       1.23 kB │ gzip:   0.62 kB
+dist/assets/filter-cascade-B-b_rvj7.js                    1.23 kB │ gzip:   0.62 kB
+dist/assets/shared-BIs2Z_Dp.js                            1.34 kB │ gzip:   0.64 kB
+dist/assets/progress-ring-daKtme8H.js                     1.39 kB │ gzip:   0.73 kB
+dist/assets/page-header-CIrEAr2J.js                       1.45 kB │ gzip:   0.68 kB
+dist/assets/section-heading-DQVmIKF9.js                   1.50 kB │ gzip:   0.73 kB
+dist/assets/SettingsProfileCard-DBfq0vVl.js               1.71 kB │ gzip:   0.70 kB
+dist/assets/Progress-B2KHq5Ef.js                          2.14 kB │ gzip:   1.10 kB
+dist/assets/CreateTicketDialog-D9PHcg9F.js                2.42 kB │ gzip:   1.10 kB
+dist/assets/NotFound-DuyEH7bE.js                          2.52 kB │ gzip:   1.11 kB
+dist/assets/Forbidden-BD-I8EDG.js                         2.70 kB │ gzip:   1.20 kB
+dist/assets/Roles-B_Ypt9yy.js                             2.70 kB │ gzip:   1.28 kB
+dist/assets/ForgotPassword-KX5KETBW.js                    2.73 kB │ gzip:   1.35 kB
+dist/assets/micro-assessments-DmmIVC_y.js                 2.81 kB │ gzip:   0.71 kB
+dist/assets/AIInsights-DTJobrri.js                        2.92 kB │ gzip:   1.36 kB
+dist/assets/Reports-C9IXhoyr.js                           2.94 kB │ gzip:   1.40 kB
+dist/assets/stat-card-Cq4uSWed.js                         2.98 kB │ gzip:   1.50 kB
+dist/assets/Downloads-D-Oeuhfs.js                         3.01 kB │ gzip:   1.48 kB
+dist/assets/Timetable-Q8UtT2wj.js                         3.05 kB │ gzip:   1.41 kB
+dist/assets/classes-cVY2yD51.js                           3.19 kB │ gzip:   0.93 kB
+dist/assets/FacultyAttemptAnalysis-BF5x-pb1.js            3.25 kB │ gzip:   1.56 kB
+dist/assets/theme-DzfutjwN.js                             3.26 kB │ gzip:   1.43 kB
+dist/assets/VerifyEmail-KlmzKmDC.js                       3.39 kB │ gzip:   1.65 kB
+dist/assets/Courses-AtXUiJNH.js                           3.39 kB │ gzip:   1.45 kB
+dist/assets/Notifications-DaVi9l38.js                     3.44 kB │ gzip:   1.51 kB
+dist/assets/ExamResults-BIsnbZNm.js                       3.46 kB │ gzip:   1.60 kB
+dist/assets/calendar-Bkfy2k3J.js                          3.51 kB │ gzip:   1.52 kB
+dist/assets/shared-BUjeEZwr.js                            3.59 kB │ gzip:   1.31 kB
+dist/assets/ResetPassword-bDA_TFu4.js                     3.60 kB │ gzip:   1.57 kB
+dist/assets/CalendarPage-DPDZADh8.js                      3.62 kB │ gzip:   1.55 kB
+dist/assets/Performance-BnC8IPiR.js                       3.63 kB │ gzip:   1.55 kB
+dist/assets/Blog-D2WQ8Cgl.js                              3.63 kB │ gzip:   1.52 kB
+dist/assets/LecturePlanner-D6FLwwiu.js                    3.65 kB │ gzip:   1.57 kB
+dist/assets/Research-H7hzrB2J.js                          3.71 kB │ gzip:   1.61 kB
+dist/assets/Revenue-CE6TMhyb.js                           3.73 kB │ gzip:   1.67 kB
+dist/assets/AuditLogs-BUMYQ4R_.js                         3.77 kB │ gzip:   1.82 kB
+dist/assets/Batches-EOdYMMZh.js                           3.79 kB │ gzip:   1.73 kB
+dist/assets/Attendance-CleJOvMs.js                        3.93 kB │ gzip:   1.62 kB
+dist/assets/faculty-interventions-DFpnj-5m.js             4.01 kB │ gzip:   0.79 kB
+dist/assets/Permissions-Dp5tPoCC.js                       4.07 kB │ gzip:   1.70 kB
+dist/assets/Subjects-BfA_osS8.js                          4.13 kB │ gzip:   1.57 kB
+dist/assets/Programs-DtwpLKvV.js                          4.15 kB │ gzip:   1.86 kB
+dist/assets/CalendarPage-BBxEgfOP.js                      4.23 kB │ gzip:   1.82 kB
+dist/assets/data-table-Ba4Ogx3F.js                        4.30 kB │ gzip:   1.70 kB
+dist/assets/PricingPage-BdkNNxlm.js                       4.37 kB │ gzip:   1.62 kB
+dist/assets/Subjects-CVW9B1mY.js                          4.38 kB │ gzip:   1.85 kB
+dist/assets/Scholarships-BFyl6Wi3.js                      4.39 kB │ gzip:   1.87 kB
+dist/assets/Support-DiZG1Of1.js                           4.43 kB │ gzip:   2.09 kB
+dist/assets/CaseStudies-BCS6UHqF.js                       4.49 kB │ gzip:   1.73 kB
+dist/assets/Courses-D8_0_wOp.js                           4.50 kB │ gzip:   1.90 kB
+dist/assets/questions-CiRPd_4Z.js                         4.54 kB │ gzip:   1.60 kB
+dist/assets/Announcements-OIRuFEeY.js                     4.66 kB │ gzip:   1.90 kB
+dist/assets/Users-DepsC8aq.js                             4.77 kB │ gzip:   2.06 kB
+dist/assets/OTPVerify-eXTuCPQ9.js                         4.80 kB │ gzip:   2.15 kB
+dist/assets/Departments-5VnSMENC.js                       4.91 kB │ gzip:   1.77 kB
+dist/assets/Faculty-DPJ_lCQu.js                           5.22 kB │ gzip:   2.08 kB
+dist/assets/Behavior-BUAT4Nrn.js                          5.26 kB │ gzip:   1.88 kB
+dist/assets/Settings-rHUkMfvz.js                          5.48 kB │ gzip:   2.06 kB
+dist/assets/Support-BDNADvya.js                           5.50 kB │ gzip:   2.33 kB
+dist/assets/ExamBuilder-Ci9ytA7P.js                       5.63 kB │ gzip:   1.88 kB
+dist/assets/Contact-Blr4Brp5.js                           5.90 kB │ gzip:   2.43 kB
+dist/assets/Media-Cj_tJYfw.js                             5.90 kB │ gzip:   2.23 kB
+dist/assets/Login-BBLWuwU6.js                             5.93 kB │ gzip:   2.52 kB
+dist/assets/Cms-BDRxLibg.js                               5.93 kB │ gzip:   1.98 kB
+dist/assets/AcademicCalendar-bkp_d9c1.js                  5.98 kB │ gzip:   2.33 kB
+dist/assets/index-BwRsBJHl.js                             5.99 kB │ gzip:   1.95 kB
+dist/assets/BlogPost-DX-OheVI.js                          6.04 kB │ gzip:   2.09 kB
+dist/assets/Assignments-pE0Ru9Ag.js                       6.08 kB │ gzip:   2.18 kB
+dist/assets/Careers-AzJ1nqT-.js                           6.28 kB │ gzip:   2.28 kB
+dist/assets/QuizBuilder-xitkNRSo.js                       6.31 kB │ gzip:   2.18 kB
+dist/assets/index-Qhvxsxsd.js                             6.37 kB │ gzip:   1.85 kB
+dist/assets/CourseOverview-CiiNVCyx.js                    6.45 kB │ gzip:   2.25 kB
+dist/assets/Legal-BwBr4kaa.js                             6.47 kB │ gzip:   2.66 kB
+dist/assets/Support-ryABCP9m.js                           6.59 kB │ gzip:   2.59 kB
+dist/assets/Research-BLrFxDPz.js                          6.62 kB │ gzip:   2.39 kB
+dist/assets/Communication-C13PERfp.js                     6.78 kB │ gzip:   2.41 kB
+dist/assets/Fees-jG7MYzVE.js                              6.83 kB │ gzip:   2.08 kB
+dist/assets/Students-BWckQUoU.js                          6.85 kB │ gzip:   2.66 kB
+dist/assets/Settings-FkpLOEqf.js                          6.85 kB │ gzip:   2.28 kB
+dist/assets/AiConfig-BTTHNZtZ.js                          6.88 kB │ gzip:   2.40 kB
+dist/assets/DataTools-CyeVV2Ui.js                         6.88 kB │ gzip:   2.41 kB
+dist/assets/ProfileSetup-BTM12UGN.js                      6.91 kB │ gzip:   2.68 kB
+dist/assets/QuestionBank-BuqVopTm.js                      6.93 kB │ gzip:   2.55 kB
+dist/assets/report-parts-DAl2JBUp.js                      7.01 kB │ gzip:   2.26 kB
+dist/assets/LearningPath-CGuxbsWU.js                      7.27 kB │ gzip:   2.60 kB
+dist/assets/CourseDetail-D9FjswsT.js                      7.76 kB │ gzip:   2.62 kB
+dist/assets/Forum-Bp35e3sF.js                             7.85 kB │ gzip:   2.73 kB
+dist/assets/MockTests-5c5EKFI_.js                         7.88 kB │ gzip:   2.58 kB
+dist/assets/Dashboard-BP0bdFFO.js                         7.88 kB │ gzip:   2.39 kB
+dist/assets/AICopilot-CcsE1DUy.js                         7.94 kB │ gzip:   2.99 kB
+dist/assets/About-el-lLEG9.js                             8.00 kB │ gzip:   2.96 kB
+dist/assets/AITutor-B5phUxs4.js                           8.08 kB │ gzip:   3.02 kB
+dist/assets/Settings-B9rFED3r.js                          8.12 kB │ gzip:   2.66 kB
+dist/assets/ApiConfig-E8URMwpK.js                         8.28 kB │ gzip:   2.37 kB
+dist/assets/extra-CLDY0oAq.js                             8.29 kB │ gzip:   2.02 kB
+dist/assets/Programs-DUEMfYsX.js                          8.46 kB │ gzip:   2.32 kB
+dist/assets/Exams-CBX_fnIZ.js                             8.58 kB │ gzip:   2.62 kB
+dist/assets/Assignments-DoPnnZaG.js                       9.04 kB │ gzip:   3.01 kB
+dist/assets/Settings-BH0ZzjJa.js                          9.06 kB │ gzip:   2.89 kB
+dist/assets/Attendance-5_nj-C5V.js                        9.37 kB │ gzip:   3.25 kB
+dist/assets/Assignments-C-pJrDml.js                       9.47 kB │ gzip:   3.57 kB
+dist/assets/faq-blog-D7-JSFFQ.js                         11.08 kB │ gzip:   3.54 kB
+dist/assets/model-BaFysT-s.js                            11.48 kB │ gzip:   4.31 kB
+dist/assets/SimilarIssues-BI0PX6da.js                    11.50 kB │ gzip:   3.23 kB
+dist/assets/MicroAssessments-CT-cJjmH.js                 12.57 kB │ gzip:   3.94 kB
+dist/assets/Register-CFTGs4M6.js                         12.72 kB │ gzip:   4.08 kB
+dist/assets/Attendance-CFGafn3-.js                       13.54 kB │ gzip:   3.98 kB
+dist/assets/Academics-DqvPmhLg.js                        15.43 kB │ gzip:   4.21 kB
+dist/assets/ProgramResults-DLNNdtmi.js                   15.47 kB │ gzip:   5.46 kB
+dist/assets/Interventions-C_vJJOqc.js                    15.49 kB │ gzip:   4.53 kB
+dist/assets/Exams-BRPdO9rI.js                            15.82 kB │ gzip:   4.26 kB
+dist/assets/reports-XP01ZOsH.js                          16.71 kB │ gzip:   5.73 kB
+dist/assets/Portfolio-B6GFVvwh.js                        17.66 kB │ gzip:   4.13 kB
+dist/assets/FacultyAnalytics-BcWY_Qta.js                 19.66 kB │ gzip:   4.50 kB
+dist/assets/Reports-BC_7t3CX.js                          22.89 kB │ gzip:   6.92 kB
+dist/assets/ProgressReport-DXvhG5KG.js                   25.15 kB │ gzip:   7.14 kB
+dist/assets/Dashboard-dqUc5Rut.js                        26.13 kB │ gzip:   6.92 kB
+dist/assets/index.esm-D79I-y4a.js                        28.07 kB │ gzip:  10.36 kB
+dist/assets/exam-agent-CURwq36R.js                       28.73 kB │ gzip:   9.99 kB
+dist/assets/faculty-students-C_WmLrRj.js                 28.92 kB │ gzip:   8.31 kB
+dist/assets/AIWorkspace-B4v34pB1.js                      29.60 kB │ gzip:   7.71 kB
+dist/assets/Dashboard-iQeYlb9f.js                        35.03 kB │ gzip:   8.86 kB
+dist/assets/Reports-DsYtx8hF.js                          37.21 kB │ gzip:  10.23 kB
+dist/assets/Mentor-DHJLQAe_.js                           37.94 kB │ gzip:   9.72 kB
+dist/assets/ExamAnalysis-CyohPaQP.js                     40.73 kB │ gzip:  11.36 kB
+dist/assets/query-CAN5UmSL.js                            42.36 kB │ gzip:  12.79 kB
+dist/assets/Home-C5f_dko2.js                             46.80 kB │ gzip:  11.74 kB
+dist/assets/MyStudents-D2ltB8xv.js                       50.56 kB │ gzip:  11.52 kB
+dist/assets/Dashboard-Do82e7eq.js                        50.78 kB │ gzip:  12.64 kB
+dist/assets/InstitutionIntelligence-Ch_mQE_m.js          56.44 kB │ gzip:  14.38 kB
+dist/assets/StudentProfile-C-R2gztA.js                   59.37 kB │ gzip:  13.83 kB
+dist/assets/index-DZRrmNIE.js                            60.39 kB │ gzip:  16.71 kB
+dist/assets/AITeachingAssistant-DHk7mmJX.js              62.14 kB │ gzip:  16.87 kB
+dist/assets/MicroAssessmentStudio-D7B7XRfZ.js            69.46 kB │ gzip:  17.03 kB
+dist/assets/student-evidence-DAtxHVE7.js                 73.72 kB │ gzip:  16.33 kB
+dist/assets/ExamAgent-uO2KJLVO.js                        75.29 kB │ gzip:  19.26 kB
+dist/assets/PerformanceAccuracy-CzrAe0rZ.js              76.32 kB │ gzip:  16.73 kB
+dist/assets/motion-B-ZRQDX3.js                          116.36 kB │ gzip:  38.56 kB
+dist/assets/vendor-yrJ4HThv.js                          164.78 kB │ gzip:  53.78 kB
+dist/assets/QuestionIntelligence-DWRgfwHQ.js            232.92 kB │ gzip:  55.35 kB
+dist/assets/math-text-5G4FQ8U1.js                       277.61 kB │ gzip:  83.73 kB
+dist/assets/charts-DzYS-Zi1.js                          433.57 kB │ gzip: 114.49 kB
+dist/assets/index-CmG2FShG.js                         1,180.85 kB │ gzip: 262.06 kB
+dist/assets/index-p74mxDMa.js                         2,528.47 kB │ gzip: 891.46 kB
+
+(!) Some chunks are larger than 1200 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 38.45s
