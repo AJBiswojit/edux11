@@ -1,0 +1,57 @@
+{
+  "note": "Baseline measurements of the original indivisible mistake-topic-columns component using the calibrated local equivalent fixture. The exact reported production value 1850.15 pt is covered by a dedicated unit test; the local fixture is deliberately close to that magnitude.",
+  "reportedProductionHeight": 1850.15,
+  "calibratedLocalHeight": 1844.95,
+  "exactProductionDataAvailable": false,
+  "measurements": [
+    {
+      "topics": 12,
+      "weakTopics": 8,
+      "mistakes": 4,
+      "topicWords": 7,
+      "height": 1585.95
+    },
+    {
+      "topics": 13,
+      "weakTopics": 9,
+      "mistakes": 5,
+      "topicWords": 7,
+      "height": 1715.45
+    },
+    {
+      "topics": 14,
+      "weakTopics": 8,
+      "mistakes": 4,
+      "topicWords": 7,
+      "height": 1844.95
+    },
+    {
+      "topics": 15,
+      "weakTopics": 9,
+      "mistakes": 5,
+      "topicWords": 7,
+      "height": 1974.45
+    },
+    {
+      "topics": 16,
+      "weakTopics": 10,
+      "mistakes": 6,
+      "topicWords": 7,
+      "height": 2103.95
+    },
+    {
+      "topics": 20,
+      "weakTopics": 12,
+      "mistakes": 8,
+      "topicWords": 7,
+      "height": 2621.95
+    },
+    {
+      "topics": 96,
+      "weakTopics": 64,
+      "mistakes": 32,
+      "topicWords": 7,
+      "height": 12463.95
+    }
+  ]
+}

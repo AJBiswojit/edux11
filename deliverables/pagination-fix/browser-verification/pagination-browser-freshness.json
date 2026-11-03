@@ -1,0 +1,17 @@
+{
+  "head": "29f53a5c6210a157e12916d9829c7755f58f198a",
+  "viteCwd": "/home/user/edux11/frontend",
+  "browserVersion": "HeadlessChrome/131.0.6778.0",
+  "profiles": [
+    "/tmp/edux-impl-chrome-1793694639113-student",
+    "/tmp/edux-impl-chrome-1793694639113-faculty",
+    "/tmp/edux-impl-chrome-1793694639113-admin"
+  ],
+  "dedicatedBrowserProcessPerRole": true,
+  "cacheDisabled": true,
+  "networkResponses": 936,
+  "moduleResponses": 627,
+  "fromDiskCacheResponses": 0,
+  "serviceWorkerResponses": 0,
+  "notModified304": 0
+}

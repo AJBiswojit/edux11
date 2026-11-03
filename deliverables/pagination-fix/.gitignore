@@ -1,0 +1,23 @@
+# Generated binaries and large per-render layout manifests are local evidence.
+# Compact JSON summaries, scripts, fixtures, logs-as-text and contact sheets
+# are committed instead.
+*.pdf
+*.png
+!previews/representative-pages-contact-sheet.png
+!browser-verification/pdf-previews/first-pages-contact-sheet.png
+!browser-verification/pdf-previews/last-pages-contact-sheet.png
+
+browser-verification/downloads/
+
+# Per-render JSON embeds the full layout audit; generation-results.json is the
+# committed compact summary. Keep the one baseline failure record.
+before/**/*.json
+before/*.json
+!before/failing-intelligence.json
+after/**/*.json
+after/*.json
+
+# Full validators are several MB; the committed *-summary.json files carry the
+# pass/fail evidence.
+pdf-validation.json
+browser-verification/pdf-validation.json

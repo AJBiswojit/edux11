@@ -1,0 +1,35 @@
+{
+  "generatedAt": "2026-11-03T09:00:00.000Z",
+  "source": "/home/user/edux11/deliverables/pagination-fix/fixtures/failing-jee-phase2.json",
+  "kind": "intelligence",
+  "subject": "All Subjects",
+  "role": "student",
+  "user": {
+    "fullName": "Aarav Sharma",
+    "rollNo": "21CS114"
+  },
+  "examName": "JEE Main Mock Test - Phase 2 - 2026-10-31 (calibrated local equivalent)",
+  "examId": "JEE-PHASE2-2026-10-31-LOCAL-EQUIVALENT",
+  "studentName": "Aarav Sharma",
+  "rollNo": "21CS114",
+  "reportTitle": "EXAM INTELLIGENCE REPORT",
+  "sourceValueCount": 269,
+  "baseline": true,
+  "engine": "premium-v2-baseline",
+  "ok": false,
+  "error": {
+    "name": "Error",
+    "message": "Component height 1844.95 pt exceeds the 708 pt printable area: mistake-topic-columns",
+    "stack": "Error: Component height 1844.95 pt exceeds the 708 pt printable area: mistake-topic-columns\n    at ReportContext.reserve (file:///tmp/pagination-baseline/src/pages/student/premium-pdf/layout.js:561:13)\n    at ReportContext.component (file:///tmp/pagination-baseline/src/pages/student/premium-pdf/layout.js:585:24)\n    at EditorialColumns (file:///tmp/pagination-baseline/src/pages/student/premium-pdf/components.js:288:14)\n    at renderLearning (file:///tmp/pagination-baseline/src/pages/student/premium-pdf/intelligence.js:214:3)\n    at renderIntelligenceReport (file:///tmp/pagination-baseline/src/pages/student/premium-pdf/intelligence.js:361:3)\n    at Module.renderPremiumPdf (file:///tmp/pagination-baseline/src/pages/student/premium-pdf/renderer.js:80:32)\n    at async main (file:///home/user/edux11/deliverables/pagination-fix/scripts/render.mjs:84:14)"
+  },
+  "componentHeight": 1844.95,
+  "pageCount": null,
+  "auditSummary": null,
+  "layoutAudit": null,
+  "flags": null,
+  "missingValues": null,
+  "emittedCharacters": null,
+  "pageSize": null,
+  "bytes": null,
+  "output": null
+}

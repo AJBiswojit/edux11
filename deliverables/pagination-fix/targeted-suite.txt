@@ -1,0 +1,67 @@
+
+ RUN  v2.1.9 /home/user/edux11/frontend
+
+ ✓ tests/pages/exam-analysis-stats.test.js > exam analysis question chips > recovers paper total from attempt ratio when the payload omits total
+ ✓ tests/pages/exam-analysis-stats.test.js > exam analysis question chips > shows every chip as a percentage of the matching base
+ ✓ tests/pages/exam-analysis-stats.test.js > exam analysis question chips > computes rates from counts when the payload has total but no precomputed ratios
+ ✓ tests/pages/exam-analysis-stats.test.js > exam analysis question chips > returns zero-percent chips when nothing was attempted
+ ✓ tests/pages/exam-analysis-stats.test.js > exam analysis question chips > uses percentage chips for faculty/admin per-attempt analysis payloads
+ ✓ tests/pages/exam-analysis-stats.test.js > faculty and admin individual analysis share the percentage chips > mounts the same attempt-analysis page on faculty and admin student routes
+ ✓ tests/pages/exam-analysis-stats.test.js > faculty and admin individual analysis share the percentage chips > guards Student exports against duplicate clicks with an independent ref lock per action
+ ✓ tests/pages/exam-analysis-stats.test.js > faculty and admin individual analysis share the percentage chips > renders the shared AnalysisDashboard and both premium PDF actions for faculty/admin
+ ✓ tests/pages/exam-analysis-stats.test.js > per-subject question counts on analysis cards > counts NEET Physics / Chemistry / Biology independently
+ ✓ tests/pages/exam-analysis-stats.test.js > per-subject question counts on analysis cards > counts JEE Physics / Chemistry / Mathematics independently
+ ✓ tests/pages/exam-analysis-stats.test.js > per-subject question counts on analysis cards > does not leak another subject’s skipped questions
+ ✓ tests/pages/exam-analysis-stats.test.js > per-subject question counts on analysis cards > falls back to subject payload fields when review rows are missing
+ ✓ tests/pages/exam-analysis-stats.test.js > per-subject question counts on analysis cards > renders Questions / Attempted / Correct / Incorrect / Skipped as simple text
+ ✓ tests/pages/exam-analysis-stats.test.js > subject ranks on analysis cards > shows the batch rank supplied on each subject, not an intra-paper subject order
+ ✓ tests/pages/exam-analysis-stats.test.js > subject ranks on analysis cards > hides rank when the payload has no batch cohort
+ ✓ tests/pages/exam-analysis-stats.test.js > subject ranks on analysis cards > formats NTA percentiles to seven decimals on JEE subject cards
+ ✓ tests/pages/exam-analysis-stats.test.js > subject ranks on analysis cards > hides percentile chips for NEET even if a stale percentile is present
+ ✓ tests/pages/exam-analysis-stats.test.js > batch AIR on the analysis hero > labels JEE and NEET overall rank as batch AIR
+ ✓ tests/pages/exam-analysis-stats.test.js > batch AIR on the analysis hero > hides AIR when the attempt has no NTA / batch overall rank
+ ✓ tests/pages/exam-analysis-stats.test.js > batch AIR on the analysis hero > uses rank cohortSize only, never comparison batchCohortSize
+ ✓ tests/pages/exam-analysis-stats.test.js > batch AIR on the analysis hero > keeps JEE NTA percentile on the hero
+ ✓ tests/pages/exam-analysis-stats.test.js > batch AIR on the analysis hero > hides comparison %ile extras on NEET analysis cards
+ ✓ tests/pages/exam-analysis-stats.test.js > question-by-question review paging > loads the first 20 questions only
+ ✓ tests/pages/exam-analysis-stats.test.js > question-by-question review paging > shows the next 20 on page 2 and the remainder on the last page
+ ✓ tests/pages/exam-analysis-stats.test.js > question-by-question review paging > clamps an out-of-range page without changing the source list
+ ✓ tests/pages/premium-pdf-layout.test.js > V2 measurement-driven layout audit > detects unintended text and sibling-component intersections
+ ✓ tests/pages/premium-pdf-layout.test.js > V2 measurement-driven layout audit > reports zero unintended intersections for contained, non-overlapping components
+ ✓ tests/pages/premium-pdf-layout.test.js > V2 dynamic data-model regressions > supports 2/3 subjects, 30+ question rows, long names, missing values, different scores and large revision lists without mutating the payload
+ ✓ tests/pages/premium-pdf-layout.test.js > V2 dynamic data-model regressions > keeps long source values and short numeric values in the preservation register
+ ✓ tests/pages/premium-pdf-layout.test.js > V2 dynamic data-model regressions > keeps the premium export API and drops the retired legacy writer
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > reproduces the exact 1850.15 pt indivisible reserve failure
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > splits a 1850.15 pt editorial component into page-sized segments without losing entries
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > renders the calibrated failing intelligence report after the fix 2328ms
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > uses the remaining space on a partially filled page instead of leaving a nearly blank sheet 1556ms
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > renders the calibrated failing full report with a clean layout 4059ms
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > renders a single oversized topic entry across continuation pages 2385ms
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > renders long question statements and explanations without clipping 4542ms
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > preserves all 180 NEET questions, explanations and subject separation 49255ms
+ ✓ tests/pages/premium-pdf.test.js > premium PDF data model > preserves every question-review row and never truncates explanations
+ ✓ tests/pages/premium-pdf.test.js > premium PDF data model > supports a different subject combination and score without mutating the payload
+ ✓ tests/pages/premium-pdf.test.js > premium PDF data model > flattens nested source values, skips nulls and de-duplicates
+ ✓ tests/pages/premium-pdf.test.js > premium PDF mathematical source handling > recognises inline and display mathematics without rewriting source
+ ✓ tests/pages/premium-pdf.test.js > premium PDF mathematical source handling > flags malformed expressions instead of guessing a correction
+ ✓ tests/pages/premium-pdf.test.js > premium PDF mathematical source handling > uses word boundaries for short numeric source values
+ ✓ tests/pages/premium-pdf.test.js > premium PDF student identity > uses the explicitly supplied student identity for faculty/admin exports
+ ✓ tests/pages/premium-pdf.test.js > premium PDF student identity > keeps both report kinds on the same identity contract
+ ✓ tests/pages/premium-pdf-base-model.test.js > premium base model (replaces the legacy buildReportModel) > normalises exam, subject scope, score and identity without drawing PDF bytes
+ ✓ tests/pages/premium-pdf-base-model.test.js > premium base model (replaces the legacy buildReportModel) > honours a single-subject scope
+ ✓ tests/pages/premium-pdf-base-model.test.js > premium base model (replaces the legacy buildReportModel) > keeps chapter and subject time calculations used by the premium renderer
+ ✓ tests/pages/premium-pdf-base-model.test.js > premium base model (replaces the legacy buildReportModel) > still produces the revision groups consumed by premium intelligence/full reports
+ ✓ tests/pages/exam-analysis-pdf.test.js > exam analysis PDF shared helpers > formats stored minutes and hides zeros
+ ✓ tests/pages/exam-analysis-pdf.test.js > exam analysis PDF shared helpers > derives mastery from accuracy and maps option letters
+ ✓ tests/pages/exam-analysis-pdf.test.js > exam analysis PDF shared helpers > prefers an explicit student identity, then the analysis payload
+ ✓ tests/pages/exam-analysis-pdf.test.js > premium-only export API > exposes the two production exports and no legacy writer surface
+ ✓ tests/pages/exam-analysis-pdf.test.js > premium-only export API > routes Report through the premium renderer and downloads exactly once
+ ✓ tests/pages/exam-analysis-pdf.test.js > premium-only export API > routes Full Analysis through the premium renderer and downloads exactly once
+ ✓ tests/pages/premium-pdf-browser-fonts.test.js > PDFKit browser standard-font registration > registers all Base 14 font metrics once for the browser build
+ ✓ tests/pages/premium-pdf-browser-fonts.test.js > PDFKit browser standard-font registration > leaves the Node build untouched when registerStdFonts is unavailable
+
+ Test Files  7 passed (7)
+      Tests  58 passed (58)
+   Start at  08:12:06
+   Duration  70.76s (transform 511ms, setup 0ms, collect 2.05s, tests 64.36s, environment 1.69s, prepare 556ms)
+

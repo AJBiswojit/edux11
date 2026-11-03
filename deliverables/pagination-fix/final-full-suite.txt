@@ -1,0 +1,1466 @@
+
+> medixo-edux-platform@1.0.0 test
+> vitest run
+
+
+ RUN  v2.1.9 /home/user/edux11/frontend
+
+ ✓ tests/intelligence/student-360-evidence-action.test.js (29 tests) 26ms
+stderr | tests/intelligence/micro-assessment-studio.test.js > connected Source Library filters > renders the selected filter value in the trigger, not a generic Select placeholder
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at Select2 (/home/user/edux11/frontend/src/components/ui/select.jsx:46:3)
+
+stderr | tests/intelligence/micro-assessment-studio.test.js > deterministic understanding, question generation and coverage > renders the selected assessment size and never leaves a Select placeholder after a choice
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at Select2 (/home/user/edux11/frontend/src/components/ui/select.jsx:46:3)
+
+ ✓ tests/intelligence/micro-assessment-studio.test.js (24 tests) 68ms
+ ❯ tests/filters/cascading-filters.test.js (21 tests | 4 failed) 51ms
+   × Exam Analysis (student) — context → family → exam → subject > detects families from canonical exam metadata, never subject names 28ms
+     → expected [] to deeply equal [ 'JEE', 'NEET' ]
+   × Exam Analysis (student) — context → family → exam → subject > switching to University clears competitive family/exam/subject 1ms
+     → Cannot read properties of undefined (reading 'id')
+   × Exam Analysis (student) — context → family → exam → subject > keeps a JEE exam out of the NEET family and vice versa (subject lists never leak) 0ms
+     → Cannot read properties of undefined (reading 'id')
+   × Exam Analysis (student) — context → family → exam → subject > switching exams clears a subject that belongs to the previous exam only 0ms
+     → Cannot read properties of undefined (reading 'id')
+ ✓ tests/pages/exam-analysis-stats.test.js (25 tests) 19ms
+ ✓ tests/intelligence/phase-6-multi-student-outcomes.test.js (25 tests) 15ms
+stderr | tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders the weaknesses tab with evidence + suggested intervention actions
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+
+stderr | tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders the similar issues tab with GROUPED and INDIVIDUAL sections
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+
+stderr | tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders chapter intelligence with derived metrics and actionable buttons
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+
+stderr | tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders strengths with evidence actions and no unconditional intervention buttons
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+
+stderr | tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders the interventions tab with the honest empty state (nothing auto-created)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+
+stderr | tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders for NEET and University students without cross-domain selectors
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at StudentProfile (/home/user/edux11/frontend/src/pages/faculty/StudentProfile.jsx:48:47)
+    at RenderedRoute (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:535:7)
+    at Routes (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1269:7)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+
+ ❯ tests/intelligence/student-360-ui-render.test.jsx (6 tests | 6 failed) 1844ms
+   × Student 360 page render (SSR smoke) > renders the weaknesses tab with evidence + suggested intervention actions 35ms
+     → Cannot read properties of undefined (reading 'pathname')
+   × Student 360 page render (SSR smoke) > renders the similar issues tab with GROUPED and INDIVIDUAL sections 4ms
+     → Cannot read properties of undefined (reading 'pathname')
+   × Student 360 page render (SSR smoke) > renders chapter intelligence with derived metrics and actionable buttons 4ms
+     → Cannot read properties of undefined (reading 'pathname')
+   × Student 360 page render (SSR smoke) > renders strengths with evidence actions and no unconditional intervention buttons 5ms
+     → Cannot read properties of undefined (reading 'pathname')
+   × Student 360 page render (SSR smoke) > renders the interventions tab with the honest empty state (nothing auto-created) 4ms
+     → Cannot read properties of undefined (reading 'pathname')
+   × Student 360 page render (SSR smoke) > renders for NEET and University students without cross-domain selectors 2ms
+     → Cannot read properties of undefined (reading 'pathname')
+ ✓ tests/intelligence/student-360-consolidation.test.js (19 tests) 12ms
+ ✓ tests/intelligence/student-360-domain-isolation.test.js (15 tests) 46ms
+ ✓ tests/pages/premium-pdf-layout.test.js (5 tests) 31ms
+ ✓ tests/pages/premium-pdf-pagination.test.js (8 tests) 63074ms
+   ✓ Premium PDF content-driven pagination > renders the calibrated failing intelligence report after the fix 2070ms
+   ✓ Premium PDF content-driven pagination > uses the remaining space on a partially filled page instead of leaving a nearly blank sheet 1673ms
+   ✓ Premium PDF content-driven pagination > renders the calibrated failing full report with a clean layout 4091ms
+   ✓ Premium PDF content-driven pagination > renders a single oversized topic entry across continuation pages 2422ms
+   ✓ Premium PDF content-driven pagination > renders long question statements and explanations without clipping 4580ms
+   ✓ Premium PDF content-driven pagination > preserves all 180 NEET questions, explanations and subject separation 48232ms
+ ❯ tests/services/phase-f-adapters.test.js (14 tests | 1 failed) 19ms
+   × Phase F — question adapter isolation > resolves structured { key, text, imageUrl } options to their display text 10ms
+     → expected [ …(3) ] to deeply equal [ '20.4 m', '40.8 m', 'C' ]
+ ✓ tests/assessment/live-question-source.test.js (11 tests) 8ms
+ ✓ tests/utils/filter-cascade.test.js (11 tests) 8ms
+ ✓ tests/pages/premium-pdf.test.js (8 tests) 29ms
+ ✓ tests/intelligence/student-360-routes.test.js (5 tests) 40ms
+ ✓ tests/pages/premium-pdf-base-model.test.js (4 tests) 23ms
+ ✓ tests/utils/dropdown-position.test.js (10 tests) 5ms
+ ✓ tests/assessment/architecture.test.js (9 tests) 151ms
+ ✓ tests/services/service-surface.test.js (7 tests) 178ms
+ ✓ tests/services/paper-send-readiness.test.js (8 tests) 5ms
+ ✓ tests/pages/legacy-pdf-removal.test.js (5 tests) 80ms
+ ✓ tests/intelligence/exam-accuracy.test.js (8 tests) 6ms
+stderr | tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > activates only AI Micro-Assessment on its nested URL
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+
+stderr | tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > activates Assessment Intelligence only on its canonical route
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+
+stderr | tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps My Students active for its intentional detail descendants
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+
+stderr | tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty mutually exclusive with all other Faculty items
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+
+stderr | tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/teaching mutually exclusive with all other Faculty items
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+
+stderr | tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/my-students mutually exclusive with all other Faculty items
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+
+stderr | tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/reports mutually exclusive with all other Faculty items
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+
+stderr | tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/ai-assistant mutually exclusive with all other Faculty items
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+
+stderr | tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/timetable mutually exclusive with all other Faculty items
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+
+stderr | tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/support mutually exclusive with all other Faculty items
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+
+stderr | tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > derives state from URL across navigation changes rather than click state
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format. This will lead to a mismatch between the initial, non-hydrated UI and the intended UI. To avoid this, useLayoutEffect should only be used in components that render exclusively on the client. See https://reactjs.org/link/uselayouteffect-ssr for common fixes.
+    at LinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:807:9)
+    at NavLinkWithRef (/home/user/edux11/frontend/node_modules/react-router-dom/dist/umd/react-router-dom.development.js:885:25)
+    at li
+    at ul
+    at div
+    at nav
+    at div
+    at Sidebar (/home/user/edux11/frontend/src/components/layout/sidebar.jsx:19:20)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+
+ ❯ tests/navigation/sidebar-active-state.test.jsx (12 tests | 6 failed) 64ms
+   × Faculty sidebar route-aware active state > activates only AI Micro-Assessment on its nested URL 35ms
+     → expected [] to deeply equal [ 'AI Micro-Assessment Studio' ]
+   × Faculty sidebar route-aware active state > keeps /faculty/teaching mutually exclusive with all other Faculty items 3ms
+     → expected [] to deeply equal [ 'Teaching' ]
+   × Faculty sidebar route-aware active state > keeps /faculty/reports mutually exclusive with all other Faculty items 2ms
+     → expected [] to deeply equal [ 'Reports' ]
+   × Faculty sidebar route-aware active state > keeps /faculty/ai-assistant mutually exclusive with all other Faculty items 2ms
+     → expected [] to deeply equal [ 'AI Workspace' ]
+   × Faculty sidebar route-aware active state > keeps /faculty/timetable mutually exclusive with all other Faculty items 3ms
+     → expected [] to deeply equal [ 'Calendar' ]
+   × Faculty sidebar route-aware active state > derives state from URL across navigation changes rather than click state 4ms
+     → expected [] to deeply equal [ 'AI Micro-Assessment Studio' ]
+ ❯ tests/pages/student-dashboard-view.test.js (3 tests | 3 failed) 7ms
+   × student dashboard view > does not repeat the pending assignment count beside the value 5ms
+     → buildDashboardKpis is not a function
+   × student dashboard view > uses each course mastery when the ranking repeats one fallback score 1ms
+     → buildSubjectMasteryRows is not a function
+   × student dashboard view > keeps a varied ranking when every course shares one placeholder score 0ms
+     → buildSubjectMasteryRows is not a function
+ ✓ tests/intelligence/admin-engine-empty.test.js (2 tests) 6ms
+ ✓ tests/utils/select-option.test.js (5 tests) 4ms
+stderr | tests/components/paper-generator-generation-flow.test.jsx > Generate Paper — no automatic generation on open > starts in a clean configuration state and never calls the generation API
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ tests/components/paper-generator-generation-flow.test.jsx (9 tests) 7495ms
+   ✓ Generate Paper — no automatic generation on open > does not restore a persisted AI paper as a new generation (stale-state isolation) 436ms
+   ✓ Generate Paper — no automatic generation on open > rehydrates the persisted backend current generation on refresh (without regenerating) 540ms
+   ✓ Generate Paper — generation only after the Generate action > posts the selected configuration exactly once and renders the real response 1526ms
+   ✓ Generate Paper — generation only after the Generate action > shows the failure state and no success notification when generation fails 880ms
+   ✓ Generate Paper — generation only after the Generate action > does not call the generation API when a required filter is missing 332ms
+   ✓ Generate Paper — Competitive domain > renders generated structured option records as their text and stays mounted 1147ms
+   ✓ Generate Paper — University regression and domain switching > keeps the University cascade working and sends real filters to the agent 1186ms
+   ✓ Generate Paper — University regression and domain switching > survives University → Competitive → University with consistent dependent filters 1156ms
+ ✓ tests/rendering/math-text.test.jsx (50 tests) 82ms
+ ✓ tests/components/select.test.jsx (21 tests) 3433ms
+   ✓ Select — composite option labels (question count) > keeps the checkmark and trigger label in sync after changing count, and clear restores the placeholder 350ms
+   ✓ Select — selected value & placeholder > updates the trigger after a selection and calls onValueChange (controlled, as features use it) 358ms
+   ✓ Select — keyboard support > arrow keys navigate options, Home/End jump, Enter selects, Escape closes and refocuses 462ms
+   ✓ Select — outside click, group, portal > outside click closes the menu (trigger and menu clicks do not) 710ms
+   ✓ Select — outside click, group, portal > within one filter group only one dropdown stays open 452ms
+stderr | tests/components/paper-generator-competitive-subjects.test.jsx > Competitive exam subject mapping > offers Mathematics, Physics, Chemistry for JEE
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ tests/components/paper-generator-competitive-subjects.test.jsx (7 tests) 5654ms
+   ✓ Competitive exam subject mapping > offers Mathematics, Physics, Chemistry for JEE 501ms
+   ✓ Competitive exam subject mapping > offers Physics, Chemistry, Biology for NEET 545ms
+   ✓ Competitive exam subject mapping > clears a JEE-only subject (Mathematics) when switching JEE → NEET 1185ms
+   ✓ Competitive exam subject mapping > clears a NEET-only subject (Biology) when switching NEET → JEE 1175ms
+   ✓ Competitive exam subject mapping > sends ticked subjects as an array in the generation payload 845ms
+   ✓ Competitive exam subject mapping > ticking "All subjects" selects every subject and sends the All sentinel 801ms
+   ✓ Competitive exam subject mapping > combines chapters from every ticked subject in the Chapter dropdown 600ms
+ ✓ tests/assessment/question-generation.test.jsx (15 tests) 17ms
+stderr | tests/components/paper-library-and-view.test.jsx > Paper Library card — focused action hierarchy > renders View/Edit/Share/Delete and none of the removed toolbar actions
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ tests/components/paper-library-and-view.test.jsx (7 tests) 629ms
+ ✓ tests/pages/faculty-attempt-analysis.test.jsx (6 tests) 925ms
+stderr | tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > removes the standalone Search field and derives Course options from the real catalog
+Error: No QueryClient set, use QueryClientProvider to set one
+    at Module.useQueryClient (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/src/QueryClientProvider.tsx:18:11)
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:74:23)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+    at HTMLUnknownElementImpl._dispatch (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:243:9)
+Error: No QueryClient set, use QueryClientProvider to set one
+    at Module.useQueryClient (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/src/QueryClientProvider.tsx:18:11)
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:74:23)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+    at HTMLUnknownElementImpl._dispatch (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:243:9)
+The above error occurred in the <PaperGeneratorTab> component:
+
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:82:36)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+stderr | tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > keeps Children disabled until each real parent is chosen and sends the selected filters to the generation agent
+Error: No QueryClient set, use QueryClientProvider to set one
+    at Module.useQueryClient (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/src/QueryClientProvider.tsx:18:11)
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:74:23)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+    at HTMLUnknownElementImpl._dispatch (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:243:9)
+Error: No QueryClient set, use QueryClientProvider to set one
+    at Module.useQueryClient (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/src/QueryClientProvider.tsx:18:11)
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:74:23)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+    at HTMLUnknownElementImpl._dispatch (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:243:9)
+The above error occurred in the <PaperGeneratorTab> component:
+
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:82:36)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+stderr | tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > changing Course clears Subject/Chapter/Topic and refuses to generate without an explicit University subject
+Error: No QueryClient set, use QueryClientProvider to set one
+    at Module.useQueryClient (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/src/QueryClientProvider.tsx:18:11)
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:74:23)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+    at HTMLUnknownElementImpl._dispatch (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:243:9)
+Error: No QueryClient set, use QueryClientProvider to set one
+    at Module.useQueryClient (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/src/QueryClientProvider.tsx:18:11)
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:74:23)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+    at HTMLUnknownElementImpl._dispatch (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:243:9)
+The above error occurred in the <PaperGeneratorTab> component:
+
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:82:36)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+stderr | tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > keeps an empty API catalog empty instead of injecting demo/sample options
+Error: No QueryClient set, use QueryClientProvider to set one
+    at Module.useQueryClient (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/src/QueryClientProvider.tsx:18:11)
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:74:23)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+    at HTMLUnknownElementImpl._dispatch (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:243:9)
+Error: No QueryClient set, use QueryClientProvider to set one
+    at Module.useQueryClient (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/src/QueryClientProvider.tsx:18:11)
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:74:23)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+    at HTMLUnknownElementImpl._dispatch (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:243:9)
+The above error occurred in the <PaperGeneratorTab> component:
+
+    at PaperGeneratorTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-generator-tab.jsx:82:36)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+ ❯ tests/components/paper-generator-syllabus-filter.test.jsx (4 tests | 4 failed) 57ms
+   × Question Paper Studio — Syllabus/content filter > removes the standalone Search field and derives Course options from the real catalog 43ms
+     → No QueryClient set, use QueryClientProvider to set one
+   × Question Paper Studio — Syllabus/content filter > keeps Children disabled until each real parent is chosen and sends the selected filters to the generation agent 5ms
+     → No QueryClient set, use QueryClientProvider to set one
+   × Question Paper Studio — Syllabus/content filter > changing Course clears Subject/Chapter/Topic and refuses to generate without an explicit University subject 4ms
+     → No QueryClient set, use QueryClientProvider to set one
+   × Question Paper Studio — Syllabus/content filter > keeps an empty API catalog empty instead of injecting demo/sample options 3ms
+     → No QueryClient set, use QueryClientProvider to set one
+stderr | tests/assessment/no-seeded-question-runtime.test.jsx > PYQ Intelligence tab — records come only from the live bank > renders zero seeded records when the backend bank is empty (empty state instead)
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ tests/assessment/no-seeded-question-runtime.test.jsx (4 tests) 266ms
+stderr | tests/components/ui-copy-cleanup.test.jsx > UI copy cleanup — implementation terminology removed from product surfaces > Question Paper Studio renders product copy and a capitalised generation state
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+stderr | tests/components/ui-copy-cleanup.test.jsx > UI copy cleanup — implementation terminology removed from product surfaces > Paper Library renders product copy
+Error: [vitest] No "useSqlPaperDetail" export is defined on the "../../src/services/faculty-papers" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+    at VitestMocker.createError (file:///home/user/edux11/frontend/node_modules/vitest/dist/chunks/execute.2pr0rHgK.js:321:19)
+    at Object.get (file:///home/user/edux11/frontend/node_modules/vitest/dist/chunks/execute.2pr0rHgK.js:389:22)
+    at PaperPreviewDialog (/home/user/edux11/frontend/src/components/assessment-workspace/paper-parts.jsx:238:21)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+Error: [vitest] No "usePublishedPapers" export is defined on the "../../src/services/faculty-papers" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+    at VitestMocker.createError (file:///home/user/edux11/frontend/node_modules/vitest/dist/chunks/execute.2pr0rHgK.js:321:19)
+    at Object.get (file:///home/user/edux11/frontend/node_modules/vitest/dist/chunks/execute.2pr0rHgK.js:389:22)
+    at MergePapersDialog (/home/user/edux11/frontend/src/components/assessment-workspace/paper-parts.jsx:839:68)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+Error: [vitest] No "useSqlPaperDetail" export is defined on the "../../src/services/faculty-papers" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+    at VitestMocker.createError (file:///home/user/edux11/frontend/node_modules/vitest/dist/chunks/execute.2pr0rHgK.js:321:19)
+    at Object.get (file:///home/user/edux11/frontend/node_modules/vitest/dist/chunks/execute.2pr0rHgK.js:389:22)
+    at PaperPreviewDialog (/home/user/edux11/frontend/src/components/assessment-workspace/paper-parts.jsx:238:21)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+Error: [vitest] No "usePublishedPapers" export is defined on the "../../src/services/faculty-papers" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+    at VitestMocker.createError (file:///home/user/edux11/frontend/node_modules/vitest/dist/chunks/execute.2pr0rHgK.js:321:19)
+    at Object.get (file:///home/user/edux11/frontend/node_modules/vitest/dist/chunks/execute.2pr0rHgK.js:389:22)
+    at MergePapersDialog (/home/user/edux11/frontend/src/components/assessment-workspace/paper-parts.jsx:839:68)
+    at renderWithHooks (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/user/edux11/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/user/edux11/frontend/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/home/user/edux11/frontend/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+The above error occurred in the <PaperPreviewDialog> component:
+
+    at PaperPreviewDialog (/home/user/edux11/frontend/src/components/assessment-workspace/paper-parts.jsx:447:31)
+    at div
+    at PaperLibraryTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-library-tab.jsx:17:28)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+The above error occurred in the <MergePapersDialog> component:
+
+    at MergePapersDialog (/home/user/edux11/frontend/src/components/assessment-workspace/paper-parts.jsx:1710:30)
+    at div
+    at PaperLibraryTab (/home/user/edux11/frontend/src/components/assessment-workspace/paper-library-tab.jsx:17:28)
+    at Router (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1203:17)
+    at MemoryRouter (/home/user/edux11/frontend/node_modules/react-router/dist/umd/react-router.development.js:1097:7)
+    at ToastProvider (/home/user/edux11/frontend/src/components/ui/toast.jsx:45:26)
+    at QueryClientProvider (file:///home/user/edux11/frontend/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+ ❯ tests/components/ui-copy-cleanup.test.jsx (3 tests | 2 failed) 255ms
+   × UI copy cleanup — implementation terminology removed from product surfaces > Question Paper Studio renders product copy and a capitalised generation state 119ms
+     → expected ' Question Paper StudioDesign, generat…' to contain 'Question Bank'
+   × UI copy cleanup — implementation terminology removed from product surfaces > Paper Library renders product copy 76ms
+     → [vitest] No "useSqlPaperDetail" export is defined on the "../../src/services/faculty-papers" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+ ✓ tests/components/dropdown-menu.test.jsx (9 tests) 2537ms
+   ✓ DropdownMenu — open/close > opens on trigger click, closes on second click 414ms
+   ✓ DropdownMenu — open/close > closes on outside click 354ms
+   ✓ DropdownMenu — open/close > Escape closes and returns focus to the trigger 356ms
+   ✓ DropdownMenu — open/close > an item click runs its handler and closes the menu 358ms
+   ✓ DropdownMenu — group mutual exclusion > within one group only one menu stays open 455ms
+ ✓ tests/components/select-positioning.test.jsx (9 tests) 1834ms
+   ✓ Select — scroll and resize behavior > closes when the trigger scrolls fully out of the viewport 459ms
+stderr | tests/components/faculty-tab-empty.test.jsx > Admin Faculty tab — empty institution (assembler only) > shows 0 faculty and does not render demo roster copy
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ tests/components/faculty-tab-empty.test.jsx (5 tests) 252ms
+ ✓ tests/pages/exam-analysis-pdf.test.js (6 tests) 23ms
+stderr | tests/intelligence/micro-assessment-question-card.test.jsx > micro-assessment question card presentation > hides the answer until Show answer is pressed and can hide it again
+Warning: The current testing environment is not configured to support act(...)
+Warning: The current testing environment is not configured to support act(...)
+Warning: The current testing environment is not configured to support act(...)
+
+stderr | tests/intelligence/micro-assessment-question-card.test.jsx > micro-assessment question card presentation > hides the answer until Show answer is pressed and can hide it again
+Warning: The current testing environment is not configured to support act(...)
+
+stderr | tests/intelligence/micro-assessment-question-card.test.jsx > micro-assessment question card presentation > does not fabricate an explanation when none exists
+Warning: The current testing environment is not configured to support act(...)
+Warning: The current testing environment is not configured to support act(...)
+
+stderr | tests/intelligence/micro-assessment-question-card.test.jsx > micro-assessment question card presentation > does not fabricate an explanation when none exists
+Warning: The current testing environment is not configured to support act(...)
+
+stderr | tests/intelligence/micro-assessment-question-card.test.jsx > micro-assessment question card presentation > keeps answer reveal state independent per question
+Warning: The current testing environment is not configured to support act(...)
+Warning: The current testing environment is not configured to support act(...)
+
+stderr | tests/intelligence/micro-assessment-question-card.test.jsx > micro-assessment question card presentation > keeps answer reveal state independent per question
+Warning: The current testing environment is not configured to support act(...)
+
+ ✓ tests/intelligence/micro-assessment-question-card.test.jsx (3 tests) 143ms
+ ✓ tests/components/paper-send-button.test.jsx (7 tests) 102ms
+ ✓ tests/pages/premium-pdf-browser-fonts.test.js (2 tests) 39ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 26 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > removes the standalone Search field and derives Course options from the real catalog
+ FAIL  tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > keeps Children disabled until each real parent is chosen and sends the selected filters to the generation agent
+ FAIL  tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > changing Course clears Subject/Chapter/Topic and refuses to generate without an explicit University subject
+ FAIL  tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > keeps an empty API catalog empty instead of injecting demo/sample options
+Error: No QueryClient set, use QueryClientProvider to set one
+ ❯ Module.useQueryClient node_modules/@tanstack/react-query/src/QueryClientProvider.tsx:18:11
+ ❯ PaperGeneratorTab src/components/assessment-workspace/paper-generator-tab.jsx:74:23
+     72|   const [searchParams] = useSearchParams()
+     73|   const toast = useToast()
+     74|   const queryClient = useQueryClient()
+       |                       ^
+     75| 
+     76|   // Catalog config for the generator. The Paper Library lives in its …
+ ❯ renderWithHooks node_modules/react-dom/cjs/react-dom.development.js:15486:18
+ ❯ mountIndeterminateComponent node_modules/react-dom/cjs/react-dom.development.js:20103:13
+ ❯ beginWork node_modules/react-dom/cjs/react-dom.development.js:21626:16
+ ❯ beginWork$1 node_modules/react-dom/cjs/react-dom.development.js:27465:14
+ ❯ performUnitOfWork node_modules/react-dom/cjs/react-dom.development.js:26599:12
+ ❯ workLoopSync node_modules/react-dom/cjs/react-dom.development.js:26505:5
+ ❯ renderRootSync node_modules/react-dom/cjs/react-dom.development.js:26473:7
+ ❯ recoverFromConcurrentError node_modules/react-dom/cjs/react-dom.development.js:25889:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/26]⎯
+
+ FAIL  tests/components/ui-copy-cleanup.test.jsx > UI copy cleanup — implementation terminology removed from product surfaces > Question Paper Studio renders product copy and a capitalised generation state
+AssertionError: expected ' Question Paper StudioDesign, generat…' to contain 'Question Bank'
+
+Expected: "Question Bank"
+Received: " Question Paper StudioDesign, generate and publish question papersGeneration: Idle1Basic detailsThe domain and exam family set the scope of this paper.Paper name *Domain *🏛️ University🎯 CompetitivePaper type Mid SemesterProgram B.Tech — CSE2Syllabus / contentDomain → Course → Subject → Chapter → Topic.Course No courses availableNo courses availableSubject Select a course firstSelect a course firstChapter Select a subject firstSelect a subject firstTopic Select a chapter firstSelect a chapter first3Paper configurationMarks, duration and difficulty for the paper.Total marks Duration (minutes) Question count Max 100Difficulty MixedQuestion Type filter All types4Advanced blueprintBloom's taxonomy, chapter weightage, CO coverage · PYQ preference, negative marking, exam pattern Show advanced optionsAdvanced blueprint controls collapsed — expand to tune Bloom's taxonomy, chapter weightage, CO coverage .5Question GenerationGenerate questions for this paper · Status: Idle · Requested: 0 · Generated: 0Idle Generate QuestionsConfig: University · All subjects · All chapters · All topics · Mixed ·  Qs · MCQ, Short Answer, Long AnswerBlueprint: Balanced · Balanced chapters · Balanced CO coverage · UniversitySelect a course and subject to enable generation.No questions generated yet.Configure your paper and click Generate Paper."
+
+ ❯ tests/components/ui-copy-cleanup.test.jsx:166:18
+    164|     expect(text).toContain('Question Paper Studio')
+    165|     expect(text).toContain('Question Generation')
+    166|     expect(text).toContain('Question Bank')
+       |                  ^
+    167|     expect(text).toContain('Generation: Idle')
+    168|     // Phase 6 shows ONLY the current generation — with no generation …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/26]⎯
+
+ FAIL  tests/components/ui-copy-cleanup.test.jsx > UI copy cleanup — implementation terminology removed from product surfaces > Paper Library renders product copy
+Error: [vitest] No "useSqlPaperDetail" export is defined on the "../../src/services/faculty-papers" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+vi.mock(import("../../src/services/faculty-papers"), async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ PaperPreviewDialog src/components/assessment-workspace/paper-parts.jsx:238:21
+    236| 
+    237|   const aiDetail = useAiPaperDetail(open && isAiMicroPaper ? paper.id …
+    238|   const sqlDetail = useSqlPaperDetail(open && isSqlPaper ? paper.id : …
+       |                     ^
+    239| 
+    240|   const embeddedQuestions = Array.isArray(paper?.questionList) ? paper…
+ ❯ renderWithHooks node_modules/react-dom/cjs/react-dom.development.js:15486:18
+ ❯ mountIndeterminateComponent node_modules/react-dom/cjs/react-dom.development.js:20103:13
+ ❯ beginWork node_modules/react-dom/cjs/react-dom.development.js:21626:16
+ ❯ beginWork$1 node_modules/react-dom/cjs/react-dom.development.js:27465:14
+ ❯ performUnitOfWork node_modules/react-dom/cjs/react-dom.development.js:26599:12
+ ❯ workLoopSync node_modules/react-dom/cjs/react-dom.development.js:26505:5
+ ❯ renderRootSync node_modules/react-dom/cjs/react-dom.development.js:26473:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/26]⎯
+
+ FAIL  tests/filters/cascading-filters.test.js > Exam Analysis (student) — context → family → exam → subject > detects families from canonical exam metadata, never subject names
+AssertionError: expected [] to deeply equal [ 'JEE', 'NEET' ]
+
+- Expected
++ Received
+
+- Array [
+-   "JEE",
+-   "NEET",
+- ]
++ Array []
+
+ ❯ tests/filters/cascading-filters.test.js:59:53
+     57| 
+     58|   it('detects families from canonical exam metadata, never subject nam…
+     59|     expect(competitiveExamFamilies(options).sort()).toEqual(['JEE', 'N…
+       |                                                     ^
+     60|     expect(visibleExamOptions(options, 'University', 'All').every((o) …
+     61|     expect(visibleExamOptions(options, 'Competitive', 'NEET').every((o…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/26]⎯
+
+ FAIL  tests/filters/cascading-filters.test.js > Exam Analysis (student) — context → family → exam → subject > switching to University clears competitive family/exam/subject
+TypeError: Cannot read properties of undefined (reading 'id')
+ ❯ tests/filters/cascading-filters.test.js:66:76
+     64|   it('switching to University clears competitive family/exam/subject',…
+     65|     const jeeExam = examAnalysisOptions.find((o) => o.pattern?.include…
+     66|     const state = { context: 'Competitive', family: 'JEE', examId: jee…
+       |                                                                            ^
+     67|     const next = sanitizeCascadeValues({ ...state, context: 'Universit…
+     68|     expect(next).toMatchObject({ context: 'University', family: 'All',…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/26]⎯
+
+ FAIL  tests/filters/cascading-filters.test.js > Exam Analysis (student) — context → family → exam → subject > keeps a JEE exam out of the NEET family and vice versa (subject lists never leak)
+TypeError: Cannot read properties of undefined (reading 'id')
+ ❯ tests/filters/cascading-filters.test.js:74:65
+     72|     const neetExam = examAnalysisOptions.find((o) => o.pattern?.includ…
+     73|     const crossed = sanitizeCascadeValues(
+     74|       { context: 'Competitive', family: 'JEE', examId: neetExam.id, su…
+       |                                                                 ^
+     75|       buildExamAnalysisCascade(options),
+     76|     )
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/26]⎯
+
+ FAIL  tests/filters/cascading-filters.test.js > Exam Analysis (student) — context → family → exam → subject > switching exams clears a subject that belongs to the previous exam only
+TypeError: Cannot read properties of undefined (reading 'id')
+ ❯ tests/filters/cascading-filters.test.js:91:65
+     89|     const neetExam = examAnalysisOptions.find((o) => o.pattern?.includ…
+     90|     const next = sanitizeCascadeValues(
+     91|       { context: 'Competitive', family: 'All', examId: neetExam.id, su…
+       |                                                                 ^
+     92|       buildExamAnalysisCascade(options),
+     93|     )
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/26]⎯
+
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders the weaknesses tab with evidence + suggested intervention actions
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders the similar issues tab with GROUPED and INDIVIDUAL sections
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders chapter intelligence with derived metrics and actionable buttons
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders strengths with evidence actions and no unconditional intervention buttons
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders the interventions tab with the honest empty state (nothing auto-created)
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders for NEET and University students without cross-domain selectors
+TypeError: Cannot read properties of undefined (reading 'pathname')
+ ❯ StudentProfile src/pages/faculty/StudentProfile.jsx:69:42
+     67| 
+     68|   /* Detect if we are inside the admin portal (URL starts with /admin)…
+     69|   const isAdminContext = window.location.pathname.startsWith('/admin')
+       |                                          ^
+     70| 
+     71|   /* ---- canonical state, mirrored to URL ---- */
+ ❯ renderWithHooks node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js:5662:16
+ ❯ renderIndeterminateComponent node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js:5736:15
+ ❯ renderElement node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js:5961:7
+ ❯ renderNodeDestructiveImpl node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js:6119:11
+ ❯ renderNodeDestructive node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js:6091:14
+ ❯ renderContextProvider node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js:5935:3
+ ❯ renderElement node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js:6032:11
+ ❯ renderNodeDestructiveImpl node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js:6119:11
+ ❯ renderNodeDestructive node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js:6091:14
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/26]⎯
+
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > activates only AI Micro-Assessment on its nested URL
+AssertionError: expected [] to deeply equal [ 'AI Micro-Assessment Studio' ]
+
+- Expected
++ Received
+
+- Array [
+-   "AI Micro-Assessment Studio",
+- ]
++ Array []
+
+ ❯ tests/navigation/sidebar-active-state.test.jsx:38:31
+     36|   it('activates only AI Micro-Assessment on its nested URL', () => {
+     37|     const html = renderFacultySidebar('/faculty/question-intelligence/…
+     38|     expect(activeItems(html)).toEqual(['AI Micro-Assessment Studio'])
+       |                               ^
+     39|     expect(itemMarkup(html, '/faculty/question-intelligence', 'Assessm…
+     40|     expect(itemMarkup(html, '/faculty/question-intelligence/micro-asse…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/26]⎯
+
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/teaching mutually exclusive with all other Faculty items
+AssertionError: expected [] to deeply equal [ 'Teaching' ]
+
+- Expected
++ Received
+
+- Array [
+-   "Teaching",
+- ]
++ Array []
+
+ ❯ tests/navigation/sidebar-active-state.test.jsx:64:53
+     62|     ['/faculty/support', 'Support'],
+     63|   ])('keeps %s mutually exclusive with all other Faculty items', (path…
+     64|     expect(activeItems(renderFacultySidebar(path))).toEqual([label])
+       |                                                     ^
+     65|   })
+     66| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/26]⎯
+
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/reports mutually exclusive with all other Faculty items
+AssertionError: expected [] to deeply equal [ 'Reports' ]
+
+- Expected
++ Received
+
+- Array [
+-   "Reports",
+- ]
++ Array []
+
+ ❯ tests/navigation/sidebar-active-state.test.jsx:64:53
+     62|     ['/faculty/support', 'Support'],
+     63|   ])('keeps %s mutually exclusive with all other Faculty items', (path…
+     64|     expect(activeItems(renderFacultySidebar(path))).toEqual([label])
+       |                                                     ^
+     65|   })
+     66| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/26]⎯
+
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/ai-assistant mutually exclusive with all other Faculty items
+AssertionError: expected [] to deeply equal [ 'AI Workspace' ]
+
+- Expected
++ Received
+
+- Array [
+-   "AI Workspace",
+- ]
++ Array []
+
+ ❯ tests/navigation/sidebar-active-state.test.jsx:64:53
+     62|     ['/faculty/support', 'Support'],
+     63|   ])('keeps %s mutually exclusive with all other Faculty items', (path…
+     64|     expect(activeItems(renderFacultySidebar(path))).toEqual([label])
+       |                                                     ^
+     65|   })
+     66| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/26]⎯
+
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/timetable mutually exclusive with all other Faculty items
+AssertionError: expected [] to deeply equal [ 'Calendar' ]
+
+- Expected
++ Received
+
+- Array [
+-   "Calendar",
+- ]
++ Array []
+
+ ❯ tests/navigation/sidebar-active-state.test.jsx:64:53
+     62|     ['/faculty/support', 'Support'],
+     63|   ])('keeps %s mutually exclusive with all other Faculty items', (path…
+     64|     expect(activeItems(renderFacultySidebar(path))).toEqual([label])
+       |                                                     ^
+     65|   })
+     66| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/26]⎯
+
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > derives state from URL across navigation changes rather than click state
+AssertionError: expected [] to deeply equal [ 'AI Micro-Assessment Studio' ]
+
+- Expected
++ Received
+
+- Array [
+-   "AI Micro-Assessment Studio",
+- ]
++ Array []
+
+ ❯ tests/navigation/sidebar-active-state.test.jsx:69:98
+     67|   it('derives state from URL across navigation changes rather than cli…
+     68|     expect(activeItems(renderFacultySidebar('/faculty/question-intelli…
+     69|     expect(activeItems(renderFacultySidebar('/faculty/question-intelli…
+       |                                                                                                  ^
+     70|     expect(activeItems(renderFacultySidebar('/faculty/my-students'))).…
+     71|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/26]⎯
+
+ FAIL  tests/pages/student-dashboard-view.test.js > student dashboard view > does not repeat the pending assignment count beside the value
+TypeError: buildDashboardKpis is not a function
+ ❯ tests/pages/student-dashboard-view.test.js:6:27
+      4| describe('student dashboard view', () => {
+      5|   it('does not repeat the pending assignment count beside the value', …
+      6|     const [assignments] = buildDashboardKpis({
+       |                           ^
+      7|       profile: { cgpa: null },
+      8|       datasets: {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/26]⎯
+
+ FAIL  tests/pages/student-dashboard-view.test.js > student dashboard view > uses each course mastery when the ranking repeats one fallback score
+TypeError: buildSubjectMasteryRows is not a function
+ ❯ tests/pages/student-dashboard-view.test.js:22:18
+     20| 
+     21|   it('uses each course mastery when the ranking repeats one fallback s…
+     22|     const rows = buildSubjectMasteryRows({
+       |                  ^
+     23|       ranking: [
+     24|         { subjectCode: 'NEET-BIO', subject: 'Biology (NEET UG)', maste…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/26]⎯
+
+ FAIL  tests/pages/student-dashboard-view.test.js > student dashboard view > keeps a varied ranking when every course shares one placeholder score
+TypeError: buildSubjectMasteryRows is not a function
+ ❯ tests/pages/student-dashboard-view.test.js:44:18
+     42| 
+     43|   it('keeps a varied ranking when every course shares one placeholder …
+     44|     const rows = buildSubjectMasteryRows({
+       |                  ^
+     45|       ranking: [
+     46|         { subjectCode: 'CS501', subject: 'Data Structures', mastery: 8…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/26]⎯
+
+ FAIL  tests/services/phase-f-adapters.test.js > Phase F — question adapter isolation > resolves structured { key, text, imageUrl } options to their display text
+AssertionError: expected [ …(3) ] to deeply equal [ '20.4 m', '40.8 m', 'C' ]
+
+- Expected
++ Received
+
+  Array [
+-   "20.4 m",
+-   "40.8 m",
+-   "C",
++   Object {
++     "imageUrl": "https://assets.edux/a.png",
++     "key": "A",
++     "text": "20.4 m",
++   },
++   Object {
++     "imageUrl": null,
++     "key": "B",
++     "text": "40.8 m",
++   },
++   Object {
++     "imageUrl": "https://assets.edux/c.png",
++     "key": "C",
++     "text": "",
++   },
+  ]
+
+ ❯ tests/services/phase-f-adapters.test.js:112:23
+    110|     })
+    111|     // Every option the faculty UI renders must be a renderable string.
+    112|     expect(q.options).toEqual(['20.4 m', '40.8 m', 'C'])
+       |                       ^
+    113|     expect(q.options.every((o) => typeof o === 'string')).toBe(true)
+    114|     // String options pass through untouched (classic bank contract).
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/26]⎯
+
+ Test Files  7 failed | 36 passed (43)
+      Tests  26 failed | 440 passed (466)
+   Start at  08:12:06
+   Duration  134.61s (transform 2.44s, setup 0ms, collect 24.66s, tests 89.57s, environment 11.24s, prepare 2.71s)
+

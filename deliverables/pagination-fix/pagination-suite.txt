@@ -1,0 +1,17 @@
+
+ RUN  v2.1.9 /home/user/edux11/frontend
+
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > reproduces the exact 1850.15 pt indivisible reserve failure
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > splits a 1850.15 pt editorial component into page-sized segments without losing entries
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > renders the calibrated failing intelligence report after the fix 1846ms
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > uses the remaining space on a partially filled page instead of leaving a nearly blank sheet 1411ms
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > renders the calibrated failing full report with a clean layout 3467ms
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > renders a single oversized topic entry across continuation pages 2064ms
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > renders long question statements and explanations without clipping 3777ms
+ ✓ tests/pages/premium-pdf-pagination.test.js > Premium PDF content-driven pagination > preserves all 180 NEET questions, explanations and subject separation 43349ms
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  08:35:08
+   Duration  57.12s (transform 189ms, setup 0ms, collect 590ms, tests 55.92s, environment 0ms, prepare 60ms)
+

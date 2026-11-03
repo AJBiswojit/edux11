@@ -1,0 +1,10 @@
+BROWSER student HeadlessChrome/131.0.6778.0 profile /tmp/edux-impl-chrome-1793694639113-student
+LOGIN student: Sign in as Student -> /student user=Dev Student
+ROLE student: buttons=[Report, Full Analysis] downloads=2 pageErrors=0 exactExceptions=0 analysisFetches=1 duplicateBlocked=true
+BROWSER faculty HeadlessChrome/131.0.6778.0 profile /tmp/edux-impl-chrome-1793694639113-faculty
+LOGIN faculty: Sign in as Faculty -> /faculty user=Dev Faculty
+ROLE faculty: buttons=[Report, Full Analysis] downloads=2 pageErrors=0 exactExceptions=0 analysisFetches=1 duplicateBlocked=true
+BROWSER admin HeadlessChrome/131.0.6778.0 profile /tmp/edux-impl-chrome-1793694639113-admin
+LOGIN admin: Sign in as Admin -> /admin user=Dev Admin
+ROLE admin: buttons=[Report, Full Analysis] downloads=2 pageErrors=0 exactExceptions=0 analysisFetches=1 duplicateBlocked=true
+PAGINATION_BROWSER_VERIFICATION_DONE responses 936 fromDiskCache 0

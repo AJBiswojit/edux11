@@ -14,6 +14,7 @@ import {
 import {
   SectionHeading, Subheading, Paragraph, EditorialColumns, MetricLedger,
   BarChartSpec, StaticTableSpec, MeasuredTable, SubjectBand, Pill,
+  StackSpec, TextFlowSpec,
 } from './components.js'
 
 function text(value) {
@@ -59,20 +60,7 @@ function subjectForTopic(m, topic) {
 
 /** A vertical stack of static specs, each with its own measured boundary. */
 function stackSpecs(ctx, builders, gap = 8) {
-  return {
-    type: 'column-stack', label: 'Briefing column stack',
-    measure: (w) => builders.map((build) => build(w).measure(w)).reduce((sum, h) => sum + h, 0) + gap * Math.max(0, builders.length - 1),
-    draw: (frame) => {
-      let y = frame.y
-      builders.forEach((build, index) => {
-        const spec = build(frame.w)
-        const h = spec.measure(frame.w)
-        ctx.child({ type: spec.type || 'stack-item', label: spec.label || '', x: frame.x, y, w: frame.w, h },
-          (childFrame) => spec.draw(childFrame))
-        y += h + (index < builders.length - 1 ? gap : 0)
-      })
-    },
-  }
+  return StackSpec(ctx, { builders, gap, label: 'Briefing column stack' })
 }
 
 function IntelligenceMasthead(ctx) {
@@ -189,7 +177,7 @@ function renderSnapshot(ctx) {
   })
   Subheading(ctx, { title: 'Chapter mastery', accent: COLORS.indigo, bottomSpacing: 4 })
   EditorialColumns(ctx, {
-    id: 'intelligence-chapter-mastery', gap: 16, bottomSpacing: 4,
+    id: 'intelligence-chapter-mastery', sectionTitle: 'Chapter mastery', gap: 16, bottomSpacing: 4,
     columns: [chapterSpec(chapterRows.slice(0, midpoint), 0), chapterSpec(chapterRows.slice(midpoint), 1)],
   })
 }
@@ -212,7 +200,7 @@ function renderLearning(ctx) {
   const weakRows = (m.recommendations.weakTopics || []).map((topic) => ({ subject: subjectForTopic(m, topic), topic: text(topic) }))
   const evidenceRows = m.mistakeList.slice(0, 3).map((row) => ({ q: text(row.q), detail: text(row.detail) }))
   EditorialColumns(ctx, {
-    id: 'mistake-topic-columns', gap: 18, bottomSpacing: 6,
+    id: 'mistake-topic-columns', sectionTitle: 'Error patterns and topic accuracy', gap: 18, bottomSpacing: 6,
     columns: [
       stackSpecs(ctx, [
         (w) => BarChartSpec(ctx, {

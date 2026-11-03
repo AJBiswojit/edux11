@@ -1,0 +1,3 @@
+SYNTHETIC / LOCAL INTEGRATION FIXTURES — NOT PRODUCTION DATA
+
+The original failing production examination payload is not present in this clean checkout. failing-jee-phase2.json is a calibrated local equivalent used to reproduce the oversized mistake-topic-columns failure. neet-180.json, oversized-topic.json and long-question.json are synthetic long-report fixtures. role-*.json use the canonical in-app payload with local identity overrides for the six role/action combinations.

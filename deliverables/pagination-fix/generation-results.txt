@@ -1,0 +1,14 @@
+allAfterOk True
+allAfterAuditsClean True
+after/matrix/student-intelligence.json pages 4 audit True
+after/matrix/student-full.json pages 18 audit True
+after/matrix/faculty-intelligence.json pages 4 audit True
+after/matrix/faculty-full.json pages 18 audit True
+after/matrix/admin-intelligence.json pages 4 audit True
+after/matrix/admin-full.json pages 18 audit True
+after/reports/failing-intelligence.json pages 10 audit True
+after/reports/failing-full.json pages 26 audit True
+after/reports/oversized-intelligence.json pages 19 audit True
+after/reports/oversized-full.json pages 39 audit True
+after/reports/long-question-full.json pages 28 audit True
+after/reports/neet-180-full.json pages 210 audit True

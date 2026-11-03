@@ -13,8 +13,238 @@ import {
   difficultyColor, subjectColor,
 } from './theme.js'
 import { SolutionRenderer } from './math.js'
+import {
+  chunkable, chunkSpec, textChunkEntries, paginateSingle, paginateColumns,
+  emptySpec, CONTINUATION_H, EPS,
+} from './pagination.js'
 
 const HAIRLINE = 0.5
+
+/* ------------------------------------------------------------------ *
+ * Content-driven pagination primitives
+ * ------------------------------------------------------------------ */
+
+/** A measured, line-chunkable text block used for oversized single entries. */
+export function TextFlowSpec(ctx, {
+  label = '', title = '', text = '', size = TYPE.body, accent = COLORS.indigo,
+  tone = COLORS.ink, widthPadding = 16, paragraphGap = 2, topPad = 5, bottomPad = 8,
+} = {}) {
+  const bodyOpts = { size, font: FONTS.body, color: tone, paragraphGap }
+  const bodyWidth = (w) => Math.max(20, w - widthPadding)
+  const resolvedTitle = (opts = {}) => (opts.continuation && title ? `${title} · continued` : title)
+  const fixed = (w, opts = {}) => {
+    const t = resolvedTitle(opts)
+    const titleH = t
+      ? ctx.measureText(t, Math.max(20, w - 14), { size: TYPE.label, font: FONTS.bodySemi, characterSpacing: 0.7 }) + 3
+      : 0
+    return topPad + titleH + bottomPad
+  }
+  const build = (subset, opts = {}) => {
+    const bodyText = subset.map((entry) => entry.text).join('\n')
+    const t = resolvedTitle(opts)
+    return {
+      type: 'text-flow', label,
+      measure: (w) => fixed(w, opts) + (bodyText ? ctx.measureText(bodyText, bodyWidth(w), bodyOpts) : 0),
+      draw: (frame) => {
+        ctx.canvas.rect(frame.x, frame.y + 3, 2, Math.max(2, frame.h - 10), { fill: accent, audit: false })
+        let cursor = frame.y + topPad
+        if (t) {
+          cursor += ctx.text(t, frame.x + 12, cursor, frame.w - 14, {
+            size: TYPE.label, font: FONTS.bodySemi, color: accent, characterSpacing: 0.7,
+          }) + 3
+        }
+        if (bodyText) ctx.text(bodyText, frame.x + 12, cursor, bodyWidth(frame.w), bodyOpts)
+      },
+    }
+  }
+  const entries = [{ kind: 'text', text: fmt(text, '—') }]
+  const split = (splitCtx, entry, w, maxHeight, opts) => textChunkEntries(
+    splitCtx, entry.text, bodyWidth(w), bodyOpts,
+    Math.max(12, maxHeight - fixed(w, opts)),
+    (chunkText, height, continuation) => ({ kind: 'text', text: chunkText, continuation, height }),
+  )
+  return chunkable({
+    type: 'text-flow', label: label || title, entries, build, split,
+    continuationLabel: title || label,
+  })
+}
+
+function cellChunkInfo(ctx, col, row, value, cw) {
+  if (col.render === 'source') {
+    const record = value || {}
+    return {
+      kind: 'source',
+      text: `${fmt(record.path)}\n${fmt(record.value)}`,
+      width: Math.max(12, cw - 8), extra: 2,
+      opts: { size: 8.2, font: FONTS.body, color: COLORS.ink, paragraphGap: 2 },
+    }
+  }
+  const text = fmt(value)
+  const opts = cellTextOptions(col, text, row)
+  if (col.render === 'pill') {
+    return {
+      kind: 'pill', text, width: Math.max(12, cw - 15), extra: 2,
+      opts: { size: 8.2, font: FONTS.bodyBold, color: resolveColor(col.color, text, row, COLORS.indigo) },
+    }
+  }
+  return {
+    kind: col.render === 'bar' ? 'bar' : 'plain',
+    text, width: Math.max(12, cw - 8), extra: col.render === 'bar' ? 8 : 0,
+    opts: { ...opts, paragraphGap: 0 },
+  }
+}
+
+function splitRowEntry(ctx, row, columns, widths, maxHeight, rowPadding) {
+  const budget = Math.max(12, maxHeight - rowPadding * 2)
+  const perColumn = columns.map((col, i) => {
+    const info = cellChunkInfo(ctx, col, row, row[col.key], widths[i])
+    return {
+      info,
+      chunks: textChunkEntries(
+        ctx, info.text, info.width, info.opts,
+        Math.max(12, budget - info.extra),
+        (chunkText, height, continuation) => ({ kind: 'text', text: chunkText, continuation, height }),
+      ),
+    }
+  })
+  const count = Math.max(...perColumn.map((column) => column.chunks.length), 1)
+  const out = []
+  for (let line = 0; line < count; line += 1) {
+    const next = { ...row, __continuation: line > 0 }
+    columns.forEach((col, i) => {
+      const text = perColumn[i].chunks[line]?.text ?? ''
+      if (perColumn[i].info.kind === 'source') {
+        const parts = text.split('\n')
+        next[col.key] = { path: parts[0] || '', value: parts.slice(1).join('\n') }
+      } else {
+        next[col.key] = text
+      }
+    })
+    out.push({ kind: 'row', row: next, index: row.__rowOffset ?? 0 })
+  }
+  return out
+}
+
+function splitBarEntry(ctx, bar, g, maxHeight, fixedBudget) {
+  const budget = Math.max(12, maxHeight - fixedBudget - 6)
+  const labelChunks = textChunkEntries(
+    ctx, fmt(bar.label), g.labelW,
+    { size: TYPE.bodySmall, font: FONTS.bodySemi, paragraphGap: 0 }, budget,
+    (text, height, continuation) => ({ kind: 'text', text, continuation, height }),
+  )
+  const valueChunks = textChunkEntries(
+    ctx, fmt(bar.valueLabel ?? bar.value), g.valueW,
+    { size: TYPE.bodySmall, font: FONTS.bodyBold, align: 'right', features: ['tnum'], paragraphGap: 0 }, budget,
+    (text, height, continuation) => ({ kind: 'text', text, continuation, height }),
+  )
+  const count = Math.max(labelChunks.length, valueChunks.length, 1)
+  return Array.from({ length: count }, (_, line) => ({
+    kind: 'bar',
+    bar: {
+      ...bar,
+      label: labelChunks[line]?.text ?? '',
+      valueLabel: valueChunks[line]?.text ?? '',
+      __continuation: line > 0,
+    },
+  }))
+}
+
+function splitMetricItem(ctx, item, w, maxHeight, columns, gap, labelSize, valueSize) {
+  const widths = equalColumns(columns, gap, w, CONTENT.x)
+  const cw = Math.max(12, widths[0].w - 4)
+  const budget = Math.max(12, maxHeight - 13)
+  const labelChunks = textChunkEntries(
+    ctx, String(item.label).toUpperCase(), cw,
+    { size: labelSize, font: FONTS.bodySemi, characterSpacing: 0.5, paragraphGap: 0 }, budget,
+    (text, height, continuation) => ({ kind: 'text', text, continuation, height }),
+  )
+  const valueChunks = textChunkEntries(
+    ctx, fmt(item.value), cw,
+    { size: valueSize, font: FONTS.bodyBold, features: ['tnum'], paragraphGap: 0 }, budget,
+    (text, height, continuation) => ({ kind: 'text', text, continuation, height }),
+  )
+  const count = Math.max(labelChunks.length, valueChunks.length, 1)
+  return Array.from({ length: count }, (_, line) => ({
+    kind: 'metric',
+    item: {
+      ...item,
+      label: labelChunks[line]?.text ?? '',
+      value: valueChunks[line]?.text ?? '',
+      __continuation: line > 0,
+    },
+  }))
+}
+
+function verticalSpec(ctx, specs, gap = 0, label = 'vertical-stack') {
+  return {
+    type: 'vertical-stack', label,
+    measure: (w) => specs.reduce((sum, spec, index) => (
+      sum + spec.measure(w) + (index < specs.length - 1 ? gap : 0)
+    ), 0),
+    draw: (frame) => {
+      let y = frame.y
+      specs.forEach((spec, index) => {
+        const h = spec.measure(frame.w)
+        ctx.child({
+          type: spec.type || 'stack-item', label: spec.label || '',
+          x: frame.x, y, w: frame.w, h,
+        }, (childFrame) => spec.draw(childFrame))
+        y += h + (index < specs.length - 1 ? gap : 0)
+      })
+    },
+  }
+}
+
+export function StackSpec(ctx, { builders = [], gap = 0, label = 'Editorial column stack' } = {}) {
+  const units = builders.map((build, index) => ({
+    kind: 'spec', build, gapAfter: index < builders.length - 1 ? gap : 0,
+  }))
+  const build = (subset, opts = {}) => {
+    const normalized = subset.map((unit, index) => ({
+      ...unit,
+      gapAfter: index < subset.length - 1 ? (unit.gapAfter || gap) : 0,
+    }))
+    const specFor = (unit, w) => (unit.kind === 'gap' ? null : unit.build(w))
+    return {
+      type: 'column-stack', label,
+      measure: (w) => normalized.reduce((sum, unit) => (
+        sum + (unit.kind === 'gap' ? unit.height : specFor(unit, w).measure(w)) + unit.gapAfter
+      ), 0),
+      draw: (frame) => {
+        let y = frame.y
+        normalized.forEach((unit) => {
+          if (unit.kind === 'gap') {
+            y += unit.height + unit.gapAfter
+            return
+          }
+          const spec = specFor(unit, frame.w)
+          const h = spec.measure(frame.w)
+          ctx.child({
+            type: spec.type || 'stack-item', label: spec.label || '',
+            x: frame.x, y, w: frame.w, h,
+          }, (childFrame) => spec.draw(childFrame))
+          y += h + unit.gapAfter
+        })
+      },
+    }
+  }
+  const split = (splitCtx, unit, w, maxHeight, opts) => {
+    if (unit.kind === 'gap') return [unit]
+    const nested = unit.build(w)
+    const budget = Math.max(12, maxHeight - unit.gapAfter)
+    const chunks = chunkSpec(splitCtx, nested, w, budget, {
+      continuationLabel: opts.continuationLabel || label,
+    })
+    return chunks.map((chunk, index) => ({
+      kind: 'spec', build: () => chunk.spec,
+      gapAfter: index < chunks.length - 1 ? gap : unit.gapAfter,
+    }))
+  }
+  return chunkable({
+    type: 'column-stack', label, entries: units, build, split,
+    continuationLabel: label,
+  })
+}
 
 function asColor(value, fallback = COLORS.ink) {
   if (typeof value === 'function') return value() || fallback
@@ -209,29 +439,23 @@ export function Subheading(ctx, { title, note = '', accent = COLORS.indigo, topS
   })
 }
 
-export function Paragraph(ctx, { text, title = '', accent = COLORS.indigo, size = TYPE.body, tone = COLORS.ink, bottomSpacing = 8 } = {}) {
-  const measure = () => {
-    const titleH = title ? ctx.measureText(title, CONTENT.w - 16, { size: TYPE.label, font: FONTS.bodySemi, characterSpacing: 0.8 }) + 4 : 0
-    const bodyH = ctx.measureText(fmt(text, '—'), CONTENT.w - 18, { size, font: FONTS.body, color: tone, paragraphGap: 3 })
-    return 10 + titleH + bodyH + 8
-  }
-  return ctx.component({
-    type: 'editorial-paragraph', label: title || String(text).slice(0, 40), bottomSpacing,
-    measure,
-    draw: (frame) => {
-      ctx.canvas.rect(frame.x, frame.y + 4, 2, frame.h - 12, { fill: accent })
-      let cursor = frame.y + 6
-      if (title) {
-        cursor += ctx.text(title, frame.x + 12, cursor, frame.w - 16, {
-          size: TYPE.label, font: FONTS.bodySemi, color: accent, characterSpacing: 0.8,
-        }) + 3
-      }
-      ctx.text(fmt(text, '—'), frame.x + 12, cursor, frame.w - 18, {
-        size, font: FONTS.body, color: tone, paragraphGap: 3,
-      })
-    },
+export function Paragraph(ctx, {
+  text, title = '', accent = COLORS.indigo, size = TYPE.body,
+  tone = COLORS.ink, bottomSpacing = 8, keepWithNext = 0, continuationLabel,
+} = {}) {
+  const spec = TextFlowSpec(ctx, {
+    label: title || String(text).slice(0, 40), title, text, size, accent, tone,
+    widthPadding: 18, paragraphGap: 3, topPad: 6, bottomPad: 8,
+  })
+  return paginateSingle(ctx, spec, {
+    w: CONTENT.w,
+    x: CONTENT.x,
+    bottomSpacing,
+    keepWithNext,
+    continuationLabel: continuationLabel || title || 'Editorial paragraph',
   })
 }
+
 
 export function Pill(ctx, { x, y, text, color = COLORS.indigo, soft = mix(color, COLORS.white, 0.1), width, size = 8, emit = true } = {}) {
   const label = fmt(text, '—')
@@ -261,6 +485,18 @@ export function ProgressBar(ctx, { x, y, w, value, max = 100, color = COLORS.ind
 function flow(ctx, spec, opts = {}) {
   const w = opts.w || CONTENT.w
   const h = spec.measure(w)
+  const topSpacing = Number(opts.topSpacing) || 0
+  const bottomSpacing = Number(opts.bottomSpacing) || 0
+  const keepWithNext = Number(opts.keepWithNext) || 0
+  const capacity = CONTENT.h - topSpacing - bottomSpacing - keepWithNext - CONTINUATION_H
+  if (spec.pagination || h > capacity + EPS) {
+    return paginateSingle(ctx, spec, {
+      ...opts,
+      w,
+      x: opts.x == null ? CONTENT.x : opts.x,
+      continuationLabel: opts.continuationLabel || spec.pagination?.continuationLabel || spec.label || spec.type,
+    })
+  }
   return ctx.component({
     type: spec.type,
     label: spec.label || '',
@@ -278,15 +514,27 @@ function flow(ctx, spec, opts = {}) {
 
 export function EditorialColumns(ctx, {
   id, columns, gap = 18, topSpacing = 0, bottomSpacing = 8, keepWithNext = 0,
+  paginate = true, continuationLabel, sectionTitle, segmentHeight,
 } = {}) {
   const frames = equalColumns(columns.length, gap, CONTENT.w, CONTENT.x)
   const specs = columns.map((entry, index) => (
     typeof entry === 'function' ? entry(frames[index].w) : entry
   ))
   const heights = specs.map((spec, index) => spec.measure(frames[index].w))
-  const h = Math.max(...heights, 1)
+  const h = segmentHeight || Math.max(...heights, 1)
+  const label = continuationLabel || sectionTitle || id || 'Editorial columns'
+  const capacity = CONTENT.h - topSpacing - bottomSpacing - keepWithNext - CONTINUATION_H
+  if (paginate && h > capacity + EPS) {
+    return paginateColumns(ctx, {
+      id, gap, topSpacing, bottomSpacing, keepWithNext,
+      continuationLabel: label, sectionTitle,
+    }, specs, frames, heights, (segmentOpts) => EditorialColumns(ctx, segmentOpts))
+  }
   return ctx.component({
     type: 'editorial-columns', label: id || '', topSpacing, bottomSpacing, keepWithNext,
+    continuationLabel,
+    allowSplit: true,
+    continuation: !!continuationLabel,
     measure: () => h,
     draw: (frame) => {
       const cols = equalColumns(columns.length, gap, frame.w, frame.x)
@@ -302,56 +550,65 @@ export function EditorialColumns(ctx, {
   })
 }
 
+
 export function MetricLedgerSpec(ctx, { label = '', items = [], labelSize = TYPE.label, valueSize = 11, columns = 4, gap = 12 } = {}) {
-  const measure = (w) => {
-    const widths = equalColumns(columns, gap, w, 0)
-    const rows = Math.ceil(items.length / columns)
-    let total = 0
-    for (let row = 0; row < rows; row += 1) {
-      let rowH = 0
-      for (let col = 0; col < columns; col += 1) {
-        const item = items[row * columns + col]
-        if (!item) continue
-        const cw = widths[col].w - 4
-        const labelH = ctx.measureText(String(item.label).toUpperCase(), cw, { size: labelSize, font: FONTS.bodySemi, characterSpacing: 0.5 })
-        const valueH = ctx.measureText(fmt(item.value), cw, { size: valueSize, font: FONTS.bodyBold, color: item.color || COLORS.midnight, features: ['tnum'] })
-        rowH = Math.max(rowH, labelH + valueH + 5)
+  const entries = items.map((item, index) => ({ kind: 'metric', item, index }))
+  const build = (subset) => {
+    const rows = subset.map((entry) => entry.item)
+    const measure = (w) => {
+      const widths = equalColumns(columns, gap, w, 0)
+      const rowCount = Math.ceil(rows.length / columns)
+      let total = 0
+      for (let row = 0; row < rowCount; row += 1) {
+        let rowH = 0
+        for (let col = 0; col < columns; col += 1) {
+          const item = rows[row * columns + col]
+          if (!item) continue
+          const cw = widths[col].w - 4
+          const labelH = ctx.measureText(String(item.label).toUpperCase(), cw, { size: labelSize, font: FONTS.bodySemi, characterSpacing: 0.5 })
+          const valueH = ctx.measureText(fmt(item.value), cw, { size: valueSize, font: FONTS.bodyBold, color: item.color || COLORS.midnight, features: ['tnum'] })
+          rowH = Math.max(rowH, labelH + valueH + 5)
+        }
+        total += rowH + 8
       }
-      total += rowH + 8
+      return total
     }
-    return total
-  }
-  const draw = (frame) => {
-    const widths = equalColumns(columns, gap, frame.w, frame.x)
-    let cursor = frame.y
-    for (let row = 0; row < Math.ceil(items.length / columns); row += 1) {
-      let rowH = 0
-      const cells = []
-      for (let col = 0; col < columns; col += 1) {
-        const item = items[row * columns + col]
-        if (!item) { cells.push(null); continue }
-        const cw = widths[col].w - 4
-        const labelH = ctx.measureText(String(item.label).toUpperCase(), cw, { size: labelSize, font: FONTS.bodySemi, characterSpacing: 0.5 })
-        const valueH = ctx.measureText(fmt(item.value), cw, { size: valueSize, font: FONTS.bodyBold, color: item.color || COLORS.midnight, features: ['tnum'] })
-        cells.push({ item, labelH, valueH, frame: widths[col] })
-        rowH = Math.max(rowH, labelH + valueH + 5)
+    const draw = (frame) => {
+      const widths = equalColumns(columns, gap, frame.w, frame.x)
+      let cursor = frame.y
+      for (let row = 0; row < Math.ceil(rows.length / columns); row += 1) {
+        let rowH = 0
+        const cells = []
+        for (let col = 0; col < columns; col += 1) {
+          const item = rows[row * columns + col]
+          if (!item) { cells.push(null); continue }
+          const cw = widths[col].w - 4
+          const labelH = ctx.measureText(String(item.label).toUpperCase(), cw, { size: labelSize, font: FONTS.bodySemi, characterSpacing: 0.5 })
+          const valueH = ctx.measureText(fmt(item.value), cw, { size: valueSize, font: FONTS.bodyBold, color: item.color || COLORS.midnight, features: ['tnum'] })
+          cells.push({ item, labelH, valueH, frame: widths[col] })
+          rowH = Math.max(rowH, labelH + valueH + 5)
+        }
+        cells.forEach((cell) => {
+          if (!cell) return
+          const { item, labelH, frame: c } = cell
+          ctx.text(String(item.label).toUpperCase(), c.x, cursor, c.w - 4, {
+            size: labelSize, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.5,
+          })
+          ctx.text(fmt(item.value), c.x, cursor + labelH + 2, c.w - 4, {
+            size: valueSize, font: FONTS.bodyBold, color: item.color || COLORS.midnight, features: ['tnum'],
+          })
+        })
+        cursor += rowH
+        ctx.canvas.line(frame.x, cursor + 3, frame.x + frame.w, cursor + 3, { color: COLORS.line, width: 0.4 })
+        cursor += 8
       }
-      cells.forEach((cell) => {
-        if (!cell) return
-        const { item, labelH, frame: c } = cell
-        ctx.text(String(item.label).toUpperCase(), c.x, cursor, c.w - 4, {
-          size: labelSize, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.5,
-        })
-        ctx.text(fmt(item.value), c.x, cursor + labelH + 2, c.w - 4, {
-          size: valueSize, font: FONTS.bodyBold, color: item.color || COLORS.midnight, features: ['tnum'],
-        })
-      })
-      cursor += rowH
-      ctx.canvas.line(frame.x, cursor + 3, frame.x + frame.w, cursor + 3, { color: COLORS.line, width: 0.4 })
-      cursor += 8
     }
+    return { type: 'metric-ledger', label, measure, draw }
   }
-  return { type: 'metric-ledger', label, measure, draw }
+  const split = (splitCtx, entry, w, maxHeight) => splitMetricItem(
+    splitCtx, entry.item, w, maxHeight, columns, gap, labelSize, valueSize,
+  )
+  return chunkable({ type: 'metric-ledger', label, entries, build, split, continuationLabel: label })
 }
 
 export function MetricLedger(ctx, opts) {
@@ -377,51 +634,63 @@ export function BarChartSpec(ctx, {
     }
     return { pad, innerW, labelW, valueW, barX, valueX, barW: Math.max(4, barW) }
   }
-  const measure = (w) => {
+  const entries = bars.map((bar, index) => ({ kind: 'bar', bar, index }))
+  const resolvedTitle = (opts = {}) => (opts.continuation && title ? `${title} · continued` : title)
+  const fixedBudget = (w, opts = {}) => {
     const g = geometry(w)
-    const titleH = title ? ctx.measureText(title, g.innerW, { size: TYPE.subsection, font: FONTS.heading }) : 0
+    const t = resolvedTitle(opts)
+    const titleH = t ? ctx.measureText(t, g.innerW, { size: TYPE.subsection, font: FONTS.heading }) : 0
     const subtitleH = subtitle ? ctx.measureText(subtitle, g.innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) : 0
-    const rowHeights = bars.map((bar) => {
-      const labelH = ctx.measureText(fmt(bar.label), g.labelW, { size: TYPE.bodySmall, font: FONTS.bodySemi })
-      const valueH = ctx.measureText(fmt(bar.valueLabel ?? bar.value), g.valueW, { size: TYPE.bodySmall, font: FONTS.bodyBold, align: 'right', features: ['tnum'] })
-      return Math.max(minRowHeight, labelH, valueH) + 6
-    })
     const legendH = legend ? ctx.measureText(legend, g.innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) : 0
-    return 8 + titleH + (subtitle ? 3 + subtitleH : 0) + 8
-      + rowHeights.reduce((sum, h) => sum + h, 0) + Math.max(0, bars.length - 1) * rowGap
-      + (legend ? 7 + legendH : 0) + 8
+    return 8 + titleH + (subtitle ? 3 + subtitleH : 0) + 8 + (legend ? 7 + legendH : 0) + 8 + Math.max(0, 1 - 1) * rowGap
   }
-  const draw = (frame) => {
-    const g = geometry(frame.w)
-    const innerX = frame.x + g.pad
-    const barX = frame.x + g.pad + g.barX
-    const valueX = frame.x + g.pad + g.valueX
-    const max = Math.max(...bars.map((bar) => Number(bar.value) || 0), 1)
-    let cursor = frame.y + 5
-    ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: HAIRLINE })
-    if (title) {
-      cursor += ctx.text(title, innerX, cursor, g.innerW, { size: TYPE.subsection, font: FONTS.heading, color: COLORS.midnight }) + 2
-    }
-    if (subtitle) {
-      cursor += ctx.text(subtitle, innerX, cursor, g.innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) + 6
-    } else cursor += 4
-    bars.forEach((bar) => {
-      const labelH = ctx.measureText(fmt(bar.label), g.labelW, { size: TYPE.bodySmall, font: FONTS.bodySemi })
-      const valueH = ctx.measureText(fmt(bar.valueLabel ?? bar.value), g.valueW, { size: TYPE.bodySmall, font: FONTS.bodyBold, align: 'right', features: ['tnum'] })
-      const rowH = Math.max(minRowHeight, labelH, valueH) + 6
-      ctx.text(fmt(bar.label), innerX, cursor, g.labelW, { size: TYPE.bodySmall, font: FONTS.bodySemi, color: COLORS.ink })
-      const barY = cursor + Math.max(2, (rowH - 5) / 2)
-      ProgressBar(ctx, { x: barX, y: barY, w: g.barW, value: Number(bar.value) || 0, max, color: bar.color || accent, height: 5 })
-      ctx.text(fmt(bar.valueLabel ?? bar.value), valueX, cursor, g.valueW, {
-        size: TYPE.bodySmall, font: FONTS.bodyBold, color: bar.color || accent, align: 'right', features: ['tnum'],
+  const build = (subset, opts = {}) => {
+    const rows = subset.map((entry) => entry.bar)
+    const t = resolvedTitle(opts)
+    const measure = (w) => {
+      const g = geometry(w)
+      const base = fixedBudget(w, opts)
+      const rowHeights = rows.map((bar) => {
+        const labelH = ctx.measureText(fmt(bar.label), g.labelW, { size: TYPE.bodySmall, font: FONTS.bodySemi })
+        const valueH = ctx.measureText(fmt(bar.valueLabel ?? bar.value), g.valueW, { size: TYPE.bodySmall, font: FONTS.bodyBold, align: 'right', features: ['tnum'] })
+        return Math.max(minRowHeight, labelH, valueH) + 6
       })
-      cursor += rowH + rowGap
-    })
-    if (legend) {
-      ctx.text(legend, innerX, cursor, g.innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted })
+      return base + rowHeights.reduce((sum, h) => sum + h, 0) + Math.max(0, rows.length - 1) * rowGap
     }
+    const draw = (frame) => {
+      const g = geometry(frame.w)
+      const innerX = frame.x + g.pad
+      const barX = frame.x + g.pad + g.barX
+      const valueX = frame.x + g.pad + g.valueX
+      const max = Math.max(...rows.map((bar) => Number(bar.value) || 0), 1)
+      let cursor = frame.y + 5
+      ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: HAIRLINE })
+      if (t) cursor += ctx.text(t, innerX, cursor, g.innerW, { size: TYPE.subsection, font: FONTS.heading, color: COLORS.midnight }) + 2
+      if (subtitle) cursor += ctx.text(subtitle, innerX, cursor, g.innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) + 6
+      else cursor += 4
+      rows.forEach((bar) => {
+        const labelH = ctx.measureText(fmt(bar.label), g.labelW, { size: TYPE.bodySmall, font: FONTS.bodySemi })
+        const valueH = ctx.measureText(fmt(bar.valueLabel ?? bar.value), g.valueW, { size: TYPE.bodySmall, font: FONTS.bodyBold, align: 'right', features: ['tnum'] })
+        const rowH = Math.max(minRowHeight, labelH, valueH) + 6
+        ctx.text(fmt(bar.label), innerX, cursor, g.labelW, { size: TYPE.bodySmall, font: FONTS.bodySemi, color: COLORS.ink })
+        const barY = cursor + Math.max(2, (rowH - 5) / 2)
+        ProgressBar(ctx, { x: barX, y: barY, w: g.barW, value: Number(bar.value) || 0, max, color: bar.color || accent, height: 5 })
+        ctx.text(fmt(bar.valueLabel ?? bar.value), valueX, cursor, g.valueW, {
+          size: TYPE.bodySmall, font: FONTS.bodyBold, color: bar.color || accent, align: 'right', features: ['tnum'],
+        })
+        cursor += rowH + rowGap
+      })
+      if (legend) ctx.text(legend, innerX, cursor, g.innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted })
+    }
+    return { type: 'bar-chart', label: label || t || '', measure, draw }
   }
-  return { type: 'bar-chart', label: label || title || '', measure, draw }
+  const split = (splitCtx, entry, w, maxHeight, opts) => splitBarEntry(
+    splitCtx, entry.bar, geometry(w), maxHeight, fixedBudget(w, opts),
+  )
+  return chunkable({
+    type: 'bar-chart', label: label || title || '', entries, build, split,
+    continuationLabel: title || label,
+  })
 }
 
 export function BarChart(ctx, opts) {
@@ -429,42 +698,59 @@ export function BarChart(ctx, opts) {
 }
 
 export function StackedBarSpec(ctx, { label = '', title, subtitle = '', segments = [], legend = true, height = 12 } = {}) {
-  const measure = (w) => {
-    const innerW = w - 20
-    const titleH = title ? ctx.measureText(title, innerW, { size: TYPE.subsection, font: FONTS.heading }) : 0
-    const subtitleH = subtitle ? ctx.measureText(subtitle, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) : 0
-    const legendH = legend ? segments.reduce((sum, seg) => (
-      sum + ctx.measureText(`${fmt(seg.label)}  ${fmt(seg.value)}`, innerW - 12, { size: TYPE.bodySmall, font: FONTS.body }) + 3
-    ), 0) : 0
-    return 8 + titleH + (subtitle ? 3 + subtitleH : 0) + 10 + height + 12 + legendH + 8
-  }
-  const draw = (frame) => {
-    const innerX = frame.x + 10
-    const innerW = frame.w - 20
-    let cursor = frame.y + 5
-    ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: HAIRLINE })
-    if (title) cursor += ctx.text(title, innerX, cursor, innerW, { size: TYPE.subsection, font: FONTS.heading, color: COLORS.midnight }) + 2
-    if (subtitle) cursor += ctx.text(subtitle, innerX, cursor, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) + 7
-    else cursor += 5
-    const total = segments.reduce((sum, seg) => sum + (Number(seg.value) || 0), 0) || 1
-    let x = innerX
-    segments.forEach((seg) => {
-      const segW = ((Number(seg.value) || 0) / total) * innerW
-      if (segW > 0.5) ctx.canvas.bar(x, cursor, segW, height, seg.color || COLORS.indigo, { variant: 'segment' })
-      x += segW
-    })
-    cursor += height + 11
-    if (legend) {
-      segments.forEach((seg) => {
-        ctx.canvas.rect(innerX, cursor + 3, 7, 7, { fill: seg.color || COLORS.indigo, kind: 'shape', role: 'legend' })
-        const h = ctx.text(`${fmt(seg.label)}  ${fmt(seg.value)}`, innerX + 12, cursor, innerW - 12, {
-          size: TYPE.bodySmall, font: FONTS.body, color: COLORS.ink,
-        })
-        cursor += h + 3
+  const entries = [{ kind: 'all' }]
+  const resolvedTitle = (opts = {}) => (opts.continuation && title ? `${title} · continued` : title)
+  const build = (subset, opts = {}) => {
+    if (!subset.length) return { type: 'stacked-bar', label, measure: () => 0, draw: () => {} }
+    if (subset.length === 1 && subset[0].kind === 'overflow') {
+      return TextFlowSpec(ctx, {
+        label: label || title, title: resolvedTitle(opts), text: subset[0].text,
+        size: TYPE.bodySmall,
       })
     }
+    const t = resolvedTitle(opts)
+    const measure = (w) => {
+      const innerW = w - 20
+      const titleH = t ? ctx.measureText(t, innerW, { size: TYPE.subsection, font: FONTS.heading }) : 0
+      const subtitleH = subtitle ? ctx.measureText(subtitle, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) : 0
+      const legendH = legend ? segments.reduce((sum, seg) => (
+        sum + ctx.measureText(`${fmt(seg.label)}  ${fmt(seg.value)}`, innerW - 12, { size: TYPE.bodySmall, font: FONTS.body }) + 3
+      ), 0) : 0
+      return 8 + titleH + (subtitle ? 3 + subtitleH : 0) + 10 + height + 12 + legendH + 8
+    }
+    const draw = (frame) => {
+      const innerX = frame.x + 10
+      const innerW = frame.w - 20
+      let cursor = frame.y + 5
+      ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: HAIRLINE })
+      if (t) cursor += ctx.text(t, innerX, cursor, innerW, { size: TYPE.subsection, font: FONTS.heading, color: COLORS.midnight }) + 2
+      if (subtitle) cursor += ctx.text(subtitle, innerX, cursor, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) + 7
+      else cursor += 5
+      const total = segments.reduce((sum, seg) => sum + (Number(seg.value) || 0), 0) || 1
+      let x = innerX
+      segments.forEach((seg) => {
+        const segW = ((Number(seg.value) || 0) / total) * innerW
+        if (segW > 0.5) ctx.canvas.bar(x, cursor, segW, height, seg.color || COLORS.indigo, { variant: 'segment' })
+        x += segW
+      })
+      cursor += height + 11
+      if (legend) {
+        segments.forEach((seg) => {
+          ctx.canvas.rect(innerX, cursor + 3, 7, 7, { fill: seg.color || COLORS.indigo, kind: 'shape', role: 'legend' })
+          const h = ctx.text(`${fmt(seg.label)}  ${fmt(seg.value)}`, innerX + 12, cursor, innerW - 12, {
+            size: TYPE.bodySmall, font: FONTS.body, color: COLORS.ink,
+          })
+          cursor += h + 3
+        })
+      }
+    }
+    return { type: 'stacked-bar', label: label || t || '', measure, draw }
   }
-  return { type: 'stacked-bar', label: label || title || '', measure, draw }
+  const split = () => [{
+    kind: 'overflow',
+    text: segments.map((seg) => `${fmt(seg.label)}  ·  ${fmt(seg.value)}`).join('\n') || '—',
+  }]
+  return chunkable({ type: 'stacked-bar', label: label || title || '', entries, build, split, continuationLabel: title || label })
 }
 
 export function StackedBar(ctx, opts) {
@@ -475,56 +761,76 @@ export function DonutGaugeSpec(ctx, {
   label = '', title, subtitle = '', slices = [], centerValue = '', centerLabel = '',
   accent = COLORS.indigo, ringWidth = 10,
 } = {}) {
-  const measure = (w) => {
-    const innerW = w - 20
-    const titleH = title ? ctx.measureText(title, innerW, { size: TYPE.subsection, font: FONTS.heading }) : 0
-    const subtitleH = subtitle ? ctx.measureText(subtitle, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) : 0
-    const legendH = slices.reduce((sum, slice) => (
-      sum + ctx.measureText(`${fmt(slice.label)}  ${fmt(slice.value)}`, innerW * 0.52, { size: TYPE.bodySmall, font: FONTS.body }) + 5
-    ), 0)
-    const circle = Math.min(132, Math.max(96, w * 0.42))
-    return 8 + titleH + (subtitle ? 3 + subtitleH : 0) + 8 + Math.max(circle, legendH) + 8
-  }
-  const draw = (frame) => {
-    const innerX = frame.x + 10
-    const innerW = frame.w - 20
-    let cursor = frame.y + 5
-    ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: HAIRLINE })
-    if (title) cursor += ctx.text(title, innerX, cursor, innerW, { size: TYPE.subsection, font: FONTS.heading, color: COLORS.midnight }) + 2
-    if (subtitle) cursor += ctx.text(subtitle, innerX, cursor, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) + 7
-    else cursor += 5
-    const radius = Math.min(58, Math.max(42, frame.w * 0.19)) - ringWidth / 2
-    const cx = innerX + radius + ringWidth / 2 + 6
-    const cy = cursor + radius + ringWidth / 2
-    const total = slices.reduce((sum, slice) => sum + (Number(slice.value) || 0), 0) || 1
-    ctx.canvas.arc(cx, cy, radius, -Math.PI / 2, Math.PI * 1.5, { color: COLORS.line, width: ringWidth })
-    let angle = -Math.PI / 2
-    slices.forEach((slice) => {
-      const sweep = ((Number(slice.value) || 0) / total) * Math.PI * 2
-      if (sweep > 0.001) ctx.canvas.arc(cx, cy, radius, angle, angle + sweep, { color: slice.color || accent, width: ringWidth })
-      angle += sweep
-    })
-    if (centerValue) {
-      ctx.text(centerValue, cx - 40, cy - 10, 80, {
-        size: 17, font: FONTS.heading, color: COLORS.midnight, align: 'center', features: ['tnum'],
+  const entries = [{ kind: 'all' }]
+  const resolvedTitle = (opts = {}) => (opts.continuation && title ? `${title} · continued` : title)
+  const build = (subset, opts = {}) => {
+    if (!subset.length) return { type: 'donut-gauge', label, measure: () => 0, draw: () => {} }
+    if (subset.length === 1 && subset[0].kind === 'overflow') {
+      return TextFlowSpec(ctx, {
+        label: label || title, title: resolvedTitle(opts), text: subset[0].text,
+        size: TYPE.bodySmall,
       })
     }
-    if (centerLabel) {
-      ctx.text(centerLabel, cx - 44, cy + 10, 88, {
-        size: TYPE.label, font: FONTS.bodySemi, color: COLORS.muted, align: 'center', characterSpacing: 0.6,
+    const t = resolvedTitle(opts)
+    const measure = (w) => {
+      const innerW = w - 20
+      const titleH = t ? ctx.measureText(t, innerW, { size: TYPE.subsection, font: FONTS.heading }) : 0
+      const subtitleH = subtitle ? ctx.measureText(subtitle, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) : 0
+      const legendH = slices.reduce((sum, slice) => (
+        sum + ctx.measureText(`${fmt(slice.label)}  ${fmt(slice.value)}`, innerW * 0.52, { size: TYPE.bodySmall, font: FONTS.body }) + 5
+      ), 0)
+      const circle = Math.min(132, Math.max(96, w * 0.42))
+      return 8 + titleH + (subtitle ? 3 + subtitleH : 0) + 8 + Math.max(circle, legendH) + 8
+    }
+    const draw = (frame) => {
+      const innerX = frame.x + 10
+      const innerW = frame.w - 20
+      let cursor = frame.y + 5
+      ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: HAIRLINE })
+      if (t) cursor += ctx.text(t, innerX, cursor, innerW, { size: TYPE.subsection, font: FONTS.heading, color: COLORS.midnight }) + 2
+      if (subtitle) cursor += ctx.text(subtitle, innerX, cursor, innerW, { size: TYPE.label, font: FONTS.body, color: COLORS.muted }) + 7
+      else cursor += 5
+      const radius = Math.min(58, Math.max(42, frame.w * 0.19)) - ringWidth / 2
+      const cx = innerX + radius + ringWidth / 2 + 6
+      const cy = cursor + radius + ringWidth / 2
+      const total = slices.reduce((sum, slice) => sum + (Number(slice.value) || 0), 0) || 1
+      ctx.canvas.arc(cx, cy, radius, -Math.PI / 2, Math.PI * 1.5, { color: COLORS.line, width: ringWidth })
+      let angle = -Math.PI / 2
+      slices.forEach((slice) => {
+        const sweep = ((Number(slice.value) || 0) / total) * Math.PI * 2
+        if (sweep > 0.001) ctx.canvas.arc(cx, cy, radius, angle, angle + sweep, { color: slice.color || accent, width: ringWidth })
+        angle += sweep
+      })
+      if (centerValue) {
+        ctx.text(centerValue, cx - 40, cy - 10, 80, {
+          size: 17, font: FONTS.heading, color: COLORS.midnight, align: 'center', features: ['tnum'],
+        })
+      }
+      if (centerLabel) {
+        ctx.text(centerLabel, cx - 44, cy + 10, 88, {
+          size: TYPE.label, font: FONTS.bodySemi, color: COLORS.muted, align: 'center', characterSpacing: 0.6,
+        })
+      }
+      const legendX = innerX + radius * 2 + ringWidth + 24
+      const legendW = Math.max(40, innerW - (legendX - innerX))
+      let ly = cursor + 4
+      slices.forEach((slice) => {
+        ctx.canvas.rect(legendX, ly + 3, 7, 7, { fill: slice.color || accent, kind: 'shape', role: 'legend' })
+        ly += ctx.text(`${fmt(slice.label)}  ${fmt(slice.value)}`, legendX + 12, ly, legendW - 12, {
+          size: TYPE.bodySmall, font: FONTS.body, color: COLORS.ink,
+        }) + 4
       })
     }
-    const legendX = innerX + radius * 2 + ringWidth + 24
-    const legendW = Math.max(40, innerW - (legendX - innerX))
-    let ly = cursor + 4
-    slices.forEach((slice) => {
-      ctx.canvas.rect(legendX, ly + 3, 7, 7, { fill: slice.color || accent, kind: 'shape', role: 'legend' })
-      ly += ctx.text(`${fmt(slice.label)}  ${fmt(slice.value)}`, legendX + 12, ly, legendW - 12, {
-        size: TYPE.bodySmall, font: FONTS.body, color: COLORS.ink,
-      }) + 4
-    })
+    return { type: 'donut-gauge', label: label || t || '', measure, draw }
   }
-  return { type: 'donut-gauge', label: label || title || '', measure, draw }
+  const split = () => [{
+    kind: 'overflow',
+    text: [
+      centerValue && `${centerLabel || 'Value'}: ${fmt(centerValue)}`,
+      ...slices.map((slice) => `${fmt(slice.label)}  ·  ${fmt(slice.value)}`),
+    ].filter(Boolean).join('\n') || '—',
+  }]
+  return chunkable({ type: 'donut-gauge', label: label || title || '', entries, build, split, continuationLabel: title || label })
 }
 
 export function DonutGauge(ctx, opts) {
@@ -604,6 +910,21 @@ function drawCell(ctx, col, row, value, x, y, cw, ch, padding) {
   }
 }
 
+function tableRowOverflowSpec(ctx, { row, columns, title, groupValue, index }) {
+  const lines = columns.map((col) => {
+    const value = row[col.key]
+    if (col.render === 'source' && value && typeof value === 'object') {
+      return `${col.label}: ${fmt(value.path)} — ${fmt(value.value)}`
+    }
+    return `${col.label}: ${fmt(value)}`
+  })
+  const heading = [title, groupValue && `${groupValue} · row ${index + 1}`].filter(Boolean).join('  ·  ')
+  return TextFlowSpec(ctx, {
+    label: heading || `Table row ${index + 1}`, title: heading, text: lines.join('\n'),
+    size: TYPE.table, widthPadding: 16, paragraphGap: 2, topPad: 5, bottomPad: 6,
+  })
+}
+
 export function MeasuredTable(ctx, {
   id, title = '', rows = [], columns = [], x = CONTENT.x, w = CONTENT.w,
   rowPadding = 3, fontSize = TYPE.table, zebra = true, header = true,
@@ -639,8 +960,8 @@ export function MeasuredTable(ctx, {
   let headerOnPage = false
   let lastGroup = null
   const paintHeader = () => {
-    if (!header) return
-    ctx.component({
+    if (!header) return null
+    const result = ctx.component({
       type: 'table-header', tableId, x, w, bottomSpacing: 0,
       measure: () => headerH,
       draw: (frame) => {
@@ -658,6 +979,7 @@ export function MeasuredTable(ctx, {
       },
     })
     headerOnPage = true
+    return result
   }
 
   rowSpecs.forEach((rowH, index) => {
@@ -666,14 +988,16 @@ export function MeasuredTable(ctx, {
     const groupChanged = groupKey && groupValue !== lastGroup
     const groupH = groupChanged ? ctx.measureText(`${groupPrefix}${groupValue}`, w, { size: TYPE.label, font: FONTS.bodyBold, color: COLORS.indigo, characterSpacing: 0.7 }) + 6 : 0
     const required = rowH + groupH
-    if (ctx.y + required + (headerOnPage ? 0 : headerH) > CONTENT.bottom) {
-      ctx.newPage()
+    const continuationReserve = CONTINUATION_H
+    if (ctx.y + required + (headerOnPage ? 0 : headerH) + continuationReserve > CONTENT.bottom) {
+      const broke = ctx.newPage()
+      if (broke) ctx.drawContinuation(`${title || 'Table'} · continued`)
       headerOnPage = false
       lastGroup = null
     }
     if (!headerOnPage) paintHeader()
     if (groupChanged) {
-      ctx.component({
+      const groupResult = ctx.component({
         type: 'table-group', tableId, x, w, label: groupValue, bottomSpacing: 0,
         measure: () => groupH,
         draw: (frame) => {
@@ -683,23 +1007,48 @@ export function MeasuredTable(ctx, {
           })
         },
       })
+      if (groupResult?.pageChanged) {
+        headerOnPage = false
+        lastGroup = null
+      }
       lastGroup = groupValue
     }
-    ctx.component({
-      type: 'table-row', tableId, x, w, bottomSpacing: 0,
-      measure: () => rowH,
-      draw: (frame) => {
-        if (zebra && index % 2 === 1) {
-          ctx.canvas.rect(frame.x, frame.y, frame.w, frame.h, { fill: COLORS.paper, audit: false })
-        }
-        ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: 0.35 })
-        let cx = frame.x
-        columns.forEach((col, i) => {
-          drawCell(ctx, col, row, row[col.key], cx, frame.y, widths[i], frame.h, rowPadding)
-          cx += widths[i]
-        })
-      },
-    })
+    const rowCapacity = CONTENT.h - headerH - CONTINUATION_H - 10
+    if (rowH > rowCapacity + EPS) {
+      const overflow = tableRowOverflowSpec(ctx, {
+        row, columns, title, groupValue, index,
+      })
+      const pageBefore = ctx.currentPageIndex
+      paginateSingle(ctx, overflow, {
+        x, w, topSpacing: 0, bottomSpacing: 0, keepWithNext: 0,
+        continuationLabel: `${title || 'Table'} · continued`,
+      })
+      if (ctx.currentPageIndex !== pageBefore) {
+        headerOnPage = false
+        lastGroup = null
+      }
+    } else {
+      const rowResult = ctx.component({
+        type: 'table-row', tableId, x, w, bottomSpacing: 0,
+        allowSplit: true,
+        measure: () => rowH,
+        draw: (frame) => {
+          if (zebra && index % 2 === 1) {
+            ctx.canvas.rect(frame.x, frame.y, frame.w, frame.h, { fill: COLORS.paper, audit: false })
+          }
+          ctx.canvas.line(frame.x, frame.y, frame.x + frame.w, frame.y, { color: COLORS.line, width: 0.35 })
+          let cx = frame.x
+          columns.forEach((col, i) => {
+            drawCell(ctx, col, row, row[col.key], cx, frame.y, widths[i], frame.h, rowPadding)
+            cx += widths[i]
+          })
+        },
+      })
+      if (rowResult?.pageChanged) {
+        headerOnPage = false
+        lastGroup = null
+      }
+    }
   })
   ctx.y += bottomSpacing
   return tableId
@@ -708,46 +1057,69 @@ export function MeasuredTable(ctx, {
 export function StaticTableSpec(ctx, {
   label = '', title = '', rows = [], columns = [], rowPadding = 2.5, zebra = true, header = true,
 } = {}) {
-  const measure = (w) => {
-    const widths = resolveWidths(columns, w)
-    const headerH = header ? Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.2 }) + 5)) : 0
-    const titleH = title ? ctx.measureText(title, w, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo }) + 4 : 0
-    const rowsH = rows.reduce((sum, row) => (
-      sum + Math.max(18, ...columns.map((col, i) => measureCell(ctx, col, row, row[col.key], widths[i]))) + rowPadding * 2
-    ), 0)
-    return titleH + headerH + rowsH
-  }
-  const draw = (frame) => {
-    const widths = resolveWidths(columns, frame.w)
-    let cursor = frame.y
-    if (title) {
-      cursor += ctx.text(title, frame.x, cursor, frame.w, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo }) + 4
+  const entries = rows.map((row, index) => ({
+    kind: 'row', row: { ...row, __rowOffset: index }, index,
+  }))
+  const resolvedTitle = (opts = {}) => (opts.continuation && title ? `${title} · continued` : title)
+  const build = (subset, opts = {}) => {
+    const tableRows = subset.map((entry) => entry.row)
+    const t = resolvedTitle(opts)
+    const rowHeights = (w) => {
+      const widths = resolveWidths(columns, w)
+      return tableRows.map((row) => Math.max(
+        18,
+        ...columns.map((col, i) => measureCell(ctx, col, row, row[col.key], widths[i])),
+      ) + rowPadding * 2)
     }
-    if (header) {
-      const headerH = Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.2 }) + 5))
-      ctx.canvas.rect(frame.x, cursor, frame.w, headerH, { fill: COLORS.midnight, audit: false })
-      let hx = frame.x
-      columns.forEach((col, i) => {
-        ctx.text(String(col.label).toUpperCase(), hx + 4, cursor + 2, widths[i] - 8, {
-          size: 7.8, font: FONTS.bodySemi, color: COLORS.white, align: col.align || 'left', characterSpacing: 0.2,
+    const measure = (w) => {
+      const widths = resolveWidths(columns, w)
+      const headerH = header ? Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.2 }) + 5)) : 0
+      const titleH = t ? ctx.measureText(t, w, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo }) + 4 : 0
+      return titleH + headerH + rowHeights(w).reduce((sum, h) => sum + h, 0)
+    }
+    const draw = (frame) => {
+      const widths = resolveWidths(columns, frame.w)
+      const heights = rowHeights(frame.w)
+      let cursor = frame.y
+      if (t) {
+        cursor += ctx.text(t, frame.x, cursor, frame.w, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo }) + 4
+      }
+      if (header) {
+        const headerH = Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.2 }) + 5))
+        ctx.canvas.rect(frame.x, cursor, frame.w, headerH, { fill: COLORS.midnight, audit: false })
+        let hx = frame.x
+        columns.forEach((col, i) => {
+          ctx.text(String(col.label).toUpperCase(), hx + 4, cursor + 2, widths[i] - 8, {
+            size: 7.8, font: FONTS.bodySemi, color: COLORS.white, align: col.align || 'left', characterSpacing: 0.2,
+          })
+          hx += widths[i]
         })
-        hx += widths[i]
+        cursor += headerH
+      }
+      tableRows.forEach((row, index) => {
+        const rowH = heights[index]
+        const visualIndex = row.__rowOffset ?? index
+        if (zebra && visualIndex % 2 === 1) ctx.canvas.rect(frame.x, cursor, frame.w, rowH, { fill: COLORS.paper, audit: false })
+        ctx.canvas.line(frame.x, cursor, frame.x + frame.w, cursor, { color: COLORS.line, width: 0.35 })
+        let cx = frame.x
+        columns.forEach((col, i) => {
+          drawCell(ctx, col, row, row[col.key], cx, cursor, widths[i], rowH, rowPadding)
+          cx += widths[i]
+        })
+        cursor += rowH
       })
-      cursor += headerH
     }
-    rows.forEach((row, index) => {
-      const rowH = Math.max(18, ...columns.map((col, i) => measureCell(ctx, col, row, row[col.key], widths[i]))) + rowPadding * 2
-      if (zebra && index % 2 === 1) ctx.canvas.rect(frame.x, cursor, frame.w, rowH, { fill: COLORS.paper, audit: false })
-      ctx.canvas.line(frame.x, cursor, frame.x + frame.w, cursor, { color: COLORS.line, width: 0.35 })
-      let cx = frame.x
-      columns.forEach((col, i) => {
-        drawCell(ctx, col, row, row[col.key], cx, cursor, widths[i], rowH, rowPadding)
-        cx += widths[i]
-      })
-      cursor += rowH
-    })
+    return { type: 'static-table', label, measure, draw }
   }
-  return { type: 'static-table', label, measure, draw }
+  const split = (splitCtx, entry, w, maxHeight, opts) => {
+    const widths = resolveWidths(columns, w)
+    const fixed = build([], opts).measure(w)
+    return splitRowEntry(splitCtx, entry.row, columns, widths, Math.max(12, maxHeight - fixed), rowPadding)
+  }
+  return chunkable({
+    type: 'static-table', label, entries, build, split,
+    continuationLabel: title || label,
+  })
 }
 
 export function StaticTable(ctx, opts) {
@@ -922,6 +1294,24 @@ function drawSolutionBackground(ctx, x, y, w, h) {
   ctx.canvas.rect(x, y, 2.5, h, { fill: COLORS.indigo, audit: false })
 }
 
+function questionIntroOverflowSpec(ctx, p, question) {
+  const lines = [
+    `${question.q}  ·  ${p.status}`,
+    `Subject: ${fmt(question.subject)}  ·  Chapter: ${fmt(question.chapter)}  ·  Topic: ${fmt(question.topic)}`,
+    `Difficulty: ${fmt(question.difficulty)}  ·  Type: ${fmt(question.type)}  ·  Status: ${p.status}`,
+    questionSource(question),
+    `Student answer: ${fmt(question.selected)}  ·  Correct answer: ${fmt(question.correct)}`,
+    `Marks: ${fmt(question.marks)}  ·  Time: ${fmt(question.time)}`,
+    p.mistakeText,
+  ].filter(Boolean)
+  return TextFlowSpec(ctx, {
+    label: `${question.q} · question statement`,
+    title: `${fmt(question.subject)} · ${question.q} · question continued`,
+    text: lines.join('\n'), size: TYPE.bodySmall, widthPadding: 18,
+    paragraphGap: 3, topPad: 6, bottomPad: 8,
+  })
+}
+
 export function QuestionCard(ctx, { question } = {}) {
   const p = prepareQuestion(ctx, question, CONTENT.w)
   const capacity = CONTENT.h - 16
@@ -962,16 +1352,25 @@ export function QuestionCard(ctx, { question } = {}) {
 
   // Unusually long solution: keep the question's identity, metadata and answer
   // comparison together, then flow the source solution with explicit labels.
-  ctx.component({
-    type: 'question-card-intro', label: `${question.q} · question statement`, allowSplit: false,
-    keepWithNext: 34, bottomSpacing: 0,
-    measure: () => p.introH,
-    draw: (frame) => drawQuestionIntro(ctx, p, frame),
-  })
+  const introContinuation = `${fmt(question.subject)} · ${question.q} · question continued`
+  const introCapacity = CONTENT.h - 34 - CONTINUATION_H - 8
+  if (p.introH > introCapacity + EPS) {
+    paginateSingle(ctx, questionIntroOverflowSpec(ctx, p, question), {
+      w: CONTENT.w, x: CONTENT.x, topSpacing: 0, bottomSpacing: 0,
+      keepWithNext: 34, continuationLabel: introContinuation,
+    })
+  } else {
+    ctx.component({
+      type: 'question-card-intro', label: `${question.q} · question statement`, allowSplit: false,
+      keepWithNext: 34, bottomSpacing: 0, continuationLabel: introContinuation,
+      measure: () => p.introH,
+      draw: (frame) => drawQuestionIntro(ctx, p, frame),
+    })
+  }
   p.parts.forEach((part) => {
     ctx.component({
       type: 'solution-label', label: `${question.q} · ${part.label}`,
-      continuationLabel: `${question.q} · solution continued`,
+      continuationLabel: `${fmt(question.subject)} · ${question.q} · solution continued`,
       keepWithNext: 20, bottomSpacing: 0,
       measure: () => ctx.measureText(part.label.toUpperCase(), p.innerW - 20, {
         size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4,
@@ -988,7 +1387,7 @@ export function QuestionCard(ctx, { question } = {}) {
       ctx.component({
         type: 'question-solution-line', label: `${question.q} · solution line ${index + 1}`,
         allowSplit: true,
-        continuationLabel: `${question.q} · solution continued`,
+        continuationLabel: `${fmt(question.subject)} · ${question.q} · solution continued`,
         bottomSpacing: index === part.lines.length - 1 ? 6 : 0,
         measure: () => line.height + 4,
         draw: (frame) => {

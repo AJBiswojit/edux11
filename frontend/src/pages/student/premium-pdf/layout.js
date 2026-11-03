@@ -557,12 +557,14 @@ export class ReportContext {
     const top = Number(opts.topSpacing) || 0
     const bottom = Number(opts.bottomSpacing) || 0
     const keep = Number(opts.keepWithNext) || 0
-    if (h > CONTENT.h) {
-      throw new Error(`Component height ${round(h)} pt exceeds the ${CONTENT.h} pt printable area: ${opts.label || opts.type || 'unnamed component'}`)
+    const continuationH = opts.continuationLabel ? 18 : 0
+    const printable = CONTENT.h - continuationH - top - bottom
+    if (h > printable + 0.01) {
+      throw new Error(`Component height ${round(h)} pt exceeds the ${round(printable)} pt printable area: ${opts.label || opts.type || 'unnamed component'}`)
     }
     const needed = h + top + bottom
     const pageBefore = this.currentPageIndex
-    const willBreak = this.y + needed + keep > CONTENT.bottom
+    const willBreak = this.y + needed + keep + continuationH > CONTENT.bottom
     if (willBreak) {
       this.startPage({ cover: false })
       if (opts.continuationLabel) this.drawContinuation(opts.continuationLabel)

@@ -1,0 +1,14 @@
+{
+  "paperId": "paper-live-neet-01",
+  "paperTitle": "NEET UG · Full Mock 01",
+  "questionCount": 15,
+  "attemptId": "e389c240-cbe7-4c11-a491-e05b178dbb97",
+  "studentId": "u_dev_student",
+  "score": 32.0,
+  "maxScore": 60.0,
+  "correct": 8,
+  "incorrect": 4,
+  "skipped": 3,
+  "source": "Local SQLite development DB seeded through real backend ORM/services for pagination-fix browser verification",
+  "exactProductionDataAvailable": false
+}
