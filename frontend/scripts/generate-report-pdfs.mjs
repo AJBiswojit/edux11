@@ -20,6 +20,7 @@ const ROOT_DELIVERABLES = new URL('../../deliverables/', import.meta.url)
 const CANONICAL = new URL('../../backend/app/data/spa/student-portal.json', import.meta.url)
 const ASSETS = {
   logo: new URL('../src/assets/logo.png', import.meta.url),
+  coverDoorway: new URL('../src/assets/premium-cover-doorway.png', import.meta.url),
   Inter: new URL('../src/assets/fonts/Inter-Regular.ttf', import.meta.url),
   InterSemi: new URL('../src/assets/fonts/Inter-SemiBold.ttf', import.meta.url),
   InterBold: new URL('../src/assets/fonts/Inter-Bold.ttf', import.meta.url),
@@ -44,8 +45,8 @@ async function loadAssets() {
     return [name, new Uint8Array(buffer)]
   }))
   const flat = Object.fromEntries(entries)
-  const { logo, ...fonts } = flat
-  return { logo, fonts }
+  const { logo, coverDoorway, ...fonts } = flat
+  return { logo, coverDoorway, fonts }
 }
 
 function twoSubjectStressFixture() {

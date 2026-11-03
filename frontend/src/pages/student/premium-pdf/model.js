@@ -207,6 +207,11 @@ export function buildPremiumModel({ data = {}, subject, user, generatedAt, kind 
   const examId = fmt(meta.examId)
   const examName = fmt(meta.examName || hero.examName, 'Examination')
   const student = analysisPdfUser(data, user) || {}
+  // Cover identity is always sourced from the examinee carried by the
+  // examination payload. `student` may use a student-portal fallback for
+  // existing interior chrome, but Faculty/Admin session identity must never
+  // become the named examinee on the Full Analysis cover.
+  const coverStudent = analysisPdfUser(data, null) || {}
   const who = [student.fullName, student.rollNo ? `Roll ${student.rollNo}` : null].filter(Boolean).join('  ·  ')
   const generatedDate = when.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
   const status = fmt(meta.examStatus ?? meta.status ?? hero.status, '—')
@@ -264,6 +269,8 @@ export function buildPremiumModel({ data = {}, subject, user, generatedAt, kind 
     who,
     studentName: fmt(student.fullName, fmt(meta.student, '—')),
     rollNo: fmt(student.rollNo, fmt(meta.rollNo, '—')),
+    coverStudentName: fmt(coverStudent.fullName),
+    coverRollNo: fmt(coverStudent.rollNo),
     generatedDate,
     generatedAtISO: when.toISOString(),
     status,
