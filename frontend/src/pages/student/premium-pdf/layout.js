@@ -376,6 +376,7 @@ export class ReportContext {
     this.audit = new LayoutAudit()
     this.flags = []
     this.emittedParts = []
+    this.renderedQuestions = []
     this.pageCount = 0
     this.currentPageIndex = -1
     this.cover = false
@@ -455,7 +456,7 @@ export class ReportContext {
    * well used. A short continuation page is filled by the next section rather
    * than becoming a nearly blank page.
    */
-  sectionBreak(minCoverage = 0.62) {
+  sectionBreak(minCoverage = 0.74) {
     const coverage = (this.y - CONTENT.y) / CONTENT.h
     if (coverage >= minCoverage) {
       this.startPage({ cover: false })
@@ -486,11 +487,11 @@ export class ReportContext {
     ))
     const maxY = contentBoxes.reduce((max, entry) => Math.max(max, entry.y + entry.h), CONTENT.y)
     if (maxY > CONTENT.bottom - height - 12) this.startPage({ cover: false })
+    // Anchor the colophon to the foot of the closing page. A colophon floated
+    // into the middle of a partially filled page reads as a mistake, so the
+    // remaining space is left above it as deliberate white space.
     const bottomY = CONTENT.bottom - height - 8
-    const remaining = Math.max(0, bottomY - maxY)
-    // Distribute the remaining vertical space around the final colophon rather
-    // than creating either a top-heavy page or a large empty middle band.
-    const y = Math.min(bottomY, maxY + Math.max(12, remaining * 0.45))
+    const y = bottomY
     return {
       x: CONTENT.x,
       y,

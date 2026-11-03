@@ -113,6 +113,12 @@ const qRows = (attempt) => (attempt?.questionAttempts ?? []).map((qa, i) => {
     classification,
     text: qa.question?.text ?? qa.question?.question ?? null,
     options: qa.question?.options ?? [],
+    // Figures travel with the attempt snapshot so the PDF export can embed
+    // the original examination image against its own question and option.
+    imageUrl: qa.question?.imageUrl ?? qa.question?.image_url ?? qa.question?.stemImageUrl ?? null,
+    stemImageUrls: qa.question?.stemImageUrls ?? qa.question?.stem_image_urls ?? [],
+    stemImageUrl: qa.question?.stemImageUrl ?? qa.question?.stem_image_url ?? null,
+    explanationImages: qa.question?.explanationImageUrls ?? qa.question?.solutionImageUrls ?? [],
     explanation: qa.question?.explanation ?? qa.question?.solution ?? qa.evaluation?.explanation ?? null,
     hint: qa.question?.hint ?? qa.question?.explanation ?? qa.question?.solution ?? qa.evaluation?.hint ?? qa.evaluation?.reason ?? null,
   }
@@ -657,6 +663,10 @@ export function buildAttemptAnalysisVariant(attempt, previous = []) {
       correctAnswer: r.correctAnswer ?? r.evaluation?.correctAnswer ?? r.key ?? null,
       text: r.text ?? null,
       options: r.options ?? [],
+      imageUrl: r.imageUrl ?? null,
+      stemImageUrls: r.stemImageUrls ?? [],
+      stemImageUrl: r.stemImageUrl ?? null,
+      explanationImages: r.explanationImages ?? [],
       explanation: r.explanation ?? null,
       hint: r.hint ?? r.explanation ?? r.classification?.hint ?? null,
       mistakeCategory: r.status === 'Incorrect' ? (r.classification?.label ?? null) : null,

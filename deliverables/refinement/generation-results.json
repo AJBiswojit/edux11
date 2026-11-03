@@ -1,0 +1,352 @@
+{
+  "generatedAt": "2026-11-03T09:00:00.000Z",
+  "engine": "premium-academic-editorial-v2 + figure-asset-layer",
+  "reports": {
+    "full": {
+      "file": "MediXO_EduX_Full_Exam_Analysis_Report.pdf",
+      "label": "Full Exam Analysis Report",
+      "kind": "full",
+      "synthetic": false,
+      "pages": 17,
+      "bytes": 1320273,
+      "sha256": "21b5bafcb7ea2225",
+      "questionsSupplied": 14,
+      "questionsRendered": 14,
+      "figureReferences": 0,
+      "figuresEmbedded": 0,
+      "figuresFailed": 0,
+      "figureQuestions": 0,
+      "mediaFailures": [],
+      "layout": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "overflowingComponents": 0
+      },
+      "flags": 0,
+      "missingValues": []
+    },
+    "intelligence": {
+      "file": "MediXO_EduX_Exam_Intelligence_Report.pdf",
+      "label": "Exam Intelligence Report",
+      "kind": "intelligence",
+      "synthetic": false,
+      "pages": 5,
+      "bytes": 463204,
+      "sha256": "6b5d33bb34d9bc66",
+      "questionsSupplied": 14,
+      "questionsRendered": 0,
+      "figureReferences": 0,
+      "figuresEmbedded": 0,
+      "figuresFailed": 0,
+      "figureQuestions": 0,
+      "mediaFailures": [],
+      "layout": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "overflowingComponents": 0
+      },
+      "flags": 0,
+      "missingValues": []
+    }
+  },
+  "exports": {
+    "student-full-analysis": {
+      "file": "exports/student-full-analysis.pdf",
+      "label": "student · Full Analysis",
+      "kind": "full",
+      "synthetic": false,
+      "pages": 19,
+      "bytes": 1648489,
+      "sha256": "ecc1cc8f25c6ff3d",
+      "questionsSupplied": 14,
+      "questionsRendered": 14,
+      "figureReferences": 13,
+      "figuresEmbedded": 13,
+      "figuresFailed": 0,
+      "figureQuestions": 4,
+      "mediaFailures": [],
+      "layout": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "overflowingComponents": 0
+      },
+      "flags": 0,
+      "missingValues": []
+    },
+    "student-report": {
+      "file": "exports/student-report.pdf",
+      "label": "student · Report",
+      "kind": "intelligence",
+      "synthetic": false,
+      "pages": 5,
+      "bytes": 463204,
+      "sha256": "076bbf626e0bfe0d",
+      "questionsSupplied": 14,
+      "questionsRendered": 0,
+      "figureReferences": 13,
+      "figuresEmbedded": 13,
+      "figuresFailed": 0,
+      "figureQuestions": 4,
+      "mediaFailures": [],
+      "layout": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "overflowingComponents": 0
+      },
+      "flags": 0,
+      "missingValues": []
+    },
+    "faculty-full-analysis": {
+      "file": "exports/faculty-full-analysis.pdf",
+      "label": "faculty · Full Analysis",
+      "kind": "full",
+      "synthetic": false,
+      "pages": 19,
+      "bytes": 1648489,
+      "sha256": "fe9b10d63bdae084",
+      "questionsSupplied": 14,
+      "questionsRendered": 14,
+      "figureReferences": 13,
+      "figuresEmbedded": 13,
+      "figuresFailed": 0,
+      "figureQuestions": 4,
+      "mediaFailures": [],
+      "layout": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "overflowingComponents": 0
+      },
+      "flags": 0,
+      "missingValues": []
+    },
+    "faculty-report": {
+      "file": "exports/faculty-report.pdf",
+      "label": "faculty · Report",
+      "kind": "intelligence",
+      "synthetic": false,
+      "pages": 5,
+      "bytes": 463204,
+      "sha256": "eb7c9a3435024f94",
+      "questionsSupplied": 14,
+      "questionsRendered": 0,
+      "figureReferences": 13,
+      "figuresEmbedded": 13,
+      "figuresFailed": 0,
+      "figureQuestions": 4,
+      "mediaFailures": [],
+      "layout": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "overflowingComponents": 0
+      },
+      "flags": 0,
+      "missingValues": []
+    },
+    "admin-full-analysis": {
+      "file": "exports/admin-full-analysis.pdf",
+      "label": "admin · Full Analysis",
+      "kind": "full",
+      "synthetic": false,
+      "pages": 19,
+      "bytes": 1648489,
+      "sha256": "ce478264a0e0fbfe",
+      "questionsSupplied": 14,
+      "questionsRendered": 14,
+      "figureReferences": 13,
+      "figuresEmbedded": 13,
+      "figuresFailed": 0,
+      "figureQuestions": 4,
+      "mediaFailures": [],
+      "layout": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "overflowingComponents": 0
+      },
+      "flags": 0,
+      "missingValues": []
+    },
+    "admin-report": {
+      "file": "exports/admin-report.pdf",
+      "label": "admin · Report",
+      "kind": "intelligence",
+      "synthetic": false,
+      "pages": 5,
+      "bytes": 463204,
+      "sha256": "b0c3e730083395ec",
+      "questionsSupplied": 14,
+      "questionsRendered": 0,
+      "figureReferences": 13,
+      "figuresEmbedded": 13,
+      "figuresFailed": 0,
+      "figureQuestions": 4,
+      "mediaFailures": [],
+      "layout": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "overflowingComponents": 0
+      },
+      "flags": 0,
+      "missingValues": []
+    }
+  },
+  "qa": {
+    "figure-exam-full": {
+      "file": "qa/figure-exam-full-analysis.pdf",
+      "label": "Figure-rich JEE paper · full analysis",
+      "kind": "full",
+      "synthetic": true,
+      "pages": 28,
+      "bytes": 3161651,
+      "sha256": "60dfe8e8141a55f3",
+      "questionsSupplied": 18,
+      "questionsRendered": 18,
+      "figureReferences": 28,
+      "figuresEmbedded": 27,
+      "figuresFailed": 1,
+      "figureQuestions": 17,
+      "mediaFailures": [
+        {
+          "code": "http-error",
+          "questionId": "Q7",
+          "field": "statement",
+          "option": null
+        }
+      ],
+      "layout": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "overflowingComponents": 0
+      },
+      "flags": 0,
+      "missingValues": []
+    },
+    "figure-exam-report": {
+      "file": "qa/figure-exam-intelligence.pdf",
+      "label": "Figure-rich JEE paper · intelligence report",
+      "kind": "intelligence",
+      "synthetic": true,
+      "pages": 4,
+      "bytes": 382388,
+      "sha256": "e0d57f6baf375b62",
+      "questionsSupplied": 18,
+      "questionsRendered": 0,
+      "figureReferences": 28,
+      "figuresEmbedded": 27,
+      "figuresFailed": 1,
+      "figureQuestions": 17,
+      "mediaFailures": [
+        {
+          "code": "http-error",
+          "questionId": "Q7",
+          "field": "statement",
+          "option": null
+        }
+      ],
+      "layout": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "overflowingComponents": 0
+      },
+      "flags": 0,
+      "missingValues": []
+    },
+    "neet-180-full": {
+      "file": "qa/neet-180-full-analysis.pdf",
+      "label": "NEET 180-question full analysis with figures",
+      "kind": "full",
+      "synthetic": true,
+      "pages": 196,
+      "bytes": 17772912,
+      "sha256": "2bf9876d15179abc",
+      "questionsSupplied": 180,
+      "questionsRendered": 180,
+      "figureReferences": 143,
+      "figuresEmbedded": 138,
+      "figuresFailed": 5,
+      "figureQuestions": 45,
+      "mediaFailures": [
+        {
+          "code": "http-error",
+          "questionId": "Q029",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "http-error",
+          "questionId": "Q061",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "http-error",
+          "questionId": "Q093",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "http-error",
+          "questionId": "Q125",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "http-error",
+          "questionId": "Q157",
+          "field": "statement",
+          "option": null
+        }
+      ],
+      "layout": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "overflowingComponents": 0
+      },
+      "flags": 0,
+      "missingValues": []
+    }
+  }
+}

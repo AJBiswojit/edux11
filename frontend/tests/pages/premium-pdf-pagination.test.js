@@ -147,9 +147,15 @@ describe('Premium PDF content-driven pagination', () => {
     }
     // The pre-capacity regression stranded only a section heading on page 2 and
     // pushed the first table segment to page 3. Every page now carries content.
-    expect(result.pageCount).toBeLessThanOrEqual(10)
-    expect(Math.min(...textBoxesPerPage)).toBeGreaterThan(40)
-    expect(textBoxesPerPage[1]).toBeGreaterThan(60)
+    // The upper bound reflects the single-column table layout: independent
+    // tables are stacked at full width instead of being squeezed side by side.
+    expect(result.pageCount).toBeLessThanOrEqual(12)
+    // The final page is a legitimate table continuation plus the colophon;
+    // every page still carries a substantial block of content.
+    expect(Math.min(...textBoxesPerPage)).toBeGreaterThan(30)
+    // Page 2 carries a continued chapter table plus two full tables; the exact
+    // count shifts with the single-column layout, so the floor is generous.
+    expect(textBoxesPerPage[1]).toBeGreaterThan(45)
   }, 120000)
 
   it('renders the calibrated failing full report with a clean layout', async () => {

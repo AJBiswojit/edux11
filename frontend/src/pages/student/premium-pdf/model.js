@@ -17,6 +17,7 @@ import {
 
 import { buildBaseReportModel } from './base-model.js'
 import { fmt, normalizeForMatch } from './theme.js'
+import { normalizeQuestionContent, toDisplayText } from './questions.js'
 
 function isRecord(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
@@ -71,6 +72,25 @@ function normName(value) {
   return String(value ?? '').trim().toLowerCase()
 }
 
+/**
+ * Running-header title. Exam names arrive with long qualifiers such as
+ * "(calibrated local equivalent)" that wrap the header onto a second line and
+ * collide with the header rule. The qualifier stays on the cover and in the
+ * report body; the running header keeps the identity only.
+ */
+export function compactExamTitle(value, limit = 48) {
+  let title = String(value ?? '').replace(/\s+/g, ' ').trim()
+  if (!title) return 'Examination'
+  title = title.replace(/\s*[(\[][^)\]`]*[)\]]\s*$/g, '').trim() || title
+  title = title.replace(/\s*[·|–—-]?\s*$/, '').trim() || title
+  if (title.length > limit) {
+    const cut = title.slice(0, limit)
+    const at = Math.max(cut.lastIndexOf(' '), cut.lastIndexOf('-'))
+    title = `${(at > limit * 0.6 ? cut.slice(0, at) : cut).replace(/[\s·|–—-]+$/, '')}…`
+  }
+  return title
+}
+
 function filterBySubject(rows, subject) {
   const list = Array.isArray(rows) ? rows : []
   if (!subject || subject === 'All Subjects') return list
@@ -81,37 +101,38 @@ function filterBySubject(rows, subject) {
 
 function displayAnswer(value) {
   if (value === null || value === undefined || value === '') return '—'
-  if (typeof value === 'object') return JSON.stringify(value)
+  if (typeof value === 'object') return toDisplayText(value, '—') || '—'
   const letter = optLetter(value)
   return letter === '—' ? fmt(value) : letter
 }
 
+/**
+ * Display text for any payload value. Objects are reduced to their
+ * human-readable field: a serialised object is never report content.
+ */
 function asText(value) {
-  if (value === null || value === undefined || value === '') return ''
-  if (typeof value === 'string') return value
-  if (typeof value === 'number' || typeof value === 'boolean') return String(value)
-  try {
-    return JSON.stringify(value, null, 2)
-  } catch {
-    return String(value)
-  }
+  return toDisplayText(value, '')
 }
 
-function buildQuestions(review, subject) {
-  return filterBySubject(review, subject).map((q, index) => {
-    const explanation = asText(q?.explanation ?? q?.solution)
+export function buildQuestions(review, subject) {
+  const rows = filterBySubject(review, subject)
+  const multiple = rows.length !== (Array.isArray(review) ? review.length : 0)
+  return rows.map((q, index) => {
+    const content = normalizeQuestionContent(q, index)
+    const explanation = content.explanation
     const hint = asText(q?.hint)
     const mistakeHint = asText(q?.mistakeHint)
+    // The hint is only repeated when it adds new information.
     const solutionParts = []
     if (explanation) solutionParts.push({ label: 'Explanation', text: explanation })
-    if (hint && hint !== explanation) solutionParts.push({ label: 'Solution / hint', text: hint })
+    if (hint && hint !== explanation) solutionParts.push({ label: 'Solution hint', text: hint })
     if (mistakeHint && mistakeHint !== explanation && mistakeHint !== hint) {
       solutionParts.push({ label: 'Mistake note', text: mistakeHint })
     }
-    const options = Array.isArray(q?.options) ? q.options.map((option) => asText(option)) : []
     return {
       index: index + 1,
       q: fmt(q?.q, `Q${index + 1}`),
+      numberLabel: content.numberLabel,
       subject: fmt(q?.subject),
       chapter: fmt(q?.chapter),
       topic: fmt(q?.topic),
@@ -128,14 +149,41 @@ function buildQuestions(review, subject) {
       correct: displayAnswer(q?.correctAnswer),
       mistakeCategory: fmt(q?.mistakeCategory),
       mistakeHint,
-      questionText: asText(q?.text ?? q?.question ?? q?.stem),
-      options,
-      explanation,
+      mistakeNote: mistakeHint,
+      questionText: content.statement,
+      statement: content.statement,
+      statementImages: content.statementImages,
+      explanationImages: content.explanationImages,
+      explanation: content.explanation,
+      explanationParts: solutionParts,
       hint,
+      options: content.options.map((option) => option.text),
+      optionItems: content.options,
+      figureCount: content.figureCount,
+      media: { statement: [], options: {}, explanation: [], failures: [] },
+      subjectScope: multiple ? subject : null,
       solutionParts,
       raw: q,
     }
   })
+}
+
+function presentRank(rank, cohort) {
+  const value = fmt(rank)
+  if (value === '—') return '—'
+  const position = Number(String(value).replace(/[^0-9.]/g, ''))
+  const size = Number(String(fmt(cohort)).replace(/[^0-9.]/g, ''))
+  // Only quote the cohort size when the two numbers describe the same field.
+  if (!Number.isFinite(position) || !Number.isFinite(size) || size < position) return `#${value}`
+  return `#${value} of ${fmt(cohort)}`
+}
+
+/** Average time per attempted question, e.g. "1m 35s". */
+function averagePace(totalSeconds, attempted) {
+  const seconds = Number(totalSeconds)
+  const count = Number(attempted)
+  if (!Number.isFinite(seconds) || !Number.isFinite(count) || count <= 0) return '—'
+  return formatReportTime(seconds / count)
 }
 
 function withRawChapter(baseChapters, rawChapters) {
@@ -205,10 +253,12 @@ export function buildPremiumModel({ data = {}, subject, user, generatedAt, kind 
     kind,
     reportCode: kind === 'full' ? 'FAR' : 'EIR',
     reportTitle: kind === 'full' ? 'FULL EXAM ANALYSIS REPORT' : 'EXAM INTELLIGENCE REPORT',
+    reportLabel: kind === 'full' ? 'FULL EXAM ANALYSIS' : 'EXAM INTELLIGENCE REPORT',
+    // Internal only: used for diagnostics and file naming, never printed in the PDF.
     reportId: `${kind === 'full' ? 'FAR' : 'EIR'} / ${examId}`,
     examId,
     examName,
-    examTitleShort: examName,
+    examTitleShort: compactExamTitle(examName),
     subjectText: base.subjectText,
     activeSubject,
     who,
@@ -235,6 +285,10 @@ export function buildPremiumModel({ data = {}, subject, user, generatedAt, kind 
     successRate: fmt(qi.successRate),
     questionAccuracy: fmt(qi.accuracy),
     overallAccuracy: fmt(hero.overallAccuracy),
+    // Secondary cover signals that are not already printed in the hero block.
+    rankLabel: presentRank(hero.rank, hero.cohortSize),
+    percentileLabel: fmt(hero.percentile),
+    paceLabel: averagePace(data?.attempt?.elapsedSeconds, qi.attempted ?? base.attempted),
     attempted: fmt(qi.attempted ?? base.attempted),
     timeTakenLabel: base.timeTakenLabel,
     hasTime: base.hasTime,
@@ -255,6 +309,8 @@ export function buildPremiumModel({ data = {}, subject, user, generatedAt, kind 
     cognitiveQuadrants: data.cognitiveQuadrants ?? {},
     revisionGroups: base.revisionGroups,
     questions,
+    figureQuestionCount: questions.filter((question) => (question.figureCount || 0) > 0).length,
+    figureReferenceCount: questions.reduce((sum, question) => sum + (question.figureCount || 0), 0),
     totalQuestions: fmt(qi.total, String(questions.length)),
     questionRowsSupplied: questions.length,
     sourceValues,

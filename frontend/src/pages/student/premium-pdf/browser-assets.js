@@ -12,6 +12,7 @@ import interBoldUrl from '../../../assets/fonts/Inter-Bold.ttf?url'
 import manropeBoldUrl from '../../../assets/fonts/Manrope-Bold.ttf?url'
 import stixMathUrl from '../../../assets/fonts/STIXTwoMath-Regular.ttf?url'
 import stixTextUrl from '../../../assets/fonts/STIXTwoText-Regular.ttf?url'
+import { createAssetLoader, convertImageWithCanvas } from './media.js'
 
 async function fetchBytes(url) {
   const response = await fetch(url)
@@ -39,5 +40,8 @@ export async function loadBrowserAssets() {
       STIXMath: stixMath,
       STIXText: stixText,
     },
+    // Figure bytes are fetched from the configured media origin and converted
+    // with the browser's own decoder when PDFKit cannot embed the format.
+    imageLoader: createAssetLoader({ convertImage: convertImageWithCanvas }),
   }
 }
