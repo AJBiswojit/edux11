@@ -91,6 +91,7 @@ export async function renderPremiumPdf({ kind = 'full', model, assets } = {}) {
   ), 0)
   const figureFailures = questions.reduce((sum, question) => sum + (question.media?.failures?.length || 0), 0)
   const figureReferences = questions.reduce((sum, question) => sum + (question.figureCount || 0), 0)
+  const figuresEmbedded = finalization.audit.boxes.filter((box) => box.kind === 'image' && box.figureField).length
   const rendered = new Set(ctx.renderedQuestions)
   // The intelligence briefing is deliberately question-free; completeness is
   // enforced only for the full analysis, where every row must appear.
@@ -112,9 +113,12 @@ export async function renderPremiumPdf({ kind = 'full', model, assets } = {}) {
     contentCoverage: {
       questionsSupplied: questions.length,
       questionsRendered: rendered.size,
-      explanationsRendered: questions.filter((question) => question.explanation || question.explanationParts?.length).length,
+      explanationsRendered: kind === 'full'
+        ? questions.filter((question) => question.explanation || question.explanationParts?.length).length
+        : 0,
       figureReferences,
-      figuresEmbedded: figureAssets,
+      figuresResolved: figureAssets,
+      figuresEmbedded,
       figuresFailed: figureFailures,
     },
     figureFailures: questions.flatMap((question) => question.media?.failures || []),

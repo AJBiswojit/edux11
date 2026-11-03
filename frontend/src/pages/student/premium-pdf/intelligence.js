@@ -17,9 +17,12 @@ import {
 } from './components.js'
 
 function text(value) {
-  if (value === null || value === undefined || value === '') return '—'
-  if (typeof value === 'object') return JSON.stringify(value)
-  return String(value)
+  if (value !== null && typeof value === 'object') return ''
+  return fmt(value)
+}
+
+function join(values, separator = ' · ') {
+  return values.map(text).filter(Boolean).join(separator)
 }
 
 function numeric(value) {
@@ -54,7 +57,7 @@ function subjectForTopic(m, topic) {
     const name = normalizeForMatch(row.chapter || row.name)
     return name && (name === needle || name.includes(needle) || needle.includes(name))
   })
-  return chapterHit?.subject ? text(chapterHit.subject) : '—'
+  return chapterHit?.subject ? text(chapterHit.subject) : ''
 }
 
 function IntelligenceMasthead(ctx) {
@@ -67,7 +70,7 @@ function IntelligenceMasthead(ctx) {
       size: 28, font: FONTS.heading, lineHeight: 34,
     })
     const examH = ctx.measureText(m.examName, CONTENT.w, { size: 12, font: FONTS.heading })
-    const metaH = ctx.measureText(`${m.course}   ·   ${m.pattern}   ·   ${m.subjectText}   ·   Generated ${m.generatedDate}`, CONTENT.w, {
+    const metaH = ctx.measureText(join([m.course, m.pattern, m.subjectText, `Generated ${m.generatedDate}`]), CONTENT.w, {
       size: TYPE.bodySmall, font: FONTS.body,
     })
     return 4 + kickerH + 6 + titleH + 8 + examH + 5 + metaH + 10
@@ -86,7 +89,7 @@ function IntelligenceMasthead(ctx) {
       cursor += ctx.text(m.examName, frame.x, cursor, frame.w, {
         size: 12, font: FONTS.heading, color: COLORS.ink,
       }) + 5
-      ctx.text(`${m.course}   ·   ${m.pattern}   ·   ${m.subjectText}   ·   Generated ${m.generatedDate}`, frame.x, cursor, frame.w, {
+      ctx.text(join([m.course, m.pattern, m.subjectText, `Generated ${m.generatedDate}`]), frame.x, cursor, frame.w, {
         size: TYPE.bodySmall, font: FONTS.body, color: COLORS.muted,
       })
       ctx.canvas.line(frame.x, frame.y + frame.h - 7, frame.x + frame.w, frame.y + frame.h - 7, { color: COLORS.line, width: 0.6 })
@@ -110,20 +113,32 @@ function IntelligenceScoreBand(ctx) {
       ctx.text('MARKS OBTAINED', frame.x + 16, frame.y + 10, half - 30, {
         size: TYPE.label, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.8,
       })
-      ctx.text(`${fmt(m.hero.score)} / ${fmt(m.hero.maxScore)}`, frame.x + 16, frame.y + 28, half - 30, {
+      ctx.text(join([m.hero.score, m.hero.maxScore], ' / '), frame.x + 16, frame.y + 28, half - 30, {
         size: 28, font: FONTS.heading, color: COLORS.midnight, features: ['tnum'], lineHeight: 34,
       })
       ctx.canvas.line(frame.x + half, frame.y + 16, frame.x + half, frame.y + 78, { color: COLORS.line, width: 0.6 })
-      ctx.text('QUESTION ACCURACY', frame.x + half + 16, frame.y + 10, half - 30, {
+      ctx.text('OVERALL ACCURACY', frame.x + half + 16, frame.y + 10, half - 30, {
         size: TYPE.label, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.8,
       })
-      ctx.text(pct(m.questionAccuracy), frame.x + half + 16, frame.y + 28, half - 30, {
+      ctx.text(pct(m.overallAccuracy), frame.x + half + 16, frame.y + 28, half - 30, {
         size: 28, font: FONTS.heading, color: COLORS.success, features: ['tnum'], lineHeight: 34,
       })
-      ctx.text(`${m.scoreLine}   ·   ${m.breakdownLine}   ·   Attempted ${m.attempted} / ${m.totalQuestions}   ·   Time ${m.timeTakenLabel}`, frame.x + 16, frame.y + 80, frame.w - 32, {
+      const summary = join([
+        m.scoreLine,
+        m.breakdownLine,
+        m.attempted !== '' ? `Attempted ${m.attempted}${m.totalQuestions ? ` / ${m.totalQuestions}` : ''}` : '',
+        m.timeTakenLabel ? `Time ${m.timeTakenLabel}` : '',
+      ])
+      const distinction = join([
+        m.hero.grade ? `Grade ${text(m.hero.grade)}` : '',
+        m.hero.rank ? `Rank ${text(m.hero.rank)}` : '',
+        m.hero.percentile ? `Percentile ${text(m.hero.percentile)}` : '',
+        m.hero.readinessScore ? `Readiness ${text(m.hero.readinessScore)}` : '',
+      ])
+      if (summary) ctx.text(summary, frame.x + 16, frame.y + 80, frame.w - 32, {
         size: TYPE.bodySmall, font: FONTS.body, color: COLORS.ink,
       })
-      ctx.text(`Grade ${text(m.hero.grade)}   ·   Rank ${text(m.hero.rank)}   ·   Percentile ${text(m.hero.percentile)}   ·   Readiness ${text(m.hero.readinessScore)}`, frame.x + 16, frame.y + 95, frame.w - 32, {
+      if (distinction) ctx.text(distinction, frame.x + 16, frame.y + 95, frame.w - 32, {
         size: TYPE.label, font: FONTS.body, color: COLORS.muted,
       })
     },
@@ -149,10 +164,15 @@ function renderSnapshot(ctx) {
     label: 'Subject performance',
     items: m.subjectValues.map((row) => ({
       label: text(row.name),
-      value: `${text(row.score)} / ${text(row.maxMarks)}   ·   ${pct(row.accuracy)}   ·   Rank ${text(row.rank)}   ·   ${text(row.difficulty)}`,
+      value: join([
+        join([row.score, row.maxMarks], ' / '),
+        pct(row.accuracy),
+        row.rank ? `Rank ${text(row.rank)}` : '',
+        text(row.difficulty),
+      ]),
       color: masteryColor(row.accuracy),
     })),
-    columns: Math.max(1, m.subjectValues.length || 1), valueSize: 9.2, bottomSpacing: 6,
+    columns: 1, valueSize: 9.2, bottomSpacing: 6,
   })
   const chapterRows = m.chapters.map((row) => ({
     chapter: text(row.chapter || row.name), subject: text(row.subject),
@@ -180,16 +200,16 @@ function renderLearning(ctx) {
     note: 'Mistake classifications, topic-level accuracy, subject-wise weak topics and source evidence.',
     accent: COLORS.error,
   })
-  const mistakeBars = m.mistakes.map((row, index) => ({
+  const mistakeBars = m.mistakes.filter((row) => text(row.count)).map((row, index) => ({
     label: text(row.category), value: numeric(row.count), valueLabel: text(row.count),
     color: [COLORS.error, COLORS.warning, COLORS.indigo, COLORS.midnight, COLORS.success, COLORS.muted, COLORS.error][index % 7],
-  }))
+  })).filter((bar) => bar.label)
   const topicRows = m.topics.map((row) => ({
     topic: text(row.topic), subject: text(row.subject), accuracy: pct(row.mastery), level: text(row.level),
   }))
   const weakRows = (m.recommendations.weakTopics || []).map((topic) => ({ subject: subjectForTopic(m, topic), topic: text(topic) }))
   const evidenceRows = m.mistakeList.slice(0, 3).map((row) => ({ q: text(row.q), detail: text(row.detail) }))
-  BarChart(ctx, {
+  if (mistakeBars.length) BarChart(ctx, {
     title: 'Mistake pattern analysis', bars: mistakeBars,
     accent: COLORS.error, minRowHeight: 18, rowGap: 2, bottomSpacing: 10,
   })
@@ -293,7 +313,7 @@ function renderRevision(ctx) {
   Subheading(ctx, { title: 'Published next actions', note: 'Practice, PYQ, mock and lecture resources attached to this attempt.', accent: COLORS.success })
   const actions = [
     ...(rec.suggestedPYQs || []).map((row) => ({ kind: 'PYQ', title: text(row.title), detail: text(row.source) })),
-    ...(rec.practiceQuestions || []).map((row) => ({ kind: 'Practice', title: text(row.title), detail: `${text(row.count)} · ${text(row.difficulty)}` })),
+    ...(rec.practiceQuestions || []).map((row) => ({ kind: 'Practice', title: text(row.title), detail: join([row.count, row.difficulty]) })),
     ...(rec.mockTests || []).map((row) => ({ kind: 'Mock test', title: text(row.title), detail: text(row.mode) })),
     ...(rec.lectures || []).map((row) => ({ kind: 'Lecture', title: text(row.title), detail: text(row.type) })),
   ]

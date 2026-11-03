@@ -52,8 +52,8 @@ export function layoutFigureStack(assets = [], {
   if (!measured.length || !Number.isFinite(budget) || raw <= budget) {
     return { items: measured, height: Math.max(0, raw) }
   }
-  const availableForFigures = Math.max(40, budget - gap * Math.max(0, measured.length - 1))
-  const scale = Math.max(0.15, fitScale(measured, availableForFigures))
+  const availableForFigures = Math.max(0, budget - gap * Math.max(0, measured.length - 1))
+  const scale = Math.min(1, Math.max(0, fitScale(measured, availableForFigures)))
   const items = measured.map((item) => ({
     ...item,
     w: Math.round(item.w * scale * 100) / 100,

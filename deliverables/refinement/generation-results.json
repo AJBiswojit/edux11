@@ -7,15 +7,24 @@
       "label": "Full Exam Analysis Report",
       "kind": "full",
       "synthetic": false,
-      "pages": 17,
-      "bytes": 1320273,
-      "sha256": "21b5bafcb7ea2225",
+      "pages": 13,
+      "bytes": 1554794,
+      "sha256": "6d2697f75d4a6a7f",
       "questionsSupplied": 14,
       "questionsRendered": 14,
       "figureReferences": 0,
+      "figuresResolved": 0,
       "figuresEmbedded": 0,
       "figuresFailed": 0,
       "figureQuestions": 0,
+      "contentCoverage": {
+        "statements": 0,
+        "options": 0,
+        "studentResponses": 2,
+        "correctAnswers": 0,
+        "explanations": 0,
+        "performanceInsights": 14
+      },
       "mediaFailures": [],
       "layout": {
         "zeroUnintendedOverlaps": true,
@@ -35,14 +44,23 @@
       "kind": "intelligence",
       "synthetic": false,
       "pages": 5,
-      "bytes": 463204,
-      "sha256": "6b5d33bb34d9bc66",
+      "bytes": 463062,
+      "sha256": "0c5050aa9cc28c00",
       "questionsSupplied": 14,
       "questionsRendered": 0,
       "figureReferences": 0,
+      "figuresResolved": 0,
       "figuresEmbedded": 0,
       "figuresFailed": 0,
       "figureQuestions": 0,
+      "contentCoverage": {
+        "statements": 0,
+        "options": 0,
+        "studentResponses": 2,
+        "correctAnswers": 0,
+        "explanations": 0,
+        "performanceInsights": 14
+      },
       "mediaFailures": [],
       "layout": {
         "zeroUnintendedOverlaps": true,
@@ -63,15 +81,24 @@
       "label": "student · Full Analysis",
       "kind": "full",
       "synthetic": false,
-      "pages": 19,
-      "bytes": 1648489,
-      "sha256": "ecc1cc8f25c6ff3d",
+      "pages": 16,
+      "bytes": 1951859,
+      "sha256": "5dd59a919b49fca6",
       "questionsSupplied": 14,
       "questionsRendered": 14,
       "figureReferences": 13,
+      "figuresResolved": 13,
       "figuresEmbedded": 13,
       "figuresFailed": 0,
       "figureQuestions": 4,
+      "contentCoverage": {
+        "statements": 0,
+        "options": 2,
+        "studentResponses": 2,
+        "correctAnswers": 0,
+        "explanations": 0,
+        "performanceInsights": 14
+      },
       "mediaFailures": [],
       "layout": {
         "zeroUnintendedOverlaps": true,
@@ -91,14 +118,23 @@
       "kind": "intelligence",
       "synthetic": false,
       "pages": 5,
-      "bytes": 463204,
-      "sha256": "076bbf626e0bfe0d",
+      "bytes": 463062,
+      "sha256": "60bfa19d9cf2f1cc",
       "questionsSupplied": 14,
       "questionsRendered": 0,
       "figureReferences": 13,
-      "figuresEmbedded": 13,
+      "figuresResolved": 0,
+      "figuresEmbedded": 0,
       "figuresFailed": 0,
       "figureQuestions": 4,
+      "contentCoverage": {
+        "statements": 0,
+        "options": 2,
+        "studentResponses": 2,
+        "correctAnswers": 0,
+        "explanations": 0,
+        "performanceInsights": 14
+      },
       "mediaFailures": [],
       "layout": {
         "zeroUnintendedOverlaps": true,
@@ -117,15 +153,24 @@
       "label": "faculty · Full Analysis",
       "kind": "full",
       "synthetic": false,
-      "pages": 19,
-      "bytes": 1648489,
-      "sha256": "fe9b10d63bdae084",
+      "pages": 16,
+      "bytes": 1951859,
+      "sha256": "20c556d7de1f47fb",
       "questionsSupplied": 14,
       "questionsRendered": 14,
       "figureReferences": 13,
+      "figuresResolved": 13,
       "figuresEmbedded": 13,
       "figuresFailed": 0,
       "figureQuestions": 4,
+      "contentCoverage": {
+        "statements": 0,
+        "options": 2,
+        "studentResponses": 2,
+        "correctAnswers": 0,
+        "explanations": 0,
+        "performanceInsights": 14
+      },
       "mediaFailures": [],
       "layout": {
         "zeroUnintendedOverlaps": true,
@@ -145,14 +190,23 @@
       "kind": "intelligence",
       "synthetic": false,
       "pages": 5,
-      "bytes": 463204,
-      "sha256": "eb7c9a3435024f94",
+      "bytes": 463062,
+      "sha256": "f945619411d65a47",
       "questionsSupplied": 14,
       "questionsRendered": 0,
       "figureReferences": 13,
-      "figuresEmbedded": 13,
+      "figuresResolved": 0,
+      "figuresEmbedded": 0,
       "figuresFailed": 0,
       "figureQuestions": 4,
+      "contentCoverage": {
+        "statements": 0,
+        "options": 2,
+        "studentResponses": 2,
+        "correctAnswers": 0,
+        "explanations": 0,
+        "performanceInsights": 14
+      },
       "mediaFailures": [],
       "layout": {
         "zeroUnintendedOverlaps": true,
@@ -171,15 +225,24 @@
       "label": "admin · Full Analysis",
       "kind": "full",
       "synthetic": false,
-      "pages": 19,
-      "bytes": 1648489,
-      "sha256": "ce478264a0e0fbfe",
+      "pages": 16,
+      "bytes": 1951859,
+      "sha256": "7893db005a63f4ac",
       "questionsSupplied": 14,
       "questionsRendered": 14,
       "figureReferences": 13,
+      "figuresResolved": 13,
       "figuresEmbedded": 13,
       "figuresFailed": 0,
       "figureQuestions": 4,
+      "contentCoverage": {
+        "statements": 0,
+        "options": 2,
+        "studentResponses": 2,
+        "correctAnswers": 0,
+        "explanations": 0,
+        "performanceInsights": 14
+      },
       "mediaFailures": [],
       "layout": {
         "zeroUnintendedOverlaps": true,
@@ -199,14 +262,23 @@
       "kind": "intelligence",
       "synthetic": false,
       "pages": 5,
-      "bytes": 463204,
-      "sha256": "b0c3e730083395ec",
+      "bytes": 463062,
+      "sha256": "565cf433f6eb9c45",
       "questionsSupplied": 14,
       "questionsRendered": 0,
       "figureReferences": 13,
-      "figuresEmbedded": 13,
+      "figuresResolved": 0,
+      "figuresEmbedded": 0,
       "figuresFailed": 0,
       "figureQuestions": 4,
+      "contentCoverage": {
+        "statements": 0,
+        "options": 2,
+        "studentResponses": 2,
+        "correctAnswers": 0,
+        "explanations": 0,
+        "performanceInsights": 14
+      },
       "mediaFailures": [],
       "layout": {
         "zeroUnintendedOverlaps": true,
@@ -228,18 +300,39 @@
       "kind": "full",
       "synthetic": true,
       "pages": 28,
-      "bytes": 3161651,
-      "sha256": "60dfe8e8141a55f3",
+      "bytes": 3626372,
+      "sha256": "bac181cbced88f19",
       "questionsSupplied": 18,
       "questionsRendered": 18,
       "figureReferences": 28,
-      "figuresEmbedded": 27,
-      "figuresFailed": 1,
+      "figuresResolved": 25,
+      "figuresEmbedded": 25,
+      "figuresFailed": 3,
       "figureQuestions": 17,
+      "contentCoverage": {
+        "statements": 18,
+        "options": 18,
+        "studentResponses": 18,
+        "correctAnswers": 18,
+        "explanations": 18,
+        "performanceInsights": 18
+      },
       "mediaFailures": [
         {
           "code": "http-error",
           "questionId": "Q7",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "load-failed",
+          "questionId": "Q4",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "load-failed",
+          "questionId": "Q5",
           "field": "statement",
           "option": null
         }
@@ -262,22 +355,24 @@
       "kind": "intelligence",
       "synthetic": true,
       "pages": 4,
-      "bytes": 382388,
-      "sha256": "e0d57f6baf375b62",
+      "bytes": 382885,
+      "sha256": "d66c74223835bfe9",
       "questionsSupplied": 18,
       "questionsRendered": 0,
       "figureReferences": 28,
-      "figuresEmbedded": 27,
-      "figuresFailed": 1,
+      "figuresResolved": 0,
+      "figuresEmbedded": 0,
+      "figuresFailed": 0,
       "figureQuestions": 17,
-      "mediaFailures": [
-        {
-          "code": "http-error",
-          "questionId": "Q7",
-          "field": "statement",
-          "option": null
-        }
-      ],
+      "contentCoverage": {
+        "statements": 18,
+        "options": 18,
+        "studentResponses": 18,
+        "correctAnswers": 18,
+        "explanations": 18,
+        "performanceInsights": 18
+      },
+      "mediaFailures": [],
       "layout": {
         "zeroUnintendedOverlaps": true,
         "textTextOverlaps": 0,
@@ -296,18 +391,39 @@
       "kind": "full",
       "synthetic": true,
       "pages": 196,
-      "bytes": 17772912,
-      "sha256": "2bf9876d15179abc",
+      "bytes": 17998064,
+      "sha256": "33dee4ee7b24bdad",
       "questionsSupplied": 180,
       "questionsRendered": 180,
       "figureReferences": 143,
-      "figuresEmbedded": 138,
-      "figuresFailed": 5,
+      "figuresResolved": 127,
+      "figuresEmbedded": 127,
+      "figuresFailed": 16,
       "figureQuestions": 45,
+      "contentCoverage": {
+        "statements": 180,
+        "options": 180,
+        "studentResponses": 180,
+        "correctAnswers": 180,
+        "explanations": 180,
+        "performanceInsights": 180
+      },
       "mediaFailures": [
         {
           "code": "http-error",
           "questionId": "Q029",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "load-failed",
+          "questionId": "Q017",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "load-failed",
+          "questionId": "Q049",
           "field": "statement",
           "option": null
         },
@@ -318,8 +434,44 @@
           "option": null
         },
         {
+          "code": "load-failed",
+          "questionId": "Q081",
+          "field": "statement",
+          "option": null
+        },
+        {
           "code": "http-error",
           "questionId": "Q093",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "load-failed",
+          "questionId": "Q113",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "load-failed",
+          "questionId": "Q021",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "load-failed",
+          "questionId": "Q053",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "load-failed",
+          "questionId": "Q085",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "load-failed",
+          "questionId": "Q117",
           "field": "statement",
           "option": null
         },
@@ -330,8 +482,26 @@
           "option": null
         },
         {
+          "code": "load-failed",
+          "questionId": "Q145",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "load-failed",
+          "questionId": "Q149",
+          "field": "statement",
+          "option": null
+        },
+        {
           "code": "http-error",
           "questionId": "Q157",
+          "field": "statement",
+          "option": null
+        },
+        {
+          "code": "load-failed",
+          "questionId": "Q177",
           "field": "statement",
           "option": null
         }

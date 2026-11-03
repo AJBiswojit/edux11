@@ -1,27 +1,27 @@
 {
   "generatedAt": "2026-11-03T09:00:00.000Z",
   "engine": "premium-academic-editorial-v2 + figure-asset-layer",
-  "verifiedAt": "2026-11-03T11:10:08+00:00",
+  "verifiedAt": "2026-11-03T14:53:38+00:00",
   "pdfs": 11,
-  "pages": 322,
-  "embeddedFigures": 215,
+  "pages": 309,
+  "embeddedFigures": 208,
   "neetQuestions": 180,
   "neetPages": 196,
   "audit": {
     "figure-exam-full": {
       "textTextOverlaps": 0,
       "overflowingComponents": 0,
-      "boxes": 2803
+      "boxes": 2807
     },
     "figure-exam-report": {
       "textTextOverlaps": 0,
       "overflowingComponents": 0,
-      "boxes": 438
+      "boxes": 446
     },
     "neet-180-full": {
       "textTextOverlaps": 0,
       "overflowingComponents": 0,
-      "boxes": 26648
+      "boxes": 26705
     }
   },
   "checks": {
@@ -39,15 +39,16 @@
     "canonical-full-analysis": {
       "file": "deliverables/refinement/MediXO_EduX_Full_Exam_Analysis_Report.pdf",
       "label": "canonical-full-analysis",
-      "pages": 17,
+      "pages": 13,
       "a4": true,
       "chrome": true,
       "cleanText": true,
       "requiredText": true,
       "figures": {
-        "total": 1,
+        "total": 2,
         "pages": [
-          17
+          1,
+          13
         ]
       },
       "noImageTextOverlap": true,
@@ -65,11 +66,7 @@
         "deliverables/refinement/previews/pages/canonical-full-analysis-p10.png",
         "deliverables/refinement/previews/pages/canonical-full-analysis-p11.png",
         "deliverables/refinement/previews/pages/canonical-full-analysis-p12.png",
-        "deliverables/refinement/previews/pages/canonical-full-analysis-p13.png",
-        "deliverables/refinement/previews/pages/canonical-full-analysis-p14.png",
-        "deliverables/refinement/previews/pages/canonical-full-analysis-p15.png",
-        "deliverables/refinement/previews/pages/canonical-full-analysis-p16.png",
-        "deliverables/refinement/previews/pages/canonical-full-analysis-p17.png"
+        "deliverables/refinement/previews/pages/canonical-full-analysis-p13.png"
       ],
       "contactSheet": "deliverables/refinement/previews/canonical-full-analysis-contact-sheet.png"
     },
@@ -101,19 +98,20 @@
     "student-full-analysis": {
       "file": "deliverables/refinement/exports/student-full-analysis.pdf",
       "label": "student-full-analysis",
-      "pages": 19,
+      "pages": 16,
       "a4": true,
       "chrome": true,
       "cleanText": true,
       "requiredText": true,
       "figures": {
-        "total": 14,
+        "total": 15,
         "pages": [
+          1,
           8,
-          10,
+          9,
+          11,
           12,
-          14,
-          19
+          16
         ]
       },
       "noImageTextOverlap": true,
@@ -134,10 +132,7 @@
         "deliverables/refinement/previews/pages/student-full-analysis-p13.png",
         "deliverables/refinement/previews/pages/student-full-analysis-p14.png",
         "deliverables/refinement/previews/pages/student-full-analysis-p15.png",
-        "deliverables/refinement/previews/pages/student-full-analysis-p16.png",
-        "deliverables/refinement/previews/pages/student-full-analysis-p17.png",
-        "deliverables/refinement/previews/pages/student-full-analysis-p18.png",
-        "deliverables/refinement/previews/pages/student-full-analysis-p19.png"
+        "deliverables/refinement/previews/pages/student-full-analysis-p16.png"
       ],
       "contactSheet": "deliverables/refinement/previews/student-full-analysis-contact-sheet.png"
     },
@@ -169,19 +164,20 @@
     "faculty-full-analysis": {
       "file": "deliverables/refinement/exports/faculty-full-analysis.pdf",
       "label": "faculty-full-analysis",
-      "pages": 19,
+      "pages": 16,
       "a4": true,
       "chrome": true,
       "cleanText": true,
       "requiredText": true,
       "figures": {
-        "total": 14,
+        "total": 15,
         "pages": [
+          1,
           8,
-          10,
+          9,
+          11,
           12,
-          14,
-          19
+          16
         ]
       },
       "noImageTextOverlap": true,
@@ -202,10 +198,7 @@
         "deliverables/refinement/previews/pages/faculty-full-analysis-p13.png",
         "deliverables/refinement/previews/pages/faculty-full-analysis-p14.png",
         "deliverables/refinement/previews/pages/faculty-full-analysis-p15.png",
-        "deliverables/refinement/previews/pages/faculty-full-analysis-p16.png",
-        "deliverables/refinement/previews/pages/faculty-full-analysis-p17.png",
-        "deliverables/refinement/previews/pages/faculty-full-analysis-p18.png",
-        "deliverables/refinement/previews/pages/faculty-full-analysis-p19.png"
+        "deliverables/refinement/previews/pages/faculty-full-analysis-p16.png"
       ],
       "contactSheet": "deliverables/refinement/previews/faculty-full-analysis-contact-sheet.png"
     },
@@ -237,19 +230,20 @@
     "admin-full-analysis": {
       "file": "deliverables/refinement/exports/admin-full-analysis.pdf",
       "label": "admin-full-analysis",
-      "pages": 19,
+      "pages": 16,
       "a4": true,
       "chrome": true,
       "cleanText": true,
       "requiredText": true,
       "figures": {
-        "total": 14,
+        "total": 15,
         "pages": [
+          1,
           8,
-          10,
+          9,
+          11,
           12,
-          14,
-          19
+          16
         ]
       },
       "noImageTextOverlap": true,
@@ -270,10 +264,7 @@
         "deliverables/refinement/previews/pages/admin-full-analysis-p13.png",
         "deliverables/refinement/previews/pages/admin-full-analysis-p14.png",
         "deliverables/refinement/previews/pages/admin-full-analysis-p15.png",
-        "deliverables/refinement/previews/pages/admin-full-analysis-p16.png",
-        "deliverables/refinement/previews/pages/admin-full-analysis-p17.png",
-        "deliverables/refinement/previews/pages/admin-full-analysis-p18.png",
-        "deliverables/refinement/previews/pages/admin-full-analysis-p19.png"
+        "deliverables/refinement/previews/pages/admin-full-analysis-p16.png"
       ],
       "contactSheet": "deliverables/refinement/previews/admin-full-analysis-contact-sheet.png"
     },
@@ -311,18 +302,17 @@
       "cleanText": true,
       "requiredText": true,
       "figures": {
-        "total": 28,
+        "total": 27,
         "pages": [
+          1,
           7,
           8,
           10,
-          11,
           12,
           13,
           15,
           16,
           17,
-          18,
           19,
           20,
           22,
@@ -400,42 +390,38 @@
       "cleanText": true,
       "requiredText": true,
       "figures": {
-        "total": 139,
+        "total": 129,
         "pages": [
+          1,
           8,
           12,
           16,
           20,
           24,
-          28,
           32,
           40,
           45,
           50,
           54,
           58,
-          62,
           66,
           74,
           78,
           82,
           86,
           90,
-          94,
           98,
           107,
           111,
           115,
           119,
           123,
-          127,
           131,
           139,
           143,
           147,
           151,
           156,
-          160,
           164,
           172,
           176,

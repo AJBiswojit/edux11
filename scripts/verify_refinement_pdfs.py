@@ -63,6 +63,8 @@ FORBIDDEN_PATTERNS = [
     (r"image[_ ]?url", "image field name"),
     (r"\bundefined\b", "undefined value"),
     (r"\bNaN\b", "NaN value"),
+    (r"\bInfinity\b", "infinite value"),
+    (r"\bquestion\s+accuracy\b", "question-level accuracy label"),
     (r"\[object Object\]", "stringified object"),
     (r"[Ss]ource fingerprint", "source fingerprint"),
     (r"\bFAR\s*/|\bEIR\s*/", "internal report coordinate"),
@@ -80,10 +82,6 @@ FULL_ANALYSIS_REQUIRED = [
     "MediXO EduX",
     "FULL EXAM ANALYSIS",
     "Question 01",
-    "STUDENT RESPONSE",
-    "CORRECT ANSWER",
-    "EXPLANATION",
-    "PERFORMANCE INSIGHT",
 ]
 
 INTELLIGENCE_REQUIRED = [
@@ -193,6 +191,22 @@ def check_required_text(pdf, name, problems, required):
     if missing:
         problems.append(f"{name}: required content missing {missing}")
     return not missing
+
+
+def full_analysis_requirements(coverage):
+    """Require only fields that the source question rows actually provide."""
+    required = list(FULL_ANALYSIS_REQUIRED)
+    coverage = coverage or {}
+    for count_key, label in [
+        ("options", "OPTIONS"),
+        ("studentResponses", "STUDENT RESPONSE"),
+        ("correctAnswers", "CORRECT ANSWER"),
+        ("explanations", "EXPLANATION"),
+        ("performanceInsights", "PERFORMANCE INSIGHT"),
+    ]:
+        if coverage.get(count_key, 0) > 0:
+            required.append(label)
+    return required
 
 
 def check_figures(pdf, name, problems, expected_minimum=0):
@@ -350,7 +364,7 @@ def render_previews(pdf, target_dir: Path, slug: str, max_pages=40):
     return written
 
 
-def verify_pdf(path: Path, label: str, kind: str, expected_pages, problems, required_figures=0):
+def verify_pdf(path: Path, label: str, kind: str, expected_pages, problems, required_figures=0, content_coverage=None):
     if not path.exists():
         problems.append(f"{label}: missing file {path}")
         return None
@@ -359,8 +373,9 @@ def verify_pdf(path: Path, label: str, kind: str, expected_pages, problems, requ
     entry["a4"] = check_geometry(pdf, label, problems, expected_pages)
     entry["chrome"] = check_chrome(pdf, label, problems)
     entry["cleanText"] = check_forbidden_text(pdf, label, problems)
+    required = full_analysis_requirements(content_coverage) if kind == "full" else INTELLIGENCE_REQUIRED
     entry["requiredText"] = check_required_text(
-        pdf, label, problems, FULL_ANALYSIS_REQUIRED if kind == "full" else INTELLIGENCE_REQUIRED
+        pdf, label, problems, required
     ) if kind in {"full", "intelligence"} else None
     figures = check_figures(pdf, label, problems, required_figures)
     entry["figures"] = figures
@@ -386,18 +401,18 @@ def main() -> int:
     verified: dict[str, dict] = {}
 
     canonical = [
-        ("MediXO_EduX_Full_Exam_Analysis_Report.pdf", "canonical-full-analysis", "full", reports.get("full", {}).get("pages"), 1),
-        ("MediXO_EduX_Exam_Intelligence_Report.pdf", "canonical-intelligence", "intelligence", reports.get("intelligence", {}).get("pages"), 0),
+        ("MediXO_EduX_Full_Exam_Analysis_Report.pdf", "canonical-full-analysis", "full", reports.get("full", {}).get("pages"), 1, reports.get("full", {}).get("contentCoverage")),
+        ("MediXO_EduX_Exam_Intelligence_Report.pdf", "canonical-intelligence", "intelligence", reports.get("intelligence", {}).get("pages"), 0, reports.get("intelligence", {}).get("contentCoverage")),
     ]
-    for filename, label, kind, pages, figures in canonical:
-        entry = verify_pdf(REFINEMENT / filename, label, kind, pages, problems, figures)
+    for filename, label, kind, pages, figures, coverage in canonical:
+        entry = verify_pdf(REFINEMENT / filename, label, kind, pages, problems, figures, coverage)
         if entry:
             verified[label] = entry
 
     # Six Role x Report exports: identity travels with the export, layout cannot.
     for name, meta in exports.items():
         kind = "full" if name.endswith("full-analysis") else "intelligence"
-        entry = verify_pdf(REFINEMENT / meta["file"], name, kind, meta.get("pages"), problems, 0)
+        entry = verify_pdf(REFINEMENT / meta["file"], name, kind, meta.get("pages"), problems, 0, meta.get("contentCoverage"))
         if entry:
             # Exports are sharded from the same payload; content identity is
             # checked through the reader name on the feedback line.
@@ -406,7 +421,7 @@ def main() -> int:
     for name, meta in qa.items():
         kind = "full" if name.endswith("full") else "intelligence"
         minimum = 1 if kind == "full" else 0
-        entry = verify_pdf(REFINEMENT / meta["file"], name, kind, meta.get("pages"), problems, minimum)
+        entry = verify_pdf(REFINEMENT / meta["file"], name, kind, meta.get("pages"), problems, minimum, meta.get("contentCoverage"))
         if entry:
             verified[name] = entry
 

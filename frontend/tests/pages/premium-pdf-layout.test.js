@@ -166,7 +166,7 @@ describe('V2 dynamic data-model regressions', () => {
       expect(model.subjectValues).toHaveLength(data.subjects.length)
       expect(model.hero.score).toBe(data.hero.score)
       expect(model.questions.some((q) => q.chapter.includes('Thermodynamics'))).toBe(true)
-      expect(model.questions.some((q) => q.selected === '—' && q.correct === '—')).toBe(true)
+      expect(model.questions.some((q) => q.selected === '' && q.correct === '')).toBe(true)
       expect(model.recommendations.priorityRevision).toHaveLength(12)
       expect(model.sourceValues.length).toBeGreaterThan(100)
       expect(JSON.stringify(data)).toBe(snapshot)

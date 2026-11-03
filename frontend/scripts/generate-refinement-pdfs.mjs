@@ -85,7 +85,11 @@ async function main() {
     const model = kind === 'full'
       ? buildPremiumFullModel({ data, subject, user, generatedAt })
       : buildPremiumIntelligenceModel({ data, subject, user, generatedAt })
-    const media = await loadQuestionMedia(model.questions, { loader })
+    // The Intelligence Report intentionally omits question-by-question
+    // content, so resolve and embed question figures only for Full Analysis.
+    const media = kind === 'full'
+      ? await loadQuestionMedia(model.questions, { loader })
+      : { diagnostics: [] }
     const result = await renderPremiumPdf({ kind, model, assets })
     await writeFile(new URL(file, ROOT), result.bytes)
     layoutAudit.reports[slug] = result.layoutAudit
@@ -97,9 +101,18 @@ async function main() {
       questionsSupplied: result.contentCoverage.questionsSupplied,
       questionsRendered: result.contentCoverage.questionsRendered,
       figureReferences: result.contentCoverage.figureReferences,
+      figuresResolved: result.contentCoverage.figuresResolved,
       figuresEmbedded: result.contentCoverage.figuresEmbedded,
       figuresFailed: result.contentCoverage.figuresFailed,
       figureQuestions: model.figureQuestionCount,
+      contentCoverage: {
+        statements: model.questions.filter((question) => Boolean(question.statement)).length,
+        options: model.questions.filter((question) => question.options?.length > 0).length,
+        studentResponses: model.questions.filter((question) => Boolean(question.selected) || /skip|unattempt|not visited/i.test(question.status || '')).length,
+        correctAnswers: model.questions.filter((question) => Boolean(question.correct)).length,
+        explanations: model.questions.filter((question) => Boolean(question.explanation) || question.explanationParts?.length > 0 || question.explanationImages?.length > 0).length,
+        performanceInsights: model.questions.filter((question) => Boolean(question.status || question.mistakeCategory || question.mistakeNote)).length,
+      },
       mediaFailures: media.diagnostics.map((entry) => ({
         code: entry.code, questionId: entry.questionId, field: entry.field, option: entry.option,
       })),

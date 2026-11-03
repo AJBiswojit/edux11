@@ -6,29 +6,52 @@
  */
 
 import { formatReportTime, masteryFromAccuracy } from '../exam-analysis-pdf.js'
+import { calculateOverallAccuracy, formatPercent, scorePercentage } from './accuracy.js'
+import { isMissingValue } from './theme.js'
 
 function isBlank(value) {
-  return value == null || value === '' || value === '—'
+  return isMissingValue(value)
 }
 
 function formatDurationLabel(raw) {
-  if (isBlank(raw)) return '—'
-  if (typeof raw === 'number' && Number.isFinite(raw)) return raw > 0 ? `${raw} min` : '—'
+  if (isBlank(raw)) return ''
+  if (typeof raw === 'number' && Number.isFinite(raw)) return raw > 0 ? `${raw} min` : ''
   const str = String(raw).trim()
-  return str || '—'
+  return isMissingValue(str) ? '' : str
 }
 
 function totalTimeTakenMinutes(data, subjects) {
-  const elapsed = Number(
-    data?.attempt?.elapsedSeconds
-    ?? data?.attempt?.timing?.elapsedSeconds
-    ?? data?.elapsedSeconds
-    ?? 0,
-  )
-  if (elapsed > 0) return elapsed / 60
-  const fromSubjects = (subjects ?? []).reduce((n, s) => n + (Number(s.time) || 0), 0)
-  if (fromSubjects > 0) return fromSubjects
-  return (data?.questionReview ?? []).reduce((n, q) => n + (Number(q.time) || 0), 0)
+  const elapsedRaw = data?.attempt?.elapsedSeconds ?? data?.attempt?.timing?.elapsedSeconds ?? data?.elapsedSeconds
+  const elapsed = Number(elapsedRaw)
+  if (elapsedRaw !== null && elapsedRaw !== undefined && Number.isFinite(elapsed) && elapsed > 0) return elapsed / 60
+  const fromSubjects = (subjects ?? []).reduce((n, s) => n + (Number(s.time) > 0 ? Number(s.time) : 0), 0)
+  return fromSubjects > 0 ? fromSubjects : null
+}
+
+function clean(value) {
+  return isMissingValue(value) ? '' : value
+}
+
+function reportTime(value) {
+  return Number(value) > 0 ? formatReportTime(value) : ''
+}
+
+function scoreLine(score, maximum) {
+  const hasScore = !isBlank(score)
+  const hasMaximum = !isBlank(maximum)
+  if (hasScore && hasMaximum) return `${score} / ${maximum} marks`
+  if (hasScore) return `${score} marks`
+  if (hasMaximum) return `${maximum} marks total`
+  return ''
+}
+
+function countLine(summary) {
+  const values = [
+    summary.correct != null ? `${summary.correct} correct` : '',
+    summary.incorrect != null ? `${summary.incorrect} incorrect` : '',
+    summary.skipped != null ? `${summary.skipped} skipped` : '',
+  ].filter(Boolean)
+  return values.join(' | ')
 }
 
 function fileStub(name) {
@@ -40,15 +63,13 @@ function normName(value) {
 }
 
 function accuracyNumber(value) {
-  if (value == null || value === '' || value === '—') return null
+  if (isMissingValue(value)) return null
   const n = Number(String(value).replace('%', '').trim())
   return Number.isFinite(n) ? n : null
 }
 
 function formatAccuracy(acc) {
-  if (acc == null) return '—'
-  const rounded = Math.round(acc * 10) / 10
-  return `${rounded}%`
+  return formatPercent(acc, 1)
 }
 
 function priorityFromAccuracy(acc, lowAttempt) {
@@ -115,7 +136,7 @@ function buildRevisionGroups({
     if (group.seen.has(`topic:${normName(name)}`)) continue
     group.seen.add(`topic:${normName(name)}`)
     group.seen.add(normName(name))
-    const chapterLabel = rawChapter && normName(rawChapter) !== normName(subject) ? rawChapter : '—'
+    const chapterLabel = rawChapter && normName(rawChapter) !== normName(subject) ? rawChapter : ''
     group.topics.push({
       name,
       chapter: chapterLabel,
@@ -143,9 +164,9 @@ function buildRevisionGroups({
     group.seen.add(normName(label))
     group.topics.push({
       name: label,
-      chapter: rawChapter && normName(rawChapter) !== normName(subject) && normName(rawChapter) !== normName(label) ? rawChapter : '—',
+      chapter: rawChapter && normName(rawChapter) !== normName(subject) && normName(rawChapter) !== normName(label) ? rawChapter : '',
       accuracy: null,
-      accuracyLabel: '—',
+      accuracyLabel: '',
       priority: 'Revise',
     })
   }
@@ -178,15 +199,16 @@ function withChapterTime(chapters, subjectText) {
   return chapters.map((c, index) => {
     const mins = minutes[index]
     const pct = total > 0 ? Math.round((100 * mins) / total) : 0
+    const mastery = clean(c.mastery) || clean(c.status) || (accuracyNumber(c.accuracy) !== null ? masteryFromAccuracy(c.accuracy) : '')
     return {
-      chapter: c.chapter || c.name || 'Chapter',
-      subject: c.subject || subjectText,
-      accuracy: `${c.accuracy ?? 0}%`,
-      marks: `${c.marks ?? 0}`,
-      mastery: c.mastery || c.status || masteryFromAccuracy(c.accuracy),
-      time: formatReportTime(mins),
+      chapter: clean(c.chapter) || clean(c.name),
+      subject: clean(c.subject) || subjectText,
+      accuracy: formatPercent(c.accuracy, 1),
+      marks: clean(c.marks) === '' ? '' : String(c.marks),
+      mastery,
+      time: reportTime(mins),
       timeMinutes: mins,
-      share: total > 0 ? `${pct}%` : '—',
+      share: total > 0 ? `${pct}%` : '',
       sharePct: pct,
     }
   })
@@ -197,7 +219,6 @@ export function buildBaseReportModel({ data, subject, user, generatedAt }) {
   const activeSubject = isAll ? null : subject
   const h = data?.hero || {}
   const meta = data?.meta || {}
-  const qi = data?.questionIntelligence || {}
   const rec = data?.recommendations || {}
 
   const examName = meta.examName || h.examName || 'Exam Intelligence Analysis'
@@ -221,46 +242,54 @@ export function buildBaseReportModel({ data, subject, user, generatedAt }) {
   const mistakes = data.mistakes ?? []
 
   const timeTakenMin = totalTimeTakenMinutes(data, subjects)
-  const timeTakenLabel = formatReportTime(timeTakenMin)
-  const accuracy = qi.successRate ?? qi.accuracy ?? h.overallAccuracy ?? h.percentage ?? 0
-  const scorePct = h.percentage ?? 0
-  const who = [user?.fullName, user?.rollNo ? `Roll No: ${user.rollNo}` : null].filter(Boolean).join(' | ')
+  const timeTakenLabel = reportTime(timeTakenMin)
+  const accuracySummary = calculateOverallAccuracy(data)
+  const accuracy = accuracySummary.accuracy
+  const scorePct = scorePercentage(null, null, h.percentage)
+    ?? scorePercentage(h.score, h.maxScore ?? h.totalScore)
+  const name = clean(user?.fullName)
+  const roll = clean(user?.rollNo)
+  const who = [name, roll ? `Roll No: ${roll}` : null].filter(Boolean).join(' | ')
 
   return {
     examName,
     subjectText,
     who,
     dateStr,
-    pattern: meta.pattern || h.pattern || '—',
-    examStatus: h.status || meta.examStatus || 'Completed',
-    examDate: meta.date || '—',
+    pattern: clean(meta.pattern) || clean(h.pattern),
+    examStatus: clean(h.status) || clean(meta.examStatus),
+    examDate: clean(meta.date),
     durationLabel: formatDurationLabel(meta.duration),
     timeTakenLabel,
-    hasTime: timeTakenLabel !== '—',
-    scoreLine: `${h.score ?? '—'} / ${h.maxScore ?? h.totalScore ?? '—'} marks`,
-    breakdownLine: `${qi.correct ?? h.correct ?? 0} correct | ${qi.incorrect ?? h.incorrect ?? 0} incorrect | ${qi.skipped ?? h.unattempted ?? 0} skipped`,
-    scorePct: `${scorePct}%`,
-    accuracy: `${accuracy}%`,
-    attempted: `${qi.attempted ?? 0}`,
-    aiSummary: h.aiSummary || '',
+    hasTime: Boolean(timeTakenLabel),
+    scoreLine: scoreLine(h.score, h.maxScore ?? h.totalScore),
+    breakdownLine: countLine(accuracySummary),
+    scorePct: formatPercent(scorePct),
+    scorePercentage: scorePct,
+    accuracySummary,
+    overallAccuracy: accuracy,
+    accuracy: formatPercent(accuracy),
+    attempted: accuracySummary.attempted == null ? '' : String(accuracySummary.attempted),
+    aiSummary: clean(h.aiSummary),
     subjects: subjects.map((s) => {
       const minutes = chapters
         .filter((c) => c.subject === s.name)
         .reduce((sum, c) => sum + (Number(c.timeMinutes) || 0), 0)
+      const maximum = s.maxMarks ?? s.maxScore
       return {
-        name: s.name,
-        score: `${s.score ?? 0} / ${s.maxMarks ?? s.maxScore ?? '—'}`,
-        accuracy: `${s.accuracy ?? 0}%`,
-        timeSpent: formatReportTime(minutes),
-        mastery: s.mastery || masteryFromAccuracy(s.accuracy),
+        name: clean(s.name),
+        score: scoreLine(s.score, maximum),
+        accuracy: formatPercent(s.accuracy, 1),
+        timeSpent: reportTime(minutes),
+        mastery: clean(s.mastery) || (accuracyNumber(s.accuracy) !== null ? masteryFromAccuracy(s.accuracy) : ''),
       }
     }),
     chapters,
     hasChapterTime: chapters.some((c) => c.timeMinutes > 0),
     mistakes: mistakes.map((m) => ({
-      category: m.category || 'Error pattern',
-      count: String(m.count ?? 1),
-    })),
+      category: clean(m.category),
+      count: m.count == null ? '' : String(m.count),
+    })).filter((m) => m.category || m.count),
     revisionGroups: buildRevisionGroups({
       chapters: chapterSource,
       topics: topicSource,
