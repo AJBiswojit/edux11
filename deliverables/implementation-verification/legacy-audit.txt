@@ -1,0 +1,155 @@
+=== BRANCH / HEAD ===
+arena/6f783e30-edux11
+0608871773004ff4990f4da4aeb407116a73c906
+
+=== GIT STATUS (short) ===
+ M frontend/src/pages/faculty/FacultyAttemptAnalysis.jsx
+ M frontend/src/pages/student/ExamAnalysis.jsx
+ M frontend/src/pages/student/exam-analysis-pdf.js
+ M frontend/src/pages/student/premium-pdf/model.js
+ M frontend/tests/pages/exam-analysis-pdf.test.js
+ M frontend/tests/pages/exam-analysis-stats.test.js
+ M frontend/tests/pages/premium-pdf-layout.test.js
+ M frontend/tests/pages/premium-pdf.test.js
+?? deliverables/AI_EXAM_ANALYSIS_PDF_FINAL_RUNTIME_REPORT.md
+?? deliverables/AI_EXAM_ANALYSIS_PDF_FORENSIC_AUDIT.md
+?? deliverables/assets/
+?? deliverables/forensic-audit/
+?? deliverables/implementation-verification/
+?? frontend/src/pages/student/premium-pdf/base-model.js
+?? frontend/tests/pages/faculty-attempt-analysis.test.jsx
+?? frontend/tests/pages/legacy-pdf-removal.test.js
+?? frontend/tests/pages/premium-pdf-base-model.test.js
+
+=== TRACKED DIFF STAT ===
+ .../src/pages/faculty/FacultyAttemptAnalysis.jsx   |   82 +-
+ frontend/src/pages/student/ExamAnalysis.jsx        |   18 +-
+ frontend/src/pages/student/exam-analysis-pdf.js    | 2085 +-------------------
+ frontend/src/pages/student/premium-pdf/model.js    |    4 +-
+ frontend/tests/pages/exam-analysis-pdf.test.js     |  394 +---
+ frontend/tests/pages/exam-analysis-stats.test.js   |   29 +-
+ frontend/tests/pages/premium-pdf-layout.test.js    |   16 +-
+ frontend/tests/pages/premium-pdf.test.js           |   25 +
+ 8 files changed, 265 insertions(+), 2388 deletions(-)
+
+=== WHITESPACE CHECK ===
+clean
+
+=== CHANGED / NEW FILES ===
+frontend/src/pages/faculty/FacultyAttemptAnalysis.jsx
+frontend/src/pages/student/ExamAnalysis.jsx
+frontend/src/pages/student/exam-analysis-pdf.js
+frontend/src/pages/student/premium-pdf/base-model.js
+frontend/src/pages/student/premium-pdf/model.js
+frontend/tests/pages/exam-analysis-pdf.test.js
+frontend/tests/pages/exam-analysis-stats.test.js
+frontend/tests/pages/faculty-attempt-analysis.test.jsx
+frontend/tests/pages/legacy-pdf-removal.test.js
+frontend/tests/pages/premium-pdf-base-model.test.js
+frontend/tests/pages/premium-pdf-layout.test.js
+frontend/tests/pages/premium-pdf.test.js
+
+=== NO BACKEND / ROUTES / PACKAGE / CONFIG CHANGES ===
+none
+
+=== NO TYPESCRIPT / JSX ENGINE CONVERSION ===
+none
+
+=== PRODUCTION-ONLY LEGACY SYMBOL COUNTS (frontend/src) ===
+FAVICON_DATA_URI           0
+htmlEscape                 0
+badgeClassFor              0
+buildFullModel             0
+buildFullAnalysisPdf       0
+buildReportPdf             0
+buildReportModel           0
+buildAnalysisPdfHtml       0
+loadBrandLogo              0
+loadLogoPixels             0
+reportCss                  0
+metaCell                   0
+statCard                   0
+masteryBadge               0
+priorityBadge              0
+revisionSectionHtml        0
+faDrawHBar                 0
+faDrawPie                  0
+faDrawVBar                 0
+faLegendRow                0
+faSubjectColor             0
+faMasteryInk               0
+HEADER_RGB                 0
+pdfSafe                    0
+FA_NAVY                    0
+FA_INDIGO                  0
+FA_STATUS_COLOR            0
+
+=== FA_* CONSTANTS IN PRODUCTION ===
+0
+
+=== LEGACY SYMBOLS IN TESTS (negative assertions only) ===
+frontend/tests/pages/exam-analysis-pdf.test.js:87:      'buildReportModel', 'buildAnalysisPdfHtml', 'buildReportPdf',
+frontend/tests/pages/exam-analysis-pdf.test.js:88:      'buildFullModel', 'buildFullAnalysisPdf', 'buildRevisionGroups',
+frontend/tests/pages/exam-analysis-pdf.test.js:89:      'FAVICON_DATA_URI', 'htmlEscape', 'badgeClassFor',
+frontend/tests/pages/premium-pdf-layout.test.js:194:    expect(pdfExports.buildReportModel).toBeUndefined()
+frontend/tests/pages/premium-pdf-layout.test.js:195:    expect(pdfExports.buildAnalysisPdfHtml).toBeUndefined()
+frontend/tests/pages/premium-pdf-layout.test.js:196:    expect(pdfExports.buildReportPdf).toBeUndefined()
+frontend/tests/pages/premium-pdf-layout.test.js:198:    expect(pdfExports.buildFullAnalysisPdf).toBeUndefined()
+frontend/tests/pages/premium-pdf-base-model.test.js:30:describe('premium base model (replaces the legacy buildReportModel)', () => {
+frontend/tests/pages/legacy-pdf-removal.test.js:24:  'buildReportModel', 'buildAnalysisPdfHtml', 'buildReportPdf',
+frontend/tests/pages/legacy-pdf-removal.test.js:25:  'buildFullModel', 'buildFullAnalysisPdf', 'FAVICON_DATA_URI',
+frontend/tests/pages/legacy-pdf-removal.test.js:30:  'HEADER_RGB', 'pdfSafe', 'FA_NAVY', 'FA_INDIGO', 'FA_BLUE',
+frontend/tests/pages/legacy-pdf-removal.test.js:53:    expect(parent).not.toContain('buildReportModel')
+
+=== PRODUCTION IMPORTS OF exam-analysis-pdf ===
+frontend/src/pages/faculty/FacultyAttemptAnalysis.jsx:21:import { analysisPdfUser, exportAnalysisPDF, exportFullAnalysisPDF } from '@/pages/student/exam-analysis-pdf'
+frontend/src/pages/student/ExamAnalysis.jsx:24:import { exportAnalysisPDF, exportFullAnalysisPDF } from './exam-analysis-pdf'
+frontend/src/pages/student/premium-pdf/model.js:16:} from '../exam-analysis-pdf.js'
+frontend/src/pages/student/premium-pdf/base-model.js:8:import { formatReportTime, masteryFromAccuracy } from '../exam-analysis-pdf.js'
+
+=== PREMIUM PIPELINE FILES ===
+base-model.js
+browser-assets.js
+components.js
+full-analysis.js
+index.js
+intelligence.js
+layout.js
+math.js
+model.js
+pdfkit-standard-fonts.js
+renderer.js
+text.js
+theme.js
+count=13
+
+=== FALLBACK / FEATURE-FLAG / DUPLICATE ENGINE SCAN (AI Exam Analysis PDF surface) ===
+(none)
+
+=== BUILT BUNDLE LEGACY STRINGS ===
+(none)
+
+=== SHARED DEPENDENCIES STILL PRESENT AND USED ===
+pdfkit           src-refs=3 package-entry=1
+svg-to-pdfkit    src-refs=1 package-entry=1
+katex            src-refs=2 package-entry=1
+mathjax-full     src-refs=1 package-entry=1
+
+=== SHARED FONT / LOGO ASSETS ===
+Inter-Bold.ttf
+Inter-Regular.ttf
+Inter-SemiBold.ttf
+Manrope-Bold.ttf
+STIXTwoMath-Regular.ttf
+STIXTwoText-Regular.ttf
+logo.png bytes=109102
+
+=== PDF-RELATED TEST FILES ===
+exam-analysis-pdf.test.js
+exam-analysis-stats.test.js
+faculty-attempt-analysis.test.jsx
+legacy-pdf-removal.test.js
+premium-pdf-base-model.test.js
+premium-pdf-browser-fonts.test.js
+premium-pdf-layout.test.js
+premium-pdf.test.js

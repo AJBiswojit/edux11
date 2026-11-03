@@ -1,0 +1,615 @@
+{
+  "generatedAt": "2026-11-03T05:30:47.400057",
+  "source": "Six real Chromium downloads from verify-implementation.mjs (real local backend/auth/data)",
+  "pypdf": "6.21.4",
+  "pymupdf": "PyMuPDF 2.1: Python bindings for the MuPDF 1.28.6 library.",
+  "results": [
+    {
+      "role": "student",
+      "kind": "Exam_Intelligence_Report",
+      "file": "deliverables/implementation-verification/downloads/student/MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+      "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+      "bytes": 380520,
+      "pages": 4,
+      "page_text_lengths": [
+        938,
+        1080,
+        1255,
+        393
+      ],
+      "page_markers": [
+        [
+          "01"
+        ],
+        [
+          "02"
+        ],
+        [
+          "03"
+        ],
+        [
+          "04"
+        ]
+      ],
+      "severe_text_block_overlaps": 0,
+      "font_names": [
+        "CZZZZZ+Inter-Regular",
+        "DZZZZZ+Manrope-ExtraLight",
+        "FZZZZZ+Inter-Regular",
+        "GZZZZZ+Inter-Regular"
+      ],
+      "image_xrefs": [
+        8,
+        16,
+        20,
+        24,
+        25
+      ],
+      "image_object_count": 10,
+      "checks": {
+        "valid_header": true,
+        "valid_eof": true,
+        "pypdf_parses": true,
+        "pymupdf_parses": true,
+        "page_count": true,
+        "name": true,
+        "roll": true,
+        "exam_name": true,
+        "subject_scope": true,
+        "markers": true,
+        "no_staff_identity": true,
+        "filename": true,
+        "embedded_fonts": true,
+        "logo_image": true,
+        "no_blank_pages": true,
+        "pagination_markers": true,
+        "all_pages_have_text": true,
+        "no_text_block_overlap": true
+      },
+      "ok": true,
+      "previews": [
+        "deliverables/implementation-verification/pdf-previews/student-Exam_Intelligence_Report-first.png",
+        "deliverables/implementation-verification/pdf-previews/student-Exam_Intelligence_Report-last.png"
+      ]
+    },
+    {
+      "role": "student",
+      "kind": "Full_Exam_Analysis_Report",
+      "file": "deliverables/implementation-verification/downloads/student/MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+      "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+      "bytes": 1057137,
+      "pages": 13,
+      "page_text_lengths": [
+        672,
+        969,
+        1182,
+        1094,
+        1144,
+        1225,
+        1252,
+        1229,
+        2364,
+        3985,
+        3973,
+        2999,
+        3134
+      ],
+      "page_markers": [
+        [
+          "01"
+        ],
+        [
+          "02"
+        ],
+        [
+          "03"
+        ],
+        [
+          "04"
+        ],
+        [
+          "05"
+        ],
+        [
+          "06"
+        ],
+        [
+          "07"
+        ],
+        [
+          "08"
+        ],
+        [
+          "09"
+        ],
+        [
+          "10"
+        ],
+        [
+          "11"
+        ],
+        [
+          "12"
+        ],
+        [
+          "13"
+        ]
+      ],
+      "severe_text_block_overlaps": 0,
+      "font_names": [
+        "CZZZZZ+Inter-Regular",
+        "DZZZZZ+Manrope-ExtraLight",
+        "EZZZZZ+STIXTwoMath-Regular",
+        "FZZZZZ+Inter-Regular",
+        "GZZZZZ+Inter-Regular"
+      ],
+      "image_xrefs": [
+        8,
+        16,
+        20,
+        24,
+        28,
+        32,
+        37,
+        41,
+        45,
+        49,
+        53,
+        57,
+        61,
+        62
+      ],
+      "image_object_count": 28,
+      "checks": {
+        "valid_header": true,
+        "valid_eof": true,
+        "pypdf_parses": true,
+        "pymupdf_parses": true,
+        "page_count": true,
+        "name": true,
+        "roll": true,
+        "exam_name": true,
+        "subject_scope": true,
+        "markers": true,
+        "no_staff_identity": true,
+        "filename": true,
+        "embedded_fonts": true,
+        "logo_image": true,
+        "no_blank_pages": true,
+        "pagination_markers": true,
+        "all_pages_have_text": true,
+        "no_text_block_overlap": true
+      },
+      "ok": true,
+      "previews": [
+        "deliverables/implementation-verification/pdf-previews/student-Full_Exam_Analysis_Report-first.png",
+        "deliverables/implementation-verification/pdf-previews/student-Full_Exam_Analysis_Report-last.png"
+      ]
+    },
+    {
+      "role": "faculty",
+      "kind": "Exam_Intelligence_Report",
+      "file": "deliverables/implementation-verification/downloads/faculty/MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+      "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+      "bytes": 384548,
+      "pages": 4,
+      "page_text_lengths": [
+        1328,
+        1557,
+        1224,
+        675
+      ],
+      "page_markers": [
+        [
+          "01"
+        ],
+        [
+          "02"
+        ],
+        [
+          "03"
+        ],
+        [
+          "04"
+        ]
+      ],
+      "severe_text_block_overlaps": 0,
+      "font_names": [
+        "CZZZZZ+Inter-Regular",
+        "DZZZZZ+Manrope-ExtraLight",
+        "FZZZZZ+Inter-Regular",
+        "GZZZZZ+Inter-Regular"
+      ],
+      "image_xrefs": [
+        8,
+        16,
+        20,
+        24,
+        25
+      ],
+      "image_object_count": 10,
+      "checks": {
+        "valid_header": true,
+        "valid_eof": true,
+        "pypdf_parses": true,
+        "pymupdf_parses": true,
+        "page_count": true,
+        "name": true,
+        "roll": true,
+        "exam_name": true,
+        "subject_scope": true,
+        "markers": true,
+        "no_staff_identity": true,
+        "filename": true,
+        "embedded_fonts": true,
+        "logo_image": true,
+        "no_blank_pages": true,
+        "pagination_markers": true,
+        "all_pages_have_text": true,
+        "no_text_block_overlap": true
+      },
+      "ok": true,
+      "previews": [
+        "deliverables/implementation-verification/pdf-previews/faculty-Exam_Intelligence_Report-first.png",
+        "deliverables/implementation-verification/pdf-previews/faculty-Exam_Intelligence_Report-last.png"
+      ]
+    },
+    {
+      "role": "faculty",
+      "kind": "Full_Exam_Analysis_Report",
+      "file": "deliverables/implementation-verification/downloads/faculty/MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+      "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+      "bytes": 1496913,
+      "pages": 19,
+      "page_text_lengths": [
+        677,
+        1031,
+        1606,
+        1049,
+        970,
+        1029,
+        1225,
+        1252,
+        1245,
+        1140,
+        1351,
+        1270,
+        1210,
+        1515,
+        1788,
+        3881,
+        4035,
+        3416,
+        3739
+      ],
+      "page_markers": [
+        [
+          "01"
+        ],
+        [
+          "02"
+        ],
+        [
+          "03"
+        ],
+        [
+          "04"
+        ],
+        [
+          "05"
+        ],
+        [
+          "06"
+        ],
+        [
+          "07"
+        ],
+        [
+          "08"
+        ],
+        [
+          "09"
+        ],
+        [
+          "10"
+        ],
+        [
+          "11"
+        ],
+        [
+          "12"
+        ],
+        [
+          "13"
+        ],
+        [
+          "14"
+        ],
+        [
+          "15"
+        ],
+        [
+          "16"
+        ],
+        [
+          "17"
+        ],
+        [
+          "18"
+        ],
+        [
+          "19"
+        ]
+      ],
+      "severe_text_block_overlaps": 0,
+      "font_names": [
+        "CZZZZZ+Inter-Regular",
+        "DZZZZZ+Manrope-ExtraLight",
+        "EZZZZZ+STIXTwoMath-Regular",
+        "FZZZZZ+Inter-Regular",
+        "GZZZZZ+Inter-Regular"
+      ],
+      "image_xrefs": [
+        8,
+        16,
+        20,
+        24,
+        28,
+        32,
+        36,
+        41,
+        45,
+        49,
+        53,
+        57,
+        61,
+        65,
+        69,
+        73,
+        77,
+        81,
+        85,
+        86
+      ],
+      "image_object_count": 40,
+      "checks": {
+        "valid_header": true,
+        "valid_eof": true,
+        "pypdf_parses": true,
+        "pymupdf_parses": true,
+        "page_count": true,
+        "name": true,
+        "roll": true,
+        "exam_name": true,
+        "subject_scope": true,
+        "markers": true,
+        "no_staff_identity": true,
+        "filename": true,
+        "embedded_fonts": true,
+        "logo_image": true,
+        "no_blank_pages": true,
+        "pagination_markers": true,
+        "all_pages_have_text": true,
+        "no_text_block_overlap": true
+      },
+      "ok": true,
+      "previews": [
+        "deliverables/implementation-verification/pdf-previews/faculty-Full_Exam_Analysis_Report-first.png",
+        "deliverables/implementation-verification/pdf-previews/faculty-Full_Exam_Analysis_Report-last.png"
+      ]
+    },
+    {
+      "role": "admin",
+      "kind": "Exam_Intelligence_Report",
+      "file": "deliverables/implementation-verification/downloads/admin/MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+      "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Exam_Intelligence_Report.pdf",
+      "bytes": 384548,
+      "pages": 4,
+      "page_text_lengths": [
+        1328,
+        1557,
+        1224,
+        675
+      ],
+      "page_markers": [
+        [
+          "01"
+        ],
+        [
+          "02"
+        ],
+        [
+          "03"
+        ],
+        [
+          "04"
+        ]
+      ],
+      "severe_text_block_overlaps": 0,
+      "font_names": [
+        "CZZZZZ+Inter-Regular",
+        "DZZZZZ+Manrope-ExtraLight",
+        "FZZZZZ+Inter-Regular",
+        "GZZZZZ+Inter-Regular"
+      ],
+      "image_xrefs": [
+        8,
+        16,
+        20,
+        24,
+        25
+      ],
+      "image_object_count": 10,
+      "checks": {
+        "valid_header": true,
+        "valid_eof": true,
+        "pypdf_parses": true,
+        "pymupdf_parses": true,
+        "page_count": true,
+        "name": true,
+        "roll": true,
+        "exam_name": true,
+        "subject_scope": true,
+        "markers": true,
+        "no_staff_identity": true,
+        "filename": true,
+        "embedded_fonts": true,
+        "logo_image": true,
+        "no_blank_pages": true,
+        "pagination_markers": true,
+        "all_pages_have_text": true,
+        "no_text_block_overlap": true
+      },
+      "ok": true,
+      "previews": [
+        "deliverables/implementation-verification/pdf-previews/admin-Exam_Intelligence_Report-first.png",
+        "deliverables/implementation-verification/pdf-previews/admin-Exam_Intelligence_Report-last.png"
+      ]
+    },
+    {
+      "role": "admin",
+      "kind": "Full_Exam_Analysis_Report",
+      "file": "deliverables/implementation-verification/downloads/admin/MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+      "filename": "MediXO_EduX_NEET_UG_Full_Mock_01_Full_Exam_Analysis_Report.pdf",
+      "bytes": 1496897,
+      "pages": 19,
+      "page_text_lengths": [
+        677,
+        1031,
+        1606,
+        1049,
+        970,
+        1029,
+        1225,
+        1252,
+        1245,
+        1140,
+        1351,
+        1270,
+        1210,
+        1515,
+        1788,
+        3881,
+        4035,
+        3416,
+        3739
+      ],
+      "page_markers": [
+        [
+          "01"
+        ],
+        [
+          "02"
+        ],
+        [
+          "03"
+        ],
+        [
+          "04"
+        ],
+        [
+          "05"
+        ],
+        [
+          "06"
+        ],
+        [
+          "07"
+        ],
+        [
+          "08"
+        ],
+        [
+          "09"
+        ],
+        [
+          "10"
+        ],
+        [
+          "11"
+        ],
+        [
+          "12"
+        ],
+        [
+          "13"
+        ],
+        [
+          "14"
+        ],
+        [
+          "15"
+        ],
+        [
+          "16"
+        ],
+        [
+          "17"
+        ],
+        [
+          "18"
+        ],
+        [
+          "19"
+        ]
+      ],
+      "severe_text_block_overlaps": 0,
+      "font_names": [
+        "CZZZZZ+Inter-Regular",
+        "DZZZZZ+Manrope-ExtraLight",
+        "EZZZZZ+STIXTwoMath-Regular",
+        "FZZZZZ+Inter-Regular",
+        "GZZZZZ+Inter-Regular"
+      ],
+      "image_xrefs": [
+        8,
+        16,
+        20,
+        24,
+        28,
+        32,
+        36,
+        41,
+        45,
+        49,
+        53,
+        57,
+        61,
+        65,
+        69,
+        73,
+        77,
+        81,
+        85,
+        86
+      ],
+      "image_object_count": 40,
+      "checks": {
+        "valid_header": true,
+        "valid_eof": true,
+        "pypdf_parses": true,
+        "pymupdf_parses": true,
+        "page_count": true,
+        "name": true,
+        "roll": true,
+        "exam_name": true,
+        "subject_scope": true,
+        "markers": true,
+        "no_staff_identity": true,
+        "filename": true,
+        "embedded_fonts": true,
+        "logo_image": true,
+        "no_blank_pages": true,
+        "pagination_markers": true,
+        "all_pages_have_text": true,
+        "no_text_block_overlap": true
+      },
+      "ok": true,
+      "previews": [
+        "deliverables/implementation-verification/pdf-previews/admin-Full_Exam_Analysis_Report-first.png",
+        "deliverables/implementation-verification/pdf-previews/admin-Full_Exam_Analysis_Report-last.png"
+      ]
+    }
+  ],
+  "all_ok": true
+}

@@ -1,0 +1,663 @@
+{
+  "generatedAt": "2026-11-03T05:27:45.862Z",
+  "note": "Controlled runtime fault (one PDF font fetch rejected per export). NOT a natural failure; no source change.",
+  "results": [
+    {
+      "actionSnapshots": [
+        {
+          "action": "Report",
+          "consoleAfter": [
+            {
+              "level": "error",
+              "at": 1793683642472,
+              "args": [
+                "[EduX PDF Export] Report failed",
+                {
+                  "__error": true,
+                  "name": "TypeError",
+                  "message": "Failed to fetch",
+                  "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+                }
+              ],
+              "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch"
+            },
+            {
+              "level": "error",
+              "at": 1793683642473,
+              "args": [
+                "[EduX PDF Export] Report stack",
+                "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+              ],
+              "text": "[EduX PDF Export] Report stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+            }
+          ],
+          "toastsAfter": [
+            "PDF failedCould not create the report. Please try again."
+          ],
+          "buttonsReenabled": true,
+          "downloadsAfter": 0
+        },
+        {
+          "action": "Full Analysis",
+          "consoleAfter": [
+            {
+              "level": "error",
+              "at": 1793683643779,
+              "args": [
+                "[EduX PDF Export] Full Analysis failed",
+                {
+                  "__error": true,
+                  "name": "TypeError",
+                  "message": "Failed to fetch",
+                  "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+                }
+              ],
+              "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch"
+            },
+            {
+              "level": "error",
+              "at": 1793683643781,
+              "args": [
+                "[EduX PDF Export] Full Analysis stack",
+                "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+              ],
+              "text": "[EduX PDF Export] Full Analysis stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+            }
+          ],
+          "toastsAfter": [
+            "PDF failedCould not create the report. Please try again.PDF failedCould not create the full analysis. Please try again."
+          ],
+          "buttonsReenabled": true,
+          "downloadsAfter": 0
+        }
+      ],
+      "role": "student",
+      "route": "http://127.0.0.1:5173/student/exam-analysis",
+      "faultInjectedUrls": [
+        "/src/assets/fonts/Inter-Regular.ttf",
+        "/src/assets/fonts/Inter-Regular.ttf"
+      ],
+      "downloads": [],
+      "console": [
+        {
+          "level": "debug",
+          "at": 1793683639649,
+          "args": [
+            "[vite] connecting..."
+          ],
+          "text": "[vite] connecting..."
+        },
+        {
+          "level": "debug",
+          "at": 1793683639673,
+          "args": [
+            "[vite] connected."
+          ],
+          "text": "[vite] connected."
+        },
+        {
+          "level": "info",
+          "at": 1793683639893,
+          "args": [
+            "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools",
+            "font-weight:bold"
+          ],
+          "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+        },
+        {
+          "level": "warn",
+          "at": 1793683639959,
+          "args": [
+            "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+          ],
+          "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+        },
+        {
+          "level": "warn",
+          "at": 1793683639960,
+          "args": [
+            "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+          ],
+          "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+        },
+        {
+          "level": "error",
+          "at": 1793683642472,
+          "args": [
+            "[EduX PDF Export] Report failed",
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+            }
+          ],
+          "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "at": 1793683642473,
+          "args": [
+            "[EduX PDF Export] Report stack",
+            "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+          ],
+          "text": "[EduX PDF Export] Report stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+        },
+        {
+          "level": "error",
+          "at": 1793683643779,
+          "args": [
+            "[EduX PDF Export] Full Analysis failed",
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+            }
+          ],
+          "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "at": 1793683643781,
+          "args": [
+            "[EduX PDF Export] Full Analysis stack",
+            "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+          ],
+          "text": "[EduX PDF Export] Full Analysis stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+        }
+      ],
+      "errors": [
+        {
+          "error": null
+        }
+      ],
+      "rejections": [],
+      "toasts": [
+        "PDF failedCould not create the report. Please try again.PDF failedCould not create the full analysis. Please try again."
+      ],
+      "buttonsReenabled": true,
+      "exportLogs": [
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Report stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+        },
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Full Analysis stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+        }
+      ],
+      "exactExceptions": [
+        {
+          "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch",
+          "errors": [
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+            }
+          ]
+        },
+        {
+          "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch",
+          "errors": [
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+            }
+          ]
+        }
+      ],
+      "ok": true
+    },
+    {
+      "actionSnapshots": [
+        {
+          "action": "Report",
+          "consoleAfter": [
+            {
+              "level": "error",
+              "at": 1793683652615,
+              "args": [
+                "[EduX PDF Export] Report failed",
+                {
+                  "__error": true,
+                  "name": "TypeError",
+                  "message": "Failed to fetch",
+                  "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+                }
+              ],
+              "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch"
+            },
+            {
+              "level": "error",
+              "at": 1793683652616,
+              "args": [
+                "[EduX PDF Export] Report stack",
+                "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+              ],
+              "text": "[EduX PDF Export] Report stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+            }
+          ],
+          "toastsAfter": [
+            "PDF failedCould not create the report. Please try again."
+          ],
+          "buttonsReenabled": true,
+          "downloadsAfter": 0
+        },
+        {
+          "action": "Full Analysis",
+          "consoleAfter": [
+            {
+              "level": "error",
+              "at": 1793683653947,
+              "args": [
+                "[EduX PDF Export] Full Analysis failed",
+                {
+                  "__error": true,
+                  "name": "TypeError",
+                  "message": "Failed to fetch",
+                  "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+                }
+              ],
+              "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch"
+            },
+            {
+              "level": "error",
+              "at": 1793683653949,
+              "args": [
+                "[EduX PDF Export] Full Analysis stack",
+                "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+              ],
+              "text": "[EduX PDF Export] Full Analysis stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+            }
+          ],
+          "toastsAfter": [
+            "PDF failedCould not create the report. Please try again.PDF failedCould not create the full analysis. Please try again."
+          ],
+          "buttonsReenabled": true,
+          "downloadsAfter": 0
+        }
+      ],
+      "role": "faculty",
+      "route": "http://127.0.0.1:5173/faculty/my-students/u_dev_student/exams/e389c240-cbe7-4c11-a491-e05b178dbb97",
+      "faultInjectedUrls": [
+        "/src/assets/fonts/Inter-Regular.ttf",
+        "/src/assets/fonts/Inter-Regular.ttf"
+      ],
+      "downloads": [],
+      "console": [
+        {
+          "level": "debug",
+          "at": 1793683651009,
+          "args": [
+            "[vite] connecting..."
+          ],
+          "text": "[vite] connecting..."
+        },
+        {
+          "level": "debug",
+          "at": 1793683651050,
+          "args": [
+            "[vite] connected."
+          ],
+          "text": "[vite] connected."
+        },
+        {
+          "level": "info",
+          "at": 1793683651232,
+          "args": [
+            "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools",
+            "font-weight:bold"
+          ],
+          "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+        },
+        {
+          "level": "warn",
+          "at": 1793683651297,
+          "args": [
+            "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+          ],
+          "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+        },
+        {
+          "level": "warn",
+          "at": 1793683651297,
+          "args": [
+            "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+          ],
+          "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+        },
+        {
+          "level": "error",
+          "at": 1793683652615,
+          "args": [
+            "[EduX PDF Export] Report failed",
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+            }
+          ],
+          "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "at": 1793683652616,
+          "args": [
+            "[EduX PDF Export] Report stack",
+            "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+          ],
+          "text": "[EduX PDF Export] Report stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+        },
+        {
+          "level": "error",
+          "at": 1793683653947,
+          "args": [
+            "[EduX PDF Export] Full Analysis failed",
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+            }
+          ],
+          "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "at": 1793683653949,
+          "args": [
+            "[EduX PDF Export] Full Analysis stack",
+            "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+          ],
+          "text": "[EduX PDF Export] Full Analysis stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+        }
+      ],
+      "errors": [
+        {
+          "error": null
+        }
+      ],
+      "rejections": [],
+      "toasts": [
+        "PDF failedCould not create the report. Please try again.PDF failedCould not create the full analysis. Please try again."
+      ],
+      "buttonsReenabled": true,
+      "exportLogs": [
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Report stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+        },
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Full Analysis stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+        }
+      ],
+      "exactExceptions": [
+        {
+          "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch",
+          "errors": [
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+            }
+          ]
+        },
+        {
+          "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch",
+          "errors": [
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+            }
+          ]
+        }
+      ],
+      "ok": true
+    },
+    {
+      "actionSnapshots": [
+        {
+          "action": "Report",
+          "consoleAfter": [
+            {
+              "level": "error",
+              "at": 1793683661483,
+              "args": [
+                "[EduX PDF Export] Report failed",
+                {
+                  "__error": true,
+                  "name": "TypeError",
+                  "message": "Failed to fetch",
+                  "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+                }
+              ],
+              "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch"
+            },
+            {
+              "level": "error",
+              "at": 1793683661483,
+              "args": [
+                "[EduX PDF Export] Report stack",
+                "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+              ],
+              "text": "[EduX PDF Export] Report stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+            }
+          ],
+          "toastsAfter": [
+            "PDF failedCould not create the report. Please try again."
+          ],
+          "buttonsReenabled": true,
+          "downloadsAfter": 0
+        },
+        {
+          "action": "Full Analysis",
+          "consoleAfter": [
+            {
+              "level": "error",
+              "at": 1793683662767,
+              "args": [
+                "[EduX PDF Export] Full Analysis failed",
+                {
+                  "__error": true,
+                  "name": "TypeError",
+                  "message": "Failed to fetch",
+                  "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+                }
+              ],
+              "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch"
+            },
+            {
+              "level": "error",
+              "at": 1793683662768,
+              "args": [
+                "[EduX PDF Export] Full Analysis stack",
+                "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+              ],
+              "text": "[EduX PDF Export] Full Analysis stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+            }
+          ],
+          "toastsAfter": [
+            "PDF failedCould not create the report. Please try again.PDF failedCould not create the full analysis. Please try again."
+          ],
+          "buttonsReenabled": true,
+          "downloadsAfter": 0
+        }
+      ],
+      "role": "admin",
+      "route": "http://127.0.0.1:5173/admin/students/u_dev_student/exams/e389c240-cbe7-4c11-a491-e05b178dbb97",
+      "faultInjectedUrls": [
+        "/src/assets/fonts/Inter-Regular.ttf",
+        "/src/assets/fonts/Inter-Regular.ttf"
+      ],
+      "downloads": [],
+      "console": [
+        {
+          "level": "debug",
+          "at": 1793683658037,
+          "args": [
+            "[vite] connecting..."
+          ],
+          "text": "[vite] connecting..."
+        },
+        {
+          "level": "debug",
+          "at": 1793683660056,
+          "args": [
+            "[vite] connected."
+          ],
+          "text": "[vite] connected."
+        },
+        {
+          "level": "info",
+          "at": 1793683660242,
+          "args": [
+            "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools",
+            "font-weight:bold"
+          ],
+          "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+        },
+        {
+          "level": "warn",
+          "at": 1793683660304,
+          "args": [
+            "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+          ],
+          "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+        },
+        {
+          "level": "warn",
+          "at": 1793683660304,
+          "args": [
+            "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+          ],
+          "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+        },
+        {
+          "level": "error",
+          "at": 1793683661483,
+          "args": [
+            "[EduX PDF Export] Report failed",
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+            }
+          ],
+          "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "at": 1793683661483,
+          "args": [
+            "[EduX PDF Export] Report stack",
+            "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+          ],
+          "text": "[EduX PDF Export] Report stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+        },
+        {
+          "level": "error",
+          "at": 1793683662767,
+          "args": [
+            "[EduX PDF Export] Full Analysis failed",
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+            }
+          ],
+          "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "at": 1793683662768,
+          "args": [
+            "[EduX PDF Export] Full Analysis stack",
+            "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+          ],
+          "text": "[EduX PDF Export] Full Analysis stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+        }
+      ],
+      "errors": [
+        {
+          "error": null
+        }
+      ],
+      "rejections": [],
+      "toasts": [
+        "PDF failedCould not create the report. Please try again.PDF failedCould not create the full analysis. Please try again."
+      ],
+      "buttonsReenabled": true,
+      "exportLogs": [
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Report stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+        },
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch"
+        },
+        {
+          "level": "error",
+          "text": "[EduX PDF Export] Full Analysis stack TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+        }
+      ],
+      "exactExceptions": [
+        {
+          "text": "[EduX PDF Export] Report failed TypeError: Failed to fetch",
+          "errors": [
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:101:24)"
+            }
+          ]
+        },
+        {
+          "text": "[EduX PDF Export] Full Analysis failed TypeError: Failed to fetch",
+          "errors": [
+            {
+              "__error": true,
+              "name": "TypeError",
+              "message": "Failed to fetch",
+              "stack": "TypeError: Failed to fetch\n    at window.fetch (pptr:evaluate;file%3A%2F%2F%2Fhome%2Fuser%2Fedux11%2Fdeliverables%2Fimplementation-verification%2Fverify-implementation-fault.mjs%3A113%3A14:8:31)\n    at fetchBytes (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:17:26)\n    at loadBrowserAssets (http://127.0.0.1:5173/src/pages/student/premium-pdf/browser-assets.js:25:5)\n    at createPremiumPdf (http://127.0.0.1:5173/src/pages/student/premium-pdf/index.js:13:24)\n    at exportFullAnalysisPDF (http://127.0.0.1:5173/src/pages/student/exam-analysis-pdf.js:122:24)"
+            }
+          ]
+        }
+      ],
+      "ok": true
+    }
+  ]
+}
