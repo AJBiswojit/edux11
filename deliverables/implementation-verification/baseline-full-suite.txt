@@ -1,0 +1,30 @@
+Baseline full suite (tracked files restored to HEAD, new implementation files removed)
+⎯⎯⎯⎯⎯⎯ Failed Tests 26 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > removes the standalone Search field and derives Course options from the real catalog
+ FAIL  tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > keeps Children disabled until each real parent is chosen and sends the selected filters to the generation agent
+ FAIL  tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > changing Course clears Subject/Chapter/Topic and refuses to generate without an explicit University subject
+ FAIL  tests/components/paper-generator-syllabus-filter.test.jsx > Question Paper Studio — Syllabus/content filter > keeps an empty API catalog empty instead of injecting demo/sample options
+ FAIL  tests/components/ui-copy-cleanup.test.jsx > UI copy cleanup — implementation terminology removed from product surfaces > Question Paper Studio renders product copy and a capitalised generation state
+ FAIL  tests/components/ui-copy-cleanup.test.jsx > UI copy cleanup — implementation terminology removed from product surfaces > Paper Library renders product copy
+ FAIL  tests/filters/cascading-filters.test.js > Exam Analysis (student) — context → family → exam → subject > detects families from canonical exam metadata, never subject names
+ FAIL  tests/filters/cascading-filters.test.js > Exam Analysis (student) — context → family → exam → subject > switching to University clears competitive family/exam/subject
+ FAIL  tests/filters/cascading-filters.test.js > Exam Analysis (student) — context → family → exam → subject > keeps a JEE exam out of the NEET family and vice versa (subject lists never leak)
+ FAIL  tests/filters/cascading-filters.test.js > Exam Analysis (student) — context → family → exam → subject > switching exams clears a subject that belongs to the previous exam only
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders the weaknesses tab with evidence + suggested intervention actions
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders the similar issues tab with GROUPED and INDIVIDUAL sections
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders chapter intelligence with derived metrics and actionable buttons
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders strengths with evidence actions and no unconditional intervention buttons
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders the interventions tab with the honest empty state (nothing auto-created)
+ FAIL  tests/intelligence/student-360-ui-render.test.jsx > Student 360 page render (SSR smoke) > renders for NEET and University students without cross-domain selectors
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > activates only AI Micro-Assessment on its nested URL
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/teaching mutually exclusive with all other Faculty items
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/reports mutually exclusive with all other Faculty items
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/ai-assistant mutually exclusive with all other Faculty items
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > keeps /faculty/timetable mutually exclusive with all other Faculty items
+ FAIL  tests/navigation/sidebar-active-state.test.jsx > Faculty sidebar route-aware active state > derives state from URL across navigation changes rather than click state
+ FAIL  tests/pages/student-dashboard-view.test.js > student dashboard view > does not repeat the pending assignment count beside the value
+ FAIL  tests/pages/student-dashboard-view.test.js > student dashboard view > uses each course mastery when the ranking repeats one fallback score
+ FAIL  tests/pages/student-dashboard-view.test.js > student dashboard view > keeps a varied ranking when every course shares one placeholder score
+ FAIL  tests/services/phase-f-adapters.test.js > Phase F — question adapter isolation > resolves structured { key, text, imageUrl } options to their display text
+ Test Files  7 failed | 32 passed (39)
+      Tests  26 failed | 419 passed (445)

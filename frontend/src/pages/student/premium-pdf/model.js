@@ -10,12 +10,12 @@
 
 import {
   analysisPdfUser,
-  buildReportModel,
   formatReportTime,
   masteryFromAccuracy,
   optLetter,
 } from '../exam-analysis-pdf.js'
 
+import { buildBaseReportModel } from './base-model.js'
 import { fmt, normalizeForMatch } from './theme.js'
 
 function isRecord(value) {
@@ -148,7 +148,7 @@ function withRawChapter(baseChapters, rawChapters) {
 }
 
 export function buildPremiumModel({ data = {}, subject, user, generatedAt, kind = 'full' } = {}) {
-  const base = buildReportModel({ data, subject, user, generatedAt })
+  const base = buildBaseReportModel({ data, subject, user, generatedAt })
   const when = generatedAt instanceof Date ? generatedAt : new Date(generatedAt || Date.now())
   const meta = data?.meta ?? {}
   const hero = data?.hero ?? {}

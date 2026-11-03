@@ -101,3 +101,28 @@ describe('premium PDF mathematical source handling', () => {
     expect(isPresentIn('Score 60.7%', '60.7')).toBe(true)
   })
 })
+
+describe('premium PDF student identity', () => {
+  it('uses the explicitly supplied student identity for faculty/admin exports', () => {
+    const model = buildPremiumIntelligenceModel({
+      data: sample,
+      subject: 'All Subjects',
+      user: { fullName: 'Dev Student', rollNo: 'DEV-STU-001' },
+      generatedAt: new Date('2026-09-22T00:00:00Z'),
+    })
+    expect(model.studentName).toBe('Dev Student')
+    expect(model.rollNo).toBe('DEV-STU-001')
+    expect(model.who).toContain('Dev Student')
+    expect(model.who).toContain('DEV-STU-001')
+    expect(model.studentName).not.toBe('Aarav Sharma')
+  })
+
+  it('keeps both report kinds on the same identity contract', () => {
+    const user = { fullName: 'Dev Student', rollNo: 'DEV-STU-001' }
+    const intelligence = buildPremiumIntelligenceModel({ data: sample, subject: 'All Subjects', user, generatedAt: new Date('2026-09-22T00:00:00Z') })
+    const full = buildPremiumFullModel({ data: sample, subject: 'All Subjects', user, generatedAt: new Date('2026-09-22T00:00:00Z') })
+    expect(intelligence.studentName).toBe('Dev Student')
+    expect(full.studentName).toBe('Dev Student')
+    expect(intelligence.rollNo).toBe(full.rollNo)
+  })
+})

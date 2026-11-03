@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { useAuth } from '@/contexts/auth-context'
 import { motion } from 'framer-motion'
 import {
@@ -878,6 +878,8 @@ function ExamAnalysis() {
   const visibleOptions = useMemo(() => visibleExamOptions(options, context, family), [options, context, family])
   const [reportBusy, setReportBusy] = useState(false)
   const [fullBusy, setFullBusy] = useState(false)
+  const reportBusyRef = useRef(false)
+  const fullBusyRef = useRef(false)
 
   if (isLoading) return <DashboardSkeleton cards={2} />
   if (isError) return <ErrorState onRetry={() => refetch()} />
@@ -910,6 +912,8 @@ function ExamAnalysis() {
   const showAnalysis = generated && !generating && !!analysisData
 
   const handleReportDownload = () => {
+    if (reportBusyRef.current) return
+    reportBusyRef.current = true
     setReportBusy(true)
     exportAnalysisPDF(analysisData, subject, user)
       .then(() => toast.success('Report downloaded', 'The marks report was saved to your downloads.'))
@@ -917,10 +921,15 @@ function ExamAnalysis() {
         logPdfExportError('Report', error)
         toast.error('PDF failed', 'Could not create the report. Please try again.')
       })
-      .finally(() => setReportBusy(false))
+      .finally(() => {
+        reportBusyRef.current = false
+        setReportBusy(false)
+      })
   }
 
   const handleFullDownload = () => {
+    if (fullBusyRef.current) return
+    fullBusyRef.current = true
     setFullBusy(true)
     exportFullAnalysisPDF(analysisData, subject, user)
       .then(() => toast.success('Full analysis downloaded', 'Your complete analysis PDF was saved to downloads.'))
@@ -928,7 +937,10 @@ function ExamAnalysis() {
         logPdfExportError('Full Analysis', error)
         toast.error('PDF failed', 'Could not create the full analysis. Please try again.')
       })
-      .finally(() => setFullBusy(false))
+      .finally(() => {
+        fullBusyRef.current = false
+        setFullBusy(false)
+      })
   }
 
   return (

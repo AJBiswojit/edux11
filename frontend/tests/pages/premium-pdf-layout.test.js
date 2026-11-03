@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { LayoutAudit, validateLayout } from '../../src/pages/student/premium-pdf/layout.js'
 import { CONTENT } from '../../src/pages/student/premium-pdf/theme.js'
 import { buildPremiumFullModel, flattenSourceValues } from '../../src/pages/student/premium-pdf/model.js'
-import * as legacyExports from '../../src/pages/student/exam-analysis-pdf.js'
+import * as pdfExports from '../../src/pages/student/exam-analysis-pdf.js'
 
 describe('V2 measurement-driven layout audit', () => {
   it('detects unintended text and sibling-component intersections', () => {
@@ -187,9 +187,15 @@ describe('V2 dynamic data-model regressions', () => {
     expect(values.filter((value) => value === '4')).toHaveLength(1)
   })
 
-  it('preserves the original export API surface', () => {
-    expect(typeof legacyExports.exportAnalysisPDF).toBe('function')
-    expect(typeof legacyExports.exportFullAnalysisPDF).toBe('function')
-    expect(typeof legacyExports.buildReportModel).toBe('function')
+  it('keeps the premium export API and drops the retired legacy writer', () => {
+    expect(typeof pdfExports.exportAnalysisPDF).toBe('function')
+    expect(typeof pdfExports.exportFullAnalysisPDF).toBe('function')
+    expect(typeof pdfExports.analysisPdfUser).toBe('function')
+    expect(pdfExports.buildReportModel).toBeUndefined()
+    expect(pdfExports.buildAnalysisPdfHtml).toBeUndefined()
+    expect(pdfExports.buildReportPdf).toBeUndefined()
+    expect(pdfExports.buildFullModel).toBeUndefined()
+    expect(pdfExports.buildFullAnalysisPdf).toBeUndefined()
+    expect(pdfExports.buildRevisionGroups).toBeUndefined()
   })
 })
