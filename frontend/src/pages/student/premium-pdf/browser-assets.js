@@ -6,6 +6,7 @@
  */
 
 import logoUrl from '../../../assets/logo.png?url'
+import coverDoorwayUrl from '../../../assets/premium-cover-doorway.png?url'
 import interRegularUrl from '../../../assets/fonts/Inter-Regular.ttf?url'
 import interSemiBoldUrl from '../../../assets/fonts/Inter-SemiBold.ttf?url'
 import interBoldUrl from '../../../assets/fonts/Inter-Bold.ttf?url'
@@ -21,8 +22,9 @@ async function fetchBytes(url) {
 }
 
 export async function loadBrowserAssets() {
-  const [logo, inter, interSemi, interBold, manrope, stixMath, stixText] = await Promise.all([
+  const [logo, coverDoorway, inter, interSemi, interBold, manrope, stixMath, stixText] = await Promise.all([
     fetchBytes(logoUrl),
+    fetchBytes(coverDoorwayUrl),
     fetchBytes(interRegularUrl),
     fetchBytes(interSemiBoldUrl),
     fetchBytes(interBoldUrl),
@@ -32,6 +34,7 @@ export async function loadBrowserAssets() {
   ])
   return {
     logo,
+    coverDoorway,
     fonts: {
       Inter: inter,
       InterSemi: interSemi,

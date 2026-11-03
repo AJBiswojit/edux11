@@ -16,6 +16,7 @@ import {
   SectionHeading, Subheading, Paragraph, MetricLedger,
   BarChart, StackedBar, MeasuredTable, SubjectBand, QuestionCard, measureQuestionCard,
 } from './components.js'
+import { renderFullAnalysisCover } from './cover.js'
 
 function text(value) {
   if (value === null || value === undefined || value === '') return '—'
@@ -66,144 +67,6 @@ function signals(m) {
     { label: 'Success rate', value: pct(m.successRate) },
     { label: 'Badge', value: text(m.hero.badge) },
   ]
-}
-
-function CoverIdentity(ctx) {
-  const m = ctx.model
-  const titleText = m.reportTitle.replace(' REPORT', '\nREPORT')
-  const measure = () => {
-    const kickerH = ctx.measureText('EDUX  /  ACADEMIC INTELLIGENCE', CONTENT.w, { size: TYPE.label, font: FONTS.bodySemi, characterSpacing: 1.1 })
-    const titleH = ctx.measureText(titleText, CONTENT.w, { size: TYPE.coverTitle, font: FONTS.heading, lineHeight: TYPE.coverTitle * 1.18, paragraphGap: 0 })
-    const examH = ctx.measureText(m.examName, CONTENT.w, { size: 12, font: FONTS.heading })
-    const metaH = ctx.measureText(`${m.course}   ·   ${m.pattern}   ·   ${m.subjectText}   ·   Generated ${m.generatedDate}`, CONTENT.w, { size: TYPE.bodySmall, font: FONTS.body })
-    return 4 + kickerH + 7 + titleH + 8 + examH + 5 + metaH + 8
-  }
-  return ctx.component({
-    type: 'cover-identity', label: 'Executive report cover', bottomSpacing: 12,
-    measure,
-    draw: (frame) => {
-      ctx.canvas.rect(frame.x, frame.y + 3, 3, 58, { fill: COLORS.indigo, audit: false })
-      let cursor = frame.y + 2
-      cursor += ctx.text('EDUX  /  ACADEMIC INTELLIGENCE', frame.x + 14, cursor, frame.w - 14, {
-        size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 1.1,
-      }) + 7
-      cursor += ctx.text(titleText, frame.x + 14, cursor, frame.w - 14, {
-        size: TYPE.coverTitle, font: FONTS.heading, color: COLORS.midnight,
-        lineHeight: TYPE.coverTitle * 1.18, paragraphGap: 0,
-      }) + 8
-      cursor += ctx.text(m.examName, frame.x + 14, cursor, frame.w - 14, {
-        size: 12, font: FONTS.heading, color: COLORS.ink,
-      }) + 5
-      ctx.text(`${m.course}   ·   ${m.pattern}   ·   ${m.subjectText}   ·   Generated ${m.generatedDate}`, frame.x + 14, cursor, frame.w - 14, {
-        size: TYPE.bodySmall, font: FONTS.body, color: COLORS.muted,
-      })
-    },
-  })
-}
-
-function CoverScoreFeature(ctx) {
-  const m = ctx.model
-  const correct = numeric(m.qi.correct)
-  const incorrect = numeric(m.qi.incorrect)
-  const skipped = numeric(m.qi.skipped)
-  const total = correct + incorrect + skipped || 1
-  const scoreFraction = Math.max(0, Math.min(1, numeric(m.scorePct) / 100))
-  const measure = () => 224
-  return ctx.component({
-    type: 'cover-score-feature', label: 'Dominant score and response visualisation',
-    bottomSpacing: 12, measure,
-    draw: (frame) => {
-      ctx.canvas.rect(frame.x, frame.y, frame.w, frame.h, { fill: COLORS.midnight, audit: false })
-      ctx.canvas.rect(frame.x + 16, frame.y + 16, 2, 62, { fill: COLORS.indigo, audit: false })
-      ctx.text('TOTAL MARKS OBTAINED', frame.x + 28, frame.y + 16, 220, {
-        size: TYPE.label, font: FONTS.bodySemi, color: COLORS.paper, characterSpacing: 1,
-      })
-      ctx.text(fmt(m.hero.score), frame.x + 28, frame.y + 38, 140, {
-        size: TYPE.metricLarge, font: FONTS.heading, color: COLORS.white,
-        features: ['tnum'], lineHeight: TYPE.metricLarge * 1.18,
-      })
-      ctx.text(`/ ${fmt(m.hero.maxScore)} marks`, frame.x + 28, frame.y + 126, 220, {
-        size: 10, font: FONTS.body, color: COLORS.paper,
-      })
-      ctx.text(m.breakdownLine, frame.x + 28, frame.y + 148, frame.w - 56, {
-        size: TYPE.bodySmall, font: FONTS.body, color: COLORS.paper,
-      })
-
-      const cx = frame.x + frame.w - 112
-      const cy = frame.y + 82
-      const radius = 47
-      ctx.canvas.arc(cx, cy, radius, -Math.PI / 2, Math.PI * 1.5, { color: mix(COLORS.white, COLORS.midnight, 0.18), width: 9 })
-      if (scoreFraction > 0.001) {
-        ctx.canvas.arc(cx, cy, radius, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * scoreFraction, { color: COLORS.indigo, width: 9, cap: 'round' })
-      }
-      ctx.text(m.scorePct, cx - 50, cy - 13, 100, {
-        size: 17, font: FONTS.heading, color: COLORS.white, align: 'center', features: ['tnum'],
-      })
-      ctx.text('SCORE', cx - 50, cy + 14, 100, {
-        size: TYPE.label, font: FONTS.bodySemi, color: COLORS.paper, align: 'center', characterSpacing: 0.8,
-      })
-
-      const barX = frame.x + 28
-      const barW = frame.w - 56
-      const barY = frame.y + 178
-      ctx.canvas.bar(barX, barY, barW, 10, mix(COLORS.white, COLORS.midnight, 0.2), { variant: 'track' })
-      let x = barX
-      const segments = [
-        { label: 'Correct', value: correct, color: COLORS.success },
-        { label: 'Incorrect', value: incorrect, color: COLORS.error },
-        { label: 'Skipped', value: skipped, color: COLORS.warning },
-      ]
-      segments.forEach((segment) => {
-        const w = (segment.value / total) * barW
-        if (w > 0.5) ctx.canvas.bar(x, barY, w, 10, segment.color, { variant: 'segment' })
-        x += w
-      })
-      const labelY = barY + 20
-      segments.forEach((segment, index) => {
-        const lx = barX + index * (barW / 3)
-        ctx.canvas.rect(lx, labelY + 3, 7, 7, { fill: segment.color, kind: 'shape', role: 'legend' })
-        ctx.text(`${segment.label}  ${text(segment.value)}`, lx + 12, labelY, barW / 3 - 14, {
-          size: TYPE.bodySmall, font: FONTS.bodySemi, color: COLORS.white,
-        })
-      })
-    },
-  })
-}
-
-function renderCover(ctx) {
-  const m = ctx.model
-  CoverIdentity(ctx)
-  MetricLedger(ctx, {
-    label: 'Candidate and examination identity',
-    items: [
-      { label: 'Student', value: m.studentName },
-      { label: 'Roll number', value: m.rollNo },
-      { label: 'Examination date', value: m.examDate },
-      { label: 'Total marks', value: m.totalMarks },
-    ],
-    columns: 4, valueSize: 11, bottomSpacing: 12,
-  })
-  CoverScoreFeature(ctx)
-  // The hero block above already prints the score, the percentage and the
-  // correct/incorrect/skipped split, so this strip carries only signals that
-  // are not stated anywhere else on the cover.
-  const signals = [
-    { label: 'Accuracy', value: pct(m.questionAccuracy), color: COLORS.success },
-    { label: 'Percentile', value: m.percentileLabel, color: COLORS.indigo },
-    { label: 'Rank', value: m.rankLabel, color: COLORS.midnight },
-    { label: 'Average pace', value: m.paceLabel, color: COLORS.midnight },
-  ].filter((item) => item.value && item.value !== '—')
-  if (signals.length) {
-    MetricLedger(ctx, {
-      label: 'Secondary signals',
-      items: signals,
-      columns: signals.length, valueSize: 11, bottomSpacing: 10,
-    })
-  }
-  Paragraph(ctx, {
-    title: 'PUBLISHED PERFORMANCE BRIEF', text: m.aiSummary,
-    size: 9.6, accent: COLORS.indigo, bottomSpacing: 10,
-  })
 }
 
 function renderPerformanceIntelligence(ctx) {
@@ -593,8 +456,10 @@ function renderLearningIntelligence(ctx) {
 
 
 export function renderFullAnalysis(ctx) {
-  renderCover(ctx)
-  ctx.sectionBreak(0.62)
+  renderFullAnalysisCover(ctx)
+  // The cover is a fixed editorial page. Start the first interior spread on a
+  // fresh page so the existing content-driven pagination is unchanged.
+  ctx.startPage({ cover: false })
   renderPerformanceIntelligence(ctx)
   ctx.sectionBreak(0.62)
   renderSubjectAndChapter(ctx)

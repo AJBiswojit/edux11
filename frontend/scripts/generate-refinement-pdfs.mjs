@@ -31,6 +31,7 @@ const ROLE_FIXTURE = (role) => new URL(`../../deliverables/pagination-fix/fixtur
 
 const ASSET_FILES = {
   logo: 'logo.png',
+  coverDoorway: 'premium-cover-doorway.png',
   Inter: 'fonts/Inter-Regular.ttf',
   InterSemi: 'fonts/Inter-SemiBold.ttf',
   InterBold: 'fonts/Inter-Bold.ttf',
@@ -47,8 +48,8 @@ async function loadAssets() {
     [name, new Uint8Array(await readFile(new URL(file, base)))]
   )))
   const flat = Object.fromEntries(entries)
-  const { logo, ...fonts } = flat
-  return { logo, fonts }
+  const { logo, coverDoorway, ...fonts } = flat
+  return { logo, coverDoorway, fonts }
 }
 
 function sha256(bytes) {

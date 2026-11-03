@@ -154,7 +154,16 @@ def check_chrome(pdf, name, problems):
         text = page_text(page)
         if "MediXO EduX" not in text:
             missing.append((index, "brand"))
-        if not PAGE_NUMBER.search(text):
+        # Full-analysis page one is an intentionally numberless editorial
+        # cover; every interior page and every intelligence/report page keeps
+        # the ordinary PAGE NN folio.
+        numberless_cover = (
+            index == 1
+            and "FULL EXAM" in text
+            and "ANALYSIS" in text
+            and "Marks Obtained" in text
+        )
+        if not PAGE_NUMBER.search(text) and not numberless_cover:
             missing.append((index, "page number"))
     if missing:
         problems.append(f"{name}: header/footer missing on pages {missing[:6]}")
@@ -206,6 +215,14 @@ def check_image_text_overlap(pdf, name, problems, tolerance=0.6):
             for image in images:
                 # The header logo and the colophon glyph are chrome, not content.
                 if image[3] < 70 or image[1] > 780:
+                    continue
+                # PDFKit rasterizes a transparent gradient's colour/soft-mask
+                # pair as full-width page-sized images. On the cover these
+                # represent the vector pathway background, whose rectangular
+                # image bounds extend into the white negative-space above its
+                # polygon. Keep checking the doorway image, but ignore those
+                # lower-left gradient backing images for cover overlap tests.
+                if index == 1 and image[0] < 1 and image[1] >= 450:
                     continue
                 area = box_overlap(bbox, image)
                 if area <= 0:

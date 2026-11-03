@@ -272,6 +272,8 @@ function drawLogo(ctx, x, y, width, role = 'content') {
  * ------------------------------------------------------------------ */
 
 export function drawHeader(ctx, { cover = false } = {}) {
+  // The Full Exam Analysis cover supplies its own art-directed branding.
+  if (cover) return
   ctx.chrome({
     type: 'header', role: 'header',
     x: CONTENT.x, y: PAGE.headerTop, w: CONTENT.w, h: 40,
@@ -312,6 +314,7 @@ export function drawHeader(ctx, { cover = false } = {}) {
 }
 
 export function drawFooter(ctx, { pageNumber } = {}) {
+  if (ctx.cover) return
   ctx.chrome({
     type: 'footer', role: 'footer',
     x: CONTENT.x, y: FOOTER.y, w: CONTENT.w, h: 24,
@@ -337,6 +340,9 @@ export function drawFooter(ctx, { pageNumber } = {}) {
 }
 
 export function drawPageTotal(ctx, total) {
+  // The full-analysis cover is intentionally numberless even though the
+  // renderer revisits pages after the context has advanced to interior pages.
+  if (ctx.cover || (ctx.kind === 'full' && ctx.currentPageIndex === 0)) return
   ctx.chrome({
     type: 'page-total', role: 'footer',
     x: CONTENT.x + CONTENT.w - 34, y: FOOTER.y + 9, w: 34, h: 10,
