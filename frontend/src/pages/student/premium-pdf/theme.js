@@ -127,25 +127,33 @@ export function threeColumns(gap = 14, w = CONTENT.w, x = CONTENT.x) {
   ]
 }
 
-export function fmt(value, fallback = '—') {
-  if (value === null || value === undefined || value === '') return fallback
+const MISSING_VALUE_RE = /^(?:[—–−]|-+|_+|[·.,:;|/\\\\]+)+$/u
+
+/** True only for a standalone missing-value token; signed numbers and prose survive. */
+export function isMissingValue(value) {
+  if (value === null || value === undefined) return true
+  return typeof value === 'string' && (!value.trim() || MISSING_VALUE_RE.test(value.trim()))
+}
+
+export function fmt(value, fallback = '') {
+  if (isMissingValue(value)) return fallback
   if (typeof value === 'boolean') return value ? 'true' : 'false'
   return String(value)
 }
 
-export function number(value, fallback = '—') {
+export function number(value, fallback = '') {
   const n = Number(value)
   return Number.isFinite(n) ? String(n) : fmt(value, fallback)
 }
 
-export function pct(value, fallback = '—') {
-  if (value === null || value === undefined || value === '') return fallback
+export function pct(value, fallback = '') {
+  if (isMissingValue(value)) return fallback
   const str = String(value)
   return str.endsWith('%') ? str : `${str}%`
 }
 
-export function minutes(value, fallback = '—') {
-  if (value === null || value === undefined || value === '') return fallback
+export function minutes(value, fallback = '') {
+  if (isMissingValue(value)) return fallback
   const n = Number(value)
   return Number.isFinite(n) ? `${n} min` : fmt(value, fallback)
 }

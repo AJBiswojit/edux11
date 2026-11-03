@@ -94,11 +94,11 @@ export function coverData(model) {
     studentName: fmt(model.coverStudentName ?? model.studentName),
     rollNo: fmt(model.coverRollNo ?? model.rollNo),
     examDate: formatDate(model.examDate),
-    totalMarks: displayNumber(meta.totalMarks ?? total) ?? '—',
-    scoreLabel: score === null ? '—' : displayNumber(hero.score),
-    totalLabel: total === null ? '—' : displayNumber(total),
+    totalMarks: displayNumber(meta.totalMarks ?? total) ?? '',
+    scoreLabel: score === null ? '' : displayNumber(hero.score),
+    totalLabel: total === null ? '' : displayNumber(total),
     percentage,
-    scoreText: percentage === null ? '—' : `${percentage}%`,
+    scoreText: percentage === null ? '' : `${percentage}%`,
     counts,
     scope,
   }
@@ -278,7 +278,7 @@ function drawScorePanel(ctx, data, y) {
       meta: { percentage: data.percentage },
     })
   }
-  ctx.text(data.scoreText, cx - 45, y + 42, 90, {
+  if (data.scoreText) ctx.text(data.scoreText, cx - 45, y + 42, 90, {
     size: 19, font: FONTS.bodyBold, color: COVER.navy, align: 'center', features: ['tnum'],
     role: 'cover-score-percentage',
   })
@@ -291,7 +291,8 @@ function drawScorePanel(ctx, data, y) {
   ctx.text('Marks Obtained', rightX, y + 20, w - 156, {
     size: 10.2, font: FONTS.bodySemi, color: COVER.ink, role: 'cover-marks-label',
   })
-  ctx.text(`${data.scoreLabel} / ${data.totalLabel}`, rightX, y + 37, w - 156, {
+  const marksValue = [data.scoreLabel, data.totalLabel].filter(Boolean).join(' / ')
+  if (marksValue) ctx.text(marksValue, rightX, y + 37, w - 156, {
     size: 24, font: FONTS.bodyBold, color: COVER.navy, features: ['tnum'], role: 'cover-marks-value',
   })
   ctx.canvas.line(rightX, y + 76, x + w - 16, y + 76, { color: COVER.panelBorder, width: 0.6, role: 'cover-panel-rule' })

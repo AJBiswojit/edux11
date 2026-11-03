@@ -58,7 +58,8 @@ export function TextFlowSpec(ctx, {
       },
     }
   }
-  const entries = [{ kind: 'text', text: fmt(text, '—') }]
+  if (!fmt(text) && !title) return emptySpec(label || 'empty text')
+  const entries = fmt(text) ? [{ kind: 'text', text: fmt(text) }] : []
   const split = (splitCtx, entry, w, maxHeight, opts) => textChunkEntries(
     splitCtx, entry.text, bodyWidth(w), bodyOpts,
     Math.max(12, maxHeight - fixed(w, opts)),
@@ -449,6 +450,7 @@ export function Paragraph(ctx, {
   text, title = '', accent = COLORS.indigo, size = TYPE.body,
   tone = COLORS.ink, bottomSpacing = 8, keepWithNext = 0, continuationLabel,
 } = {}) {
+  if (!fmt(text) && !title) return null
   const spec = TextFlowSpec(ctx, {
     label: title || String(text).slice(0, 40), title, text, size, accent, tone,
     widthPadding: 18, paragraphGap: 3, topPad: 6, bottomPad: 8,
@@ -464,7 +466,8 @@ export function Paragraph(ctx, {
 
 
 export function Pill(ctx, { x, y, text, color = COLORS.indigo, soft = mix(color, COLORS.white, 0.1), width, size = 8, emit = true } = {}) {
-  const label = fmt(text, '—')
+  const label = fmt(text)
+  if (!label) return { w: 0, h: 0 }
   const measured = ctx.textEngine.measureRun(label, FONTS.bodyBold, size, {})
   const w = width || measured + 14
   const h = size + 7
@@ -558,7 +561,10 @@ export function EditorialColumns(ctx, {
 
 
 export function MetricLedgerSpec(ctx, { label = '', items = [], labelSize = TYPE.label, valueSize = 11, columns = 4, gap = 12 } = {}) {
-  const entries = items.map((item, index) => ({ kind: 'metric', item, index }))
+  const entries = items
+    .filter((item) => fmt(item?.label) && fmt(item?.value))
+    .map((item, index) => ({ kind: 'metric', item, index }))
+  if (!entries.length) return emptySpec(label || 'empty metrics')
   const build = (subset) => {
     const rows = subset.map((entry) => entry.item)
     const measure = (w) => {
@@ -754,7 +760,7 @@ export function StackedBarSpec(ctx, { label = '', title, subtitle = '', segments
   }
   const split = () => [{
     kind: 'overflow',
-    text: segments.map((seg) => `${fmt(seg.label)}  ·  ${fmt(seg.value)}`).join('\n') || '—',
+    text: segments.map((seg) => `${fmt(seg.label)}  ·  ${fmt(seg.value)}`).join('\n'),
   }]
   return chunkable({ type: 'stacked-bar', label: label || title || '', entries, build, split, continuationLabel: title || label })
 }
@@ -834,7 +840,7 @@ export function DonutGaugeSpec(ctx, {
     text: [
       centerValue && `${centerLabel || 'Value'}: ${fmt(centerValue)}`,
       ...slices.map((slice) => `${fmt(slice.label)}  ·  ${fmt(slice.value)}`),
-    ].filter(Boolean).join('\n') || '—',
+    ].filter(Boolean).join('\n'),
   }]
   return chunkable({ type: 'donut-gauge', label: label || title || '', entries, build, split, continuationLabel: title || label })
 }
@@ -920,10 +926,12 @@ function tableRowOverflowSpec(ctx, { row, columns, title, groupValue, index }) {
   const lines = columns.map((col) => {
     const value = row[col.key]
     if (col.render === 'source' && value && typeof value === 'object') {
-      return `${col.label}: ${fmt(value.path)} — ${fmt(value.value)}`
+      const parts = [fmt(value.path), fmt(value.value)].filter(Boolean)
+      return parts.length ? `${col.label}: ${parts.join(': ')}` : ''
     }
-    return `${col.label}: ${fmt(value)}`
-  })
+    const content = fmt(value)
+    return content ? `${col.label}: ${content}` : ''
+  }).filter(Boolean)
   const heading = [title, groupValue && `${groupValue} · row ${index + 1}`].filter(Boolean).join('  ·  ')
   return TextFlowSpec(ctx, {
     label: heading || `Table row ${index + 1}`, title: heading, text: lines.join('\n'),
@@ -931,15 +939,26 @@ function tableRowOverflowSpec(ctx, { row, columns, title, groupValue, index }) {
   })
 }
 
+function hasTableValue(column, row) {
+  const value = row?.[column.key]
+  if (column.render === 'source' && value && typeof value === 'object') {
+    return Boolean(fmt(value.path) || fmt(value.value))
+  }
+  return Boolean(fmt(value))
+}
+
 export function MeasuredTable(ctx, {
   id, title = '', rows = [], columns = [], x = CONTENT.x, w = CONTENT.w,
   rowPadding = 3, fontSize = TYPE.table, zebra = true, header = true,
   groupKey = '', groupPrefix = '', topSpacing = 0, bottomSpacing = 8, keepWithNext = 0,
 } = {}) {
-  if (!rows.length) return null
+  if (!rows.length || !columns.length) return null
   // A grouped table already prints the group value as its band; repeating it in
   // a dedicated column on every row is pure noise.
   if (groupKey) columns = columns.filter((col) => col.key !== groupKey)
+  rows = rows.filter((row) => columns.some((column) => hasTableValue(column, row)))
+  if (!rows.length) return null
+  columns = columns.filter((column) => rows.some((row) => hasTableValue(column, row)))
   if (!columns.length) return null
   const widths = resolveWidths(columns, w)
   const headerH = header
@@ -1147,7 +1166,7 @@ function prepareSolution(ctx, source, fontSize, width, sourceLabel = '') {
 }
 
 function present(value) {
-  return value !== null && value !== undefined && value !== '' && value !== '—'
+  return fmt(value) !== ''
 }
 
 function questionNumber(question) {
@@ -1183,10 +1202,7 @@ function questionMetaLine(question) {
 
 function responseLabel(value, status = '') {
   if (present(value)) return String(value)
-  // "Not attempted" is a claim about the student; when the attempt happened
-  // but the choice was not published, saying so is the honest label.
-  if (/correct|incorrect|wrong|partial|review/i.test(String(status))) return 'Not published'
-  return 'Not attempted'
+  return /skip|unattempt|not visited/i.test(String(status)) ? 'Not attempted' : ''
 }
 
 function optionFigureLayout(question, option, width, budget) {
@@ -1212,18 +1228,15 @@ function prepareQuestion(ctx, question, w) {
   const statement = question.statement
     ? prepareSolution(ctx, question.statement, 10.6, innerW, question.q)
     : null
-  const statementH = statement ? statement.height + 8 : 0
+  const statementH = statement ? statement.height + 5 : 0
 
-  const missingStatement = !statement && !(question.options || []).length && !(question.media?.statement?.length)
-  const statementNote = missingStatement ? 'Question statement and options were not published for this attempt.' : ''
-  const statementNoteH = statementNote
-    ? ctx.measureText(statementNote, innerW, { size: 9.2, font: FONTS.body }) + 8
-    : 0
+  const statementNote = ''
+  const statementNoteH = 0
 
   const statementFigures = layoutFigureStack(question.media?.statement || [], {
     field: 'statement', available: innerW, gap: 9, budget: 296,
   })
-  const statementFigureH = statementFigures.items.length ? statementFigures.height + 10 : 0
+  const statementFigureH = statementFigures.items.length ? statementFigures.height + 6 : 0
 
   const isSkipped = /skip|unattempt|not visited/i.test(status)
   const rawOptions = question.optionItems?.length
@@ -1253,10 +1266,14 @@ function prepareQuestion(ctx, question, w) {
   })
   const optionsH = optionCount
     ? ctx.measureText('OPTIONS', innerW, { size: 8.6, font: FONTS.bodySemi, characterSpacing: 0.8 }) + 5
-      + optionBlocks.reduce((sum, block) => sum + block.height + 4, 0)
+      + optionBlocks.reduce((sum, block) => sum + block.height + 6, 0)
     : 0
 
-  const responseH = 42
+  const responseEntries = []
+  if (present(question.selected)) responseEntries.push({ label: 'STUDENT RESPONSE', value: String(question.selected), color: statusColor(status) })
+  else if (isSkipped) responseEntries.push({ label: 'STUDENT RESPONSE', value: 'Not attempted', color: COLORS.warning })
+  if (present(question.correct)) responseEntries.push({ label: 'CORRECT ANSWER', value: String(question.correct), color: COLORS.midnight })
+  const responseH = responseEntries.length ? 36 : 0
   const awarded = marksLabel(question.marks, { awarded: true })
   const outcome = isSkipped
     ? 'Not attempted — no marks awarded'
@@ -1264,7 +1281,7 @@ function prepareQuestion(ctx, question, w) {
       ? `Answered incorrectly${awarded ? ` — ${awarded}` : ''}`
       : /correct/i.test(status)
         ? `Answered correctly${awarded ? ` — ${awarded}` : ''}`
-        : `${status || 'Reviewed'}${awarded ? ` — ${awarded}` : ''}`
+        : status ? `${status}${awarded ? ` — ${awarded}` : ''}` : ''
   const insightText = [
     outcome,
     present(question.mistakeCategory) ? question.mistakeCategory : null,
@@ -1272,11 +1289,11 @@ function prepareQuestion(ctx, question, w) {
   ].filter(Boolean).join('   ·   ')
   // The insight can wrap (a mistake note is a full sentence), so it is
   // measured rather than given a fixed height.
-  const insightH = 14 + ctx.measureText(insightText, innerW, { size: 9.6, font: FONTS.body })
+  const insightH = insightText ? 12 + ctx.measureText(insightText, innerW, { size: 9.6, font: FONTS.body }) : 0
 
   const explanationParts = question.explanationParts?.length
     ? question.explanationParts
-    : [{ label: 'Explanation', text: question.explanation || 'No explanation was published for this question.' }]
+    : String(question.explanation ?? '').trim() ? [{ label: 'Explanation', text: question.explanation }] : []
   const parts = explanationParts.map((part) => ({
     label: part.label,
     ...prepareSolution(ctx, part.text, 10.2, innerW - 24, question.q),
@@ -1294,7 +1311,8 @@ function prepareQuestion(ctx, question, w) {
     field: 'explanation', available: innerW - 24, gap: 8, budget: 210,
   })
   const explanationFigureH = explanationFigures.items.length ? explanationFigures.height + 8 : 0
-  const solutionH = 12 + 16 + partsH + explanationFigureH + 8
+  const hasSolution = parts.length > 0 || explanationFigures.items.length > 0
+  const solutionH = hasSolution ? 12 + 16 + partsH + explanationFigureH + 8 : 0
 
   const introH = pad + headerH + metaH + statementH + statementNoteH + statementFigureH
     + optionsH + responseH + insightH
@@ -1304,8 +1322,8 @@ function prepareQuestion(ctx, question, w) {
     question, pad, innerW, status, accent, title, subject, headerH,
     metaText, metaH, statement, statementH, statementNote, statementNoteH,
     statementFigures, statementFigureH,
-    optionBlocks, optionsH, responseH, insightText, insightH, isSkipped,
-    parts, showPartLabels, solutionH,
+    optionBlocks, optionsH, responseEntries, responseH, insightText, insightH, isSkipped,
+    parts, showPartLabels, hasSolution, solutionH,
     explanationFigures,
     totalH, introH,
   }
@@ -1357,27 +1375,23 @@ function drawOptions(ctx, p, x, cursor) {
       })
       blockBottom = Math.max(blockBottom, figureTop + drawn)
     }
-    cursor = blockBottom + 4
+    cursor = blockBottom + 6
   })
   return cursor
 }
 
 function drawResponse(ctx, p, x, cursor) {
+  if (!p.responseEntries.length) return cursor
   const start = cursor
-  const columnW = p.innerW / 2
-  const topRuleY = cursor
-  ctx.canvas.line(x, topRuleY, x + p.innerW, topRuleY, { color: COLORS.line, width: 0.4 })
-  cursor += 8
-  const labels = [
-    { label: 'STUDENT RESPONSE', value: responseLabel(p.question.selected, p.status), color: p.isSkipped ? COLORS.warning : statusColor(p.status) },
-    { label: 'CORRECT ANSWER', value: responseLabel(p.question.correct, p.status), color: COLORS.midnight },
-  ]
-  labels.forEach((entry, index) => {
+  const columnW = p.innerW / p.responseEntries.length
+  ctx.canvas.line(x, cursor, x + p.innerW, cursor, { color: COLORS.line, width: 0.4 })
+  cursor += 6
+  p.responseEntries.forEach((entry, index) => {
     const cx = x + index * columnW
     ctx.text(entry.label, cx, cursor, columnW - 10, {
       size: 8.4, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.6,
     })
-    ctx.text(String(entry.value), cx, cursor + 12, columnW - 10, {
+    ctx.text(entry.value, cx, cursor + 12, columnW - 10, {
       size: 12, font: FONTS.bodyBold, color: entry.color, features: ['tnum'],
     })
   })
@@ -1385,6 +1399,7 @@ function drawResponse(ctx, p, x, cursor) {
 }
 
 function drawInsight(ctx, p, x, cursor) {
+  if (!p.insightText) return cursor
   ctx.text('PERFORMANCE INSIGHT', x, cursor, p.innerW, {
     size: 8.4, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.6,
   })
@@ -1410,7 +1425,7 @@ function drawQuestionIntro(ctx, p, frame) {
       p.statement.renderer.drawLine(line, x, cursor, p.innerW)
       cursor += line.height
     })
-    cursor += 8
+    cursor += 5
   } else if (p.statementNote) {
     cursor += ctx.text(p.statementNote, x, cursor, p.innerW, {
       size: 9.2, font: FONTS.body, color: COLORS.muted,
@@ -1419,7 +1434,7 @@ function drawQuestionIntro(ctx, p, frame) {
   if (p.statementFigures.items.length) {
     cursor += drawFigureItems(ctx, p.statementFigures.items, x, cursor, p.innerW, {
       field: 'statement', gap: 9, role: 'question-figure',
-    }) + 10
+    }) + 6
   }
   cursor = drawOptions(ctx, p, x, cursor)
   cursor = drawResponse(ctx, p, x, cursor)
@@ -1459,20 +1474,19 @@ function drawExplanationParts(ctx, p, x, cursor, width) {
 function questionIntroOverflowSpec(ctx, p, question) {
   const lines = []
   if (p.metaText) lines.push(p.metaText)
-  lines.push(p.statement ? question.statement : 'Question statement was not published.')
+  if (p.statement) lines.push(question.statement)
   const textOptions = p.optionBlocks.filter((block) => block.option.text)
   if (textOptions.length) {
     lines.push('OPTIONS')
     textOptions.forEach((block) => {
       lines.push(`${block.option.label}. ${block.option.text}`)
     })
-  } else if (p.optionBlocks.length) {
-    lines.push('OPTIONS')
-    lines.push('The answer choices are figures and follow the question figure.')
   }
-  lines.push(`Student response: ${responseLabel(question.selected, p.status)}`)
-  lines.push(`Correct answer: ${responseLabel(question.correct, p.status)}`)
-  lines.push(p.insightText)
+  const response = responseLabel(question.selected, p.status)
+  const correct = present(question.correct) ? String(question.correct) : ''
+  if (response) lines.push(`Student response: ${response}`)
+  if (correct) lines.push(`Correct answer: ${correct}`)
+  if (p.insightText) lines.push(p.insightText)
   return TextFlowSpec(ctx, {
     label: `${question.q} · question statement`,
     title: `${p.title}${p.subject ? `  ·  ${p.subject}` : ''}`,
@@ -1597,17 +1611,19 @@ export function QuestionCard(ctx, { question } = {}) {
       measure: () => p.totalH,
       draw: (frame) => {
         drawQuestionIntro(ctx, p, frame)
-        const sy = frame.y + p.introH
-        const innerPad = 12
-        drawSolutionBackground(ctx, frame.x + p.pad, sy, p.innerW, p.solutionH)
-        let cursor = sy + innerPad
-        drawSolutionLabel(ctx, frame.x + p.pad + 12, cursor, p.innerW - 24)
-        cursor += 16
-        cursor = drawExplanationParts(ctx, p, frame.x + p.pad + 12, cursor, p.innerW - 24)
-        if (p.explanationFigures.items.length) {
-          drawFigureItems(ctx, p.explanationFigures.items, frame.x + p.pad + 12, cursor, p.innerW - 24, {
-            field: 'explanation', gap: 8, role: 'explanation-figure',
-          })
+        if (p.hasSolution) {
+          const sy = frame.y + p.introH
+          const innerPad = 12
+          drawSolutionBackground(ctx, frame.x + p.pad, sy, p.innerW, p.solutionH)
+          let cursor = sy + innerPad
+          drawSolutionLabel(ctx, frame.x + p.pad + 12, cursor, p.innerW - 24)
+          cursor += 16
+          cursor = drawExplanationParts(ctx, p, frame.x + p.pad + 12, cursor, p.innerW - 24)
+          if (p.explanationFigures.items.length) {
+            drawFigureItems(ctx, p.explanationFigures.items, frame.x + p.pad + 12, cursor, p.innerW - 24, {
+              field: 'explanation', gap: 8, role: 'explanation-figure',
+            })
+          }
         }
         ctx.canvas.line(frame.x, frame.y + frame.h - 4, frame.x + frame.w, frame.y + frame.h - 4, {
           color: COLORS.line, width: 0.4,
@@ -1634,6 +1650,7 @@ export function QuestionCard(ctx, { question } = {}) {
       draw: (frame) => drawQuestionIntro(ctx, p, frame),
     })
   }
+  if (p.hasSolution) {
   ctx.component({
     type: 'solution-label', label: `${question.q} · explanation`,
     continuationLabel: `${fmt(question.subject)} · ${question.q} · explanation continued`,
@@ -1691,6 +1708,7 @@ export function QuestionCard(ctx, { question } = {}) {
         },
       })
     })
+  }
   }
   return { type: 'split-question-card', label: question.q }
 }

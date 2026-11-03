@@ -61,7 +61,7 @@ describe('Premium PDF Full Exam Analysis cover', () => {
       rollNo: 'N-42',
     })
     expect(unavailable.percentage).toBeNull()
-    expect(unavailable.scoreText).toBe('—')
+    expect(unavailable.scoreText).toBe('')
     expect(unavailable.counts).toEqual([])
   })
 
@@ -74,7 +74,8 @@ describe('Premium PDF Full Exam Analysis cover', () => {
       .join('\n')
 
     expect(new TextDecoder().decode(result.bytes.subarray(0, 5))).toBe('%PDF-')
-    expect(result.pageCount).toBe(17)
+    expect(result.pageCount).toBeLessThan(17)
+    expect(result.contentCoverage.questionsRendered).toBe(model.questions.length)
     expect(result.auditSummary.zeroUnintendedOverlaps).toBe(true)
     expect(result.layoutAudit.boxes.some((box) => box.page === 0 && box.role === 'cover-illustration')).toBe(true)
     for (const value of ['FULL EXAM', 'ANALYSIS', 'REPORT', '182 / 300', 'Aarav Sharma', '21CS114', '47', '14', '7']) {

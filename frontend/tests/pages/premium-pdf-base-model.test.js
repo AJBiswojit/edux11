@@ -36,7 +36,9 @@ describe('premium base model (replaces the legacy buildReportModel)', () => {
     expect(model.scoreLine).toBe('142 / 300 marks')
     expect(model.breakdownLine).toBe('40 correct | 20 incorrect | 5 skipped')
     expect(model.scorePct).toBe('47.3%')
-    expect(model.accuracy).toBe('57.1%')
+    expect(model.accuracy).toBe('66.67%')
+    expect(model.overallAccuracy).toBe(66.67)
+    expect(model.scorePercentage).toBe(47.3)
     expect(model.who).toBe('Aarav Sharma | Roll No: 21CS114')
     expect(model.durationLabel).toBe('180 min')
   })
@@ -54,7 +56,7 @@ describe('premium base model (replaces the legacy buildReportModel)', () => {
     expect(model.chapters[0].share).toBe('100%')
     expect(model.hasChapterTime).toBe(true)
     expect(model.subjects.find((s) => s.name === 'Physics').timeSpent).toBe('45s')
-    expect(model.subjects.find((s) => s.name === 'Chemistry').timeSpent).toBe('—')
+    expect(model.subjects.find((s) => s.name === 'Chemistry').timeSpent).toBe('')
 
     const summed = base({
       chapters: [

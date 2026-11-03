@@ -19,14 +19,16 @@ import {
 import { renderFullAnalysisCover } from './cover.js'
 
 function text(value) {
-  if (value === null || value === undefined || value === '') return '—'
-  if (typeof value === 'object') return JSON.stringify(value)
-  return String(value)
+  if (value !== null && typeof value === 'object') return ''
+  return fmt(value)
+}
+
+function join(values, separator = ' · ') {
+  return values.map(text).filter(Boolean).join(separator)
 }
 
 function list(value) {
-  if (Array.isArray(value) && value.length) return value.map(text).join(' · ')
-  return '—'
+  return Array.isArray(value) ? join(value) : ''
 }
 
 function masterySoft(value) {
@@ -64,7 +66,7 @@ function signals(m) {
     { label: 'Guess attempts', value: text(m.qi.guessAttempts) },
     { label: 'Attempt ratio', value: pct(m.qi.attemptRatio) },
     { label: 'Total questions', value: text(m.totalQuestions) },
-    { label: 'Success rate', value: pct(m.successRate) },
+    { label: 'Overall accuracy', value: pct(m.overallAccuracy) },
     { label: 'Badge', value: text(m.hero.badge) },
   ]
 }
@@ -76,45 +78,46 @@ function renderPerformanceIntelligence(ctx) {
     note: '',
   })
   const responseSegments = [
-    { label: 'Correct', value: numeric(m.qi.correct), color: COLORS.success },
-    { label: 'Incorrect', value: numeric(m.qi.incorrect), color: COLORS.error },
-    { label: 'Skipped', value: numeric(m.qi.skipped), color: COLORS.warning },
-  ]
-  const difficultyBars = m.difficulty.map((row) => ({
-    label: text(row.level), value: numeric(row.questions), valueLabel: `${text(row.questions)} Q  ·  ${pct(row.accuracy)}`,
+    { label: 'Correct', value: m.accuracySummary.correct, color: COLORS.success },
+    { label: 'Incorrect', value: m.accuracySummary.incorrect, color: COLORS.error },
+    { label: 'Skipped', value: m.accuracySummary.skipped, color: COLORS.warning },
+  ].filter((segment) => segment.value != null)
+  const difficultyBars = m.difficulty.filter((row) => text(row.questions)).map((row) => ({
+    label: text(row.level), value: numeric(row.questions),
+    valueLabel: join([`${text(row.questions)} Q`, pct(row.accuracy)]),
     color: difficultyColor(row.level),
-  }))
-  const mistakeBars = m.mistakes.map((row, index) => ({
+  })).filter((bar) => bar.label)
+  const mistakeBars = m.mistakes.filter((row) => text(row.count)).map((row, index) => ({
     label: text(row.category), value: numeric(row.count), valueLabel: text(row.count),
     color: [COLORS.error, COLORS.warning, COLORS.indigo, COLORS.midnight, COLORS.success, COLORS.muted, COLORS.error][index % 7],
-  }))
-  const subjectBars = m.subjectValues.map((row, index) => ({
+  })).filter((bar) => bar.label)
+  const subjectBars = m.subjectValues.filter((row) => text(row.accuracy)).map((row, index) => ({
     label: text(row.name), value: numeric(row.accuracy), valueLabel: pct(row.accuracy),
     color: subjectColor(row.name, index),
-  }))
-  StackedBar(ctx, {
+  })).filter((bar) => bar.label)
+  if (responseSegments.length) StackedBar(ctx, {
     title: 'Response composition',
-    subtitle: `${m.totalQuestions} questions in the paper`,
+    subtitle: m.totalQuestions ? `${m.totalQuestions} questions in the paper` : '',
     segments: responseSegments.map((segment) => ({ ...segment, value: text(segment.value) })),
     legend: true, bottomSpacing: 10,
   })
-  BarChart(ctx, {
+  if (difficultyBars.length) BarChart(ctx, {
     title: 'Difficulty analysis',
     subtitle: 'Questions and published accuracy', bars: difficultyBars,
     accent: COLORS.indigo, minRowHeight: 16, rowGap: 2,
     legend: 'Accuracy values are reproduced from the payload.', bottomSpacing: 10,
   })
-  BarChart(ctx, {
+  if (mistakeBars.length) BarChart(ctx, {
     title: 'Mistake distribution',
     subtitle: 'Count by published classification', bars: mistakeBars,
     accent: COLORS.error, minRowHeight: 16, rowGap: 2,
     legend: 'Source classifications; rows are measured independently.', bottomSpacing: 10,
   })
-  BarChart(ctx, {
+  if (subjectBars.length) BarChart(ctx, {
     title: 'Subject-wise performance',
     subtitle: 'Accuracy by subject', bars: subjectBars,
     accent: COLORS.indigo, minRowHeight: 16, rowGap: 2,
-    legend: m.subjectValues.map((row) => `${text(row.name)} ${text(row.score)} / ${text(row.maxMarks)}`).join('   '),
+    legend: join(m.subjectValues.map((row) => join([row.name, join([row.score, row.maxMarks], '/')], ' ')), '   '),
     bottomSpacing: 8,
   })
   Subheading(ctx, { title: 'Important performance signals', note: '', accent: COLORS.indigo })
@@ -133,11 +136,11 @@ function renderSubjectAndChapter(ctx) {
   const subjectRows = m.subjectValues.map((subject) => {
     const name = text(subject.name)
     const chapters = m.chapters.filter((chapter) => String(chapter.subject) === name)
-    const strong = chapters.filter((row) => String(row.mastery).toLowerCase() === 'strong').map((row) => text(row.chapter || row.name)).join(' · ') || '—'
-    const weak = chapters.filter((row) => ['weak', 'critical'].includes(String(row.mastery).toLowerCase())).map((row) => text(row.chapter || row.name)).join(' · ') || '—'
-    const critical = chapters.filter((row) => String(row.mastery).toLowerCase() === 'critical').map((row) => text(row.chapter || row.name)).join(' · ') || '—'
+    const strong = join(chapters.filter((row) => String(row.mastery).toLowerCase() === 'strong').map((row) => row.chapter || row.name))
+    const weak = join(chapters.filter((row) => ['weak', 'critical'].includes(String(row.mastery).toLowerCase())).map((row) => row.chapter || row.name))
+    const critical = join(chapters.filter((row) => String(row.mastery).toLowerCase() === 'critical').map((row) => row.chapter || row.name))
     return {
-      subject: name, score: `${text(subject.score)} / ${text(subject.maxMarks)}`,
+      subject: name, score: join([subject.score, subject.maxMarks], ' / '),
       accuracy: pct(subject.accuracy), rank: text(subject.rank), level: text(subject.difficulty),
       strongAreas: list(subject.strongAreas), weakAreas: list(subject.weakAreas),
       strong, weak, critical,
@@ -317,7 +320,6 @@ function renderComparisonAndProjection(ctx) {
       { label: 'Confidence index', value: text(m.hero.confidenceIndex), color: COLORS.indigo },
       { label: 'Health score', value: text(m.hero.healthScore) },
       { label: 'Overall accuracy', value: pct(m.overallAccuracy) },
-      { label: 'Success rate', value: pct(m.successRate) },
       { label: 'Badge', value: text(m.hero.badge) },
     ],
     columns: 3, valueSize: 10.4, bottomSpacing: 6,
@@ -360,7 +362,7 @@ function renderQuestionIntelligence(ctx) {
 function actionRows(rec) {
   return [
     ...(rec.suggestedPYQs || []).map((row) => ({ kind: 'PYQ', title: text(row.title), detail: text(row.source) })),
-    ...(rec.practiceQuestions || []).map((row) => ({ kind: 'Practice', title: text(row.title), detail: `${text(row.count)} · ${text(row.difficulty)}` })),
+    ...(rec.practiceQuestions || []).map((row) => ({ kind: 'Practice', title: text(row.title), detail: join([row.count, row.difficulty]) })),
     ...(rec.mockTests || []).map((row) => ({ kind: 'Mock test', title: text(row.title), detail: text(row.mode) })),
     ...(rec.lectures || []).map((row) => ({ kind: 'Lecture', title: text(row.title), detail: text(row.type) })),
   ]

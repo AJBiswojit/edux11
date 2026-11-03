@@ -2,16 +2,15 @@
  * Data layer for the premium PDF reports.
  *
  * This module only normalises and labels the API payload. It never draws
- * anything and never invents academic values. Missing optional fields are
- * represented by an em dash. A flattened, de-duplicated list of every source
- * primitive is kept so the renderer can append a data-preservation register
+ * anything and never invents academic values. Missing optional fields stay
+ * empty so the renderer can omit them. A flattened, de-duplicated list of
+ * source primitives is kept so the renderer can append a data-preservation register
  * for any value that is not already visible in the publication.
  */
 
 import {
   analysisPdfUser,
   formatReportTime,
-  masteryFromAccuracy,
   optLetter,
 } from '../exam-analysis-pdf.js'
 
@@ -100,8 +99,8 @@ function filterBySubject(rows, subject) {
 }
 
 function displayAnswer(value) {
-  if (value === null || value === undefined || value === '') return '—'
-  if (typeof value === 'object') return toDisplayText(value, '—') || '—'
+  if (value === null || value === undefined || value === '') return ''
+  if (typeof value === 'object') return toDisplayText(value, '')
   const letter = optLetter(value)
   return letter === '—' ? fmt(value) : letter
 }
@@ -136,13 +135,13 @@ export function buildQuestions(review, subject) {
       subject: fmt(q?.subject),
       chapter: fmt(q?.chapter),
       topic: fmt(q?.topic),
-      difficulty: fmt(q?.difficulty, '—'),
-      type: fmt(q?.type, '—'),
-      status: fmt(q?.status, '—'),
+      difficulty: fmt(q?.difficulty),
+      type: fmt(q?.type),
+      status: fmt(q?.status),
       marksRaw: q?.marks,
       marks: fmt(q?.marks),
       timeRaw: q?.time,
-      time: formatReportTime(q?.time),
+      time: Number(q?.time) > 0 ? formatReportTime(q.time) : '',
       selectedRaw: q?.selected,
       selected: displayAnswer(q?.selected),
       correctRaw: q?.correctAnswer,
@@ -170,7 +169,7 @@ export function buildQuestions(review, subject) {
 
 function presentRank(rank, cohort) {
   const value = fmt(rank)
-  if (value === '—') return '—'
+  if (!value) return ''
   const position = Number(String(value).replace(/[^0-9.]/g, ''))
   const size = Number(String(fmt(cohort)).replace(/[^0-9.]/g, ''))
   // Only quote the cohort size when the two numbers describe the same field.
@@ -182,17 +181,8 @@ function presentRank(rank, cohort) {
 function averagePace(totalSeconds, attempted) {
   const seconds = Number(totalSeconds)
   const count = Number(attempted)
-  if (!Number.isFinite(seconds) || !Number.isFinite(count) || count <= 0) return '—'
+  if (!Number.isFinite(seconds) || !Number.isFinite(count) || count <= 0) return ''
   return formatReportTime(seconds / count)
-}
-
-function withRawChapter(baseChapters, rawChapters) {
-  return baseChapters.map((chapter, index) => ({
-    ...chapter,
-    attempted: fmt(rawChapters[index]?.attempted),
-    questions: fmt(rawChapters[index]?.questions ?? rawChapters[index]?.n),
-    mastery: chapter.mastery || masteryFromAccuracy(chapter.accuracy),
-  }))
 }
 
 export function buildPremiumModel({ data = {}, subject, user, generatedAt, kind = 'full' } = {}) {
@@ -214,7 +204,7 @@ export function buildPremiumModel({ data = {}, subject, user, generatedAt, kind 
   const coverStudent = analysisPdfUser(data, null) || {}
   const who = [student.fullName, student.rollNo ? `Roll ${student.rollNo}` : null].filter(Boolean).join('  ·  ')
   const generatedDate = when.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-  const status = fmt(meta.examStatus ?? meta.status ?? hero.status, '—')
+  const status = fmt(meta.examStatus ?? meta.status ?? hero.status)
 
   const raw = {
     subjects: Array.isArray(data.subjects) ? data.subjects : [],
@@ -267,8 +257,8 @@ export function buildPremiumModel({ data = {}, subject, user, generatedAt, kind 
     subjectText: base.subjectText,
     activeSubject,
     who,
-    studentName: fmt(student.fullName, fmt(meta.student, '—')),
-    rollNo: fmt(student.rollNo, fmt(meta.rollNo, '—')),
+    studentName: fmt(student.fullName, fmt(meta.student)),
+    rollNo: fmt(student.rollNo, fmt(meta.rollNo)),
     coverStudentName: fmt(coverStudent.fullName),
     coverRollNo: fmt(coverStudent.rollNo),
     generatedDate,
@@ -289,14 +279,14 @@ export function buildPremiumModel({ data = {}, subject, user, generatedAt, kind 
     breakdownLine: base.breakdownLine,
     scorePct: base.scorePct,
     accuracy: base.accuracy,
-    successRate: fmt(qi.successRate),
-    questionAccuracy: fmt(qi.accuracy),
-    overallAccuracy: fmt(hero.overallAccuracy),
+    successRate: base.accuracy,
+    accuracySummary: base.accuracySummary,
+    overallAccuracy: base.overallAccuracy,
     // Secondary cover signals that are not already printed in the hero block.
     rankLabel: presentRank(hero.rank, hero.cohortSize),
     percentileLabel: fmt(hero.percentile),
-    paceLabel: averagePace(data?.attempt?.elapsedSeconds, qi.attempted ?? base.attempted),
-    attempted: fmt(qi.attempted ?? base.attempted),
+    paceLabel: averagePace(data?.attempt?.elapsedSeconds, base.attempted),
+    attempted: base.attempted,
     timeTakenLabel: base.timeTakenLabel,
     hasTime: base.hasTime,
     aiSummary: asText(hero.aiSummary),
