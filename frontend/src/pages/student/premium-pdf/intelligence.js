@@ -9,12 +9,11 @@
 import {
   CONTENT, COLORS, FONTS, TYPE,
   fmt, pct, mix, normalizeForMatch,
-  masteryColor, priorityColor, subjectColor, difficultyColor,
+  masteryColor, priorityColor,
 } from './theme.js'
 import {
-  SectionHeading, Subheading, Paragraph, EditorialColumns, MetricLedger,
-  BarChartSpec, StaticTableSpec, MeasuredTable, SubjectBand, Pill,
-  StackSpec, TextFlowSpec,
+  SectionHeading, Subheading, MetricLedger,
+  BarChart, MeasuredTable, SubjectBand,
 } from './components.js'
 
 function text(value) {
@@ -58,11 +57,6 @@ function subjectForTopic(m, topic) {
   return chapterHit?.subject ? text(chapterHit.subject) : '—'
 }
 
-/** A vertical stack of static specs, each with its own measured boundary. */
-function stackSpecs(ctx, builders, gap = 8) {
-  return StackSpec(ctx, { builders, gap, label: 'Briefing column stack' })
-}
-
 function IntelligenceMasthead(ctx) {
   const m = ctx.model
   const measure = () => {
@@ -73,7 +67,7 @@ function IntelligenceMasthead(ctx) {
       size: 28, font: FONTS.heading, lineHeight: 34,
     })
     const examH = ctx.measureText(m.examName, CONTENT.w, { size: 12, font: FONTS.heading })
-    const metaH = ctx.measureText(`${m.course}   ·   ${m.pattern}   ·   ${m.subjectText}   ·   ${m.reportId}   ·   Generated ${m.generatedDate}`, CONTENT.w, {
+    const metaH = ctx.measureText(`${m.course}   ·   ${m.pattern}   ·   ${m.subjectText}   ·   Generated ${m.generatedDate}`, CONTENT.w, {
       size: TYPE.bodySmall, font: FONTS.body,
     })
     return 4 + kickerH + 6 + titleH + 8 + examH + 5 + metaH + 10
@@ -92,7 +86,7 @@ function IntelligenceMasthead(ctx) {
       cursor += ctx.text(m.examName, frame.x, cursor, frame.w, {
         size: 12, font: FONTS.heading, color: COLORS.ink,
       }) + 5
-      ctx.text(`${m.course}   ·   ${m.pattern}   ·   ${m.subjectText}   ·   ${m.reportId}   ·   Generated ${m.generatedDate}`, frame.x, cursor, frame.w, {
+      ctx.text(`${m.course}   ·   ${m.pattern}   ·   ${m.subjectText}   ·   Generated ${m.generatedDate}`, frame.x, cursor, frame.w, {
         size: TYPE.bodySmall, font: FONTS.body, color: COLORS.muted,
       })
       ctx.canvas.line(frame.x, frame.y + frame.h - 7, frame.x + frame.w, frame.y + frame.h - 7, { color: COLORS.line, width: 0.6 })
@@ -164,21 +158,17 @@ function renderSnapshot(ctx) {
     chapter: text(row.chapter || row.name), subject: text(row.subject),
     accuracy: pct(row.accuracy), mastery: text(row.mastery),
   }))
-  const midpoint = Math.ceil(chapterRows.length / 2)
-  const chapterSpec = (rows, index) => StaticTableSpec(ctx, {
-    label: `Chapter mastery ${index + 1}`, title: `Chapter mastery  ·  ${index + 1} of 2`, rows,
-    columns: [
-      { key: 'chapter', label: 'Chapter', width: 2.2, font: FONTS.bodySemi },
-      { key: 'subject', label: 'Subject', width: 0.9 },
-      { key: 'accuracy', label: 'Acc.', width: 0.6, align: 'right', color: (v) => masteryColor(v) },
-      { key: 'mastery', label: 'Mastery', width: 0.8, render: 'pill', color: (v) => masteryColor(v), soft: (v) => masterySoft(v) },
-    ],
-    rowPadding: 1,
-  })
   Subheading(ctx, { title: 'Chapter mastery', accent: COLORS.indigo, bottomSpacing: 4 })
-  EditorialColumns(ctx, {
-    id: 'intelligence-chapter-mastery', sectionTitle: 'Chapter mastery', gap: 16, bottomSpacing: 4,
-    columns: [chapterSpec(chapterRows.slice(0, midpoint), 0), chapterSpec(chapterRows.slice(midpoint), 1)],
+  MeasuredTable(ctx, {
+    id: 'intelligence-chapter-mastery', title: 'Chapter mastery by subject', rows: chapterRows,
+    groupKey: 'subject',
+    columns: [
+      { key: 'chapter', label: 'Chapter', width: 2.6, font: FONTS.bodySemi },
+      { key: 'subject', label: 'Subject', width: 1.0 },
+      { key: 'accuracy', label: 'Accuracy', width: 0.8, align: 'right', color: (v) => masteryColor(v) },
+      { key: 'mastery', label: 'Mastery', width: 0.9, render: 'pill', color: (v) => masteryColor(v), soft: (v) => masterySoft(v) },
+    ],
+    rowPadding: 1.5, bottomSpacing: 6,
   })
 }
 
@@ -199,42 +189,36 @@ function renderLearning(ctx) {
   }))
   const weakRows = (m.recommendations.weakTopics || []).map((topic) => ({ subject: subjectForTopic(m, topic), topic: text(topic) }))
   const evidenceRows = m.mistakeList.slice(0, 3).map((row) => ({ q: text(row.q), detail: text(row.detail) }))
-  EditorialColumns(ctx, {
-    id: 'mistake-topic-columns', sectionTitle: 'Error patterns and topic accuracy', gap: 18, bottomSpacing: 6,
+  BarChart(ctx, {
+    title: 'Mistake pattern analysis', bars: mistakeBars,
+    accent: COLORS.error, minRowHeight: 18, rowGap: 2, bottomSpacing: 10,
+  })
+  MeasuredTable(ctx, {
+    id: 'intelligence-topic-accuracy', title: 'Topic-level accuracy', rows: topicRows,
+    groupKey: 'subject',
     columns: [
-      stackSpecs(ctx, [
-        (w) => BarChartSpec(ctx, {
-          label: 'Mistake pattern analysis', title: 'Mistake pattern analysis',
-          bars: mistakeBars, accent: COLORS.error, minRowHeight: 18, rowGap: 1,
-        }),
-        (w) => StaticTableSpec(ctx, {
-          label: 'Subject-wise weak topics', title: 'Subject-wise weak topics', rows: weakRows,
-          columns: [
-            { key: 'subject', label: 'Subject', width: 0.9, font: FONTS.bodySemi },
-            { key: 'topic', label: 'Weak topic', width: 2.2 },
-          ],
-          rowPadding: 0.5,
-        }),
-        (w) => StaticTableSpec(ctx, {
-          label: 'Source mistake evidence', title: 'Source mistake evidence', rows: evidenceRows,
-          columns: [
-            { key: 'q', label: 'Q', width: 0.4, font: FONTS.bodyBold },
-            { key: 'detail', label: 'Source detail', width: 2.8 },
-          ],
-          rowPadding: 0.5,
-        }),
-      ], 6),
-      (w) => StaticTableSpec(ctx, {
-        label: 'Topic-level accuracy', title: 'Topic-level accuracy', rows: topicRows,
-        columns: [
-          { key: 'topic', label: 'Topic', width: 2.2, font: FONTS.bodySemi },
-          { key: 'subject', label: 'Subject', width: 0.9 },
-          { key: 'accuracy', label: 'Acc.', width: 0.6, align: 'right', color: (v) => masteryColor(v) },
-          { key: 'level', label: 'Level', width: 0.7, color: (v) => masteryColor(v) },
-        ],
-        rowPadding: 0.5,
-      }),
+      { key: 'topic', label: 'Topic', width: 2.8, font: FONTS.bodySemi },
+      { key: 'subject', label: 'Subject', width: 1.0 },
+      { key: 'accuracy', label: 'Accuracy', width: 0.8, align: 'right', color: (v) => masteryColor(v) },
+      { key: 'level', label: 'Level', width: 0.9, color: (v) => masteryColor(v) },
     ],
+    rowPadding: 1.5, bottomSpacing: 8,
+  })
+  MeasuredTable(ctx, {
+    id: 'intelligence-weak-topics', title: 'Subject-wise weak topics', rows: weakRows,
+    columns: [
+      { key: 'subject', label: 'Subject', width: 1.1, font: FONTS.bodySemi },
+      { key: 'topic', label: 'Weak topic', width: 3.4 },
+    ],
+    rowPadding: 1.5, bottomSpacing: 8,
+  })
+  MeasuredTable(ctx, {
+    id: 'intelligence-mistake-evidence', title: 'Source mistake evidence', rows: evidenceRows,
+    columns: [
+      { key: 'q', label: 'Question', width: 0.55, font: FONTS.bodyBold },
+      { key: 'detail', label: 'Source detail', width: 3.4 },
+    ],
+    rowPadding: 1.5, bottomSpacing: 6,
   })
   const priorityRows = (m.recommendations.priorityRevision || []).map((row) => ({
     topic: text(row.topic), priority: text(row.priority), timeframe: text(row.timeframe),
@@ -334,11 +318,6 @@ function renderRevision(ctx) {
       { key: 'detail', label: 'Source detail', width: 3.0 },
     ],
     rowPadding: 1.5, bottomSpacing: 8,
-  })
-  Paragraph(ctx, {
-    title: 'BRIEFING COORDINATES',
-    text: `${m.reportId}   ·   ${m.examId}   ·   Source fingerprint ${m.sourceHash}   ·   ${m.questionRowsSupplied} question-review rows supplied`,
-    size: TYPE.label, accent: COLORS.indigo, bottomSpacing: 4,
   })
 }
 

@@ -13,6 +13,7 @@ import {
   difficultyColor, subjectColor,
 } from './theme.js'
 import { SolutionRenderer } from './math.js'
+import { layoutFigureStack, drawFigureItems } from './figures.js'
 import {
   chunkable, chunkSpec, textChunkEntries, paginateSingle, paginateColumns,
   emptySpec, CONTINUATION_H, EPS,
@@ -84,7 +85,7 @@ function cellChunkInfo(ctx, col, row, value, cw) {
   if (col.render === 'pill') {
     return {
       kind: 'pill', text, width: Math.max(12, cw - 15), extra: 2,
-      opts: { size: 8.2, font: FONTS.bodyBold, color: resolveColor(col.color, text, row, COLORS.indigo) },
+      opts: { size: TYPE.tableLabel, font: FONTS.bodyBold, color: resolveColor(col.color, text, row, COLORS.indigo) },
     }
   }
   return {
@@ -284,20 +285,20 @@ export function drawHeader(ctx, { cover = false } = {}) {
     })
     const rightW = 250
     const rightX = frame.x + frame.w - rightW
-    const rightLabel = ctx.kind === 'intelligence'
-      ? 'EXAM INTELLIGENCE  /  PERFORMANCE BRIEFING'
-      : 'ACADEMIC INTELLIGENCE  /  PUBLICATION'
-    ctx.text(rightLabel, rightX, frame.y + 4, rightW, {
-      size: 7.8, font: FONTS.bodySemi, color: COLORS.muted,
+    const reportLabel = ctx.kind === 'intelligence'
+      ? 'EXAM INTELLIGENCE REPORT'
+      : 'FULL EXAM ANALYSIS'
+    ctx.text(reportLabel, rightX, frame.y + 4, rightW, {
+      size: TYPE.tableLabel, font: FONTS.bodySemi, color: COLORS.muted,
       align: 'right', characterSpacing: 0.7, chrome: true, emit: false, role: 'header',
     })
     if (!cover) {
-      ctx.text(ctx.model.reportId, brandX, frame.y + 16, 200, {
-        size: 7.8, font: FONTS.bodySemi, color: COLORS.muted,
-        characterSpacing: 0.5, chrome: true, emit: false, role: 'header',
+      ctx.text(ctx.model.examTitleShort, brandX, frame.y + 16, 260, {
+        size: 8.2, font: FONTS.body, color: COLORS.muted,
+        chrome: true, emit: false, role: 'header',
       })
-      ctx.text(ctx.model.examTitleShort, rightX, frame.y + 16, rightW, {
-        size: 7.8, font: FONTS.body, color: COLORS.muted,
+      ctx.text(ctx.model.subjectText, rightX, frame.y + 16, rightW, {
+        size: 8.2, font: FONTS.body, color: COLORS.muted,
         align: 'right', chrome: true, emit: false, role: 'header',
       })
     }
@@ -322,7 +323,9 @@ export function drawFooter(ctx, { pageNumber } = {}) {
       size: TYPE.folio, font: FONTS.bodySemi, color: COLORS.muted,
       chrome: true, emit: false, role: 'footer',
     })
-    ctx.text(ctx.model.reportId, frame.x + 150, frame.y + 9, frame.w - 300, {
+    // The running header already carries the examination name; the footer
+    // carries the reader instead, so no line is repeated verbatim on a page.
+    ctx.text(ctx.model.who || ctx.model.examTitleShort, frame.x + 150, frame.y + 9, frame.w - 300, {
       size: TYPE.folio, font: FONTS.body, color: COLORS.muted,
       align: 'center', chrome: true, emit: false, role: 'footer',
     })
@@ -358,11 +361,8 @@ export function FinalBranding(ctx) {
     ctx.text('MediXO EduX  ·  Examination Intelligence', frame.x, frame.y + 16, frame.w / 2 - 24, {
       size: 8.6, font: FONTS.heading, color: COLORS.midnight, align: 'right',
     })
-    ctx.text(`End of report  ·  ${ctx.model.reportId}`, cx + 24, frame.y + 17, frame.w / 2 - 24, {
+    ctx.text(`End of report  ·  ${ctx.model.generatedDate}`, cx + 24, frame.y + 17, frame.w / 2 - 24, {
       size: 8, font: FONTS.body, color: COLORS.muted,
-    })
-    ctx.text('Missing values are shown as —.', frame.x, frame.y + 39, frame.w, {
-      size: TYPE.folio, font: FONTS.body, color: COLORS.muted, align: 'center',
     })
   })
 }
@@ -373,7 +373,7 @@ export function FinalBranding(ctx) {
 
 export function SectionHeading(ctx, {
   number, kicker, title, note = '', accent = COLORS.indigo,
-  topSpacing = 4, bottomSpacing = 12, keepWithNext = 78,
+  topSpacing = 4, bottomSpacing = 12, keepWithNext = 260,
 } = {}) {
   const titleW = CONTENT.w - 52
   const measure = () => {
@@ -422,7 +422,7 @@ export function Subheading(ctx, { title, note = '', accent = COLORS.indigo, topS
     return titleH + (note ? 2 + noteH : 0) + 5
   }
   return ctx.component({
-    type: 'subsection-heading', label: title, topSpacing, bottomSpacing, keepWithNext: 30,
+    type: 'subsection-heading', label: title, topSpacing, bottomSpacing, keepWithNext: 170,
     measure,
     draw: (frame) => {
       ctx.canvas.rect(frame.x, frame.y + 3, 2.5, 12, { fill: accent })
@@ -876,7 +876,7 @@ function measureCell(ctx, col, row, value, cw) {
   const opts = cellTextOptions(col, fmt(value), row)
   const textH = ctx.measureText(fmt(value), cw - 8, opts)
   if (col.render === 'bar') return textH + 8
-  if (col.render === 'pill') return ctx.measureText(fmt(value), cw - 15, { size: 8.2, font: FONTS.bodyBold }) + 2
+  if (col.render === 'pill') return ctx.measureText(fmt(value), cw - 15, { size: TYPE.tableLabel, font: FONTS.bodyBold }) + 2
   return textH
 }
 
@@ -895,7 +895,7 @@ function drawCell(ctx, col, row, value, x, y, cw, ch, padding) {
     const color = resolveColor(col.color, text, row, COLORS.indigo)
     ctx.canvas.rect(x + 4, y + padding + 4, 4, 4, { fill: color, kind: 'shape', role: 'marker' })
     ctx.text(text, x + 11, y + padding, cw - 15, {
-      size: 8.2, font: FONTS.bodyBold, color,
+      size: TYPE.tableLabel, font: FONTS.bodyBold, color,
     })
     return
   }
@@ -931,10 +931,14 @@ export function MeasuredTable(ctx, {
   groupKey = '', groupPrefix = '', topSpacing = 0, bottomSpacing = 8, keepWithNext = 0,
 } = {}) {
   if (!rows.length) return null
+  // A grouped table already prints the group value as its band; repeating it in
+  // a dedicated column on every row is pure noise.
+  if (groupKey) columns = columns.filter((col) => col.key !== groupKey)
+  if (!columns.length) return null
   const widths = resolveWidths(columns, w)
   const headerH = header
     ? Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, {
-      size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.2,
+      size: TYPE.tableLabel, font: FONTS.bodySemi, characterSpacing: 0.3,
     }) + 5))
     : 0
   const rowSpecs = rows.map((row) => {
@@ -947,7 +951,7 @@ export function MeasuredTable(ctx, {
   if (title) {
     ctx.component({
       type: 'table-title', label: title, x, w, topSpacing, bottomSpacing: 2,
-      keepWithNext: Math.max(keepWithNext, headerH + (rowSpecs[0] || 0) + 8),
+      keepWithNext: Math.max(keepWithNext, headerH + (rowSpecs[0] || 0) + 44),
       measure: () => titleH,
       draw: (frame) => {
         ctx.text(title, frame.x, frame.y, frame.w, {
@@ -971,7 +975,7 @@ export function MeasuredTable(ctx, {
         let cx = frame.x
         columns.forEach((col, i) => {
           ctx.text(String(col.label).toUpperCase(), cx + 4, frame.y + 2, widths[i] - 8, {
-            size: 7.8, font: FONTS.bodySemi, color: COLORS.white,
+            size: TYPE.tableLabel, font: FONTS.bodySemi, color: COLORS.white,
             align: col.align || 'left', characterSpacing: 0.2,
           })
           cx += widths[i]
@@ -1073,7 +1077,7 @@ export function StaticTableSpec(ctx, {
     }
     const measure = (w) => {
       const widths = resolveWidths(columns, w)
-      const headerH = header ? Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.2 }) + 5)) : 0
+      const headerH = header ? Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: TYPE.tableLabel, font: FONTS.bodySemi, characterSpacing: 0.3 }) + 5)) : 0
       const titleH = t ? ctx.measureText(t, w, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo }) + 4 : 0
       return titleH + headerH + rowHeights(w).reduce((sum, h) => sum + h, 0)
     }
@@ -1085,12 +1089,12 @@ export function StaticTableSpec(ctx, {
         cursor += ctx.text(t, frame.x, cursor, frame.w, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo }) + 4
       }
       if (header) {
-        const headerH = Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.2 }) + 5))
+        const headerH = Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: TYPE.tableLabel, font: FONTS.bodySemi, characterSpacing: 0.3 }) + 5))
         ctx.canvas.rect(frame.x, cursor, frame.w, headerH, { fill: COLORS.midnight, audit: false })
         let hx = frame.x
         columns.forEach((col, i) => {
           ctx.text(String(col.label).toUpperCase(), hx + 4, cursor + 2, widths[i] - 8, {
-            size: 7.8, font: FONTS.bodySemi, color: COLORS.white, align: col.align || 'left', characterSpacing: 0.2,
+            size: TYPE.tableLabel, font: FONTS.bodySemi, color: COLORS.white, align: col.align || 'left', characterSpacing: 0.2,
           })
           hx += widths[i]
         })
@@ -1136,267 +1140,552 @@ function prepareSolution(ctx, source, fontSize, width, sourceLabel = '') {
   return { renderer, lines, height: lines.reduce((sum, line) => sum + line.height, 0) }
 }
 
-function questionSource(question) {
-  if (!question.questionText && !question.options.length) return '—'
+function present(value) {
+  return value !== null && value !== undefined && value !== '' && value !== '—'
+}
+
+function questionNumber(question) {
+  const index = Number(question?.index)
+  if (Number.isFinite(index) && index > 0) {
+    return String(index).padStart(index > 99 ? 3 : 2, '0')
+  }
+  return String(question?.numberLabel || '').replace(/^Q/i, '').padStart(2, '0')
+}
+
+/** One restrained metadata line: only the classifications the exam supplies. */
+/** Mark weight as a reader would say it: 4 marks, 1 mark, 1 mark deducted. */
+function marksLabel(value, { awarded = false } = {}) {
+  const marks = Number(value)
+  if (!Number.isFinite(marks)) return ''
+  const magnitude = Math.abs(marks)
+  const unit = `${magnitude} ${magnitude === 1 ? 'mark' : 'marks'}`
+  if (marks < 0) return awarded ? `${unit} deducted` : `−${unit}`
+  return unit
+}
+
+function questionMetaLine(question) {
   const parts = []
-  parts.push(`Question: ${question.questionText || '—'}`)
-  parts.push(`Options: ${question.options.length ? question.options.map((option, i) => `${String.fromCharCode(65 + i)} · ${option}`).join('   ') : '—'}`)
-  return parts.join('\n')
+  if (present(question.chapter)) parts.push(question.chapter)
+  if (present(question.topic) && question.topic !== question.chapter) parts.push(question.topic)
+  if (present(question.difficulty)) parts.push(question.difficulty)
+  if (present(question.type)) parts.push(question.type)
+  const marks = marksLabel(question.marks)
+  if (marks) parts.push(marks)
+  if (present(question.time)) parts.push(question.time)
+  return parts.join('   ·   ')
+}
+
+function responseLabel(value, status = '') {
+  if (present(value)) return String(value)
+  // "Not attempted" is a claim about the student; when the attempt happened
+  // but the choice was not published, saying so is the honest label.
+  if (/correct|incorrect|wrong|partial|review/i.test(String(status))) return 'Not published'
+  return 'Not attempted'
+}
+
+function optionFigureLayout(question, option, width, budget) {
+  // Option figures are attached to the question's media map by option label,
+  // which is what keeps a figure bound to its own option.
+  const assets = question?.media?.options?.[option?.label] || option?.media || []
+  if (!assets.length) return { items: [], height: 0 }
+  return layoutFigureStack(assets, { field: 'option', available: width, gap: 7, budget })
 }
 
 function prepareQuestion(ctx, question, w) {
-  const pad = 16
+  const pad = 18
   const innerW = w - pad * 2
   const status = fmt(question.status)
   const accent = statusColor(status)
-  const headerH = 26
-  const metaItems = [
-    ['Subject', question.subject], ['Chapter', question.chapter], ['Topic', question.topic],
-    ['Difficulty', question.difficulty], ['Type', question.type], ['Status', status],
-  ]
-  const metaCols = equalColumns(3, 10, innerW, 0)
-  const metaRows = []
-  for (let i = 0; i < metaItems.length; i += 3) {
-    let rowH = 0
-    for (let j = 0; j < 3; j += 1) {
-      const item = metaItems[i + j]
-      if (!item) continue
-      const cw = metaCols[j].w - 4
-      const labelH = ctx.measureText(item[0].toUpperCase(), cw, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.4 })
-      const valueH = ctx.measureText(fmt(item[1]), cw, { size: TYPE.bodySmall, font: FONTS.bodySemi })
-      rowH = Math.max(rowH, labelH + valueH + 2)
-    }
-    metaRows.push(rowH + 4)
-  }
-  const metaH = metaRows.reduce((a, b) => a + b, 0)
+  const title = `QUESTION ${questionNumber(question)}`
+  const subject = present(question.subject) ? String(question.subject).toUpperCase() : ''
 
-  const answerItems = [
-    ['Student answer', question.selected], ['Correct answer', question.correct],
-    ['Marks', question.marks], ['Time', question.time],
-  ]
-  const answerCols = equalColumns(4, 10, innerW, 0)
-  let answerH = 0
-  answerItems.forEach((item, i) => {
-    const cw = answerCols[i].w - 4
-    const labelH = ctx.measureText(item[0].toUpperCase(), cw, { size: 7.8, font: FONTS.bodySemi, characterSpacing: 0.4 })
-    const valueH = ctx.measureText(fmt(item[1]), cw, { size: 10.4, font: FONTS.bodyBold, features: ['tnum'] })
-    answerH = Math.max(answerH, labelH + valueH + 3)
+  const headerH = 22
+  const metaText = questionMetaLine(question)
+  const metaH = metaText ? ctx.measureText(metaText, innerW, { size: 9.2, font: FONTS.body }) + 6 : 0
+
+  const statement = question.statement
+    ? prepareSolution(ctx, question.statement, 10.6, innerW, question.q)
+    : null
+  const statementH = statement ? statement.height + 8 : 0
+
+  const missingStatement = !statement && !(question.options || []).length && !(question.media?.statement?.length)
+  const statementNote = missingStatement ? 'Question statement and options were not published for this attempt.' : ''
+  const statementNoteH = statementNote
+    ? ctx.measureText(statementNote, innerW, { size: 9.2, font: FONTS.body }) + 8
+    : 0
+
+  const statementFigures = layoutFigureStack(question.media?.statement || [], {
+    field: 'statement', available: innerW, gap: 9, budget: 296,
   })
+  const statementFigureH = statementFigures.items.length ? statementFigures.height + 10 : 0
 
-  const mistakeText = question.mistakeCategory && question.mistakeCategory !== '—'
-    ? `Mistake category  ·  ${question.mistakeCategory}`
-    : ''
-  const mistakeH = mistakeText ? ctx.measureText(mistakeText, innerW, { size: TYPE.bodySmall, font: FONTS.bodySemi, color: COLORS.error }) + 5 : 0
-
-  const qSource = questionSource(question)
-  const questionText = prepareSolution(ctx, qSource, 9.4, innerW, question.q)
-  const qLabelH = ctx.measureText('QUESTION / OPTIONS', innerW, { size: TYPE.label, font: FONTS.bodySemi, characterSpacing: 0.7 }) + 2
-  const qBlockH = qLabelH + questionText.height + 4
-
-  const parts = question.solutionParts.length
-    ? question.solutionParts.map((part) => ({
-      label: part.label,
-      ...prepareSolution(ctx, part.text, 10.2, innerW, question.q),
+  const isSkipped = /skip|unattempt|not visited/i.test(status)
+  const rawOptions = question.optionItems?.length
+    ? question.optionItems
+    : (question.options || []).map((option, index) => ({
+      label: String.fromCharCode(65 + index),
+      text: typeof option === 'string' ? option : '',
+      media: [],
     }))
-    : [{ label: 'Explanation', ...prepareSolution(ctx, '—', 10.2, innerW, question.q) }]
-  const solutionLabelH = ctx.measureText('SOLUTION / EXPLANATION', innerW, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 0.7 }) + 2
-  const partsH = parts.reduce((sum, part) => (
-    sum + ctx.measureText(part.label.toUpperCase(), innerW, { size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4 }) + 2 + part.height + 3
-  ), 0)
-  const solutionH = 6 + solutionLabelH + partsH + 6
+  const optionCount = rawOptions.length
+  const imageOptions = rawOptions.filter((option) => (
+    question?.media?.options?.[option.label] || option.media || []
+  ).length).length
+  const perOptionBudget = imageOptions ? Math.min(118, 264 / imageOptions) : 0
+  const optionBlocks = rawOptions.map((option) => {
+    const textWidth = innerW - 22
+    const textH = option.text
+      ? ctx.measureText(option.text, textWidth, { size: 10.2, font: FONTS.body, lineHeight: 14.2 })
+      : 0
+    const figures = optionFigureLayout(question, option, textWidth, perOptionBudget)
+    return {
+      option,
+      textH,
+      figures,
+      height: Math.max(15, textH) + (figures.items.length ? 4 + figures.height : 0),
+    }
+  })
+  const optionsH = optionCount
+    ? ctx.measureText('OPTIONS', innerW, { size: 8.6, font: FONTS.bodySemi, characterSpacing: 0.8 }) + 5
+      + optionBlocks.reduce((sum, block) => sum + block.height + 4, 0)
+    : 0
 
-  const totalH = 6 + headerH + metaH + 4 + qBlockH + 4 + answerH + 3 + mistakeH + solutionH + 6
-  const introH = 6 + headerH + metaH + 4 + qBlockH + 4 + answerH + 3 + mistakeH + 2
+  const responseH = 42
+  const awarded = marksLabel(question.marks, { awarded: true })
+  const outcome = isSkipped
+    ? 'Not attempted — no marks awarded'
+    : /incorrect|wrong/i.test(status)
+      ? `Answered incorrectly${awarded ? ` — ${awarded}` : ''}`
+      : /correct/i.test(status)
+        ? `Answered correctly${awarded ? ` — ${awarded}` : ''}`
+        : `${status || 'Reviewed'}${awarded ? ` — ${awarded}` : ''}`
+  const insightText = [
+    outcome,
+    present(question.mistakeCategory) ? question.mistakeCategory : null,
+    present(question.mistakeNote) ? question.mistakeNote : null,
+  ].filter(Boolean).join('   ·   ')
+  // The insight can wrap (a mistake note is a full sentence), so it is
+  // measured rather than given a fixed height.
+  const insightH = 14 + ctx.measureText(insightText, innerW, { size: 9.6, font: FONTS.body })
+
+  const explanationParts = question.explanationParts?.length
+    ? question.explanationParts
+    : [{ label: 'Explanation', text: question.explanation || 'No explanation was published for this question.' }]
+  const parts = explanationParts.map((part) => ({
+    label: part.label,
+    ...prepareSolution(ctx, part.text, 10.2, innerW - 24, question.q),
+  }))
+  const showPartLabels = parts.length > 1 && parts.some((part, index) => (
+    index > 0 && String(part.label || '').toLowerCase() !== 'explanation'
+  ))
+  const PART_LABELS = showPartLabels
+  const partsH = parts.reduce((sum, part, index) => (
+    sum + (PART_LABELS && index > 0 ? ctx.measureText(part.label.toUpperCase(), innerW - 24, {
+      size: TYPE.tableLabel, font: FONTS.bodySemi, characterSpacing: 0.5,
+    }) + 3 : 0) + part.height + 5
+  ), 0)
+  const explanationFigures = layoutFigureStack(question.media?.explanation || [], {
+    field: 'explanation', available: innerW - 24, gap: 8, budget: 210,
+  })
+  const explanationFigureH = explanationFigures.items.length ? explanationFigures.height + 8 : 0
+  const solutionH = 12 + 16 + partsH + explanationFigureH + 8
+
+  const introH = pad + headerH + metaH + statementH + statementNoteH + statementFigureH
+    + optionsH + responseH + insightH
+  const totalH = introH + solutionH + pad
+
   return {
-    question, pad, innerW, status, accent, headerH, metaItems, metaCols, metaRows, metaH,
-    answerItems, answerCols, answerH, mistakeText, mistakeH, qSource, questionText, qLabelH, qBlockH,
-    parts, solutionLabelH, solutionH, totalH, introH,
+    question, pad, innerW, status, accent, title, subject, headerH,
+    metaText, metaH, statement, statementH, statementNote, statementNoteH,
+    statementFigures, statementFigureH,
+    optionBlocks, optionsH, responseH, insightText, insightH, isSkipped,
+    parts, showPartLabels, solutionH,
+    explanationFigures,
+    totalH, introH,
   }
 }
 
 function drawQuestionHeader(ctx, p, x, y, w) {
-  ctx.canvas.rect(x, y + 3, 2.5, 20, { fill: p.accent, audit: false })
-  ctx.text(p.question.q, x + 12, y, 52, {
-    size: 15, font: FONTS.heading, color: COLORS.midnight, features: ['tnum'],
+  ctx.canvas.rect(x, y + 1, 3, 20, { fill: p.accent, audit: false })
+  const titleW = ctx.textEngine.measureRun(p.title, FONTS.heading, 14)
+  ctx.text(p.title, x + 12, y, Math.min(w - 12, titleW + 2), {
+    size: 14, font: FONTS.heading, color: COLORS.midnight,
   })
-  ctx.text(`${p.question.q}  ·  ${p.status}`, x + 70, y + 2, w - 175, {
-    size: 11, font: FONTS.heading, color: COLORS.midnight,
-  })
-  Pill(ctx, {
-    x: x + w - 92, y: y + 1, text: p.status, color: p.accent,
-    soft: statusSoft(p.status), width: 88, size: 8,
-  })
+  if (p.subject) {
+    ctx.text(p.subject, x + 12 + titleW + 10, y + 4, Math.max(40, w - titleW - 118), {
+      size: 10, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 0.6,
+    })
+  }
+  if (p.status && p.status !== '—') {
+    ctx.text(String(p.status).toUpperCase(), x + w - 112, y + 4, 112, {
+      size: 8.6, font: FONTS.bodySemi, color: p.accent,
+      align: 'right', characterSpacing: 0.7,
+    })
+  }
 }
 
-function drawQuestionIntro(ctx, p, frame, continuation = false) {
-  const x = frame.x + p.pad
-  const w = p.innerW
-  let cursor = frame.y + 6
-  drawQuestionHeader(ctx, p, x, cursor, w)
-  cursor += p.headerH + 2
-  if (continuation) {
-    // The label itself is part of the reserved intro height.
-    cursor += 2
-  }
-  for (let row = 0; row < p.metaRows.length; row += 1) {
-    const rowH = p.metaRows[row]
-    for (let col = 0; col < 3; col += 1) {
-      const item = p.metaItems[row * 3 + col]
-      if (!item) continue
-      const c = p.metaCols[col]
-      const cx = x + c.x
-      const labelH = ctx.text(item[0].toUpperCase(), cx, cursor, c.w - 4, {
-        size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4,
-      })
-      ctx.text(fmt(item[1]), cx, cursor + labelH + 2, c.w - 4, {
-        size: TYPE.bodySmall, font: FONTS.bodySemi, color: COLORS.ink,
+function drawOptions(ctx, p, x, cursor) {
+  if (!p.optionBlocks.length) return cursor
+  cursor += ctx.text('OPTIONS', x, cursor, p.innerW, {
+    size: 8.6, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.8,
+  }) + 5
+  p.optionBlocks.forEach((block) => {
+    const { option, textH, figures } = block
+    const textWidth = p.innerW - 22
+    ctx.text(`${option.label}.`, x, cursor, 20, {
+      size: 10.6, font: FONTS.bodyBold, color: COLORS.midnight,
+    })
+    let textCursor = cursor
+    if (option.text) {
+      textCursor += ctx.text(option.text, x + 22, cursor, textWidth, {
+        size: 10.2, font: FONTS.body, color: COLORS.ink, lineHeight: 14.2,
       })
     }
-    cursor += rowH
-  }
-  ctx.canvas.line(x, cursor - 2, x + w, cursor - 2, { color: COLORS.line, width: 0.4 })
-  cursor += 4
+    let blockBottom = Math.max(cursor + Math.max(15, textH), textCursor)
+    if (figures.items.length) {
+      // An image-only option keeps the letter on the same baseline row as its
+      // figure instead of leaving a bare "A." above a stranded picture.
+      const figureTop = option.text ? blockBottom + 4 : cursor
+      const drawn = drawFigureItems(ctx, figures.items, x + 22, figureTop, textWidth, {
+        field: 'option', gap: 7, role: 'option-figure', align: 'left',
+      })
+      blockBottom = Math.max(blockBottom, figureTop + drawn)
+    }
+    cursor = blockBottom + 4
+  })
+  return cursor
+}
 
-  ctx.text('QUESTION / OPTIONS', x, cursor, w, {
-    size: TYPE.label, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.7,
+function drawResponse(ctx, p, x, cursor) {
+  const start = cursor
+  const columnW = p.innerW / 2
+  const topRuleY = cursor
+  ctx.canvas.line(x, topRuleY, x + p.innerW, topRuleY, { color: COLORS.line, width: 0.4 })
+  cursor += 8
+  const labels = [
+    { label: 'STUDENT RESPONSE', value: responseLabel(p.question.selected, p.status), color: p.isSkipped ? COLORS.warning : statusColor(p.status) },
+    { label: 'CORRECT ANSWER', value: responseLabel(p.question.correct, p.status), color: COLORS.midnight },
+  ]
+  labels.forEach((entry, index) => {
+    const cx = x + index * columnW
+    ctx.text(entry.label, cx, cursor, columnW - 10, {
+      size: 8.4, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.6,
+    })
+    ctx.text(String(entry.value), cx, cursor + 12, columnW - 10, {
+      size: 12, font: FONTS.bodyBold, color: entry.color, features: ['tnum'],
+    })
   })
-  cursor += p.qLabelH
-  p.questionText.renderer.maxWidth = w
-  p.questionText.lines.forEach((line) => {
-    p.questionText.renderer.drawLine(line, x, cursor, w)
-    cursor += line.height
-  })
-  cursor += 4
-  ctx.canvas.line(x, cursor - 2, x + w, cursor - 2, { color: COLORS.line, width: 0.4 })
+  return start + p.responseH
+}
 
-  p.answerItems.forEach((item, i) => {
-    const c = p.answerCols[i]
-    const cx = x + c.x
-    const labelH = ctx.text(item[0].toUpperCase(), cx, cursor, c.w - 4, {
-      size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4,
-    })
-    ctx.text(fmt(item[1]), cx, cursor + labelH + 2, c.w - 4, {
-      size: 10.4, font: FONTS.bodyBold, color: i === 0 ? statusColor(p.status) : COLORS.midnight, features: ['tnum'],
-    })
+function drawInsight(ctx, p, x, cursor) {
+  ctx.text('PERFORMANCE INSIGHT', x, cursor, p.innerW, {
+    size: 8.4, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.6,
   })
-  cursor += p.answerH + 3
-  if (p.mistakeText) {
-    ctx.canvas.rect(x, cursor + 3, 5, 5, { fill: COLORS.error, kind: 'shape', role: 'marker' })
-    ctx.text(p.mistakeText, x + 10, cursor, w - 10, {
-      size: TYPE.bodySmall, font: FONTS.bodySemi, color: COLORS.error,
-    })
-    cursor += p.mistakeH
+  ctx.text(p.insightText, x, cursor + 12, p.innerW, {
+    size: 9.6, font: FONTS.body, color: COLORS.ink,
+  })
+  return cursor + p.insightH
+}
+
+function drawQuestionIntro(ctx, p, frame) {
+  const x = frame.x + p.pad
+  let cursor = frame.y + p.pad
+  drawQuestionHeader(ctx, p, x, cursor, p.innerW)
+  cursor += p.headerH
+  if (p.metaText) {
+    cursor += ctx.text(p.metaText, x, cursor, p.innerW, {
+      size: 9.2, font: FONTS.body, color: COLORS.muted,
+    }) + 6
   }
+  if (p.statement) {
+    p.statement.renderer.maxWidth = p.innerW
+    p.statement.lines.forEach((line) => {
+      p.statement.renderer.drawLine(line, x, cursor, p.innerW)
+      cursor += line.height
+    })
+    cursor += 8
+  } else if (p.statementNote) {
+    cursor += ctx.text(p.statementNote, x, cursor, p.innerW, {
+      size: 9.2, font: FONTS.body, color: COLORS.muted,
+    }) + 8
+  }
+  if (p.statementFigures.items.length) {
+    cursor += drawFigureItems(ctx, p.statementFigures.items, x, cursor, p.innerW, {
+      field: 'statement', gap: 9, role: 'question-figure',
+    }) + 10
+  }
+  cursor = drawOptions(ctx, p, x, cursor)
+  cursor = drawResponse(ctx, p, x, cursor)
+  cursor = drawInsight(ctx, p, x, cursor)
+  return cursor
+}
+
+function drawSolutionLabel(ctx, x, y, w, accent = COLORS.indigo) {
+  ctx.canvas.rect(x, y, 2.5, 13, { fill: accent, audit: false })
+  ctx.text('EXPLANATION', x + 10, y + 1, w - 10, {
+    size: 9.4, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 0.8,
+  })
 }
 
 function drawSolutionBackground(ctx, x, y, w, h) {
   ctx.canvas.rect(x, y, w, h, { fill: COLORS.paper, audit: false })
-  ctx.canvas.rect(x, y, 2.5, h, { fill: COLORS.indigo, audit: false })
+}
+
+function drawExplanationParts(ctx, p, x, cursor, width) {
+  p.parts.forEach((part, index) => {
+    const labelled = p.showPartLabels && index > 0
+    if (labelled) {
+      cursor += ctx.text(String(part.label).toUpperCase(), x, cursor, width, {
+        size: TYPE.tableLabel, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.5,
+      }) + 3
+    }
+    part.renderer.maxWidth = width
+    part.lines.forEach((line) => {
+      part.renderer.drawLine(line, x, cursor, width)
+      cursor += line.height
+    })
+    cursor += 5
+  })
+  return cursor
 }
 
 function questionIntroOverflowSpec(ctx, p, question) {
-  const lines = [
-    `${question.q}  ·  ${p.status}`,
-    `Subject: ${fmt(question.subject)}  ·  Chapter: ${fmt(question.chapter)}  ·  Topic: ${fmt(question.topic)}`,
-    `Difficulty: ${fmt(question.difficulty)}  ·  Type: ${fmt(question.type)}  ·  Status: ${p.status}`,
-    questionSource(question),
-    `Student answer: ${fmt(question.selected)}  ·  Correct answer: ${fmt(question.correct)}`,
-    `Marks: ${fmt(question.marks)}  ·  Time: ${fmt(question.time)}`,
-    p.mistakeText,
-  ].filter(Boolean)
+  const lines = []
+  if (p.metaText) lines.push(p.metaText)
+  lines.push(p.statement ? question.statement : 'Question statement was not published.')
+  const textOptions = p.optionBlocks.filter((block) => block.option.text)
+  if (textOptions.length) {
+    lines.push('OPTIONS')
+    textOptions.forEach((block) => {
+      lines.push(`${block.option.label}. ${block.option.text}`)
+    })
+  } else if (p.optionBlocks.length) {
+    lines.push('OPTIONS')
+    lines.push('The answer choices are figures and follow the question figure.')
+  }
+  lines.push(`Student response: ${responseLabel(question.selected, p.status)}`)
+  lines.push(`Correct answer: ${responseLabel(question.correct, p.status)}`)
+  lines.push(p.insightText)
   return TextFlowSpec(ctx, {
     label: `${question.q} · question statement`,
-    title: `${fmt(question.subject)} · ${question.q} · question continued`,
-    text: lines.join('\n'), size: TYPE.bodySmall, widthPadding: 18,
-    paragraphGap: 3, topPad: 6, bottomPad: 8,
+    title: `${p.title}${p.subject ? `  ·  ${p.subject}` : ''}`,
+    text: lines.join('\n'), size: TYPE.bodySmall, widthPadding: 20,
+    paragraphGap: 4, topPad: 8, bottomPad: 10,
   })
+}
+
+/**
+ * Image-only answer choices on a question whose intro overflowed a page.
+ *
+ * Each letter sits on the same row as its own figure, two choices per row, so
+ * the figure can never read as belonging to the next option. Rendering four
+ * separate full-width stacks instead wasted half the page per question.
+ */
+function optionFigureBoard(ctx, p, question) {
+  const gapX = 18
+  const gapY = 10
+  const colW = (CONTENT.w - 36 - gapX) / 2
+  const cells = p.optionBlocks
+    .filter((block) => block.figures.items.length)
+    .map((block) => ({
+      label: block.option.label,
+      layout: layoutFigureStack(
+        question?.media?.options?.[block.option.label] || [],
+        { field: 'option', available: colW - 26, gap: 6, budget: 150 },
+      ),
+    }))
+  // When the choices also carry text, the flow above already printed them, so
+  // the board is introduced as the figures for those choices rather than as a
+  // second list of options.
+  const hasTextOptions = p.optionBlocks.some((block) => block.option.text)
+  const boardLabel = hasTextOptions ? 'OPTION FIGURES' : 'OPTIONS'
+  const labelH = ctx.measureText(boardLabel, CONTENT.w - 36, {
+    size: 8.6, font: FONTS.bodySemi, characterSpacing: 0.8,
+  }) + 5
+  const rows = Math.ceil(cells.length / 2)
+  const rowTops = Array.from({ length: rows }, (_, row) => {
+    const rowCells = cells.slice(row * 2, row * 2 + 2)
+    return Math.max(...rowCells.map((cell) => cell.layout.height))
+  })
+  const height = rowTops.reduce((sum, value) => sum + value, 0) + gapY * Math.max(0, rows - 1)
+  return ctx.component({
+    type: 'option-figure-board',
+    label: `${question.q} · option figures`,
+    continuationLabel: `${fmt(question.subject)} · ${question.q} · options continued`,
+    bottomSpacing: 8,
+    measure: () => height + labelH + 4,
+    draw: (frame) => {
+      ctx.text(boardLabel, frame.x + 18, frame.y + 2, CONTENT.w - 36, {
+        size: 8.6, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.8,
+      })
+      frame = { ...frame, y: frame.y + labelH }
+      let cursor = frame.y + 2
+      cells.forEach((cell, index) => {
+        const row = Math.floor(index / 2)
+        const column = index % 2
+        const rowTop = frame.y + 2
+          + rowTops.slice(0, row).reduce((sum, value) => sum + value + gapY, 0)
+        const x = frame.x + 18 + column * (colW + gapX)
+        ctx.text(`${cell.label}.`, x, rowTop, 20, {
+          size: 10.6, font: FONTS.bodyBold, color: COLORS.midnight,
+        })
+        drawFigureItems(ctx, cell.layout.items, x + 22, rowTop, colW - 22, {
+          field: 'option', gap: 6, role: 'option-figure', align: 'left',
+        })
+        if (column === 1) cursor = rowTop + rowTops[row] + gapY
+      })
+      return cursor
+    },
+  })
+}
+
+/** Figure components used when a question's intro is taller than one page. */
+function renderIntroFigures(ctx, p, question) {
+  const groups = []
+  if (p.statementFigures.items.length) {
+    groups.push({ field: 'statement', items: p.statementFigures.items, role: 'question-figure' })
+  }
+  groups.forEach((group) => {
+    const gap = group.field === 'statement' ? 9 : 7
+    ctx.component({
+      type: 'question-figure-group',
+      label: group.label || `${question.q} · figure`,
+      bottomSpacing: 8,
+      continuationLabel: `${question.q} · figure continued`,
+      measure: () => group.items.reduce((sum, item) => sum + item.h, 0) + gap * Math.max(0, group.items.length - 1) + 4,
+      draw: (frame) => {
+        drawFigureItems(ctx, group.items, frame.x + 18, frame.y + 2, CONTENT.w - 36, {
+          field: group.field, gap, role: group.role,
+        })
+      },
+    })
+  })
+  // Statement figures are placed before the answer choices, matching the
+  // reading order of an examination question.
+  if (p.optionBlocks.some((block) => block.figures.items.length)) {
+    optionFigureBoard(ctx, p, question)
+  }
+}
+
+/**
+ * Height a question card will occupy. Callers use it to keep a subject band
+ * with its first question instead of stranding the band at a page foot.
+ */
+export function measureQuestionCard(ctx, question) {
+  return prepareQuestion(ctx, question, CONTENT.w).totalH
 }
 
 export function QuestionCard(ctx, { question } = {}) {
   const p = prepareQuestion(ctx, question, CONTENT.w)
+  ctx.renderedQuestions?.push(question.index)
   const capacity = CONTENT.h - 16
   const remaining = CONTENT.bottom - ctx.y
-  // Normal cards are kept together. An unusually long solution uses the
-  // labelled continuation flow when the current page cannot hold the whole
-  // card, instead of leaving a half-used page behind.
   const longCard = p.totalH > CONTENT.h * 0.52
   const keepTogether = p.totalH <= capacity && (!longCard || remaining >= p.totalH + 2)
+
   if (keepTogether) {
     return ctx.component({
       type: 'question-card', label: `${question.q} · complete`, allowSplit: false,
-      bottomSpacing: 2,
+      bottomSpacing: 4,
       measure: () => p.totalH,
       draw: (frame) => {
         drawQuestionIntro(ctx, p, frame)
         const sy = frame.y + p.introH
+        const innerPad = 12
         drawSolutionBackground(ctx, frame.x + p.pad, sy, p.innerW, p.solutionH)
-        let cursor = sy + 6
-        cursor += ctx.text('SOLUTION / EXPLANATION', frame.x + p.pad + 10, cursor, p.innerW - 20, {
-          size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 0.7,
-        }) + 2
-        p.parts.forEach((part) => {
-          cursor += ctx.text(part.label.toUpperCase(), frame.x + p.pad + 10, cursor, p.innerW - 20, {
-            size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4,
-          }) + 2
-          part.renderer.maxWidth = p.innerW - 20
-          part.lines.forEach((line) => {
-            part.renderer.drawLine(line, frame.x + p.pad + 10, cursor, p.innerW - 20)
-            cursor += line.height
+        let cursor = sy + innerPad
+        drawSolutionLabel(ctx, frame.x + p.pad + 12, cursor, p.innerW - 24)
+        cursor += 16
+        cursor = drawExplanationParts(ctx, p, frame.x + p.pad + 12, cursor, p.innerW - 24)
+        if (p.explanationFigures.items.length) {
+          drawFigureItems(ctx, p.explanationFigures.items, frame.x + p.pad + 12, cursor, p.innerW - 24, {
+            field: 'explanation', gap: 8, role: 'explanation-figure',
           })
-          cursor += 3
+        }
+        ctx.canvas.line(frame.x, frame.y + frame.h - 4, frame.x + frame.w, frame.y + frame.h - 4, {
+          color: COLORS.line, width: 0.4,
         })
-        ctx.canvas.line(frame.x, frame.y + frame.h - 2, frame.x + frame.w, frame.y + frame.h - 2, { color: COLORS.line, width: 0.4 })
       },
     })
   }
 
-  // Unusually long solution: keep the question's identity, metadata and answer
-  // comparison together, then flow the source solution with explicit labels.
+  // Long question: keep the identity, statement, figures, options and answer
+  // comparison together, then flow the explanation with explicit labels.
   const introContinuation = `${fmt(question.subject)} · ${question.q} · question continued`
   const introCapacity = CONTENT.h - 34 - CONTINUATION_H - 8
-  if (p.introH > introCapacity + EPS) {
+  if (p.introH > introCapacity) {
     paginateSingle(ctx, questionIntroOverflowSpec(ctx, p, question), {
-      w: CONTENT.w, x: CONTENT.x, topSpacing: 0, bottomSpacing: 0,
+      w: CONTENT.w, x: CONTENT.x, topSpacing: 0, bottomSpacing: 10,
       keepWithNext: 34, continuationLabel: introContinuation,
     })
+    renderIntroFigures(ctx, p, question)
   } else {
     ctx.component({
       type: 'question-card-intro', label: `${question.q} · question statement`, allowSplit: false,
-      keepWithNext: 34, bottomSpacing: 0, continuationLabel: introContinuation,
+      keepWithNext: 40, bottomSpacing: 0, continuationLabel: introContinuation,
       measure: () => p.introH,
       draw: (frame) => drawQuestionIntro(ctx, p, frame),
     })
   }
-  p.parts.forEach((part) => {
-    ctx.component({
-      type: 'solution-label', label: `${question.q} · ${part.label}`,
-      continuationLabel: `${fmt(question.subject)} · ${question.q} · solution continued`,
-      keepWithNext: 20, bottomSpacing: 0,
-      measure: () => ctx.measureText(part.label.toUpperCase(), p.innerW - 20, {
-        size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4,
-      }) + 5,
-      draw: (frame) => {
-        drawSolutionBackground(ctx, frame.x + p.pad, frame.y, p.innerW, frame.h)
-        ctx.text(part.label.toUpperCase(), frame.x + p.pad + 10, frame.y + 3, p.innerW - 20, {
-          size: 7.8, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.4,
-        })
-      },
-    })
-    part.renderer.maxWidth = p.innerW - 20
+  ctx.component({
+    type: 'solution-label', label: `${question.q} · explanation`,
+    continuationLabel: `${fmt(question.subject)} · ${question.q} · explanation continued`,
+    keepWithNext: 20, bottomSpacing: 0,
+    measure: () => 20,
+    draw: (frame) => {
+      drawSolutionBackground(ctx, frame.x + p.pad, frame.y, p.innerW, frame.h)
+      drawSolutionLabel(ctx, frame.x + p.pad + 12, frame.y + 4, p.innerW - 24)
+    },
+  })
+  p.parts.forEach((part, index) => {
+    if (p.showPartLabels && index > 0) {
+      ctx.component({
+        type: 'solution-label', label: `${question.q} · ${part.label}`,
+        continuationLabel: `${fmt(question.subject)} · ${question.q} · explanation continued`,
+        keepWithNext: 20, bottomSpacing: 0,
+        measure: () => ctx.measureText(part.label.toUpperCase(), p.innerW - 24, {
+          size: TYPE.tableLabel, font: FONTS.bodySemi, characterSpacing: 0.5,
+        }) + 5,
+        draw: (frame) => {
+          drawSolutionBackground(ctx, frame.x + p.pad, frame.y, p.innerW, frame.h)
+          ctx.text(part.label.toUpperCase(), frame.x + p.pad + 12, frame.y + 2, p.innerW - 24, {
+            size: TYPE.tableLabel, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.5,
+          })
+        },
+      })
+    }
+    part.renderer.maxWidth = p.innerW - 24
     part.lines.forEach((line, index) => {
       ctx.component({
-        type: 'question-solution-line', label: `${question.q} · solution line ${index + 1}`,
+        type: 'question-solution-line', label: `${question.q} · explanation line ${index + 1}`,
         allowSplit: true,
-        continuationLabel: `${fmt(question.subject)} · ${question.q} · solution continued`,
-        bottomSpacing: index === part.lines.length - 1 ? 6 : 0,
+        continuationLabel: `${fmt(question.subject)} · ${question.q} · explanation continued`,
+        bottomSpacing: index === part.lines.length - 1 ? 4 : 0,
         measure: () => line.height + 4,
         draw: (frame) => {
           drawSolutionBackground(ctx, frame.x + p.pad, frame.y, p.innerW, frame.h)
-          part.renderer.drawLine(line, frame.x + p.pad + 10, frame.y + 2, p.innerW - 20)
+          part.renderer.drawLine(line, frame.x + p.pad + 12, frame.y + 2, p.innerW - 24)
         },
       })
     })
   })
+  if (p.explanationFigures.items.length) {
+    p.explanationFigures.items.forEach((item) => {
+      ctx.component({
+        type: 'explanation-figure', label: `${question.q} · explanation figure`,
+        continuationLabel: `${fmt(question.subject)} · ${question.q} · explanation continued`,
+        bottomSpacing: 6,
+        measure: () => item.h + 8,
+        draw: (frame) => {
+          drawSolutionBackground(ctx, frame.x + p.pad, frame.y, p.innerW, frame.h)
+          drawFigureItems(ctx, [item], frame.x + p.pad + 12, frame.y + 4, p.innerW - 24, {
+            field: 'explanation', role: 'explanation-figure',
+          })
+        },
+      })
+    })
+  }
   return { type: 'split-question-card', label: question.q }
 }
 
@@ -1404,7 +1693,7 @@ export function QuestionCard(ctx, { question } = {}) {
  * Revision + source register
  * ------------------------------------------------------------------ */
 
-export function SubjectBand(ctx, { subject, index = 0, note = '', x = CONTENT.x, w = CONTENT.w, bottomSpacing = 7 } = {}) {
+export function SubjectBand(ctx, { subject, index = 0, note = '', x = CONTENT.x, w = CONTENT.w, bottomSpacing = 7, keepWithNext = 210 } = {}) {
   const accent = subjectColor(subject, index)
   const measure = () => {
     const titleH = ctx.measureText(subject, w - 42, { size: 13, font: FONTS.heading })
@@ -1412,7 +1701,10 @@ export function SubjectBand(ctx, { subject, index = 0, note = '', x = CONTENT.x,
     return 5 + titleH + (note ? 2 + noteH : 0) + 5
   }
   return ctx.component({
-    type: 'subject-band', label: subject, x, w, bottomSpacing, keepWithNext: 30,
+    // A subject band must never close a page on its own: the reserve covers the
+    // opening of the first question under it, or the whole card when it fits a
+    // page (the caller measures it).
+    type: 'subject-band', label: subject, x, w, bottomSpacing, keepWithNext,
     measure,
     draw: (frame) => {
       ctx.canvas.rect(frame.x, frame.y + 3, 2.5, 16, { fill: accent, audit: false })
@@ -1430,46 +1722,4 @@ export function SubjectBand(ctx, { subject, index = 0, note = '', x = CONTENT.x,
       ctx.canvas.line(frame.x, frame.y + frame.h - 3, frame.x + frame.w, frame.y + frame.h - 3, { color: COLORS.line, width: 0.4 })
     },
   })
-}
-
-export function SourceRegister(ctx, { rows = [] } = {}) {
-  if (!rows.length) return null
-  const isLong = (row) => (
-    String(row?.value ?? '').length > 80 || String(row?.path ?? '').length > 58
-  )
-  const shortRows = rows.filter((row) => !isLong(row))
-  const longRows = rows.filter(isLong)
-  const pack = (list, count) => {
-    const packed = []
-    for (let i = 0; i < list.length; i += count) {
-      const record = {}
-      for (let col = 0; col < count; col += 1) record[`col${col}`] = list[i + col] || null
-      packed.push(record)
-    }
-    return packed
-  }
-  const sourceColumns = (count) => Array.from({ length: count }, (_, index) => ({
-    key: `col${index}`, label: 'Source / value', width: 1, render: 'source',
-  }))
-  if (shortRows.length) {
-    MeasuredTable(ctx, {
-      id: 'source-register-short',
-      title: `Source data register  ·  ${rows.length} canonical payload values`,
-      rows: pack(shortRows, 4),
-      columns: sourceColumns(4),
-      rowPadding: 0.5,
-      bottomSpacing: 6,
-    })
-  }
-  if (longRows.length) {
-    MeasuredTable(ctx, {
-      id: 'source-register-extended',
-      title: `Extended source values  ·  ${longRows.length} verbatim entries`,
-      rows: pack(longRows, 2),
-      columns: sourceColumns(2),
-      rowPadding: 0.5,
-      bottomSpacing: 8,
-    })
-  }
-  return true
 }

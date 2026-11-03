@@ -55,7 +55,14 @@ function logPdfExportReady(label, result, blob, filename) {
       bytes: blob.size,
       pageCount: result?.pageCount,
       flags: result?.flags?.length ?? 0,
+      figures: result?.contentCoverage?.figuresEmbedded ?? 0,
+      unreadableFigures: result?.contentCoverage?.figuresFailed ?? 0,
     })
+  }
+  // Figure failures are development diagnostics only: the question id, the
+  // field and the resolved URL never appear in the student-facing PDF.
+  if (import.meta.env?.DEV && result?.mediaDiagnostics?.length) {
+    console.warn('[MediXO EduX] figures that could not be embedded', result.mediaDiagnostics)
   }
 }
 

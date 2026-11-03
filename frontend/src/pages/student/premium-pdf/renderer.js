@@ -10,9 +10,9 @@
 import PDFDocument from 'pdfkit'
 
 import { ensurePdfKitStandardFonts } from './pdfkit-standard-fonts.js'
-import { A4, FONTS, FONT_FILES, COLORS, normalizeForMatch } from './theme.js'
+import { A4, FONTS, FONT_FILES, normalizeForMatch } from './theme.js'
 import { ReportContext } from './layout.js'
-import { SectionHeading, SourceRegister, FinalBranding } from './components.js'
+import { FinalBranding } from './components.js'
 import { renderFullAnalysis } from './full-analysis.js'
 import { renderIntelligenceReport } from './intelligence.js'
 
@@ -66,8 +66,8 @@ export async function renderPremiumPdf({ kind = 'full', model, assets } = {}) {
     info: {
       Title: model.reportTitle,
       Author: 'MediXO EduX',
-      Subject: `${model.examName} · ${model.reportId}`,
-      Keywords: `MediXO EduX, academic intelligence, ${model.examId}, ${model.sourceHash}`,
+      Subject: `${model.examName} · ${model.reportTitle}`,
+      Keywords: `MediXO EduX, academic intelligence, ${model.examName}`,
       Creator: 'MediXO EduX Premium Academic Editorial Engine V2',
       Producer: 'MediXO EduX / PDFKit',
     },
@@ -80,29 +80,24 @@ export async function renderPremiumPdf({ kind = 'full', model, assets } = {}) {
   if (kind === 'intelligence') renderIntelligenceReport(ctx)
   else renderFullAnalysis(ctx)
 
-  if (kind === 'full') {
-    ctx.sectionBreak(0.62)
-    SectionHeading(ctx, {
-      number: '08', kicker: 'DATA INTEGRITY', title: 'Source data register',
-      note: '',
-      accent: COLORS.indigo,
-    })
-    SourceRegister(ctx, { rows: model.sourceValues || [] })
-    let missing = ctx.missingSourceValues()
-    if (missing.length) {
-      ctx.sectionBreak(0.62)
-      SectionHeading(ctx, {
-        number: '08A', kicker: 'DATA INTEGRITY', title: 'Source value addendum',
-        note: '',
-        accent: COLORS.indigo,
-      })
-      SourceRegister(ctx, { rows: missing })
-    }
-  }
-
   FinalBranding(ctx)
   const finalization = ctx.finalize()
-  const remaining = ctx.missingSourceValues().map((row) => row.value)
+  const questions = Array.isArray(model.questions) ? model.questions : []
+  const figureAssets = questions.reduce((sum, question) => (
+    sum
+    + (question.media?.statement?.length || 0)
+    + Object.values(question.media?.options || {}).reduce((count, list) => count + list.length, 0)
+    + (question.media?.explanation?.length || 0)
+  ), 0)
+  const figureFailures = questions.reduce((sum, question) => sum + (question.media?.failures?.length || 0), 0)
+  const figureReferences = questions.reduce((sum, question) => sum + (question.figureCount || 0), 0)
+  const rendered = new Set(ctx.renderedQuestions)
+  // The intelligence briefing is deliberately question-free; completeness is
+  // enforced only for the full analysis, where every row must appear.
+  const questionsMissing = kind === 'full'
+    ? questions.filter((question) => !rendered.has(question.index))
+    : []
+  const missingValues = questionsMissing.map((question) => `${question.q} was not rendered`)
   doc.end()
   const bytes = await done
 
@@ -113,7 +108,16 @@ export async function renderPremiumPdf({ kind = 'full', model, assets } = {}) {
     auditSummary: finalization.summary,
     flags: ctx.flags,
     sourceValueCount: (model.sourceValues || []).length,
-    missingValues: remaining,
+    missingValues,
+    contentCoverage: {
+      questionsSupplied: questions.length,
+      questionsRendered: rendered.size,
+      explanationsRendered: questions.filter((question) => question.explanation || question.explanationParts?.length).length,
+      figureReferences,
+      figuresEmbedded: figureAssets,
+      figuresFailed: figureFailures,
+    },
+    figureFailures: questions.flatMap((question) => question.media?.failures || []),
     emittedCharacters: ctx.emittedText.length,
     pageSize: [A4.width, A4.height],
   }

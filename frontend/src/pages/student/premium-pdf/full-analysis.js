@@ -13,10 +13,8 @@ import {
   subjectColor,
 } from './theme.js'
 import {
-  SectionHeading, Subheading, Paragraph, EditorialColumns, MetricLedger,
-  MetricLedgerSpec, BarChartSpec, StackedBarSpec, DonutGaugeSpec,
-  StaticTable, StaticTableSpec, MeasuredTable, SubjectBand, QuestionCard, Pill,
-  StackSpec, TextFlowSpec,
+  SectionHeading, Subheading, Paragraph, MetricLedger,
+  BarChart, StackedBar, MeasuredTable, SubjectBand, QuestionCard, measureQuestionCard,
 } from './components.js'
 
 function text(value) {
@@ -48,18 +46,6 @@ function prioritySoft(value) {
 function numeric(value) {
   const n = Number(String(value ?? '').replace('%', ''))
   return Number.isFinite(n) ? n : 0
-}
-
-/** A vertical stack of static specs, each with its own measured boundary. */
-function stackSpecs(ctx, builders, gap = 10) {
-  return StackSpec(ctx, { builders, gap, label: 'Editorial column stack' })
-}
-
-function ParagraphSpec(ctx, { label = '', title = '', text = '', size = TYPE.body, accent = COLORS.indigo } = {}) {
-  return TextFlowSpec(ctx, {
-    label: label || title, title, text, size, accent,
-    widthPadding: 16, paragraphGap: 2, topPad: 5, bottomPad: 8,
-  })
 }
 
 function signals(m) {
@@ -184,21 +170,6 @@ function CoverScoreFeature(ctx) {
   })
 }
 
-function CoverCoordinates(ctx) {
-  const m = ctx.model
-  const coordinates = `${m.reportId}   ·   ${m.examId}   ·   Source fingerprint ${m.sourceHash}   ·   ${m.generatedAtISO}`
-  const textOpts = {
-    size: TYPE.folio, font: FONTS.body, color: COLORS.muted, align: 'center',
-  }
-  return ctx.component({
-    type: 'cover-coordinates', label: 'Report coordinates', bottomSpacing: 0,
-    measure: () => ctx.measureText(coordinates, CONTENT.w, textOpts) + 4,
-    draw: (frame) => {
-      ctx.text(coordinates, frame.x, frame.y + 2, frame.w, textOpts)
-    },
-  })
-}
-
 function renderCover(ctx) {
   const m = ctx.model
   CoverIdentity(ctx)
@@ -213,20 +184,26 @@ function renderCover(ctx) {
     columns: 4, valueSize: 11, bottomSpacing: 12,
   })
   CoverScoreFeature(ctx)
-  MetricLedger(ctx, {
-    label: 'Executive signals',
-    items: [
-      { label: 'Score', value: m.scorePct, color: COLORS.indigo },
-      { label: 'Accuracy', value: pct(m.questionAccuracy), color: COLORS.success },
-      { label: 'Response distribution', value: m.breakdownLine, color: COLORS.midnight },
-    ],
-    columns: 3, valueSize: 11, bottomSpacing: 10,
-  })
+  // The hero block above already prints the score, the percentage and the
+  // correct/incorrect/skipped split, so this strip carries only signals that
+  // are not stated anywhere else on the cover.
+  const signals = [
+    { label: 'Accuracy', value: pct(m.questionAccuracy), color: COLORS.success },
+    { label: 'Percentile', value: m.percentileLabel, color: COLORS.indigo },
+    { label: 'Rank', value: m.rankLabel, color: COLORS.midnight },
+    { label: 'Average pace', value: m.paceLabel, color: COLORS.midnight },
+  ].filter((item) => item.value && item.value !== '—')
+  if (signals.length) {
+    MetricLedger(ctx, {
+      label: 'Secondary signals',
+      items: signals,
+      columns: signals.length, valueSize: 11, bottomSpacing: 10,
+    })
+  }
   Paragraph(ctx, {
     title: 'PUBLISHED PERFORMANCE BRIEF', text: m.aiSummary,
     size: 9.6, accent: COLORS.indigo, bottomSpacing: 10,
   })
-  CoverCoordinates(ctx)
 }
 
 function renderPerformanceIntelligence(ctx) {
@@ -252,42 +229,34 @@ function renderPerformanceIntelligence(ctx) {
     label: text(row.name), value: numeric(row.accuracy), valueLabel: pct(row.accuracy),
     color: subjectColor(row.name, index),
   }))
-  EditorialColumns(ctx, {
-    id: 'performance-charts', sectionTitle: 'Performance intelligence', gap: 20, bottomSpacing: 8,
-    columns: [
-      stackSpecs(ctx, [
-        (w) => StackedBarSpec(ctx, {
-          label: 'Response composition', title: 'Response composition',
-          subtitle: `${m.totalQuestions} questions in the paper`,
-          segments: responseSegments.map((segment) => ({ ...segment, value: text(segment.value) })),
-          legend: true,
-        }),
-        (w) => BarChartSpec(ctx, {
-          label: 'Difficulty analysis', title: 'Difficulty analysis',
-          subtitle: 'Questions and published accuracy', bars: difficultyBars,
-          accent: COLORS.indigo, minRowHeight: 16, rowGap: 1,
-          legend: 'Accuracy values are reproduced from the payload.',
-        }),
-      ], 8),
-      stackSpecs(ctx, [
-        (w) => BarChartSpec(ctx, {
-          label: 'Mistake distribution', title: 'Mistake distribution',
-          subtitle: 'Count by published classification', bars: mistakeBars,
-          accent: COLORS.error, minRowHeight: 16, rowGap: 1,
-          legend: 'Seven source classifications; rows are measured independently.',
-        }),
-        (w) => BarChartSpec(ctx, {
-          label: 'Subject-wise performance', title: 'Subject-wise performance',
-          subtitle: 'Accuracy by subject', bars: subjectBars,
-          accent: COLORS.indigo, minRowHeight: 16, rowGap: 1,
-          legend: m.subjectValues.map((row) => `${text(row.name)} ${text(row.score)} / ${text(row.maxMarks)}`).join('   '),
-        }),
-      ], 8),
-    ],
+  StackedBar(ctx, {
+    title: 'Response composition',
+    subtitle: `${m.totalQuestions} questions in the paper`,
+    segments: responseSegments.map((segment) => ({ ...segment, value: text(segment.value) })),
+    legend: true, bottomSpacing: 10,
+  })
+  BarChart(ctx, {
+    title: 'Difficulty analysis',
+    subtitle: 'Questions and published accuracy', bars: difficultyBars,
+    accent: COLORS.indigo, minRowHeight: 16, rowGap: 2,
+    legend: 'Accuracy values are reproduced from the payload.', bottomSpacing: 10,
+  })
+  BarChart(ctx, {
+    title: 'Mistake distribution',
+    subtitle: 'Count by published classification', bars: mistakeBars,
+    accent: COLORS.error, minRowHeight: 16, rowGap: 2,
+    legend: 'Source classifications; rows are measured independently.', bottomSpacing: 10,
+  })
+  BarChart(ctx, {
+    title: 'Subject-wise performance',
+    subtitle: 'Accuracy by subject', bars: subjectBars,
+    accent: COLORS.indigo, minRowHeight: 16, rowGap: 2,
+    legend: m.subjectValues.map((row) => `${text(row.name)} ${text(row.score)} / ${text(row.maxMarks)}`).join('   '),
+    bottomSpacing: 8,
   })
   Subheading(ctx, { title: 'Important performance signals', note: '', accent: COLORS.indigo })
   MetricLedger(ctx, {
-    label: 'Performance signals', items: signals(m), columns: 8, valueSize: 9.2, bottomSpacing: 4,
+    label: 'Performance signals', items: signals(m), columns: 3, valueSize: 10.4, bottomSpacing: 4,
   })
 }
 
@@ -383,39 +352,33 @@ function renderTimeIntelligence(ctx) {
     ],
   })
   Subheading(ctx, { title: 'Time-management metrics', accent: COLORS.indigo })
-  EditorialColumns(ctx, {
-    id: 'time-metrics-columns', sectionTitle: 'Time intelligence', gap: 18, bottomSpacing: 4,
-    columns: [
-      (w) => MetricLedgerSpec(ctx, {
-        label: 'Time-management metrics',
-        items: [
-          { label: 'Average / question', value: text(ti.avgTimePerQuestion) },
-          { label: 'Navigation count', value: text(ti.navigationCount) },
-          { label: 'Management score', value: text(ti.timeManagementScore) },
-          { label: 'Fastest question', value: text(ti.fastestQuestion?.q) },
-          { label: 'Fastest time', value: text(ti.fastestQuestion?.time) },
-          { label: 'Slowest question', value: text(ti.slowestQuestion?.q) },
-          { label: 'Slowest time', value: text(ti.slowestQuestion?.time) },
-        ],
-        columns: 4, valueSize: 9.2,
-      }),
-      (w) => StaticTableSpec(ctx, {
-        label: 'Sectional time allocation', title: 'Sectional allocation and efficiency',
-        rows: (ti.distribution || []).map((row) => ({
-          section: text(row.section), allocated: text(row.allocated), used: text(row.used), efficiency: text(row.efficiency),
-        })),
-        columns: [
-          { key: 'section', label: 'Section', width: 1.4, font: FONTS.bodySemi },
-          { key: 'allocated', label: 'Alloc.', width: 0.8, align: 'right' },
-          { key: 'used', label: 'Used', width: 0.8, align: 'right' },
-          { key: 'efficiency', label: 'Eff.', width: 0.7, align: 'right', color: (v) => masteryColor(v) },
-        ],
-        rowPadding: 1.5,
-      }),
+  MetricLedger(ctx, {
+    label: 'Time-management metrics',
+    items: [
+      { label: 'Average per question', value: text(ti.avgTimePerQuestion) },
+      { label: 'Navigation count', value: text(ti.navigationCount) },
+      { label: 'Management score', value: text(ti.timeManagementScore) },
+      { label: 'Fastest question', value: text(ti.fastestQuestion?.q) },
+      { label: 'Fastest time', value: text(ti.fastestQuestion?.time) },
+      { label: 'Slowest question', value: text(ti.slowestQuestion?.q) },
+      { label: 'Slowest time', value: text(ti.slowestQuestion?.time) },
     ],
+    columns: 3, valueSize: 10.4, bottomSpacing: 10,
+  })
+  MeasuredTable(ctx, {
+    id: 'sectional-time-allocation', title: 'Sectional allocation and efficiency',
+    rows: (ti.distribution || []).map((row) => ({
+      section: text(row.section), allocated: text(row.allocated), used: text(row.used), efficiency: text(row.efficiency),
+    })),
+    columns: [
+      { key: 'section', label: 'Section', width: 1.4, font: FONTS.bodySemi },
+      { key: 'allocated', label: 'Allocated', width: 0.8, align: 'right' },
+      { key: 'used', label: 'Used', width: 0.8, align: 'right' },
+      { key: 'efficiency', label: 'Efficiency', width: 0.8, align: 'right', color: (v) => masteryColor(v) },
+    ],
+    rowPadding: 2, bottomSpacing: 6,
   })
 }
-
 
 function renderComparisonAndProjection(ctx) {
   const m = ctx.model
@@ -431,30 +394,19 @@ function renderComparisonAndProjection(ctx) {
     percentile: text(comp[key].percentile), grade: text(comp[key].grade), reference: text(comp[key].name),
   }))
   Subheading(ctx, { title: 'Comparative performance', note: '', accent: COLORS.indigo })
-  EditorialColumns(ctx, {
-    id: 'comparison-columns', sectionTitle: 'Comparison intelligence', gap: 18, bottomSpacing: 6,
+  // The benchmark chart that used to sit here repeated the same five scores as
+  // the register below it. The register carries score, percentile, grade and
+  // reference, so it is the single source for this comparison.
+  MeasuredTable(ctx, {
+    id: 'comparison-register', title: 'Comparison register', rows: comparisonRows,
     columns: [
-      (w) => BarChartSpec(ctx, {
-        label: 'Benchmark score comparison', title: 'Benchmark scores',
-        bars: comparisonRows.map((row, index) => ({
-          label: row.label, value: numeric(row.score), valueLabel: row.score,
-          color: [COLORS.indigo, COLORS.midnight, COLORS.muted, COLORS.success, COLORS.warning][index % 5],
-        })),
-        accent: COLORS.indigo, minRowHeight: 16, rowGap: 1,
-        legend: `Current score ${text(m.hero.score)} / ${text(m.hero.maxScore)}`,
-      }),
-      (w) => StaticTableSpec(ctx, {
-        label: 'Published comparison fields', title: 'Comparison register', rows: comparisonRows,
-        columns: [
-          { key: 'label', label: 'Benchmark', width: 1.8, font: FONTS.bodySemi },
-          { key: 'score', label: 'Score', width: 0.8, align: 'right', features: ['tnum'] },
-          { key: 'percentile', label: 'Pct.', width: 0.8, align: 'right' },
-          { key: 'grade', label: 'Grade', width: 0.7, align: 'center' },
-          { key: 'reference', label: 'Reference', width: 1.2 },
-        ],
-        rowPadding: 1.5,
-      }),
+      { key: 'label', label: 'Benchmark', width: 1.8, font: FONTS.bodySemi },
+      { key: 'score', label: 'Score', width: 0.8, align: 'right', features: ['tnum'] },
+      { key: 'percentile', label: 'Percentile', width: 0.9, align: 'right' },
+      { key: 'grade', label: 'Grade', width: 0.7, align: 'center' },
+      { key: 'reference', label: 'Reference', width: 1.2 },
     ],
+    rowPadding: 2, bottomSpacing: 6,
   })
   MetricLedger(ctx, {
     label: 'Published score changes',
@@ -465,41 +417,35 @@ function renderComparisonAndProjection(ctx) {
   })
   Subheading(ctx, { title: 'Projection and readiness', note: '', accent: COLORS.success })
   const trajectoryRows = (pred.trajectory || []).map((row) => ({ exam: text(row.exam), score: text(row.score) }))
-  EditorialColumns(ctx, {
-    id: 'projection-columns', sectionTitle: 'Projection intelligence', gap: 18, bottomSpacing: 6,
-    columns: [
-      (w) => BarChartSpec(ctx, {
-        label: 'Score trajectory', title: 'Score trajectory',
-        bars: trajectoryRows.map((row, index) => ({
-          label: row.exam, value: numeric(row.score), valueLabel: row.score,
-          color: index === trajectoryRows.length - 1 ? COLORS.success : COLORS.indigo,
-        })),
-        accent: COLORS.success, minRowHeight: 14, rowGap: 1,
-        legend: `Expected improvement ${text(pred.expectedImprovement)}   ·   Risk ${text(pred.riskLevel)}`,
-      }),
-      stackSpecs(ctx, [
-        (w) => MetricLedgerSpec(ctx, {
-          label: 'Prediction signals',
-          items: [
-            { label: 'JEE percentile', value: text(pred.jeePercentile) },
-            { label: 'NEET score', value: text(pred.neetScore) },
-            { label: 'Expected AIR', value: text(pred.expectedAIR) },
-            { label: 'Target probability', value: text(pred.targetProbability) },
-            { label: 'Risk level', value: text(pred.riskLevel) },
-            { label: 'Expected improvement', value: text(pred.expectedImprovement) },
-          ],
-          columns: 3, valueSize: 9.2,
-        }),
-        (w) => StaticTableSpec(ctx, {
-          label: 'Trajectory register', title: 'Trajectory values', rows: trajectoryRows,
-          columns: [
-            { key: 'exam', label: 'Examination / projection', width: 2.2, font: FONTS.bodySemi },
-            { key: 'score', label: 'Score', width: 0.8, align: 'right', features: ['tnum'] },
-          ],
-          rowPadding: 0.5,
-        }),
-      ], 6),
+  BarChart(ctx, {
+    title: 'Score trajectory',
+    bars: trajectoryRows.map((row, index) => ({
+      label: row.exam, value: numeric(row.score), valueLabel: row.score,
+      color: index === trajectoryRows.length - 1 ? COLORS.success : COLORS.indigo,
+    })),
+    accent: COLORS.success, minRowHeight: 14, rowGap: 2,
+    legend: `Expected improvement ${text(pred.expectedImprovement)}   ·   Risk ${text(pred.riskLevel)}`,
+    bottomSpacing: 10,
+  })
+  MetricLedger(ctx, {
+    label: 'Prediction signals',
+    items: [
+      { label: 'JEE percentile', value: text(pred.jeePercentile) },
+      { label: 'NEET score', value: text(pred.neetScore) },
+      { label: 'Expected AIR', value: text(pred.expectedAIR) },
+      { label: 'Target probability', value: text(pred.targetProbability) },
+      { label: 'Risk level', value: text(pred.riskLevel) },
+      { label: 'Expected improvement', value: text(pred.expectedImprovement) },
     ],
+    columns: 3, valueSize: 10.4, bottomSpacing: 8,
+  })
+  MeasuredTable(ctx, {
+    id: 'trajectory-register', title: 'Trajectory values', rows: trajectoryRows,
+    columns: [
+      { key: 'exam', label: 'Examination / projection', width: 2.2, font: FONTS.bodySemi },
+      { key: 'score', label: 'Score', width: 0.8, align: 'right', features: ['tnum'] },
+    ],
+    rowPadding: 2, bottomSpacing: 6,
   })
   MetricLedger(ctx, {
     label: 'Readiness metrics',
@@ -511,7 +457,7 @@ function renderComparisonAndProjection(ctx) {
       { label: 'Success rate', value: pct(m.successRate) },
       { label: 'Badge', value: text(m.hero.badge) },
     ],
-    columns: 6, valueSize: 9.2, bottomSpacing: 4,
+    columns: 3, valueSize: 10.4, bottomSpacing: 6,
   })
 }
 
@@ -520,12 +466,7 @@ function renderQuestionIntelligence(ctx) {
   const m = ctx.model
   SectionHeading(ctx, {
     number: '05', kicker: 'QUESTION INTELLIGENCE', title: 'Question-by-question analysis',
-    note: `${m.questionRowsSupplied} question-review rows supplied. Missing optional values are shown as —; full source explanations are never shortened.`,
-  })
-  Paragraph(ctx, {
-    title: 'REVIEW LEGEND',
-    text: 'Correct  ·  Incorrect  ·  Skipped     Each question presents its identity, classifications, answer comparison, marks, time, mistake category and complete solution.',
-    size: TYPE.bodySmall, accent: COLORS.indigo, bottomSpacing: 10,
+    note: `${m.questionRowsSupplied} questions reviewed · published explanations reproduced in full`,
   })
   const subjectCounts = new Map()
   m.questions.forEach((question) => {
@@ -540,8 +481,11 @@ function renderQuestionIntelligence(ctx) {
       SubjectBand(ctx, {
         subject,
         index: subjectIndex,
-        note: `${subjectCounts.get(subject) || 1} question-review blocks · complete explanations retained`,
+        note: `${subjectCounts.get(subject) || 1} questions`,
         bottomSpacing: 8,
+        // Reserve enough for the opening of the card, capped so a single
+        // figure-heavy question cannot push the band onto an empty page.
+        keepWithNext: Math.min(330, Math.max(170, measureQuestionCard(ctx, question))),
       })
       subjectIndex += 1
       lastSubject = subject
@@ -585,38 +529,31 @@ function renderLearningIntelligence(ctx) {
   const evidenceRows = m.mistakeList.map((row) => ({ q: text(row.q), detail: text(row.detail) }))
   const weakChapters = (rec.weakChapters || []).map((value, index) => ({ index: String(index + 1), value: text(value) }))
   const weakTopics = (rec.weakTopics || []).map((value, index) => ({ index: String(index + 1), value: text(value) }))
-  EditorialColumns(ctx, {
-    id: 'learning-evidence-columns', sectionTitle: 'Learning evidence', gap: 16, bottomSpacing: 8,
+  MeasuredTable(ctx, {
+    id: 'topic-level-accuracy', title: 'Topic-level accuracy', rows: topicRows,
     columns: [
-      (w) => StaticTableSpec(ctx, {
-        label: 'Topic-level accuracy', title: 'Topic-level accuracy', rows: topicRows,
-        columns: [
-          { key: 'topic', label: 'Topic', width: 2.2, font: FONTS.bodySemi },
-          { key: 'subject', label: 'Subject', width: 1.0 },
-          { key: 'accuracy', label: 'Acc.', width: 0.7, align: 'right', color: (v) => masteryColor(v) },
-          { key: 'level', label: 'Level', width: 0.8, color: (v) => masteryColor(v) },
-        ],
-        rowPadding: 1.5,
-      }),
-      stackSpecs(ctx, [
-        (w) => StaticTableSpec(ctx, {
-          label: 'Mistake evidence', title: 'Mistake evidence', rows: evidenceRows,
-          columns: [
-            { key: 'q', label: 'Q', width: 0.45, font: FONTS.bodyBold },
-            { key: 'detail', label: 'Source detail', width: 3.0 },
-          ],
-          rowPadding: 1.5,
-        }),
-        (w) => StaticTableSpec(ctx, {
-          label: 'Weak chapters', title: 'Weak chapters', rows: weakChapters,
-          columns: [
-            { key: 'index', label: 'No.', width: 0.4, align: 'center' },
-            { key: 'value', label: 'Weak chapter', width: 2.6, font: FONTS.bodySemi },
-          ],
-          rowPadding: 1.5,
-        }),
-      ], 6),
+      { key: 'topic', label: 'Topic', width: 2.4, font: FONTS.bodySemi },
+      { key: 'subject', label: 'Subject', width: 1.0 },
+      { key: 'accuracy', label: 'Accuracy', width: 0.8, align: 'right', color: (v) => masteryColor(v) },
+      { key: 'level', label: 'Level', width: 0.9, color: (v) => masteryColor(v) },
     ],
+    rowPadding: 2, bottomSpacing: 8,
+  })
+  MeasuredTable(ctx, {
+    id: 'mistake-evidence', title: 'Mistake evidence', rows: evidenceRows,
+    columns: [
+      { key: 'q', label: 'Question', width: 0.55, font: FONTS.bodyBold },
+      { key: 'detail', label: 'Source detail', width: 3.4 },
+    ],
+    rowPadding: 2, bottomSpacing: 8,
+  })
+  MeasuredTable(ctx, {
+    id: 'weak-chapters', title: 'Weak chapters', rows: weakChapters,
+    columns: [
+      { key: 'index', label: 'No.', width: 0.4, align: 'center' },
+      { key: 'value', label: 'Weak chapter', width: 3.2, font: FONTS.bodySemi },
+    ],
+    rowPadding: 2, bottomSpacing: 6,
   })
   Subheading(ctx, { title: 'Subject-wise revision sections', note: '', accent: COLORS.indigo })
   const revisionRows = m.revisionGroups.flatMap((group) => group.topics.map((topic) => ({
@@ -644,21 +581,13 @@ function renderLearningIntelligence(ctx) {
     ],
     rowPadding: 1, bottomSpacing: 6,
   })
-  EditorialColumns(ctx, {
-    id: 'weak-topics-list', sectionTitle: 'Published revision priorities', gap: 18, bottomSpacing: 4,
+  MeasuredTable(ctx, {
+    id: 'weak-topics', title: 'Weak topics · published list', rows: weakTopics,
     columns: [
-      (w) => StaticTableSpec(ctx, {
-        label: 'Weak topics', title: 'Weak topics  /  published list', rows: weakTopics,
-        columns: [
-          { key: 'index', label: 'No.', width: 0.4, align: 'center' },
-          { key: 'value', label: 'Weak topic', width: 2.6, font: FONTS.bodySemi },
-        ],
-        rowPadding: 1.5,
-      }),
-      (w) => ParagraphSpec(ctx, {
-        label: 'Published performance brief', title: 'PUBLISHED PERFORMANCE BRIEF', text: m.aiSummary, size: 9.2,
-      }),
+      { key: 'index', label: 'No.', width: 0.4, align: 'center' },
+      { key: 'value', label: 'Weak topic', width: 3.2, font: FONTS.bodySemi },
     ],
+    rowPadding: 2, bottomSpacing: 6,
   })
 }
 

@@ -1129,7 +1129,13 @@ def analysis_from_attempt(attempt: dict, *, db: Session | None = None, attempt_r
                 "selected": sel,
                 "correctAnswer": correct_ans,
                 "text": qsnap.get("text") or qsnap.get("question") or None,
+                # Structured options keep their own figures; the stem figure
+                # fields are carried explicitly so the PDF export can embed
+                # the original examination figure for this question.
                 "options": qsnap.get("options") or [],
+                "imageUrl": qsnap.get("imageUrl"),
+                "stemImageUrls": qsnap.get("stemImageUrls") or [],
+                "stemImageUrl": qsnap.get("stemImageUrl"),
                 "hint": q_hint,
                 "explanation": q_explanation,
                 # Mistake analysis — populated for Incorrect answers only
