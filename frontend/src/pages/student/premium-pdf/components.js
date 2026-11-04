@@ -20,6 +20,50 @@ import {
 } from './pagination.js'
 
 const HAIRLINE = 0.5
+const TABLE_HEADER_SIZE = 8.2
+const TABLE_HEADER_PAD = 8
+
+// Compact academic question hierarchy. These values apply only to the
+// question-review section; the rest of the report keeps its approved type scale.
+const QUESTION_TYPE = Object.freeze({
+  title: 9.8,
+  subject: 7.9,
+  status: 7.2,
+  metadata: 7.35,
+  statement: 8.8,
+  option: 8.2,
+  optionLabel: 7.2,
+  optionLetter: 8.2,
+  responseLabel: 7.2,
+  responseValue: 7.9,
+  insightLabel: 7.2,
+  insight: 7.35,
+  explanationLabel: 7.7,
+  explanation: 8.35,
+  mistakeNote: 7.4,
+  partLabel: 7.2,
+})
+const QUESTION_SPACE = Object.freeze({
+  horizontalPad: 10,
+  topPad: 6,
+  bottomPad: 5,
+  headerH: 15,
+  metadataBottom: 2,
+  statementBottom: 3,
+  figureGap: 4,
+  figureBottom: 3,
+  optionsLabelGap: 3,
+  optionGap: 3,
+  optionFigureGap: 3,
+  responseTop: 4,
+  responseLabelGap: 1,
+  responseBottom: 3,
+  insightTop: 3,
+  solutionTop: 6,
+  solutionLabelGap: 2,
+  partGap: 2,
+  solutionBottom: 4,
+})
 
 /* ------------------------------------------------------------------ *
  * Content-driven pagination primitives
@@ -27,16 +71,18 @@ const HAIRLINE = 0.5
 
 /** A measured, line-chunkable text block used for oversized single entries. */
 export function TextFlowSpec(ctx, {
-  label = '', title = '', text = '', size = TYPE.body, accent = COLORS.indigo,
-  tone = COLORS.ink, widthPadding = 16, paragraphGap = 2, topPad = 5, bottomPad = 8,
+  label = '', title = '', text = '', size = TYPE.body, titleSize = TYPE.label,
+  accent = COLORS.indigo, tone = COLORS.ink, widthPadding = 16,
+  paragraphGap = 2, topPad = 5, bottomPad = 8,
 } = {}) {
   const bodyOpts = { size, font: FONTS.body, color: tone, paragraphGap }
+  const titleOpts = { size: titleSize, font: FONTS.bodySemi, characterSpacing: 0.7 }
   const bodyWidth = (w) => Math.max(20, w - widthPadding)
   const resolvedTitle = (opts = {}) => (opts.continuation && title ? `${title} · continued` : title)
   const fixed = (w, opts = {}) => {
     const t = resolvedTitle(opts)
     const titleH = t
-      ? ctx.measureText(t, Math.max(20, w - 14), { size: TYPE.label, font: FONTS.bodySemi, characterSpacing: 0.7 }) + 3
+      ? ctx.measureText(t, Math.max(20, w - 14), titleOpts) + 3
       : 0
     return topPad + titleH + bottomPad
   }
@@ -51,7 +97,7 @@ export function TextFlowSpec(ctx, {
         let cursor = frame.y + topPad
         if (t) {
           cursor += ctx.text(t, frame.x + 12, cursor, frame.w - 14, {
-            size: TYPE.label, font: FONTS.bodySemi, color: accent, characterSpacing: 0.7,
+            size: titleSize, font: FONTS.bodySemi, color: accent, characterSpacing: 0.7,
           }) + 3
         }
         if (bodyText) ctx.text(bodyText, frame.x + 12, cursor, bodyWidth(frame.w), bodyOpts)
@@ -853,10 +899,43 @@ export function DonutGauge(ctx, opts) {
  * Tables — measured rows, repeated headers
  * ------------------------------------------------------------------ */
 
-function resolveWidths(columns, w) {
+function resolveWidths(columns, w, measuredMinimums = []) {
   const weights = columns.map((col) => Number(col.width) || 1)
-  const sum = weights.reduce((a, b) => a + b, 0) || 1
-  return weights.map((weight) => (weight / sum) * w)
+  const weightTotal = weights.reduce((sum, value) => sum + value, 0) || 1
+  const minimums = columns.map((column, index) => Math.max(
+    0,
+    Number(column.minWidth) || 0,
+    Number(measuredMinimums[index]) || 0,
+  ))
+  const minimumTotal = minimums.reduce((sum, value) => sum + value, 0)
+  if (minimumTotal >= w) {
+    const scale = w / Math.max(1, minimumTotal)
+    return minimums.map((value) => value * scale)
+  }
+  const flexible = w - minimumTotal
+  return minimums.map((minimum, index) => minimum + (weights[index] / weightTotal) * flexible)
+}
+
+function tableHeaderOptions(size = TABLE_HEADER_SIZE) {
+  return { size, font: FONTS.bodySemi, characterSpacing: 0.2 }
+}
+
+function tableHeaderMinimums(ctx, columns, size = TABLE_HEADER_SIZE) {
+  const opts = tableHeaderOptions(size)
+  return columns.map((column) => ctx.textEngine.measureRun(
+    String(column.label).toUpperCase(), FONTS.bodySemi, size, opts,
+  ) + TABLE_HEADER_PAD + 1)
+}
+
+function measureTableHeader(ctx, columns, widths, size = TABLE_HEADER_SIZE) {
+  const opts = tableHeaderOptions(size)
+  return columns.map((column, index) => ctx.measureText(
+    String(column.label).toUpperCase(), Math.max(12, widths[index] - TABLE_HEADER_PAD), opts,
+  ))
+}
+
+function tableHeaderHeight(ctx, columns, widths, size = TABLE_HEADER_SIZE) {
+  return Math.max(15, ...measureTableHeader(ctx, columns, widths, size).map((height) => height + 4))
 }
 
 function cellTextOptions(col, value, row) {
@@ -949,8 +1028,9 @@ function hasTableValue(column, row) {
 
 export function MeasuredTable(ctx, {
   id, title = '', rows = [], columns = [], x = CONTENT.x, w = CONTENT.w,
-  rowPadding = 3, fontSize = TYPE.table, zebra = true, header = true,
-  groupKey = '', groupPrefix = '', topSpacing = 0, bottomSpacing = 8, keepWithNext = 0,
+  rowPadding = 3, fontSize = TYPE.table, headerSize = TABLE_HEADER_SIZE,
+  zebra = true, header = true, groupKey = '', groupPrefix = '',
+  topSpacing = 0, bottomSpacing = 8, keepWithNext = 0,
 } = {}) {
   if (!rows.length || !columns.length) return null
   // A grouped table already prints the group value as its band; repeating it in
@@ -960,11 +1040,10 @@ export function MeasuredTable(ctx, {
   if (!rows.length) return null
   columns = columns.filter((column) => rows.some((row) => hasTableValue(column, row)))
   if (!columns.length) return null
-  const widths = resolveWidths(columns, w)
+  const widths = resolveWidths(columns, w, header ? tableHeaderMinimums(ctx, columns, headerSize) : [])
+  const headerMeasures = header ? measureTableHeader(ctx, columns, widths, headerSize) : []
   const headerH = header
-    ? Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, {
-      size: TYPE.tableLabel, font: FONTS.bodySemi, characterSpacing: 0.3,
-    }) + 5))
+    ? Math.max(15, ...headerMeasures.map((height) => height + 4))
     : 0
   const rowSpecs = rows.map((row) => {
     const cellHeights = columns.map((col, i) => measureCell(ctx, col, row, row[col.key], widths[i]))
@@ -999,8 +1078,10 @@ export function MeasuredTable(ctx, {
         ctx.canvas.rect(frame.x, frame.y, 2, headerH - 2, { fill: COLORS.indigo, audit: false })
         let cx = frame.x
         columns.forEach((col, i) => {
-          ctx.text(String(col.label).toUpperCase(), cx + 4, frame.y + 2, widths[i] - 8, {
-            size: TYPE.tableLabel, font: FONTS.bodySemi, color: COLORS.white,
+          const labelH = headerMeasures[i] || 0
+          const labelY = frame.y + Math.max(1, (headerH - labelH) / 2)
+          ctx.text(String(col.label).toUpperCase(), cx + TABLE_HEADER_PAD / 2, labelY, widths[i] - TABLE_HEADER_PAD, {
+            size: headerSize, font: FONTS.bodySemi, color: COLORS.white,
             align: col.align || 'left', characterSpacing: 0.2,
           })
           cx += widths[i]
@@ -1084,8 +1165,12 @@ export function MeasuredTable(ctx, {
 }
 
 export function StaticTableSpec(ctx, {
-  label = '', title = '', rows = [], columns = [], rowPadding = 2.5, zebra = true, header = true,
+  label = '', title = '', rows = [], columns = [], rowPadding = 2.5,
+  zebra = true, header = true, headerSize = TABLE_HEADER_SIZE,
 } = {}) {
+  const widthsFor = (w) => resolveWidths(
+    columns, w, header ? tableHeaderMinimums(ctx, columns, headerSize) : [],
+  )
   const entries = rows.map((row, index) => ({
     kind: 'row', row: { ...row, __rowOffset: index }, index,
   }))
@@ -1094,32 +1179,36 @@ export function StaticTableSpec(ctx, {
     const tableRows = subset.map((entry) => entry.row)
     const t = resolvedTitle(opts)
     const rowHeights = (w) => {
-      const widths = resolveWidths(columns, w)
+      const widths = widthsFor(w)
       return tableRows.map((row) => Math.max(
         18,
         ...columns.map((col, i) => measureCell(ctx, col, row, row[col.key], widths[i])),
       ) + rowPadding * 2)
     }
     const measure = (w) => {
-      const widths = resolveWidths(columns, w)
-      const headerH = header ? Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: TYPE.tableLabel, font: FONTS.bodySemi, characterSpacing: 0.3 }) + 5)) : 0
+      const widths = widthsFor(w)
+      const headerH = header ? tableHeaderHeight(ctx, columns, widths, headerSize) : 0
       const titleH = t ? ctx.measureText(t, w, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo }) + 4 : 0
       return titleH + headerH + rowHeights(w).reduce((sum, h) => sum + h, 0)
     }
     const draw = (frame) => {
-      const widths = resolveWidths(columns, frame.w)
+      const widths = widthsFor(frame.w)
       const heights = rowHeights(frame.w)
       let cursor = frame.y
       if (t) {
         cursor += ctx.text(t, frame.x, cursor, frame.w, { size: TYPE.label, font: FONTS.bodySemi, color: COLORS.indigo }) + 4
       }
       if (header) {
-        const headerH = Math.max(16, ...columns.map((col, i) => ctx.measureText(String(col.label).toUpperCase(), widths[i] - 8, { size: TYPE.tableLabel, font: FONTS.bodySemi, characterSpacing: 0.3 }) + 5))
+        const headerH = tableHeaderHeight(ctx, columns, widths, headerSize)
+        const headerMeasures = measureTableHeader(ctx, columns, widths, headerSize)
         ctx.canvas.rect(frame.x, cursor, frame.w, headerH, { fill: COLORS.midnight, audit: false })
         let hx = frame.x
         columns.forEach((col, i) => {
-          ctx.text(String(col.label).toUpperCase(), hx + 4, cursor + 2, widths[i] - 8, {
-            size: TYPE.tableLabel, font: FONTS.bodySemi, color: COLORS.white, align: col.align || 'left', characterSpacing: 0.2,
+          const labelH = headerMeasures[i] || 0
+          const labelY = cursor + Math.max(1, (headerH - labelH) / 2)
+          ctx.text(String(col.label).toUpperCase(), hx + TABLE_HEADER_PAD / 2, labelY, widths[i] - TABLE_HEADER_PAD, {
+            size: headerSize, font: FONTS.bodySemi, color: COLORS.white,
+            align: col.align || 'left', characterSpacing: 0.2,
           })
           hx += widths[i]
         })
@@ -1141,7 +1230,7 @@ export function StaticTableSpec(ctx, {
     return { type: 'static-table', label, measure, draw }
   }
   const split = (splitCtx, entry, w, maxHeight, opts) => {
-    const widths = resolveWidths(columns, w)
+    const widths = widthsFor(w)
     const fixed = build([], opts).measure(w)
     return splitRowEntry(splitCtx, entry.row, columns, widths, Math.max(12, maxHeight - fixed), rowPadding)
   }
@@ -1205,38 +1294,56 @@ function responseLabel(value, status = '') {
   return /skip|unattempt|not visited/i.test(String(status)) ? 'Not attempted' : ''
 }
 
-function optionFigureLayout(question, option, width, budget) {
+function optionFigureLayout(question, option, width, budget, maxHeight) {
   // Option figures are attached to the question's media map by option label,
-  // which is what keeps a figure bound to its own option.
+  // which keeps every original diagram bound to its own answer choice.
   const assets = question?.media?.options?.[option?.label] || option?.media || []
   if (!assets.length) return { items: [], height: 0 }
-  return layoutFigureStack(assets, { field: 'option', available: width, gap: 7, budget })
+  return layoutFigureStack(assets, {
+    field: 'option', available: width, maxWidth: Math.min(210, width),
+    maxHeight, gap: 4, budget,
+  })
 }
 
-function prepareQuestion(ctx, question, w) {
-  const pad = 18
+function questionFigurePolicy(availableHeight) {
+  const pageSpace = Math.max(0, Math.min(CONTENT.h, Number(availableHeight) || CONTENT.h))
+  return {
+    statementMaxHeight: Math.min(205, Math.max(112, pageSpace * 0.29)),
+    statementBudget: Math.min(214, Math.max(112, pageSpace * 0.31)),
+    optionMaxHeight: Math.min(88, Math.max(48, pageSpace * 0.125)),
+    optionBudget: Math.min(198, Math.max(96, pageSpace * 0.28)),
+    explanationMaxHeight: Math.min(148, Math.max(70, pageSpace * 0.21)),
+    explanationBudget: Math.min(152, Math.max(70, pageSpace * 0.22)),
+  }
+}
+
+function prepareQuestion(ctx, question, w, { availableHeight = CONTENT.h } = {}) {
+  const pad = QUESTION_SPACE.horizontalPad
   const innerW = w - pad * 2
+  const figurePolicy = questionFigurePolicy(availableHeight)
   const status = fmt(question.status)
   const accent = statusColor(status)
   const title = `QUESTION ${questionNumber(question)}`
   const subject = present(question.subject) ? String(question.subject).toUpperCase() : ''
-
-  const headerH = 22
+  const headerH = QUESTION_SPACE.headerH
   const metaText = questionMetaLine(question)
-  const metaH = metaText ? ctx.measureText(metaText, innerW, { size: 9.2, font: FONTS.body }) + 6 : 0
+  const metaOpts = { size: QUESTION_TYPE.metadata, font: FONTS.body }
+  const metaH = metaText
+    ? ctx.measureText(metaText, innerW, metaOpts) + QUESTION_SPACE.metadataBottom
+    : 0
 
   const statement = question.statement
-    ? prepareSolution(ctx, question.statement, 10.6, innerW, question.q)
+    ? prepareSolution(ctx, question.statement, QUESTION_TYPE.statement, innerW, question.q)
     : null
-  const statementH = statement ? statement.height + 5 : 0
-
-  const statementNote = ''
-  const statementNoteH = 0
-
+  const statementH = statement ? statement.height + QUESTION_SPACE.statementBottom : 0
   const statementFigures = layoutFigureStack(question.media?.statement || [], {
-    field: 'statement', available: innerW, gap: 9, budget: 296,
+    field: 'statement', available: innerW, maxWidth: Math.min(340, innerW),
+    maxHeight: figurePolicy.statementMaxHeight, gap: QUESTION_SPACE.figureGap,
+    budget: figurePolicy.statementBudget,
   })
-  const statementFigureH = statementFigures.items.length ? statementFigures.height + 6 : 0
+  const statementFigureH = statementFigures.items.length
+    ? statementFigures.height + QUESTION_SPACE.figureBottom
+    : 0
 
   const isSkipped = /skip|unattempt|not visited/i.test(status)
   const rawOptions = question.optionItems?.length
@@ -1246,34 +1353,69 @@ function prepareQuestion(ctx, question, w) {
       text: typeof option === 'string' ? option : '',
       media: [],
     }))
-  const optionCount = rawOptions.length
   const imageOptions = rawOptions.filter((option) => (
     question?.media?.options?.[option.label] || option.media || []
   ).length).length
-  const perOptionBudget = imageOptions ? Math.min(118, 264 / imageOptions) : 0
+  const perOptionBudget = imageOptions
+    ? Math.min(figurePolicy.optionMaxHeight, figurePolicy.optionBudget / imageOptions)
+    : 0
+  const optionTextOpts = {
+    size: QUESTION_TYPE.option, font: FONTS.body, color: COLORS.ink,
+    lineHeight: QUESTION_TYPE.option * 1.4,
+  }
+  const optionsLabelOpts = {
+    size: QUESTION_TYPE.optionLabel, font: FONTS.bodySemi,
+    characterSpacing: 0.6,
+  }
   const optionBlocks = rawOptions.map((option) => {
     const textWidth = innerW - 22
-    const textH = option.text
-      ? ctx.measureText(option.text, textWidth, { size: 10.2, font: FONTS.body, lineHeight: 14.2 })
+    // Option strings can contain inline TeX just like stems and explanations.
+    // Route them through the same MathJax-backed renderer instead of exposing
+    // literal dollar delimiters and commands in the student-facing PDF.
+    const textSolution = option.text
+      ? prepareSolution(ctx, option.text, QUESTION_TYPE.option, textWidth, question.q)
+      : null
+    const textH = textSolution?.height || 0
+    const figures = optionFigureLayout(
+      question, option, textWidth, perOptionBudget, figurePolicy.optionMaxHeight,
+    )
+    const figureOffset = figures.items.length && option.text
+      ? textH + QUESTION_SPACE.optionFigureGap
       : 0
-    const figures = optionFigureLayout(question, option, textWidth, perOptionBudget)
-    return {
-      option,
-      textH,
-      figures,
-      height: Math.max(15, textH) + (figures.items.length ? 4 + figures.height : 0),
-    }
+    const rowH = Math.max(12, textH, figureOffset + figures.height)
+    return { option, textH, textWidth, textSolution, figures, rowH, height: rowH + QUESTION_SPACE.optionGap }
   })
-  const optionsH = optionCount
-    ? ctx.measureText('OPTIONS', innerW, { size: 8.6, font: FONTS.bodySemi, characterSpacing: 0.8 }) + 5
-      + optionBlocks.reduce((sum, block) => sum + block.height + 6, 0)
+  const optionsLabelH = rawOptions.length
+    ? ctx.measureText('OPTIONS', innerW, optionsLabelOpts) + QUESTION_SPACE.optionsLabelGap
+    : 0
+  const optionsH = rawOptions.length
+    ? optionsLabelH + optionBlocks.reduce((sum, block) => sum + block.height, 0)
     : 0
 
   const responseEntries = []
   if (present(question.selected)) responseEntries.push({ label: 'STUDENT RESPONSE', value: String(question.selected), color: statusColor(status) })
   else if (isSkipped) responseEntries.push({ label: 'STUDENT RESPONSE', value: 'Not attempted', color: COLORS.warning })
   if (present(question.correct)) responseEntries.push({ label: 'CORRECT ANSWER', value: String(question.correct), color: COLORS.midnight })
-  const responseH = responseEntries.length ? 36 : 0
+  const responseLabelOpts = {
+    size: QUESTION_TYPE.responseLabel, font: FONTS.bodySemi,
+    color: COLORS.muted, characterSpacing: 0.4,
+  }
+  const responseValueOpts = {
+    size: QUESTION_TYPE.responseValue, font: FONTS.bodyBold,
+    features: ['tnum'],
+  }
+  const responseColumnW = innerW / Math.max(1, responseEntries.length)
+  const responseLabelH = responseEntries.length
+    ? Math.max(...responseEntries.map((entry) => ctx.measureText(entry.label, responseColumnW - 10, responseLabelOpts)))
+    : 0
+  const responseValueH = responseEntries.length
+    ? Math.max(...responseEntries.map((entry) => ctx.measureText(entry.value, responseColumnW - 10, responseValueOpts)))
+    : 0
+  const responseH = responseEntries.length
+    ? QUESTION_SPACE.responseTop + responseLabelH + QUESTION_SPACE.responseLabelGap
+      + responseValueH + QUESTION_SPACE.responseBottom
+    : 0
+
   const awarded = marksLabel(question.marks, { awarded: true })
   const outcome = isSkipped
     ? 'Not attempted — no marks awarded'
@@ -1287,63 +1429,113 @@ function prepareQuestion(ctx, question, w) {
     present(question.mistakeCategory) ? question.mistakeCategory : null,
     present(question.mistakeNote) ? question.mistakeNote : null,
   ].filter(Boolean).join('   ·   ')
-  // The insight can wrap (a mistake note is a full sentence), so it is
-  // measured rather than given a fixed height.
-  const insightH = insightText ? 12 + ctx.measureText(insightText, innerW, { size: 9.6, font: FONTS.body }) : 0
+  const insightLabelOpts = {
+    size: QUESTION_TYPE.insightLabel, font: FONTS.bodySemi,
+    color: COLORS.muted, characterSpacing: 0.5,
+  }
+  const insightTextOpts = { size: QUESTION_TYPE.insight, font: FONTS.body, color: COLORS.ink }
+  const insightH = insightText
+    ? ctx.measureText('PERFORMANCE INSIGHT', innerW, insightLabelOpts)
+      + QUESTION_SPACE.insightTop
+      + ctx.measureText(insightText, innerW, insightTextOpts)
+    : 0
 
   const explanationParts = question.explanationParts?.length
     ? question.explanationParts
     : String(question.explanation ?? '').trim() ? [{ label: 'Explanation', text: question.explanation }] : []
-  const parts = explanationParts.map((part) => ({
-    label: part.label,
-    ...prepareSolution(ctx, part.text, 10.2, innerW - 24, question.q),
-  }))
+  const parts = explanationParts.filter((part) => String(part?.text ?? '').trim()).map((part) => {
+    const label = String(part.label || 'Explanation')
+    const isMistakeNote = /mistake/i.test(label)
+    return {
+      label,
+      ...prepareSolution(
+        ctx, part.text,
+        isMistakeNote ? QUESTION_TYPE.mistakeNote : QUESTION_TYPE.explanation,
+        innerW - 24, question.q,
+      ),
+    }
+  })
   const showPartLabels = parts.length > 1 && parts.some((part, index) => (
     index > 0 && String(part.label || '').toLowerCase() !== 'explanation'
   ))
-  const PART_LABELS = showPartLabels
-  const partsH = parts.reduce((sum, part, index) => (
-    sum + (PART_LABELS && index > 0 ? ctx.measureText(part.label.toUpperCase(), innerW - 24, {
-      size: TYPE.tableLabel, font: FONTS.bodySemi, characterSpacing: 0.5,
-    }) + 3 : 0) + part.height + 5
-  ), 0)
+  const partLabelOpts = {
+    size: QUESTION_TYPE.partLabel, font: FONTS.bodySemi,
+    characterSpacing: 0.45,
+  }
+  const partsH = parts.reduce((sum, part, index) => {
+    const labelH = showPartLabels && index > 0
+      ? ctx.measureText(part.label.toUpperCase(), innerW - 24, partLabelOpts) + 2
+      : 0
+    return sum + labelH + part.height + QUESTION_SPACE.partGap
+  }, 0)
   const explanationFigures = layoutFigureStack(question.media?.explanation || [], {
-    field: 'explanation', available: innerW - 24, gap: 8, budget: 210,
+    field: 'explanation', available: innerW - 24,
+    maxWidth: Math.min(320, innerW - 24),
+    maxHeight: figurePolicy.explanationMaxHeight, gap: 5,
+    budget: figurePolicy.explanationBudget,
   })
-  const explanationFigureH = explanationFigures.items.length ? explanationFigures.height + 8 : 0
+  const explanationFigureH = explanationFigures.items.length
+    ? explanationFigures.height + QUESTION_SPACE.figureBottom
+    : 0
   const hasSolution = parts.length > 0 || explanationFigures.items.length > 0
-  const solutionH = hasSolution ? 12 + 16 + partsH + explanationFigureH + 8 : 0
+  const solutionLabelOpts = {
+    size: QUESTION_TYPE.explanationLabel, font: FONTS.bodySemi,
+    characterSpacing: 0.6,
+  }
+  const solutionLabelH = ctx.measureText('EXPLANATION', innerW - 20, solutionLabelOpts)
+  const solutionH = hasSolution
+    ? QUESTION_SPACE.solutionTop + solutionLabelH + QUESTION_SPACE.solutionLabelGap
+      + partsH + explanationFigureH + QUESTION_SPACE.solutionBottom
+    : 0
 
-  const introH = pad + headerH + metaH + statementH + statementNoteH + statementFigureH
-    + optionsH + responseH + insightH
-  const totalH = introH + solutionH + pad
+  const introH = QUESTION_SPACE.topPad + headerH + metaH + statementH
+    + statementFigureH + optionsH + responseH + insightH
+  const totalH = introH + solutionH + QUESTION_SPACE.bottomPad
 
   return {
     question, pad, innerW, status, accent, title, subject, headerH,
-    metaText, metaH, statement, statementH, statementNote, statementNoteH,
-    statementFigures, statementFigureH,
-    optionBlocks, optionsH, responseEntries, responseH, insightText, insightH, isSkipped,
-    parts, showPartLabels, hasSolution, solutionH,
-    explanationFigures,
+    metaText, metaH, metaOpts, statement, statementH,
+    statementFigures, statementFigureH, figurePolicy,
+    optionBlocks, optionsH, optionsLabelOpts, optionTextOpts,
+    responseEntries, responseH, responseLabelH, responseLabelOpts, responseValueOpts,
+    insightText, insightH, insightLabelOpts, insightTextOpts,
+    parts, partLabelOpts, showPartLabels, hasSolution, solutionH,
+    solutionLabelOpts, solutionLabelH, explanationFigures,
     totalH, introH,
   }
 }
 
+function prepareQuestionForPlacement(ctx, question, w = CONTENT.w) {
+  const remaining = Math.max(0, CONTENT.bottom - ctx.y)
+  const fitted = prepareQuestion(ctx, question, w, { availableHeight: remaining })
+  // A question that cannot fit in the current remnant should move intact to a
+  // fresh printable area at the figure's full configured size, not retain a
+  // needlessly shrunken image just because an earlier component used the page.
+  if (fitted.totalH <= remaining) return fitted
+  return prepareQuestion(ctx, question, w, { availableHeight: CONTENT.h })
+}
+
 function drawQuestionHeader(ctx, p, x, y, w) {
-  ctx.canvas.rect(x, y + 1, 3, 20, { fill: p.accent, audit: false })
-  const titleW = ctx.textEngine.measureRun(p.title, FONTS.heading, 14)
-  ctx.text(p.title, x + 12, y, Math.min(w - 12, titleW + 2), {
-    size: 14, font: FONTS.heading, color: COLORS.midnight,
+  ctx.canvas.rect(x, y + 1, 2.5, p.headerH - 2, { fill: p.accent, audit: false })
+  const titleX = x + 8
+  const titleW = ctx.textEngine.measureRun(p.title, FONTS.heading, QUESTION_TYPE.title)
+  ctx.text(p.title, titleX, y, titleW + 2, {
+    size: QUESTION_TYPE.title, font: FONTS.heading, color: COLORS.midnight,
   })
-  if (p.subject) {
-    ctx.text(p.subject, x + 12 + titleW + 10, y + 4, Math.max(40, w - titleW - 118), {
-      size: 10, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 0.6,
+  const hasStatus = p.status && p.status !== '—'
+  const statusW = hasStatus ? 78 : 0
+  const subjectX = titleX + titleW + 8
+  const subjectRight = x + w - statusW - (hasStatus ? 8 : 0)
+  if (p.subject && subjectRight > subjectX) {
+    ctx.text(p.subject, subjectX, y + 2, subjectRight - subjectX, {
+      size: QUESTION_TYPE.subject, font: FONTS.bodySemi, color: COLORS.indigo,
+      characterSpacing: 0.45,
     })
   }
-  if (p.status && p.status !== '—') {
-    ctx.text(String(p.status).toUpperCase(), x + w - 112, y + 4, 112, {
-      size: 8.6, font: FONTS.bodySemi, color: p.accent,
-      align: 'right', characterSpacing: 0.7,
+  if (hasStatus) {
+    ctx.text(String(p.status).toUpperCase(), x + w - statusW, y + 2, statusW, {
+      size: QUESTION_TYPE.status, font: FONTS.bodySemi, color: p.accent,
+      align: 'right', characterSpacing: 0.5,
     })
   }
 }
@@ -1351,31 +1543,33 @@ function drawQuestionHeader(ctx, p, x, y, w) {
 function drawOptions(ctx, p, x, cursor) {
   if (!p.optionBlocks.length) return cursor
   cursor += ctx.text('OPTIONS', x, cursor, p.innerW, {
-    size: 8.6, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.8,
-  }) + 5
+    ...p.optionsLabelOpts, color: COLORS.muted,
+  }) + QUESTION_SPACE.optionsLabelGap
   p.optionBlocks.forEach((block) => {
-    const { option, textH, figures } = block
-    const textWidth = p.innerW - 22
+    const { option, textH, textWidth, figures } = block
     ctx.text(`${option.label}.`, x, cursor, 20, {
-      size: 10.6, font: FONTS.bodyBold, color: COLORS.midnight,
+      size: QUESTION_TYPE.optionLetter, font: FONTS.bodyBold, color: COLORS.midnight,
     })
     let textCursor = cursor
-    if (option.text) {
-      textCursor += ctx.text(option.text, x + 22, cursor, textWidth, {
-        size: 10.2, font: FONTS.body, color: COLORS.ink, lineHeight: 14.2,
+    if (option.text && block.textSolution) {
+      block.textSolution.renderer.maxWidth = textWidth
+      block.textSolution.lines.forEach((line) => {
+        block.textSolution.renderer.drawLine(line, x + 22, textCursor, textWidth)
+        textCursor += line.height
       })
     }
-    let blockBottom = Math.max(cursor + Math.max(15, textH), textCursor)
+    let blockBottom = Math.max(cursor + textH, textCursor)
     if (figures.items.length) {
-      // An image-only option keeps the letter on the same baseline row as its
-      // figure instead of leaving a bare "A." above a stranded picture.
-      const figureTop = option.text ? blockBottom + 4 : cursor
+      // An image-only option keeps the letter on the same row as its figure.
+      const figureTop = option.text
+        ? cursor + textH + QUESTION_SPACE.optionFigureGap
+        : cursor
       const drawn = drawFigureItems(ctx, figures.items, x + 22, figureTop, textWidth, {
-        field: 'option', gap: 7, role: 'option-figure', align: 'left',
+        field: 'option', gap: 4, role: 'option-figure', align: 'left',
       })
       blockBottom = Math.max(blockBottom, figureTop + drawn)
     }
-    cursor = blockBottom + 6
+    cursor = Math.max(blockBottom, cursor + block.rowH) + QUESTION_SPACE.optionGap
   })
   return cursor
 }
@@ -1385,14 +1579,12 @@ function drawResponse(ctx, p, x, cursor) {
   const start = cursor
   const columnW = p.innerW / p.responseEntries.length
   ctx.canvas.line(x, cursor, x + p.innerW, cursor, { color: COLORS.line, width: 0.4 })
-  cursor += 6
+  cursor += QUESTION_SPACE.responseTop
   p.responseEntries.forEach((entry, index) => {
     const cx = x + index * columnW
-    ctx.text(entry.label, cx, cursor, columnW - 10, {
-      size: 8.4, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.6,
-    })
-    ctx.text(entry.value, cx, cursor + 12, columnW - 10, {
-      size: 12, font: FONTS.bodyBold, color: entry.color, features: ['tnum'],
+    ctx.text(entry.label, cx, cursor, columnW - 10, p.responseLabelOpts)
+    ctx.text(entry.value, cx, cursor + p.responseLabelH + QUESTION_SPACE.responseLabelGap, columnW - 10, {
+      ...p.responseValueOpts, color: entry.color,
     })
   })
   return start + p.responseH
@@ -1400,24 +1592,22 @@ function drawResponse(ctx, p, x, cursor) {
 
 function drawInsight(ctx, p, x, cursor) {
   if (!p.insightText) return cursor
-  ctx.text('PERFORMANCE INSIGHT', x, cursor, p.innerW, {
-    size: 8.4, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.6,
-  })
-  ctx.text(p.insightText, x, cursor + 12, p.innerW, {
-    size: 9.6, font: FONTS.body, color: COLORS.ink,
-  })
-  return cursor + p.insightH
+  const labelH = ctx.measureText('PERFORMANCE INSIGHT', p.innerW, p.insightLabelOpts)
+  ctx.text('PERFORMANCE INSIGHT', x, cursor, p.innerW, p.insightLabelOpts)
+  cursor += labelH + QUESTION_SPACE.insightTop
+  const textH = ctx.measureText(p.insightText, p.innerW, p.insightTextOpts)
+  ctx.text(p.insightText, x, cursor, p.innerW, p.insightTextOpts)
+  return cursor + textH
 }
 
 function drawQuestionIntro(ctx, p, frame) {
   const x = frame.x + p.pad
-  let cursor = frame.y + p.pad
+  let cursor = frame.y + QUESTION_SPACE.topPad
   drawQuestionHeader(ctx, p, x, cursor, p.innerW)
   cursor += p.headerH
   if (p.metaText) {
-    cursor += ctx.text(p.metaText, x, cursor, p.innerW, {
-      size: 9.2, font: FONTS.body, color: COLORS.muted,
-    }) + 6
+    cursor += ctx.text(p.metaText, x, cursor, p.innerW, { ...p.metaOpts, color: COLORS.muted })
+      + QUESTION_SPACE.metadataBottom
   }
   if (p.statement) {
     p.statement.renderer.maxWidth = p.innerW
@@ -1425,16 +1615,12 @@ function drawQuestionIntro(ctx, p, frame) {
       p.statement.renderer.drawLine(line, x, cursor, p.innerW)
       cursor += line.height
     })
-    cursor += 5
-  } else if (p.statementNote) {
-    cursor += ctx.text(p.statementNote, x, cursor, p.innerW, {
-      size: 9.2, font: FONTS.body, color: COLORS.muted,
-    }) + 8
+    cursor += QUESTION_SPACE.statementBottom
   }
   if (p.statementFigures.items.length) {
     cursor += drawFigureItems(ctx, p.statementFigures.items, x, cursor, p.innerW, {
-      field: 'statement', gap: 9, role: 'question-figure',
-    }) + 6
+      field: 'statement', gap: QUESTION_SPACE.figureGap, role: 'question-figure',
+    }) + QUESTION_SPACE.figureBottom
   }
   cursor = drawOptions(ctx, p, x, cursor)
   cursor = drawResponse(ctx, p, x, cursor)
@@ -1442,10 +1628,10 @@ function drawQuestionIntro(ctx, p, frame) {
   return cursor
 }
 
-function drawSolutionLabel(ctx, x, y, w, accent = COLORS.indigo) {
-  ctx.canvas.rect(x, y, 2.5, 13, { fill: accent, audit: false })
-  ctx.text('EXPLANATION', x + 10, y + 1, w - 10, {
-    size: 9.4, font: FONTS.bodySemi, color: COLORS.indigo, characterSpacing: 0.8,
+function drawSolutionLabel(ctx, p, x, y, w) {
+  ctx.canvas.rect(x, y, 2.5, Math.max(9, p.solutionLabelH), { fill: p.accent, audit: false })
+  ctx.text('EXPLANATION', x + 10, y, w - 10, {
+    ...p.solutionLabelOpts, color: COLORS.indigo,
   })
 }
 
@@ -1458,40 +1644,98 @@ function drawExplanationParts(ctx, p, x, cursor, width) {
     const labelled = p.showPartLabels && index > 0
     if (labelled) {
       cursor += ctx.text(String(part.label).toUpperCase(), x, cursor, width, {
-        size: TYPE.tableLabel, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.5,
-      }) + 3
+        ...p.partLabelOpts, color: COLORS.muted,
+      }) + QUESTION_SPACE.solutionLabelGap
     }
     part.renderer.maxWidth = width
     part.lines.forEach((line) => {
       part.renderer.drawLine(line, x, cursor, width)
       cursor += line.height
     })
-    cursor += 5
+    cursor += QUESTION_SPACE.partGap
   })
   return cursor
 }
 
+function MathTextFlowSpec(ctx, {
+  label = '', title = '', blocks = [], size = TYPE.bodySmall,
+  accent = COLORS.indigo, widthPadding = 20, topPad = 8, bottomPad = 10,
+  sourceLabel = '',
+} = {}) {
+  const bodyWidth = (w) => Math.max(20, w - widthPadding)
+  const titleOpts = { size: TYPE.label, font: FONTS.bodySemi, characterSpacing: 0.7 }
+  const resolvedTitle = (opts = {}) => (opts.continuation && title ? `${title} · continued` : title)
+  const entries = blocks.flatMap((block) => {
+    const text = fmt(block.text)
+    if (!text) return []
+    const renderer = new SolutionRenderer(ctx, {
+      fontSize: size, maxWidth: bodyWidth(CONTENT.w), sourceLabel,
+    })
+    return renderer.layout(text).map((line, index, lines) => ({
+      renderer,
+      line,
+      height: line.height,
+      gapAfter: index === lines.length - 1 ? Math.max(0, Number(block.gapAfter) || 0) : 0,
+    }))
+  })
+  const build = (subset, opts = {}) => {
+    const t = resolvedTitle(opts)
+    const fixed = (w) => {
+      const titleH = t
+        ? ctx.measureText(t, Math.max(20, w - 14), titleOpts) + 3
+        : 0
+      return topPad + titleH + bottomPad
+    }
+    const bodyH = subset.reduce((sum, entry) => sum + entry.height + entry.gapAfter, 0)
+    return {
+      type: 'text-flow',
+      label,
+      measure: (w) => fixed(w) + bodyH,
+      draw: (frame) => {
+        ctx.canvas.rect(frame.x, frame.y + 3, 2, Math.max(2, frame.h - 10), {
+          fill: accent, audit: false,
+        })
+        let cursor = frame.y + topPad
+        if (t) {
+          cursor += ctx.text(t, frame.x + 12, cursor, frame.w - 14, {
+            ...titleOpts, color: accent,
+          }) + 3
+        }
+        subset.forEach((entry) => {
+          entry.renderer.maxWidth = bodyWidth(frame.w)
+          entry.renderer.drawLine(entry.line, frame.x + 12, cursor, bodyWidth(frame.w))
+          cursor += entry.height + entry.gapAfter
+        })
+      },
+    }
+  }
+  return chunkable({
+    type: 'text-flow', label, entries, build,
+    continuationLabel: title || label,
+  })
+}
+
 function questionIntroOverflowSpec(ctx, p, question) {
-  const lines = []
-  if (p.metaText) lines.push(p.metaText)
-  if (p.statement) lines.push(question.statement)
+  const blocks = []
+  if (p.metaText) blocks.push({ text: p.metaText, gapAfter: 4 })
+  if (p.statement) blocks.push({ text: question.statement, gapAfter: 4 })
   const textOptions = p.optionBlocks.filter((block) => block.option.text)
   if (textOptions.length) {
-    lines.push('OPTIONS')
+    blocks.push({ text: 'OPTIONS', gapAfter: 4 })
     textOptions.forEach((block) => {
-      lines.push(`${block.option.label}. ${block.option.text}`)
+      blocks.push({ text: `${block.option.label}. ${block.option.text}`, gapAfter: 4 })
     })
   }
   const response = responseLabel(question.selected, p.status)
   const correct = present(question.correct) ? String(question.correct) : ''
-  if (response) lines.push(`Student response: ${response}`)
-  if (correct) lines.push(`Correct answer: ${correct}`)
-  if (p.insightText) lines.push(p.insightText)
-  return TextFlowSpec(ctx, {
+  if (response) blocks.push({ text: `Student response: ${response}`, gapAfter: 4 })
+  if (correct) blocks.push({ text: `Correct answer: ${correct}`, gapAfter: 4 })
+  if (p.insightText) blocks.push({ text: p.insightText, gapAfter: 4 })
+  return MathTextFlowSpec(ctx, {
     label: `${question.q} · question statement`,
     title: `${p.title}${p.subject ? `  ·  ${p.subject}` : ''}`,
-    text: lines.join('\n'), size: TYPE.bodySmall, widthPadding: 20,
-    paragraphGap: 4, topPad: 8, bottomPad: 10,
+    blocks, size: TYPE.bodySmall, widthPadding: 20,
+    topPad: 8, bottomPad: 10, sourceLabel: question.q,
   })
 }
 
@@ -1504,15 +1748,19 @@ function questionIntroOverflowSpec(ctx, p, question) {
  */
 function optionFigureBoard(ctx, p, question) {
   const gapX = 18
-  const gapY = 10
-  const colW = (CONTENT.w - 36 - gapX) / 2
+  const gapY = 7
+  const colW = (p.innerW - gapX) / 2
   const cells = p.optionBlocks
     .filter((block) => block.figures.items.length)
     .map((block) => ({
       label: block.option.label,
       layout: layoutFigureStack(
-        question?.media?.options?.[block.option.label] || [],
-        { field: 'option', available: colW - 26, gap: 6, budget: 150 },
+        block.figures.items.map((item) => item.asset),
+        {
+          field: 'option', available: colW - 26,
+          maxWidth: Math.min(210, colW - 26), maxHeight: p.figurePolicy.optionMaxHeight,
+          gap: 4, budget: p.figurePolicy.optionBudget / 2,
+        },
       ),
     }))
   // When the choices also carry text, the flow above already printed them, so
@@ -1520,9 +1768,9 @@ function optionFigureBoard(ctx, p, question) {
   // second list of options.
   const hasTextOptions = p.optionBlocks.some((block) => block.option.text)
   const boardLabel = hasTextOptions ? 'OPTION FIGURES' : 'OPTIONS'
-  const labelH = ctx.measureText(boardLabel, CONTENT.w - 36, {
-    size: 8.6, font: FONTS.bodySemi, characterSpacing: 0.8,
-  }) + 5
+  const boardLabelOpts = { size: QUESTION_TYPE.optionLabel, font: FONTS.bodySemi, characterSpacing: 0.6 }
+  const labelH = ctx.measureText(boardLabel, p.innerW, boardLabelOpts)
+    + QUESTION_SPACE.optionsLabelGap
   const rows = Math.ceil(cells.length / 2)
   const rowTops = Array.from({ length: rows }, (_, row) => {
     const rowCells = cells.slice(row * 2, row * 2 + 2)
@@ -1536,8 +1784,8 @@ function optionFigureBoard(ctx, p, question) {
     bottomSpacing: 8,
     measure: () => height + labelH + 4,
     draw: (frame) => {
-      ctx.text(boardLabel, frame.x + 18, frame.y + 2, CONTENT.w - 36, {
-        size: 8.6, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.8,
+      ctx.text(boardLabel, frame.x + p.pad, frame.y + 2, p.innerW, {
+        ...boardLabelOpts, color: COLORS.muted,
       })
       frame = { ...frame, y: frame.y + labelH }
       let cursor = frame.y + 2
@@ -1546,12 +1794,12 @@ function optionFigureBoard(ctx, p, question) {
         const column = index % 2
         const rowTop = frame.y + 2
           + rowTops.slice(0, row).reduce((sum, value) => sum + value + gapY, 0)
-        const x = frame.x + 18 + column * (colW + gapX)
+        const x = frame.x + p.pad + column * (colW + gapX)
         ctx.text(`${cell.label}.`, x, rowTop, 20, {
-          size: 10.6, font: FONTS.bodyBold, color: COLORS.midnight,
+          size: QUESTION_TYPE.optionLetter, font: FONTS.bodyBold, color: COLORS.midnight,
         })
         drawFigureItems(ctx, cell.layout.items, x + 22, rowTop, colW - 22, {
-          field: 'option', gap: 6, role: 'option-figure', align: 'left',
+          field: 'option', gap: 4, role: 'option-figure', align: 'left',
         })
         if (column === 1) cursor = rowTop + rowTops[row] + gapY
       })
@@ -1567,15 +1815,15 @@ function renderIntroFigures(ctx, p, question) {
     groups.push({ field: 'statement', items: p.statementFigures.items, role: 'question-figure' })
   }
   groups.forEach((group) => {
-    const gap = group.field === 'statement' ? 9 : 7
+    const gap = group.field === 'statement' ? QUESTION_SPACE.figureGap : 4
     ctx.component({
       type: 'question-figure-group',
       label: group.label || `${question.q} · figure`,
-      bottomSpacing: 8,
+      bottomSpacing: 6,
       continuationLabel: `${question.q} · figure continued`,
       measure: () => group.items.reduce((sum, item) => sum + item.h, 0) + gap * Math.max(0, group.items.length - 1) + 4,
       draw: (frame) => {
-        drawFigureItems(ctx, group.items, frame.x + 18, frame.y + 2, CONTENT.w - 36, {
+        drawFigureItems(ctx, group.items, frame.x + p.pad, frame.y + 2, p.innerW, {
           field: group.field, gap, role: group.role,
         })
       },
@@ -1597,7 +1845,7 @@ export function measureQuestionCard(ctx, question) {
 }
 
 export function QuestionCard(ctx, { question } = {}) {
-  const p = prepareQuestion(ctx, question, CONTENT.w)
+  const p = prepareQuestionForPlacement(ctx, question, CONTENT.w)
   ctx.renderedQuestions?.push(question.index)
   const capacity = CONTENT.h - 16
   const remaining = CONTENT.bottom - ctx.y
@@ -1613,15 +1861,14 @@ export function QuestionCard(ctx, { question } = {}) {
         drawQuestionIntro(ctx, p, frame)
         if (p.hasSolution) {
           const sy = frame.y + p.introH
-          const innerPad = 12
           drawSolutionBackground(ctx, frame.x + p.pad, sy, p.innerW, p.solutionH)
-          let cursor = sy + innerPad
-          drawSolutionLabel(ctx, frame.x + p.pad + 12, cursor, p.innerW - 24)
-          cursor += 16
+          let cursor = sy + QUESTION_SPACE.solutionTop
+          drawSolutionLabel(ctx, p, frame.x + p.pad + 8, cursor, p.innerW - 16)
+          cursor += p.solutionLabelH + QUESTION_SPACE.solutionLabelGap
           cursor = drawExplanationParts(ctx, p, frame.x + p.pad + 12, cursor, p.innerW - 24)
           if (p.explanationFigures.items.length) {
             drawFigureItems(ctx, p.explanationFigures.items, frame.x + p.pad + 12, cursor, p.innerW - 24, {
-              field: 'explanation', gap: 8, role: 'explanation-figure',
+              field: 'explanation', gap: 5, role: 'explanation-figure',
             })
           }
         }
@@ -1651,14 +1898,14 @@ export function QuestionCard(ctx, { question } = {}) {
     })
   }
   if (p.hasSolution) {
-  ctx.component({
+    ctx.component({
     type: 'solution-label', label: `${question.q} · explanation`,
     continuationLabel: `${fmt(question.subject)} · ${question.q} · explanation continued`,
     keepWithNext: 20, bottomSpacing: 0,
-    measure: () => 20,
+    measure: () => QUESTION_SPACE.solutionTop + p.solutionLabelH + QUESTION_SPACE.solutionLabelGap,
     draw: (frame) => {
       drawSolutionBackground(ctx, frame.x + p.pad, frame.y, p.innerW, frame.h)
-      drawSolutionLabel(ctx, frame.x + p.pad + 12, frame.y + 4, p.innerW - 24)
+      drawSolutionLabel(ctx, p, frame.x + p.pad + 8, frame.y + QUESTION_SPACE.solutionTop, p.innerW - 16)
     },
   })
   p.parts.forEach((part, index) => {
@@ -1667,13 +1914,11 @@ export function QuestionCard(ctx, { question } = {}) {
         type: 'solution-label', label: `${question.q} · ${part.label}`,
         continuationLabel: `${fmt(question.subject)} · ${question.q} · explanation continued`,
         keepWithNext: 20, bottomSpacing: 0,
-        measure: () => ctx.measureText(part.label.toUpperCase(), p.innerW - 24, {
-          size: TYPE.tableLabel, font: FONTS.bodySemi, characterSpacing: 0.5,
-        }) + 5,
+        measure: () => ctx.measureText(part.label.toUpperCase(), p.innerW - 24, p.partLabelOpts) + 2,
         draw: (frame) => {
           drawSolutionBackground(ctx, frame.x + p.pad, frame.y, p.innerW, frame.h)
-          ctx.text(part.label.toUpperCase(), frame.x + p.pad + 12, frame.y + 2, p.innerW - 24, {
-            size: TYPE.tableLabel, font: FONTS.bodySemi, color: COLORS.muted, characterSpacing: 0.5,
+          ctx.text(part.label.toUpperCase(), frame.x + p.pad + 12, frame.y, p.innerW - 24, {
+            ...p.partLabelOpts, color: COLORS.muted,
           })
         },
       })

@@ -1,0 +1,223 @@
+{
+  "generatedAt": "2026-11-04T03:49:41.256941+00:00",
+  "reports": {
+    "jee-phase2": {
+      "sourceFile": "MediXO_EduX_JEE_Main_Mock_Test_-_Phase_2_Full_Exam_Analysis_Report12.pdf",
+      "sourcePages": 71,
+      "generatedPages": 46,
+      "questionCount": 75,
+      "questionHeadingSequence": true,
+      "questionFieldChecks": {
+        "passed": 540,
+        "total": 540,
+        "failures": []
+      },
+      "renderedMathExpressionChecks": {
+        "passed": 14,
+        "total": 14,
+        "failures": []
+      },
+      "numberedSections": {
+        "passed": true,
+        "headings": [
+          "01 Performance Intelligence",
+          "02 Subject and Chapter Mastery",
+          "03 Time Intelligence",
+          "04 Question Analysis",
+          "05 Learning Intelligence"
+        ]
+      },
+      "comparisonProjectionSectionRemoved": true,
+      "coverIdentity": {
+        "passed": true,
+        "exam": "JEE Main Mock Test - Phase 2",
+        "student": "SUJJAL KUMAR NATH",
+        "rollNo": "260094"
+      },
+      "a4Geometry": true,
+      "interiorPageFolios": true,
+      "chapterMasteryHeader": {
+        "page": 4,
+        "line": "CHAPTER ACCURACY MARKS TIME MASTERY",
+        "headerLabels": [
+          "CHAPTER",
+          "ACCURACY",
+          "MARKS",
+          "TIME",
+          "MASTERY"
+        ],
+        "accuracyIsOneUnbrokenSpan": true,
+        "columnsInLeftToRightOrder": true,
+        "columnsDoNotOverlap": true,
+        "passed": true
+      },
+      "sourceMathRestorations": [
+        "Q28",
+        "Q51",
+        "Q52",
+        "Q54",
+        "Q57",
+        "Q59",
+        "Q61",
+        "Q62",
+        "Q63",
+        "Q68",
+        "Q69",
+        "Q71",
+        "Q72"
+      ],
+      "sourceDiscrepancyChecks": [],
+      "figureAssetMappings": 20,
+      "embeddedQuestionFigures": 20,
+      "figureAspectRatioFailures": [],
+      "rendererAudit": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "orphanHeadings": 0,
+        "repeatedTableHeaderFailures": 0,
+        "overflowingComponents": 0
+      },
+      "rendererDiagnostics": {
+        "flags": 0,
+        "figuresFailed": 0,
+        "mediaDiagnostics": [],
+        "missingQuestions": []
+      },
+      "contactSheet": "deliverables/question-layout-fix/previews/jee-phase2-before-after-contact-sheet.jpg"
+    },
+    "neet-set2": {
+      "sourceFile": "MediXO_EduX_NEET_Mock_Paper_Set_-_2_Full_Exam_Analysis_Report.pdf",
+      "sourcePages": 132,
+      "generatedPages": 96,
+      "questionCount": 180,
+      "questionHeadingSequence": true,
+      "questionFieldChecks": {
+        "passed": 1441,
+        "total": 1441,
+        "failures": []
+      },
+      "renderedMathExpressionChecks": {
+        "passed": 105,
+        "total": 105,
+        "failures": []
+      },
+      "numberedSections": {
+        "passed": true,
+        "headings": [
+          "01 Performance Intelligence",
+          "02 Subject and Chapter Mastery",
+          "03 Time Intelligence",
+          "04 Question Analysis",
+          "05 Learning Intelligence"
+        ]
+      },
+      "comparisonProjectionSectionRemoved": true,
+      "coverIdentity": {
+        "passed": true,
+        "exam": "NEET Mock Paper Set - 2",
+        "student": "AAHANA PATTANAIK",
+        "rollNo": "260201"
+      },
+      "a4Geometry": true,
+      "interiorPageFolios": true,
+      "chapterMasteryHeader": {
+        "page": 4,
+        "line": "CHAPTER ACCURACY MARKS TIME MASTERY",
+        "headerLabels": [
+          "CHAPTER",
+          "ACCURACY",
+          "MARKS",
+          "TIME",
+          "MASTERY"
+        ],
+        "accuracyIsOneUnbrokenSpan": true,
+        "columnsInLeftToRightOrder": true,
+        "columnsDoNotOverlap": true,
+        "passed": true
+      },
+      "sourceMathRestorations": [
+        "Q5",
+        "Q7",
+        "Q8",
+        "Q9",
+        "Q13",
+        "Q18",
+        "Q19",
+        "Q20",
+        "Q21",
+        "Q22",
+        "Q23",
+        "Q25",
+        "Q26",
+        "Q29",
+        "Q30",
+        "Q31",
+        "Q32",
+        "Q35",
+        "Q36",
+        "Q37",
+        "Q38",
+        "Q39",
+        "Q40",
+        "Q41",
+        "Q42",
+        "Q43",
+        "Q45",
+        "Q59",
+        "Q61",
+        "Q62",
+        "Q63",
+        "Q71",
+        "Q80",
+        "Q82",
+        "Q83",
+        "Q84",
+        "Q85",
+        "Q89",
+        "Q90",
+        "Q125",
+        "Q140",
+        "Q159",
+        "Q160"
+      ],
+      "sourceDiscrepancyChecks": [
+        {
+          "questionNumber": 84,
+          "markedAnswer": "B",
+          "markedOption": "12",
+          "explanationOption": "A",
+          "explanationValue": "24",
+          "handling": "Preserved as printed; not reconciled.",
+          "preserved": true
+        }
+      ],
+      "figureAssetMappings": 0,
+      "embeddedQuestionFigures": 0,
+      "figureAspectRatioFailures": [],
+      "rendererAudit": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "orphanHeadings": 0,
+        "repeatedTableHeaderFailures": 0,
+        "overflowingComponents": 0
+      },
+      "rendererDiagnostics": {
+        "flags": 0,
+        "figuresFailed": 0,
+        "mediaDiagnostics": [],
+        "missingQuestions": []
+      },
+      "contactSheet": "deliverables/question-layout-fix/previews/neet-set2-before-after-contact-sheet.jpg"
+    }
+  },
+  "problems": [],
+  "passed": true
+}
