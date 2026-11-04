@@ -2,9 +2,10 @@
  * REPORT ONE — Full Exam Analysis Report, V2.
  *
  * An editorial publication rather than a dashboard: a typographic cover,
- * four intelligence spreads, open question review pages, learning evidence,
- * and a complete source register. Every section uses measured components and
- * page-aware flow; no fixed page plan or fixed chart row height is used.
+ * five ordered analysis sections, open question review pages, learning
+ * evidence, and a complete source register. Every section uses measured
+ * components and page-aware flow; no fixed page plan or fixed chart row height
+ * is used.
  */
 
 import {
@@ -150,13 +151,13 @@ function renderSubjectAndChapter(ctx) {
     id: 'subject-summary', title: 'Subject marks, accuracy and classification',
     rows: subjectRows,
     columns: [
-      { key: 'subject', label: 'Subject', width: 1.2, font: FONTS.bodySemi },
-      { key: 'score', label: 'Marks', width: 0.9, align: 'right', features: ['tnum'] },
-      { key: 'accuracy', label: 'Accuracy', width: 0.8, align: 'right', color: (v) => masteryColor(v) },
-      { key: 'rank', label: 'Rank', width: 0.5, align: 'right' },
-      { key: 'level', label: 'Level', width: 0.7, color: (v) => difficultyColor(v) },
-      { key: 'strongAreas', label: 'Strong areas', width: 1.6 },
-      { key: 'weakAreas', label: 'Weak areas', width: 1.6 },
+      { key: 'subject', label: 'Subject', width: 1.15, font: FONTS.bodySemi },
+      { key: 'score', label: 'Marks', width: 0.95, align: 'right', features: ['tnum'] },
+      { key: 'accuracy', label: 'Accuracy', width: 1.15, align: 'right', color: (v) => masteryColor(v) },
+      { key: 'rank', label: 'Rank', width: 0.55, align: 'right' },
+      { key: 'level', label: 'Level', width: 0.8, color: (v) => difficultyColor(v) },
+      { key: 'strongAreas', label: 'Strong areas', width: 1.5 },
+      { key: 'weakAreas', label: 'Weak areas', width: 1.5 },
     ],
     rowPadding: 0.5, bottomSpacing: 4,
   })
@@ -246,91 +247,10 @@ function renderTimeIntelligence(ctx) {
   })
 }
 
-function renderComparisonAndProjection(ctx) {
-  const m = ctx.model
-  const comp = m.comparison || {}
-  const pred = m.prediction || {}
-  SectionHeading(ctx, {
-    number: '04', kicker: 'COMPARISON & TRAJECTORY', title: 'Comparison and projection',
-    note: '',
-  })
-  const benchmarkKeys = ['previousTest', 'previousMonth', 'batchAverage', 'instituteAverage', 'topPerformer']
-  const comparisonRows = benchmarkKeys.filter((key) => comp[key]).map((key) => ({
-    label: text(comp[key].label), score: text(comp[key].score),
-    percentile: text(comp[key].percentile), grade: text(comp[key].grade), reference: text(comp[key].name),
-  }))
-  Subheading(ctx, { title: 'Comparative performance', note: '', accent: COLORS.indigo })
-  // The benchmark chart that used to sit here repeated the same five scores as
-  // the register below it. The register carries score, percentile, grade and
-  // reference, so it is the single source for this comparison.
-  MeasuredTable(ctx, {
-    id: 'comparison-register', title: 'Comparison register', rows: comparisonRows,
-    columns: [
-      { key: 'label', label: 'Benchmark', width: 1.8, font: FONTS.bodySemi },
-      { key: 'score', label: 'Score', width: 0.8, align: 'right', features: ['tnum'] },
-      { key: 'percentile', label: 'Percentile', width: 0.9, align: 'right' },
-      { key: 'grade', label: 'Grade', width: 0.7, align: 'center' },
-      { key: 'reference', label: 'Reference', width: 1.2 },
-    ],
-    rowPadding: 2, bottomSpacing: 6,
-  })
-  MetricLedger(ctx, {
-    label: 'Published score changes',
-    items: (comp.deltas || []).map((row) => ({
-      label: text(row.label), value: text(row.value), color: row.up === true ? COLORS.success : COLORS.muted,
-    })),
-    columns: 4, valueSize: 10, bottomSpacing: 8,
-  })
-  Subheading(ctx, { title: 'Projection and readiness', note: '', accent: COLORS.success })
-  const trajectoryRows = (pred.trajectory || []).map((row) => ({ exam: text(row.exam), score: text(row.score) }))
-  BarChart(ctx, {
-    title: 'Score trajectory',
-    bars: trajectoryRows.map((row, index) => ({
-      label: row.exam, value: numeric(row.score), valueLabel: row.score,
-      color: index === trajectoryRows.length - 1 ? COLORS.success : COLORS.indigo,
-    })),
-    accent: COLORS.success, minRowHeight: 14, rowGap: 2,
-    legend: `Expected improvement ${text(pred.expectedImprovement)}   ·   Risk ${text(pred.riskLevel)}`,
-    bottomSpacing: 10,
-  })
-  MetricLedger(ctx, {
-    label: 'Prediction signals',
-    items: [
-      { label: 'JEE percentile', value: text(pred.jeePercentile) },
-      { label: 'NEET score', value: text(pred.neetScore) },
-      { label: 'Expected AIR', value: text(pred.expectedAIR) },
-      { label: 'Target probability', value: text(pred.targetProbability) },
-      { label: 'Risk level', value: text(pred.riskLevel) },
-      { label: 'Expected improvement', value: text(pred.expectedImprovement) },
-    ],
-    columns: 3, valueSize: 10.4, bottomSpacing: 8,
-  })
-  MeasuredTable(ctx, {
-    id: 'trajectory-register', title: 'Trajectory values', rows: trajectoryRows,
-    columns: [
-      { key: 'exam', label: 'Examination / projection', width: 2.2, font: FONTS.bodySemi },
-      { key: 'score', label: 'Score', width: 0.8, align: 'right', features: ['tnum'] },
-    ],
-    rowPadding: 2, bottomSpacing: 6,
-  })
-  MetricLedger(ctx, {
-    label: 'Readiness metrics',
-    items: [
-      { label: 'Readiness score', value: text(m.hero.readinessScore), color: COLORS.success },
-      { label: 'Confidence index', value: text(m.hero.confidenceIndex), color: COLORS.indigo },
-      { label: 'Health score', value: text(m.hero.healthScore) },
-      { label: 'Overall accuracy', value: pct(m.overallAccuracy) },
-      { label: 'Badge', value: text(m.hero.badge) },
-    ],
-    columns: 3, valueSize: 10.4, bottomSpacing: 6,
-  })
-}
-
-
 function renderQuestionIntelligence(ctx) {
   const m = ctx.model
   SectionHeading(ctx, {
-    number: '05', kicker: 'QUESTION INTELLIGENCE', title: 'Question-by-question analysis',
+    number: '04', kicker: 'QUESTION ANALYSIS', title: 'Question-by-question analysis',
     note: `${m.questionRowsSupplied} questions reviewed · published explanations reproduced in full`,
   })
   const subjectCounts = new Map()
@@ -372,7 +292,7 @@ function renderLearningIntelligence(ctx) {
   const m = ctx.model
   const rec = m.recommendations || {}
   SectionHeading(ctx, {
-    number: '06', kicker: 'LEARNING INTELLIGENCE', title: 'Learning intelligence',
+    number: '05', kicker: 'LEARNING INTELLIGENCE', title: 'Learning intelligence',
     note: '',
   })
   Subheading(ctx, { title: 'Published revision priorities', note: '', accent: COLORS.error })
@@ -467,8 +387,6 @@ export function renderFullAnalysis(ctx) {
   renderSubjectAndChapter(ctx)
   ctx.sectionBreak(0.62)
   renderTimeIntelligence(ctx)
-  ctx.sectionBreak(0.62)
-  renderComparisonAndProjection(ctx)
   ctx.sectionBreak(0.62)
   renderQuestionIntelligence(ctx)
   ctx.sectionBreak(0.62)

@@ -1,0 +1,152 @@
+{
+  "generatedAt": "2026-11-04T00:00:00.000Z",
+  "reports": {
+    "jee-phase2": {
+      "reference": {
+        "file": "MediXO_EduX_JEE_Main_Mock_Test_-_Phase_2_Full_Exam_Analysis_Report12.pdf",
+        "pageCount": 71,
+        "questionCount": 75,
+        "figureAssetMappings": 20,
+        "manualMathRestorations": [
+          "Q28",
+          "Q51",
+          "Q52",
+          "Q54",
+          "Q57",
+          "Q59",
+          "Q61",
+          "Q62",
+          "Q63",
+          "Q68",
+          "Q69",
+          "Q71",
+          "Q72"
+        ],
+        "sourceDiscrepancies": [],
+        "note": "Question text and page references were extracted from the supplied PDF. Math glyphs omitted by the PDF text layer were restored from rendered source pages; only source-matched, checked-in question figures are attached. Known source discrepancies are preserved rather than reconciled."
+      },
+      "file": "after/jee-phase2-full-analysis.pdf",
+      "bytes": 5460825,
+      "sha256": "c10542c557acd4e69e573970a773ec202f9c7f3b442e3daeab45662e8e1f4ed5",
+      "pages": 46,
+      "pageSize": [
+        595.276,
+        841.89
+      ],
+      "questionsSupplied": 75,
+      "questionsRendered": 75,
+      "explanationsRendered": 75,
+      "figureReferences": 20,
+      "figuresResolved": 20,
+      "figuresEmbedded": 20,
+      "figuresFailed": 0,
+      "mediaDiagnostics": [],
+      "missingQuestions": [],
+      "flags": 0,
+      "audit": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "orphanHeadings": 0,
+        "repeatedTableHeaderFailures": 0,
+        "overflowingComponents": 0
+      }
+    },
+    "neet-set2": {
+      "reference": {
+        "file": "MediXO_EduX_NEET_Mock_Paper_Set_-_2_Full_Exam_Analysis_Report.pdf",
+        "pageCount": 132,
+        "questionCount": 180,
+        "figureAssetMappings": 0,
+        "manualMathRestorations": [
+          "Q5",
+          "Q7",
+          "Q8",
+          "Q9",
+          "Q13",
+          "Q18",
+          "Q19",
+          "Q20",
+          "Q21",
+          "Q22",
+          "Q23",
+          "Q25",
+          "Q26",
+          "Q29",
+          "Q30",
+          "Q31",
+          "Q32",
+          "Q35",
+          "Q36",
+          "Q37",
+          "Q38",
+          "Q39",
+          "Q40",
+          "Q41",
+          "Q42",
+          "Q43",
+          "Q45",
+          "Q59",
+          "Q61",
+          "Q62",
+          "Q63",
+          "Q71",
+          "Q80",
+          "Q82",
+          "Q83",
+          "Q84",
+          "Q85",
+          "Q89",
+          "Q90",
+          "Q125",
+          "Q140",
+          "Q159",
+          "Q160"
+        ],
+        "sourceDiscrepancies": [
+          {
+            "questionNumber": 84,
+            "markedAnswer": "B",
+            "markedOption": "12",
+            "explanationOption": "A",
+            "explanationValue": "24",
+            "handling": "Preserved as printed; not reconciled."
+          }
+        ],
+        "note": "Question text and page references were extracted from the supplied PDF. Math glyphs omitted by the PDF text layer were restored from rendered source pages; only source-matched, checked-in question figures are attached. Known source discrepancies are preserved rather than reconciled."
+      },
+      "file": "after/neet-set2-full-analysis.pdf",
+      "bytes": 7778428,
+      "sha256": "3353f086ae9a379495a6d9c87a7b364ee0d5de1306dd11494ccfd51685a64e09",
+      "pages": 96,
+      "pageSize": [
+        595.276,
+        841.89
+      ],
+      "questionsSupplied": 180,
+      "questionsRendered": 180,
+      "explanationsRendered": 180,
+      "figureReferences": 0,
+      "figuresResolved": 0,
+      "figuresEmbedded": 0,
+      "figuresFailed": 0,
+      "mediaDiagnostics": [],
+      "missingQuestions": [],
+      "flags": 0,
+      "audit": {
+        "zeroUnintendedOverlaps": true,
+        "textTextOverlaps": 0,
+        "textBarOverlaps": 0,
+        "siblingComponentOverlaps": 0,
+        "componentBoundaryViolations": 0,
+        "footerCollisions": 0,
+        "orphanHeadings": 0,
+        "repeatedTableHeaderFailures": 0,
+        "overflowingComponents": 0
+      }
+    }
+  }
+}

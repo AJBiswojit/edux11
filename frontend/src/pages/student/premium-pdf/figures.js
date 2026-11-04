@@ -21,20 +21,32 @@ function clamp(value, min, max) {
  * Compute the drawn size of one figure inside a slot.
  * `available` is the width of the column the figure lives in.
  */
-export function measureFigure(asset, { field = 'statement', available = 356 } = {}) {
+export function measureFigure(asset, {
+  field = 'statement', available = 356, maxWidth: widthLimit, maxHeight: heightLimit,
+} = {}) {
   if (!asset || !(asset.width > 0) || !(asset.height > 0)) return { w: 0, h: 0 }
   const limits = FIGURE_LIMITS[field] || FIGURE_LIMITS.statement
-  const maxWidth = Math.max(40, Math.min(limits.maxWidth, available))
+  const configuredWidth = Number(widthLimit)
+  const configuredHeight = Number(heightLimit)
+  const maxWidth = Math.max(40, Math.min(
+    limits.maxWidth,
+    Number.isFinite(configuredWidth) && configuredWidth > 0 ? configuredWidth : limits.maxWidth,
+    available,
+  ))
+  const maxHeight = Math.max(1, Math.min(
+    limits.maxHeight,
+    Number.isFinite(configuredHeight) && configuredHeight > 0 ? configuredHeight : limits.maxHeight,
+  ))
   // Crops are usually exported at 2x. Sizing at half the pixel width keeps
   // diagrams crisp; a small source image is never blown up past its min width
   // unless the column is narrower than that.
   const natural = asset.width * 0.5 + limits.minWidth * 0.5
   let width = clamp(natural, Math.min(limits.minWidth, maxWidth), maxWidth)
   let height = (width * asset.height) / asset.width
-  if (height > limits.maxHeight) {
-    const scale = limits.maxHeight / height
+  if (height > maxHeight) {
+    const scale = maxHeight / height
     width *= scale
-    height = limits.maxHeight
+    height = maxHeight
   }
   return { w: Math.round(width * 100) / 100, h: Math.round(height * 100) / 100 }
 }
@@ -46,8 +58,11 @@ export function measureFigure(asset, { field = 'statement', available = 356 } = 
  */
 export function layoutFigureStack(assets = [], {
   field = 'statement', available = 356, gap = 8, budget = Infinity,
+  maxWidth, maxHeight,
 } = {}) {
-  const measured = assets.map((asset) => ({ asset, ...measureFigure(asset, { field, available }) }))
+  const measured = assets.map((asset) => ({ asset, ...measureFigure(asset, {
+    field, available, maxWidth, maxHeight,
+  }) }))
   const raw = measured.reduce((sum, item) => sum + item.h, 0) + gap * Math.max(0, measured.length - 1)
   if (!measured.length || !Number.isFinite(budget) || raw <= budget) {
     return { items: measured, height: Math.max(0, raw) }

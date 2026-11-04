@@ -1,0 +1,2799 @@
+{
+  "reference": {
+    "file": "MediXO_EduX_JEE_Main_Mock_Test_-_Phase_2_Full_Exam_Analysis_Report12.pdf",
+    "pageCount": 71,
+    "questionCount": 75,
+    "figureAssetMappings": 20,
+    "manualMathRestorations": [
+      "Q28",
+      "Q51",
+      "Q52",
+      "Q54",
+      "Q57",
+      "Q59",
+      "Q61",
+      "Q62",
+      "Q63",
+      "Q68",
+      "Q69",
+      "Q71",
+      "Q72"
+    ],
+    "sourceDiscrepancies": [],
+    "note": "Question text and page references were extracted from the supplied PDF. Math glyphs omitted by the PDF text layer were restored from rendered source pages; only source-matched, checked-in question figures are attached. Known source discrepancies are preserved rather than reconciled."
+  },
+  "data": {
+    "meta": {
+      "examId": "JEE-PHASE2-2026-10-31",
+      "examName": "JEE Main Mock Test - Phase 2",
+      "course": "JEE Main",
+      "pattern": "JEE Main (Paper 1)",
+      "student": "SUJJAL KUMAR NATH",
+      "rollNo": "260094",
+      "date": "2026-10-31",
+      "totalMarks": 300,
+      "duration": "3 hrs",
+      "sections": [
+        "Physics",
+        "Chemistry",
+        "Mathematics"
+      ],
+      "examStatus": "Completed"
+    },
+    "hero": {
+      "score": 67,
+      "maxScore": 300,
+      "percentage": 22.3,
+      "grade": "D",
+      "rank": 11,
+      "batchRank": 11,
+      "cohortSize": 51,
+      "percentile": "",
+      "overallAccuracy": 46.94,
+      "overallSpeed": 2.4,
+      "confidenceIndex": 46.9,
+      "readinessScore": 19.7,
+      "healthScore": 19.7,
+      "badge": "Completed",
+      "aiSummary": ""
+    },
+    "questionIntelligence": {
+      "total": 75,
+      "attempted": 49,
+      "correct": 23,
+      "incorrect": 26,
+      "skipped": 26,
+      "negativeMarks": 25,
+      "guessAttempts": 0,
+      "attemptRatio": 65.3
+    },
+    "attempt": {
+      "elapsedSeconds": 10805
+    },
+    "subjects": [
+      {
+        "name": "Physics",
+        "score": 17,
+        "maxMarks": 100,
+        "accuracy": 28,
+        "rank": 12,
+        "difficulty": "Medium",
+        "strongAreas": [
+          "Acceleration Calculation",
+          "Motion Under Gravity",
+          "Acceleration-Time Graph"
+        ],
+        "weakAreas": [
+          "Kinematics Graphs",
+          "Vertical Motion Under Gravity",
+          "Consecutive Time Distances"
+        ]
+      },
+      {
+        "name": "Chemistry",
+        "score": 37,
+        "maxMarks": 100,
+        "accuracy": 44,
+        "rank": 10,
+        "difficulty": "Medium",
+        "strongAreas": [
+          "Electronic Configuration",
+          "Nodes in Orbitals",
+          "Aufbau Principle"
+        ],
+        "weakAreas": [
+          "Discovery of Subatomic Particles",
+          "Orbital Energies and Penetration",
+          "Photoelectric Effect and Ionization"
+        ]
+      },
+      {
+        "name": "Mathematics",
+        "score": 13,
+        "maxMarks": 100,
+        "accuracy": 20,
+        "rank": 11,
+        "difficulty": "Medium",
+        "strongAreas": [
+          "Trigonometric Identities",
+          "Exponential Equations",
+          "Telescoping Sums"
+        ],
+        "weakAreas": [
+          "Modulus Properties",
+          "Cosine Series",
+          "Euler Form"
+        ]
+      }
+    ],
+    "chapters": [
+      {
+        "chapter": "Kinematics",
+        "subject": "Physics",
+        "accuracy": 35.3,
+        "marks": 16,
+        "time": 71.8,
+        "mastery": "Critical"
+      },
+      {
+        "chapter": "Laws of Motion",
+        "subject": "Physics",
+        "accuracy": 0.0,
+        "marks": -3,
+        "time": 19.9,
+        "mastery": "Critical"
+      },
+      {
+        "chapter": "Laws of Motion & Mechanics",
+        "subject": "Physics",
+        "accuracy": 100.0,
+        "marks": 4,
+        "time": 0.8,
+        "mastery": "Strong"
+      },
+      {
+        "chapter": "Structure of Atom",
+        "subject": "Chemistry",
+        "accuracy": 40.9,
+        "marks": 30,
+        "time": 26.9,
+        "mastery": "Weak"
+      },
+      {
+        "chapter": "Classification of Elements",
+        "subject": "Chemistry",
+        "accuracy": 66.7,
+        "marks": 7,
+        "time": 3.6,
+        "mastery": "Average"
+      },
+      {
+        "chapter": "Sets and Relations",
+        "subject": "Mathematics",
+        "accuracy": 0.0,
+        "marks": 0,
+        "time": 6.7,
+        "mastery": "Critical"
+      },
+      {
+        "chapter": "Sequences and Series",
+        "subject": "Mathematics",
+        "accuracy": 20.0,
+        "marks": 3,
+        "time": 2.6,
+        "mastery": "Critical"
+      },
+      {
+        "chapter": "Trigonometry",
+        "subject": "Mathematics",
+        "accuracy": 50.0,
+        "marks": 6,
+        "time": 10.5,
+        "mastery": "Weak"
+      },
+      {
+        "chapter": "Quadratic Equations",
+        "subject": "Mathematics",
+        "accuracy": 33.3,
+        "marks": 8,
+        "time": 5.2,
+        "mastery": "Critical"
+      },
+      {
+        "chapter": "Complex Numbers",
+        "subject": "Mathematics",
+        "accuracy": 0.0,
+        "marks": -3,
+        "time": 29.2,
+        "mastery": "Critical"
+      },
+      {
+        "chapter": "Inequalities",
+        "subject": "Mathematics",
+        "accuracy": 0.0,
+        "marks": -1,
+        "time": 2.8,
+        "mastery": "Critical"
+      }
+    ],
+    "mistakes": [
+      {
+        "category": "Unit Error",
+        "count": 5
+      },
+      {
+        "category": "Formula Error",
+        "count": 6
+      },
+      {
+        "category": "Knowledge Gap",
+        "count": 3
+      },
+      {
+        "category": "Calculation Error",
+        "count": 11
+      },
+      {
+        "category": "Incomplete Reasoning",
+        "count": 1
+      }
+    ],
+    "mistakeList": [
+      {
+        "q": "Q1",
+        "subject": "Physics",
+        "detail": "Unit Error · Kinematics Graphs"
+      },
+      {
+        "q": "Q2",
+        "subject": "Physics",
+        "detail": "Unit Error · Kinematics Graphs"
+      },
+      {
+        "q": "Q3",
+        "subject": "Physics",
+        "detail": "Formula Error · Vertical Motion Under Gravity"
+      },
+      {
+        "q": "Q7",
+        "subject": "Physics",
+        "detail": "Formula Error · Consecutive Time Distances"
+      },
+      {
+        "q": "Q9",
+        "subject": "Physics",
+        "detail": "Knowledge Gap · Multi-stage Motion"
+      },
+      {
+        "q": "Q10",
+        "subject": "Physics",
+        "detail": "Formula Error · Instantaneous Rest"
+      },
+      {
+        "q": "Q12",
+        "subject": "Physics",
+        "detail": "Unit Error · Three-stage Motion"
+      },
+      {
+        "q": "Q13",
+        "subject": "Physics",
+        "detail": "Unit Error · Newton's Second Law"
+      },
+      {
+        "q": "Q14",
+        "subject": "Physics",
+        "detail": "Calculation Error · Contact Forces"
+      },
+      {
+        "q": "Q15",
+        "subject": "Physics",
+        "detail": "Formula Error · Motion Under Gravity"
+      },
+      {
+        "q": "Q18",
+        "subject": "Physics",
+        "detail": "Calculation Error · Tension and Breaking Strength"
+      },
+      {
+        "q": "Q23",
+        "subject": "Physics",
+        "detail": "Formula Error · Variable Acceleration"
+      },
+      {
+        "q": "Q26",
+        "subject": "Chemistry",
+        "detail": "Calculation Error · Discovery of Subatomic Particles"
+      },
+      {
+        "q": "Q27",
+        "subject": "Chemistry",
+        "detail": "Knowledge Gap · Orbital Energies and Penetration"
+      },
+      {
+        "q": "Q30",
+        "subject": "Chemistry",
+        "detail": "Knowledge Gap · Photoelectric Effect and Ionization"
+      },
+      {
+        "q": "Q33",
+        "subject": "Chemistry",
+        "detail": "Calculation Error · Transition Metal Electronic Configuration"
+      },
+      {
+        "q": "Q35",
+        "subject": "Chemistry",
+        "detail": "Calculation Error · Electromagnetic Spectrum"
+      },
+      {
+        "q": "Q37",
+        "subject": "Chemistry",
+        "detail": "Calculation Error · Excited State Configurations"
+      },
+      {
+        "q": "Q44",
+        "subject": "Chemistry",
+        "detail": "Unit Error · Electron Gain Enthalpy"
+      },
+      {
+        "q": "Q55",
+        "subject": "Mathematics",
+        "detail": "Calculation Error · Modulus Properties"
+      },
+      {
+        "q": "Q60",
+        "subject": "Mathematics",
+        "detail": "Calculation Error · Cosine Series"
+      },
+      {
+        "q": "Q61",
+        "subject": "Mathematics",
+        "detail": "Incomplete Reasoning · Euler Form"
+      },
+      {
+        "q": "Q63",
+        "subject": "Mathematics",
+        "detail": "Formula Error · Logarithmic Inequalities"
+      },
+      {
+        "q": "Q66",
+        "subject": "Mathematics",
+        "detail": "Calculation Error · Harmonic Progression"
+      },
+      {
+        "q": "Q67",
+        "subject": "Mathematics",
+        "detail": "Calculation Error · Trigonometric Equations"
+      },
+      {
+        "q": "Q68",
+        "subject": "Mathematics",
+        "detail": "Calculation Error · Roots of Unity"
+      }
+    ],
+    "questionReview": [
+      {
+        "q": "Q1",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Kinematics Graphs",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 29.433333,
+        "text": "The v-x graph of a particle moving along x-axis is as shown in the figure. Then acceleration of the particle at x = 8 m is:",
+        "selected": "A",
+        "correctAnswer": "B",
+        "mistakeCategory": "Unit Error",
+        "mistakeHint": "The numerical approach is likely correct but the unit or scale used in the final step is off. Verify unit conversions and dimensional consistency.",
+        "explanation": "Acceleration a = v (dv/dx). From the graph, slope dv/dx = -8/16 = -1/2. At x = 8 m, v = 8 -(1/2)(8) = 4 m/s. Therefore, a = 4 * (-1/2) = -2 m/s².",
+        "options": [
+          {
+            "key": "a",
+            "text": "2 m/s²"
+          },
+          {
+            "key": "b",
+            "text": "-2 m/s²"
+          },
+          {
+            "key": "c",
+            "text": "4 m/s²"
+          },
+          {
+            "key": "d",
+            "text": "-4 m/s²"
+          }
+        ],
+        "imageUrl": "/media/pdf_extract/phase2-jee/phy_q7_q09_stem.png"
+      },
+      {
+        "q": "Q2",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Kinematics Graphs",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 2.783333,
+        "text": "The graph shown in figure shows the velocity v versus time t for a body. Which of the graphs represents the corresponding acceleration versus time graphs?",
+        "selected": "C",
+        "correctAnswer": "B",
+        "mistakeCategory": "Unit Error",
+        "mistakeHint": "The numerical approach is likely correct but the unit or scale used in the final step is off. Verify unit conversions and dimensional consistency.",
+        "explanation": "The slope of the v-t graph is negative and constant for the first half, and positive and constant over the second half. Therefore, acceleration is a negative constant followed by a positive constant, corresponding to graph (B).",
+        "options": [
+          {
+            "key": "a",
+            "text": "(A)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/phy_q8_q03_opt_a.png"
+          },
+          {
+            "key": "b",
+            "text": "(B)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/phy_q8_q03_opt_b.png"
+          },
+          {
+            "key": "c",
+            "text": "(C)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/phy_q8_q03_opt_c.png"
+          },
+          {
+            "key": "d",
+            "text": "(D)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/phy_q8_q03_opt_d.png"
+          }
+        ],
+        "imageUrl": "/media/pdf_extract/phase2-jee/phy_q8_q03_stem.png"
+      },
+      {
+        "q": "Q3",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Vertical Motion Under Gravity",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 1.233333,
+        "text": "A ball is thrown vertically upwards. Which of the following graphs represents the velocity-time graph of the ball during its flight? (air resistance is neglected)",
+        "selected": "B",
+        "correctAnswer": "D",
+        "mistakeCategory": "Formula Error",
+        "mistakeHint": "The wrong formula or relationship was applied here. Revisit the relevant formulas for this topic and verify which one fits this scenario. Topic: Vertical Motion Under Gravity.",
+        "explanation": "v = u - gt. The velocity-time relation is a straight line with a constant negative slope (-g), crossing the time axis when v = 0 at the highest point and continuing downwards, corresponding to graph (D).",
+        "options": [
+          {
+            "key": "a",
+            "text": "(A)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/phy_q8_q04_opt_a.png"
+          },
+          {
+            "key": "b",
+            "text": "(B)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/phy_q8_q04_opt_b.png"
+          },
+          {
+            "key": "c",
+            "text": "(C)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/phy_q8_q04_opt_c.png"
+          },
+          {
+            "key": "d",
+            "text": "(D)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/phy_q8_q04_opt_d.png"
+          }
+        ]
+      },
+      {
+        "q": "Q4",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Acceleration Calculation",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.833333,
+        "text": "If the displacement of a particle is x = 2t² + t + 5 meters, what will be its acceleration at t = 5 seconds?",
+        "selected": "C",
+        "correctAnswer": "C",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "v = dx/dt = 4t + 1 m/s. a = dv/dt = 4 m/s². The acceleration is 4 m/s² at all times.",
+        "options": [
+          {
+            "key": "a",
+            "text": "21 m/s²"
+          },
+          {
+            "key": "b",
+            "text": "20 m/s²"
+          },
+          {
+            "key": "c",
+            "text": "4 m/s²"
+          },
+          {
+            "key": "d",
+            "text": "10 m/s²"
+          }
+        ]
+      },
+      {
+        "q": "Q5",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Motion Under Gravity",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 4.15,
+        "text": "A man throws balls with the same speed vertically upwards, one after the other at an interval of 2 seconds. What should be the speed of the throw so that more than two balls are in the sky at any time? (Given g = 9.8 m/s²)",
+        "selected": "D",
+        "correctAnswer": "D",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "For more than 2 balls to remain in the sky, the time of flight T of each ball must exceed 4 seconds (2 × 2 s). T = 2u/g > 4 => u > 2g = 2 × 9.8 = 19.6 m/s.",
+        "options": [
+          {
+            "key": "a",
+            "text": "At least 0.8 m/s"
+          },
+          {
+            "key": "b",
+            "text": "Any speed less than 19.6 m/s"
+          },
+          {
+            "key": "c",
+            "text": "Only with speed 19.6 m/s"
+          },
+          {
+            "key": "d",
+            "text": "More than 19.6 m/s"
+          }
+        ]
+      },
+      {
+        "q": "Q6",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Acceleration-Time Graph",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 2.95,
+        "text": "A particle starts from rest. Its acceleration (a) versus time (t) graph is as shown in the figure. The maximum speed of the particle will be:",
+        "selected": "B",
+        "correctAnswer": "B",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "v_max - v_initial = Area under a-t graph = 1/2 × base × height = 1/2 × 11 × 10 = 55 m/s. Since u = 0, v_max = 55 m/s.",
+        "options": [
+          {
+            "key": "a",
+            "text": "110 m/s"
+          },
+          {
+            "key": "b",
+            "text": "55 m/s"
+          },
+          {
+            "key": "c",
+            "text": "550 m/s"
+          },
+          {
+            "key": "d",
+            "text": "660 m/s"
+          }
+        ],
+        "imageUrl": "/media/pdf_extract/phase2-jee/phy_q8_q09_stem.png"
+      },
+      {
+        "q": "Q7",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Consecutive Time Distances",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 2.283333,
+        "text": "A body travels for 15 seconds starting from rest with constant acceleration. If it travels distances S₁, S₂, and S₃ in the first five seconds, second five seconds, and next five seconds respectively, the relation between S₁, S₂, and S₃ is:",
+        "selected": "A",
+        "correctAnswer": "C",
+        "mistakeCategory": "Formula Error",
+        "mistakeHint": "The wrong formula or relationship was applied here. Revisit the relevant formulas for this topic and verify which one fits this scenario. Topic: Consecutive Time Distances.",
+        "explanation": "For motion from rest under constant acceleration, distances travelled in consecutive equal time intervals are in the ratio of odd numbers: S₁ : S₂ : S₃ = 1 : 3 : 5, hence S₁ = S₂ / 3 = S₃ / 5.",
+        "options": [
+          {
+            "key": "a",
+            "text": "S₁ = S₂ = S₃"
+          },
+          {
+            "key": "b",
+            "text": "5S₁ = 3S₂ = S₃"
+          },
+          {
+            "key": "c",
+            "text": "S₁ = (1/3) S₂ = (1/5) S₃"
+          },
+          {
+            "key": "d",
+            "text": "S₁ = (1/5) S₂ = (1/3) S₃"
+          }
+        ]
+      },
+      {
+        "q": "Q8",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Distance in nth Second",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 1.25,
+        "text": "A particle is moving in a straight line with initial velocity u and uniform acceleration a. If the sum of the distance travelled in t-th and (t + 1)-th seconds is 100 cm, then its velocity after t seconds, in cm/s, is:",
+        "selected": "B",
+        "correctAnswer": "B",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "S_t + S_(t+1) = [u + a(t - 1/2)] + [u + a(t + 1/2)] = 2(u + at) = 100 cm. Therefore, velocity after t seconds is v = u + at = 50 cm/s.",
+        "options": [
+          {
+            "key": "a",
+            "text": "80"
+          },
+          {
+            "key": "b",
+            "text": "50"
+          },
+          {
+            "key": "c",
+            "text": "20"
+          },
+          {
+            "key": "d",
+            "text": "30"
+          }
+        ]
+      },
+      {
+        "q": "Q9",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Multi-stage Motion",
+        "difficulty": "Hard",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 5.583333,
+        "text": "A metro train starts from rest and in five seconds achieves a speed 108 km/h. After that it moves with constant velocity and comes to rest after travelling 45 m with uniform retardation. If total distance travelled is 395 m, find total time of travelling.",
+        "selected": "B",
+        "correctAnswer": "D",
+        "mistakeCategory": "Knowledge Gap",
+        "mistakeHint": "This topic needs more study time. The concept or fact required here has not been fully covered yet — revisit the chapter and practise more questions on this area. Focus specifically on: Multi-stage Motion.",
+        "explanation": "Top speed v = 108 km/h = 30 m/s. Accelerating: t₁ = 5 s, s₁ = 1/2 × 30 × 5 = 75 m. Decelerating: s₃ = 45 m, t₃ = 2 × 45 / 30 = 3 s. Constant velocity: s₂ = 395 - (75 + 45) = 275 m => t₂ = 275 / 30 = 9.17 s. Total time = 5 + 9.17 + 3 = 17.17 s ≈17.2 s.",
+        "options": [
+          {
+            "key": "a",
+            "text": "12.2 s"
+          },
+          {
+            "key": "b",
+            "text": "15.3 s"
+          },
+          {
+            "key": "c",
+            "text": "9 s"
+          },
+          {
+            "key": "d",
+            "text": "17.2 s"
+          }
+        ]
+      },
+      {
+        "q": "Q10",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Instantaneous Rest",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 1.183333,
+        "text": "A particle moves along a straight line OX. At a time t (in seconds) the distance x (in metres) of the particle from O is given by x = 40 + 12t - t³. Value of x for the particle when it comes to rest momentarily is:",
+        "selected": "D",
+        "correctAnswer": "B",
+        "mistakeCategory": "Formula Error",
+        "mistakeHint": "The wrong formula or relationship was applied here. Revisit the relevant formulas for this topic and verify which one fits this scenario. Topic: Instantaneous Rest.",
+        "explanation": "v = dx/dt = 12 - 3t². Setting v = 0 gives t² = 4 => t = 2 s. Position at t = 2 s: x = 40 + 12(2) -2³ = 40 + 24 - 8 = 56 m.",
+        "options": [
+          {
+            "key": "a",
+            "text": "40 m"
+          },
+          {
+            "key": "b",
+            "text": "56 m"
+          },
+          {
+            "key": "c",
+            "text": "16 m"
+          },
+          {
+            "key": "d",
+            "text": "24 m"
+          }
+        ]
+      },
+      {
+        "q": "Q11",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Uniform Acceleration Equations",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.883333,
+        "text": "A body moving with a uniform acceleration crosses a distance of 65 m in the 5th second and 105 m in 9th second. How far will it go in 20 s?",
+        "selected": "C",
+        "correctAnswer": "C",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "S_n = u + a(n - 1/2). S₅ = u + 4.5 a = 65. S₉ = u + 8.5 a = 105. Subtracting gives 4a = 40 => a = 10 m/s². Then u = 20 m/s. Total distance in 20 s: s = ut + 1/2 a t² = 20(20) + 1/2 (10) (20)² = 400 + 2000 = 2400 m.",
+        "options": [
+          {
+            "key": "a",
+            "text": "2040 m"
+          },
+          {
+            "key": "b",
+            "text": "240 m"
+          },
+          {
+            "key": "c",
+            "text": "2400 m"
+          },
+          {
+            "key": "d",
+            "text": "12004 m"
+          }
+        ]
+      },
+      {
+        "q": "Q12",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Three-stage Motion",
+        "difficulty": "Hard",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 1.933333,
+        "text": "A car, starting from rest, accelerates at the rate f through a distance S, then continues at constant speed for time t and then decelerates at the rate f / 2 to come to rest. If the total distance traversed is 15 S, then:",
+        "selected": "C",
+        "correctAnswer": "D",
+        "mistakeCategory": "Unit Error",
+        "mistakeHint": "The numerical approach is likely correct but the unit or scale used in the final step is off. Verify unit conversions and dimensional consistency.",
+        "explanation": "Phase 1: S₁ = S = v² / (2f). Phase 3: S₃ = v² / (2 × f/2) = v² / f = 2S. Phase 2: S₂ = 15S - S - 2S = 12S. Also S₂ = v t => v = 12 S / t. Substituting into S = v² / (2f) gives S = (144 S² / t²) / (2f) => 1 = 72 S / (f t²) => S = (1/72) f t².",
+        "options": [
+          {
+            "key": "a",
+            "text": "S = (1/6) f t²"
+          },
+          {
+            "key": "b",
+            "text": "S = f t"
+          },
+          {
+            "key": "c",
+            "text": "S = (1/4) f t²"
+          },
+          {
+            "key": "d",
+            "text": "S = (1/72) f t²"
+          }
+        ]
+      },
+      {
+        "q": "Q13",
+        "subject": "Physics",
+        "chapter": "Laws of Motion",
+        "topic": "Newton's Second Law",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 2.466667,
+        "text": "A block of mass M is pulled along a horizontal frictionless surface by a rope of mass m. If a force P is applied at the free end of the rope, the force exerted by the rope on the block will be:",
+        "selected": "D",
+        "correctAnswer": "C",
+        "mistakeCategory": "Unit Error",
+        "mistakeHint": "The numerical approach is likely correct but the unit or scale used in the final step is off. Verify unit conversions and dimensional consistency.",
+        "explanation": "Acceleration of the block + rope system: a = P / (M + m). The rope is the only horizontal force on the block, so the force exerted by the rope on the block = M a = M P / (M + m).",
+        "options": [
+          {
+            "key": "a",
+            "text": "P"
+          },
+          {
+            "key": "b",
+            "text": "P m / (M + m)"
+          },
+          {
+            "key": "c",
+            "text": "M P / (M + m)"
+          },
+          {
+            "key": "d",
+            "text": "m P / (M + m)"
+          }
+        ]
+      },
+      {
+        "q": "Q14",
+        "subject": "Physics",
+        "chapter": "Laws of Motion",
+        "topic": "Contact Forces",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 2.816667,
+        "text": "Two blocks of mass m = 1 kg and M = 2 kg are in contact on a frictionless table. A horizontal force F (= 3 N) is applied to m. The force of contact between the blocks will be:",
+        "selected": "C",
+        "correctAnswer": "A",
+        "mistakeCategory": "Calculation Error",
+        "mistakeHint": "Your approach looks right but a computational slip derailed the answer. Double-check each arithmetic step and watch for sign/factor errors. Topic: Contact Forces.",
+        "explanation": "Common acceleration a = F / (m + M) = 3 / (1 + 2) = 1 m/s². The contact force between the blocks accelerates block M: N = M × a = 2 × 1 = 2 N.",
+        "options": [
+          {
+            "key": "a",
+            "text": "2 N"
+          },
+          {
+            "key": "b",
+            "text": "1 N"
+          },
+          {
+            "key": "c",
+            "text": "4 N"
+          },
+          {
+            "key": "d",
+            "text": "5 N"
+          }
+        ]
+      },
+      {
+        "q": "Q15",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Motion Under Gravity",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 3.883333,
+        "text": "A stone thrown upward with a speed u from the top of a tower reaches the ground with a velocity 3u. The height of the tower is:",
+        "selected": "D",
+        "correctAnswer": "B",
+        "mistakeCategory": "Formula Error",
+        "mistakeHint": "The wrong formula or relationship was applied here. Revisit the relevant formulas for this topic and verify which one fits this scenario. Topic: Motion Under Gravity.",
+        "explanation": "By conservation of energy / kinematics: v² = u² + 2gh ⇒(3u)² = u² + 2gh ⇒8u² = 2gh ⇒h = 4 u² / g.",
+        "options": [
+          {
+            "key": "a",
+            "text": "3 u² / g"
+          },
+          {
+            "key": "b",
+            "text": "4 u² / g"
+          },
+          {
+            "key": "c",
+            "text": "6 u² / g"
+          },
+          {
+            "key": "d",
+            "text": "9 u² / g"
+          }
+        ]
+      },
+      {
+        "q": "Q16",
+        "subject": "Physics",
+        "chapter": "Laws of Motion",
+        "topic": "Pulley Systems",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 3.233333,
+        "text": "The pulley arrangements of fig. (a) and (b) are identical. The mass of the rope is negligible. In (a) the mass m is lifted up by attaching a mass 2m to the other end of the rope. In (b) m is lifted up by pulling the other end of the rope with a constant downward force F = 2mg. Which of the following is correct?",
+        "selected": null,
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "In case (a): a₁ = (2m - m)g / (2m + m) = g/3. In case (b): a₂ = (F - mg) / m = (2mg - mg) / m = g. Therefore, a₂ = 3 a₁.",
+        "options": [
+          {
+            "key": "a",
+            "text": "Acceleration in case (b) is 3 times more than that in case (a)"
+          },
+          {
+            "key": "b",
+            "text": "In case (a) acceleration is g, while in case (b) is 2g"
+          },
+          {
+            "key": "c",
+            "text": "In both cases, acceleration is the same"
+          },
+          {
+            "key": "d",
+            "text": "None of the above"
+          }
+        ],
+        "imageUrl": "/media/pdf_extract/phase2-jee/phy_q10_q06_stem.png"
+      },
+      {
+        "q": "Q17",
+        "subject": "Physics",
+        "chapter": "Laws of Motion & Mechanics",
+        "topic": "Friction and Pseudo Force",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.85,
+        "text": "A block of mass m is in contact with the cart C as shown in the figure. The coefficient of static friction between the block and the cart is μ. The acceleration α of the cart that will prevent the block from falling satisfies:",
+        "selected": "C",
+        "correctAnswer": "C",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "In the accelerating frame of the cart, the block experiences a pseudo-force mα pressing it against the vertical cart face, giving a normal reaction N = mα and maximum upward static friction f_max = μN = μmα. To prevent the block from falling, μmα ≥mg ⇒α ≥g/μ.",
+        "options": [
+          {
+            "key": "a",
+            "text": "α < mg / μ"
+          },
+          {
+            "key": "b",
+            "text": "α > g / (m μ)"
+          },
+          {
+            "key": "c",
+            "text": "α ≥ g / μ"
+          },
+          {
+            "key": "d",
+            "text": "α < g / μ"
+          }
+        ],
+        "imageUrl": "/media/pdf_extract/phase2-jee/phy_q10_q07_cart_stem.png"
+      },
+      {
+        "q": "Q18",
+        "subject": "Physics",
+        "chapter": "Laws of Motion",
+        "topic": "Tension and Breaking Strength",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 1.2,
+        "text": "A monkey is descending from the branch of a tree with constant acceleration. If the breaking strength of the branch is 75% of the weight of the monkey, the maximum acceleration with which monkey can slide down without breaking the branch is:",
+        "selected": "B",
+        "correctAnswer": "C",
+        "mistakeCategory": "Calculation Error",
+        "mistakeHint": "Your approach looks right but a computational slip derailed the answer. Double-check each arithmetic step and watch for sign/factor errors. Topic: Tension and Breaking Strength.",
+        "explanation": "While sliding down with acceleration a, the branch tension is T = m(g −a). The branch survives only if T ≤0.75 mg ⇒m(g −a) ≤0.75 mg ⇒a ≥g/4. So the limiting (critical) acceleration at which the branch is just about to break is a = g/4; the monkey must slide down with at least this acceleration.",
+        "options": [
+          {
+            "key": "a",
+            "text": "g"
+          },
+          {
+            "key": "b",
+            "text": "(3/4) g"
+          },
+          {
+            "key": "c",
+            "text": "g / 4"
+          },
+          {
+            "key": "d",
+            "text": "g / 2"
+          }
+        ]
+      },
+      {
+        "q": "Q19",
+        "subject": "Physics",
+        "chapter": "Laws of Motion",
+        "topic": "Equilibrium of Concurrent Forces",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 8.366667,
+        "text": "For the given situation as shown in the figure, the value of θ to keep the system in equilibrium will be:",
+        "selected": null,
+        "correctAnswer": "B",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "At the junction, T₂ = W = 60 N acts vertically downward and a 60 N force acts horizontally. T₁ makes angle θ with the vertical. Vertical balance: T₁ cos θ = 60 N. Horizontal balance: T₁ sin θ = 60 N. Dividing, tan θ = 1, so θ = 45°.",
+        "options": [
+          {
+            "key": "a",
+            "text": "30°"
+          },
+          {
+            "key": "b",
+            "text": "45°"
+          },
+          {
+            "key": "c",
+            "text": "0°"
+          },
+          {
+            "key": "d",
+            "text": "90°"
+          }
+        ],
+        "imageUrl": "/media/pdf_extract/phase2-jee/phy_q10_q01_stem.png"
+      },
+      {
+        "q": "Q20",
+        "subject": "Physics",
+        "chapter": "Laws of Motion",
+        "topic": "Connected Bodies and Pulleys",
+        "difficulty": "Hard",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 1.483333,
+        "text": "Three equal weights of mass m each are hanging on a string passing over a fixed pulley as shown in the figure. The tensions in the string connecting weights A to B and B to C will respectively be:",
+        "selected": null,
+        "correctAnswer": "C",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Mass on left side is m, mass on right side is 2m. System acceleration a = (2m - m)g / (3m) = g/3. For mass A: T_AB - mg = m(g/3) => T_AB = (4/3)mg. For bottom mass C: mg - T_BC = m(g/3) => T_BC = (2/3)mg. Thus tensions are (4/3)mg and (2/3)mg.",
+        "options": [
+          {
+            "key": "a",
+            "text": "(2/3) mg, (2/3) mg"
+          },
+          {
+            "key": "b",
+            "text": "(2/3) mg, (4/3) mg"
+          },
+          {
+            "key": "c",
+            "text": "(4/3) mg, (2/3) mg"
+          },
+          {
+            "key": "d",
+            "text": "(3/2) mg, (3/4) mg"
+          }
+        ],
+        "imageUrl": "/media/pdf_extract/phase2-jee/phy_q10_q13_stem.png"
+      },
+      {
+        "q": "Q21",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Relative Velocity",
+        "difficulty": "Easy",
+        "type": "Fill in the Blank",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 11.866667,
+        "text": "A train 120 m long travelling at 30 m/s starts overtaking another train 150 m long travelling at 15 m/s in the same direction. The time taken by the first train to pass the second train completely is:",
+        "selected": null,
+        "correctAnswer": "18s",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Relative distance to cover = 120 + 150 = 270 m. Relative speed = 30 −15 = 15 m/s. Time taken t = 270 / 15 = 18 s.",
+        "options": []
+      },
+      {
+        "q": "Q22",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Uniform Motion",
+        "difficulty": "Easy",
+        "type": "Fill in the Blank",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.066667,
+        "text": "Two automobiles are 150 kilometers apart and traveling towards each other. One automobile is moving at 60 km/h and the other is moving at 40 km/h. In how many hours will they meet?",
+        "selected": null,
+        "correctAnswer": "1.5",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "For motion towards each other, closing speed v_rel = 60 + 40 = 100 km/h. Time taken t = 150 / 100 = 1.5 h.",
+        "options": []
+      },
+      {
+        "q": "Q23",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Variable Acceleration",
+        "difficulty": "Easy",
+        "type": "Fill in the Blank",
+        "status": "INCORRECT",
+        "marks": 0,
+        "time": 1.05,
+        "text": "The coordinate of a particle in meters is given by x(t) = 16t - 3.0 t³, where the time t is in seconds. The particle is momentarily at rest at t =",
+        "selected": "2.66",
+        "correctAnswer": "1.33",
+        "mistakeCategory": "Formula Error",
+        "mistakeHint": "The wrong formula or relationship was applied here. Revisit the relevant formulas for this topic and verify which one fits this scenario. Topic: Variable Acceleration.",
+        "explanation": "Momentarily at rest ⇒v = dx/dt = 16 −9t² = 0 ⇒t² = 16/9 ⇒t = 4/3 s ≈1.33 s.",
+        "options": []
+      },
+      {
+        "q": "Q24",
+        "subject": "Physics",
+        "chapter": "Laws of Motion",
+        "topic": "Work-Energy Theorem",
+        "difficulty": "Medium",
+        "type": "Fill in the Blank",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.3,
+        "text": "A force of 100 N acts in the direction as shown in the figure on a block of mass 10 kg resting on a smooth horizontal table. The speed acquired by the block after it has moved a distance of 10 m, will be: (in m/s) (take g = 10 m/s²)",
+        "selected": null,
+        "correctAnswer": "13.16",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Horizontal component of force F_x = 100 cos 60° = 50 N. Acceleration a = F_x / m = 50 / 10 = 5 m/s². Using v² = u² + 2as with u = 0 and s = 10 m: v = √(2 × 5 × 10) = √100 = 10 m/s.",
+        "options": [],
+        "imageUrl": "/media/pdf_extract/phase2-jee/phy_q10_q07_stem.png"
+      },
+      {
+        "q": "Q25",
+        "subject": "Physics",
+        "chapter": "Kinematics",
+        "topic": "Relative Speed",
+        "difficulty": "Easy",
+        "type": "Fill in the Blank",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.416667,
+        "text": "A thief is running away on a straight road in a jeep moving with a speed of 9 m/s. A policeman chases him on a motorcycle moving at a speed of 10 m/s. If the instantaneous separation of the jeep from the motorcycle is 100 m, how long will it take for the policeman to catch the thief?",
+        "selected": "100",
+        "correctAnswer": "100s",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Relative speed along the same straight road v_rel = 10 −9 = 1 m/s. Time taken t = 100 / 1 = 100 s.",
+        "options": []
+      },
+      {
+        "q": "Q26",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Discovery of Subatomic Particles",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 0.5,
+        "text": "Cathode rays are deflected away from a negatively charged plate because:",
+        "selected": "B",
+        "correctAnswer": "D",
+        "mistakeCategory": "Calculation Error",
+        "mistakeHint": "Your approach looks right but a computational slip derailed the answer. Double-check each arithmetic step and watch for sign/factor errors. Topic: Discovery of Subatomic Particles.",
+        "explanation": "Cathode rays consist of negatively charged electrons, which are repelled by a negatively charged plate.",
+        "options": [
+          {
+            "key": "a",
+            "text": "they are not particles"
+          },
+          {
+            "key": "b",
+            "text": "they are positively charged particles"
+          },
+          {
+            "key": "c",
+            "text": "they are neutral"
+          },
+          {
+            "key": "d",
+            "text": "they are negatively charged particles"
+          }
+        ]
+      },
+      {
+        "q": "Q27",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Orbital Energies and Penetration",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 2.55,
+        "text": "The energies of the 3s, 3p and 3d orbitals in a multielectron atom increase in that order. To which factor(s) can this order be attributed? I. the relative penetrations of these orbitals near the nucleus II. the relative average distance of the electron from the nucleus",
+        "selected": "A",
+        "correctAnswer": "C",
+        "mistakeCategory": "Knowledge Gap",
+        "mistakeHint": "This topic needs more study time. The concept or fact required here has not been fully covered yet — revisit the chapter and practise more questions on this area. Focus specifically on: Orbital Energies and Penetration.",
+        "explanation": "In a multi-electron atom the orbital energies for the same shell increase as E(3s) < E(3p) < E(3d). (I) Penetration: the s orbital penetrates closest to the nucleus, p less, d least, giving a larger effective nuclear charge and lower energy. (II) Average distance: the mean distance of the electron from the nucleus grows in the order 3s < 3p < 3d, so electron-nucleus attraction weakens in the same order. Both factors I and II are responsible.",
+        "options": [
+          {
+            "key": "a",
+            "text": "I only"
+          },
+          {
+            "key": "b",
+            "text": "II only"
+          },
+          {
+            "key": "c",
+            "text": "Both I and II"
+          },
+          {
+            "key": "d",
+            "text": "Neither I nor II"
+          }
+        ]
+      },
+      {
+        "q": "Q28",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Electronic Configuration",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 4.683333,
+        "text": "Which gas-phase atom in its ground state could have an electron with the quantum numbers n = 3, l = 2, m_l = 0, m_s = −1/2? (Given atomic numbers: Na = 11, Mg = 12, P = 15, Ti = 22)",
+        "selected": "D",
+        "correctAnswer": "D",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "The quantum numbers n = 3, l = 2 specify a 3d orbital. Titanium (Z = 22) has ground-state configuration [Ar] 4s² 3d², which contains 3d electrons.",
+        "options": [
+          {
+            "key": "a",
+            "text": "Na"
+          },
+          {
+            "key": "b",
+            "text": "Mg"
+          },
+          {
+            "key": "c",
+            "text": "P"
+          },
+          {
+            "key": "d",
+            "text": "Ti"
+          }
+        ]
+      },
+      {
+        "q": "Q29",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Nodes in Orbitals",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.316667,
+        "text": "Which orbital possesses one angular node and one radial node?",
+        "selected": "C",
+        "correctAnswer": "C",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Angular nodes = l = 1 (p-orbital). Radial nodes = n - l - 1 = 1 => n - 1 - 1 = 1 => n = 3. Thus, the 3p orbital has 1 angular node and 1 radial node.",
+        "options": [
+          {
+            "key": "a",
+            "text": "2s"
+          },
+          {
+            "key": "b",
+            "text": "2p"
+          },
+          {
+            "key": "c",
+            "text": "3p"
+          },
+          {
+            "key": "d",
+            "text": "3d"
+          }
+        ]
+      },
+      {
+        "q": "Q30",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Photoelectric Effect and Ionization",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 5.216667,
+        "text": "The first ionization energy of Na is 495.9 kJ/mol. What is the longest wavelength of light that could remove an electron from a Na atom?",
+        "selected": "D",
+        "correctAnswer": "A",
+        "mistakeCategory": "Knowledge Gap",
+        "mistakeHint": "This topic needs more study time. The concept or fact required here has not been fully covered yet — revisit the chapter and practise more questions on this area. Focus specifically on: Photoelectric Effect and Ionization.",
+        "explanation": "Ionization energy per atom E = (495.9 × 10³ J/mol) / (6.022 × 10²³ mol⁻¹) = 8.235 × 10⁻¹⁹ J. Maximum wavelength λ = hc / E = (6.626 × 10⁻³⁴ × 3 × 10⁸) / (8.235 × 10⁻¹⁹) = 2.41 × 10⁻⁷ m.",
+        "options": [
+          {
+            "key": "a",
+            "text": "2.41 × 10⁻⁷ m"
+          },
+          {
+            "key": "b",
+            "text": "2.41 × 10⁻⁴ m"
+          },
+          {
+            "key": "c",
+            "text": "4.14 m"
+          },
+          {
+            "key": "d",
+            "text": "4.14 × 10³ m"
+          }
+        ]
+      },
+      {
+        "q": "Q31",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Hydrogen Spectral Series",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 1.216667,
+        "text": "What is the ratio of frequencies between the first lines of Lyman, Balmer and Paschen series?",
+        "selected": null,
+        "correctAnswer": "C",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "ν = R c (1/n₁² - 1/n₂²). Lyman first line (2 -> 1): 1 - 1/4 = 3/4. Balmer first line (3 -> 2): 1/4 - 1/9 = 5/36. Paschen first line (4 -> 3): 1/9 - 1/16 = 7/144. Ratio = 3/4 : 5/36 : 7/144.",
+        "options": [
+          {
+            "key": "a",
+            "text": "1/2 : 1/6 : 1/12"
+          },
+          {
+            "key": "b",
+            "text": "1/2 : 1/3 : 1/4"
+          },
+          {
+            "key": "c",
+            "text": "3/4 : 5/36 : 7/144"
+          },
+          {
+            "key": "d",
+            "text": "2/3 : 8/56 : 3/88"
+          }
+        ]
+      },
+      {
+        "q": "Q32",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Aufbau Principle",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.633333,
+        "text": "Which set of orbitals is listed in the sequential order of filling in a many-electron atom?",
+        "selected": "C",
+        "correctAnswer": "C",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "According to the (n + l) rule: 3d (n+l = 5, n=3) -> 4p (n+l = 5, n=4) -> 5s (n+l = 5, n=5). Therefore, 3d, 4p, 5s is in direct sequential order.",
+        "options": [
+          {
+            "key": "a",
+            "text": "3s, 3p, 3d"
+          },
+          {
+            "key": "b",
+            "text": "3d, 4s, 4p"
+          },
+          {
+            "key": "c",
+            "text": "3d, 4p, 5s"
+          },
+          {
+            "key": "d",
+            "text": "4p, 4d, 5s"
+          }
+        ]
+      },
+      {
+        "q": "Q33",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Transition Metal Electronic Configuration",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 0.983333,
+        "text": "What is the electron configuration for a gas phase Fe³⁺ ion (Z = 26)?",
+        "selected": "B",
+        "correctAnswer": "A",
+        "mistakeCategory": "Calculation Error",
+        "mistakeHint": "Your approach looks right but a computational slip derailed the answer. Double-check each arithmetic step and watch for sign/factor errors. Topic: Transition Metal Electronic Configuration.",
+        "explanation": "Neutral Fe: [Ar] 4s² 3d⁶. Ionization removes the outer 4s electrons first, then 3d: losing three electrons yields [Ar] 3d⁵.",
+        "options": [
+          {
+            "key": "a",
+            "text": "[Ar] 3d⁵"
+          },
+          {
+            "key": "b",
+            "text": "[Ar] 4s² 3d³"
+          },
+          {
+            "key": "c",
+            "text": "[Ar] 4s¹ 3d⁴"
+          },
+          {
+            "key": "d",
+            "text": "[Ar] 4s² 3d⁶"
+          }
+        ]
+      },
+      {
+        "q": "Q34",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Bohr Model Transitions",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.016667,
+        "text": "Wavelength of a particular transition for H atom is 400 nm. What can be the wavelength of He⁺ for the same transition?",
+        "selected": null,
+        "correctAnswer": "B",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "1/λ = R Z² (1/n₁² - 1/n₂²). For He⁺, Z = 2, so 1/λ_He = 4 (1/λ_H) => λ_He = λ_H / 4 = 400 nm / 4 = 100 nm.",
+        "options": [
+          {
+            "key": "a",
+            "text": "400 nm"
+          },
+          {
+            "key": "b",
+            "text": "100 nm"
+          },
+          {
+            "key": "c",
+            "text": "1600 nm"
+          },
+          {
+            "key": "d",
+            "text": "200 nm"
+          }
+        ]
+      },
+      {
+        "q": "Q35",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Electromagnetic Spectrum",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 0.233333,
+        "text": "The correct sequence of frequency of electromagnetic radiations in electromagnetic spectrum is:",
+        "selected": "D",
+        "correctAnswer": "A",
+        "mistakeCategory": "Calculation Error",
+        "mistakeHint": "Your approach looks right but a computational slip derailed the answer. Double-check each arithmetic step and watch for sign/factor errors. Topic: Electromagnetic Spectrum.",
+        "explanation": "Frequency order is: X-rays (~10¹⁸ Hz) > UV rays (~10¹⁵ Hz) > Microwaves (~10¹⁰ Hz) > Radio waves (~10⁶ Hz).",
+        "options": [
+          {
+            "key": "a",
+            "text": "X-rays > UV rays > Microwaves > Radio waves"
+          },
+          {
+            "key": "b",
+            "text": "Radio waves > Microwaves > UV rays > X-rays"
+          },
+          {
+            "key": "c",
+            "text": "UV rays > X-rays > Radio waves > Microwaves"
+          },
+          {
+            "key": "d",
+            "text": "Radio waves > Microwaves > X-rays > UV rays"
+          }
+        ]
+      },
+      {
+        "q": "Q36",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Photoelectric Effect",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.616667,
+        "text": "The work function for a metal is 4 eV. To emit a photoelectron of zero velocity from the surface of the metal, the wavelength of incident light should be: [Given: h = 6.626 × 10⁻³⁴ J·s, c = 3 × 10⁸ m/s]",
+        "selected": null,
+        "correctAnswer": "D",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Threshold wavelength λ₀ = hc / φ = (12400 eV·Å) / 4 eV = 3100 Å.",
+        "options": [
+          {
+            "key": "a",
+            "text": "2700 Å"
+          },
+          {
+            "key": "b",
+            "text": "1700 Å"
+          },
+          {
+            "key": "c",
+            "text": "5900 Å"
+          },
+          {
+            "key": "d",
+            "text": "3100 Å"
+          }
+        ]
+      },
+      {
+        "q": "Q37",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Excited State Configurations",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 1.416667,
+        "text": "Which electron configuration corresponds to a gas-phase oxygen atom in an excited state?",
+        "selected": "D",
+        "correctAnswer": "B",
+        "mistakeCategory": "Calculation Error",
+        "mistakeHint": "Your approach looks right but a computational slip derailed the answer. Double-check each arithmetic step and watch for sign/factor errors. Topic: Excited State Configurations.",
+        "explanation": "Oxygen (Z = 8) has 8 electrons. The ground state is 1s² 2s² 2p⁴. Promoting one 2s electron to the 2p orbital gives 1s² 2s¹ 2p⁵, which has 8 electrons in an excited configuration.",
+        "options": [
+          {
+            "key": "a",
+            "text": "1s² 1p² 2s² 2p²"
+          },
+          {
+            "key": "b",
+            "text": "1s² 2s¹ 2p⁵"
+          },
+          {
+            "key": "c",
+            "text": "1s² 2s² 2p³"
+          },
+          {
+            "key": "d",
+            "text": "1s² 2s² 2p⁴"
+          }
+        ]
+      },
+      {
+        "q": "Q38",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "de Broglie Wavelength",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.066667,
+        "text": "If the kinetic energy of a particle is doubled, its de Broglie wavelength becomes:",
+        "selected": "D",
+        "correctAnswer": "D",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "λ = h / √(2mE). If kinetic energy is doubled (E' = 2E), λ' = h / √(2m(2E)) = λ / √2 = (1/√2) times.",
+        "options": [
+          {
+            "key": "a",
+            "text": "2 times"
+          },
+          {
+            "key": "b",
+            "text": "4 times"
+          },
+          {
+            "key": "c",
+            "text": "√2 times"
+          },
+          {
+            "key": "d",
+            "text": "1/√2 times"
+          }
+        ]
+      },
+      {
+        "q": "Q39",
+        "subject": "Chemistry",
+        "chapter": "Classification of Elements",
+        "topic": "Valence Shell Configuration",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.133333,
+        "text": "The outermost electronic configuration of the most electronegative element is:",
+        "selected": "C",
+        "correctAnswer": "C",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Fluorine is the most electronegative element of all, belonging to group 17 (halogens) with valence configuration ns² np⁵.",
+        "options": [
+          {
+            "key": "a",
+            "text": "ns² np³"
+          },
+          {
+            "key": "b",
+            "text": "ns² np⁴"
+          },
+          {
+            "key": "c",
+            "text": "ns² np⁵"
+          },
+          {
+            "key": "d",
+            "text": "ns² np⁶"
+          }
+        ]
+      },
+      {
+        "q": "Q40",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Quantum Numbers",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.85,
+        "text": "An electron has spin quantum number s = +1/2 and magnetic quantum number m = +2. It cannot be present in:",
+        "selected": "A",
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "The magnetic quantum number obeys −l ≤m ≤+l, so m = +2 requires l ≥2 (d or f orbital). Therefore, the electron cannot be present in an s-orbital (nor in a p-orbital). Recorded key: (a) s-orbital.",
+        "options": [
+          {
+            "key": "a",
+            "text": "s-orbital"
+          },
+          {
+            "key": "b",
+            "text": "p-orbital"
+          },
+          {
+            "key": "c",
+            "text": "d-orbital"
+          },
+          {
+            "key": "d",
+            "text": "f-orbital"
+          }
+        ]
+      },
+      {
+        "q": "Q41",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Orbital Symmetry and Waves",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.333333,
+        "text": "Which one among the following statements is correct?",
+        "selected": "A",
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "l = 0 denotes an s-orbital (specifically 2s here), which is spherically symmetric. Statement (A) is correct.",
+        "options": [
+          {
+            "key": "a",
+            "text": "An orbital containing an electron having quantum numbers n = 2, l = 0, m = 0 and s = +1/2 is spherical."
+          },
+          {
+            "key": "b",
+            "text": "The frequency of X-rays is less than that of radio-waves."
+          },
+          {
+            "key": "c",
+            "text": "All photons have same energy."
+          },
+          {
+            "key": "d",
+            "text": "As intensity of light increases, its frequency also increases."
+          }
+        ]
+      },
+      {
+        "q": "Q42",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Bohr Radius",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 1.5,
+        "text": "Correct order of radius of the 1st orbit of H, He⁺, Li²⁺, Be³⁺ is: [Given : Atomic No. H = 1, He = 2, Li = 3, Be = 4]",
+        "selected": "A",
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Radius of n-th Bohr orbit is r_n = r₀ (n² / Z). For the 1st orbit (n = 1), r ∝1/Z. Since Z increases from H(1) to Be(4), radius decreases: H > He⁺ > Li²⁺ > Be³⁺.",
+        "options": [
+          {
+            "key": "a",
+            "text": "H > He⁺ > Li²⁺ > Be³⁺"
+          },
+          {
+            "key": "b",
+            "text": "Be³⁺ > Li²⁺ > He⁺ > H"
+          },
+          {
+            "key": "c",
+            "text": "He⁺ > Be³⁺ > Li²⁺ > H"
+          },
+          {
+            "key": "d",
+            "text": "He⁺ > H > Li²⁺ > Be³⁺"
+          }
+        ]
+      },
+      {
+        "q": "Q43",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Photon Energy",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.183333,
+        "text": "Which statement regarding the relative energies of monochromatic light with λ = 800 nm and monochromatic light with λ = 400 nm is correct?",
+        "selected": null,
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Energy per mole of photons is E = N_A (hc / λ). Since energy is inversely proportional to wavelength, 800 nm light has half the energy per mole as 400 nm light.",
+        "options": [
+          {
+            "key": "a",
+            "text": "800 nm light has half as much energy per mole of photons as 400 nm light"
+          },
+          {
+            "key": "b",
+            "text": "800 nm light has same energy per mole of photons as 400 nm light"
+          },
+          {
+            "key": "c",
+            "text": "800 nm light has twice as much energy per mole of photons as 400 nm light"
+          },
+          {
+            "key": "d",
+            "text": "No conclusion may be drawn regarding the relative energy per mole of photons without knowing the intensity of the light"
+          }
+        ]
+      },
+      {
+        "q": "Q44",
+        "subject": "Chemistry",
+        "chapter": "Classification of Elements",
+        "topic": "Electron Gain Enthalpy",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 2.35,
+        "text": "Atoms of which element release the most energy when an electron is added to them in the gas phase?",
+        "selected": "C",
+        "correctAnswer": "D",
+        "mistakeCategory": "Unit Error",
+        "mistakeHint": "The numerical approach is likely correct but the unit or scale used in the final step is off. Verify unit conversions and dimensional consistency.",
+        "explanation": "Sulfur has a more negative electron gain enthalpy (-200 kJ/mol) than oxygen (-141 kJ/mol) due to the smaller size and compact 2p subshell of oxygen leading to high electron-electron repulsions.",
+        "options": [
+          {
+            "key": "a",
+            "text": "C"
+          },
+          {
+            "key": "b",
+            "text": "O"
+          },
+          {
+            "key": "c",
+            "text": "Si"
+          },
+          {
+            "key": "d",
+            "text": "S"
+          }
+        ]
+      },
+      {
+        "q": "Q45",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Radial Probability Distribution",
+        "difficulty": "Hard",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.8,
+        "text": "The correct radial probability distribution curve for the hydrogen atomic orbital with principal quantum number n = 3 and azimuthal quantum number l = 1 is: (4π r² ψ² = radial probability density function and r = radial distance from the nucleus)",
+        "selected": null,
+        "correctAnswer": "B",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "For n = 3, l = 1 (a 3p orbital), the number of radial nodes is n −l −1 = 3 −1 −1 = 1. The radial probability distribution curve 4πr²ψ² therefore has two maxima separated by one node, with the outer maximum much taller than the inner maximum, corresponding to Graph (B).",
+        "options": [
+          {
+            "key": "a",
+            "text": "(A)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/chem_q9_q12_opt_a.png"
+          },
+          {
+            "key": "b",
+            "text": "(B)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/chem_q9_q12_opt_b.png"
+          },
+          {
+            "key": "c",
+            "text": "(C)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/chem_q9_q12_opt_c.png"
+          },
+          {
+            "key": "d",
+            "text": "(D)",
+            "imageUrl": "/media/pdf_extract/phase2-jee/chem_q9_q12_opt_d.png"
+          }
+        ]
+      },
+      {
+        "q": "Q46",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Atomic Orbitals",
+        "difficulty": "Easy",
+        "type": "Fill in the Blank",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 1.233333,
+        "text": "How many orbitals are in an f sublevel (l = 3)?",
+        "selected": "7",
+        "correctAnswer": "7",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Number of orbitals in a subshell = 2l + 1. For l = 3 (f subshell), 2(3) + 1 = 7 orbitals.",
+        "options": []
+      },
+      {
+        "q": "Q47",
+        "subject": "Chemistry",
+        "chapter": "Classification of Elements",
+        "topic": "Periodic Table Periods",
+        "difficulty": "Easy",
+        "type": "Fill in the Blank",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 1.116667,
+        "text": "An element with atomic number 20 will be placed in which period of the periodic table?",
+        "selected": "E",
+        "correctAnswer": "E",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Z = 20 (Ca): 1s²2s²2p⁶3s²3p⁶4s² = [Ar]4s². The highest principal quantum number occupied is n = 4 (4th period).",
+        "options": []
+      },
+      {
+        "q": "Q48",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Magnetic Moment",
+        "difficulty": "Easy",
+        "type": "Fill in the Blank",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 2.683333,
+        "text": "The calculated value of spin only magnetic moment of ₂₆Fe³⁺ is:",
+        "selected": "5.86",
+        "correctAnswer": "5.92",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Fe³⁺ (Z = 26) has configuration [Ar]3d⁵ with n = 5 unpaired electrons. Spin-only magnetic moment μ = √(n(n+2)) = √(5 × 7) = √35 ≈5.92 BM.",
+        "options": []
+      },
+      {
+        "q": "Q49",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Bohr Energy Levels",
+        "difficulty": "Medium",
+        "type": "Fill in the Blank",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.666667,
+        "text": "The ratio of (E₂ - E₁) to (E₄ - E₃) for the hydrogen atom is approximately equal to:",
+        "selected": null,
+        "correctAnswer": "15.4",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "For hydrogen, E_n ∝−1/n². E₂ −E₁ ∝(1 −1/4) = 3/4, and E₄ −E₃ ∝(1/9 −1/16) = 7/144. Ratio = (3/4) ÷ (7/144) = 108/7 ≈15.4.",
+        "options": []
+      },
+      {
+        "q": "Q50",
+        "subject": "Chemistry",
+        "chapter": "Structure of Atom",
+        "topic": "Quantum Numbers Counting",
+        "difficulty": "Hard",
+        "type": "Fill in the Blank",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.183333,
+        "text": "How many electrons will have m (magnetic quantum number) = 0 in ₂₆Fe³⁺ ion?",
+        "selected": null,
+        "correctAnswer": "11",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "₂₆Fe³⁺ has 23 electrons: 1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁵. Each s subshell has 2 electrons with m = 0, each p subshell has 2 electrons with m = 0, and 3d⁵ has 1 electron with m = 0: 2 + 2 + 2 + 2 + 2 + 1 = 11 (or 5 in the 3s, 3p, 3d shells).",
+        "options": []
+      },
+      {
+        "q": "Q51",
+        "subject": "Mathematics",
+        "chapter": "Sets and Relations",
+        "topic": "Fractional Part Equations",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 6.45,
+        "text": "The sum of all real values of x that satisfy the equation {x} + {x + 1/3} + {x + 2/3} = x, where {x} denotes the fractional part of x, is:",
+        "selected": null,
+        "correctAnswer": "C",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "By Hermite's identity, [x] + [x + 1/3] + [x + 2/3] = [3x]. Hence {x} + {x + 1/3} + {x + 2/3} = (x + x + 1/3 + x + 2/3) −[3x] = 3x + 1 −[3x] = {3x} + 1. So the equation becomes {3x} + 1 = x. Since 0 ≤{3x} < 1, we need 1 ≤x < 2, i.e. 3 ≤3x < 6. • [3x] = 3: 3x −3 + 1 = x ⇒x = 1 (3x = 3 ✓). • [3x] = 4: 3x −4 + 1 = x ⇒x = 3/2 (3x = 4.5 ✓). • [3x] = 5: 3x −5 + 1 = x ⇒x = 2 (not < 2, rejected). Roots: 1 and 3/2. Sum = 5/2.",
+        "options": [
+          {
+            "key": "a",
+            "text": "1"
+          },
+          {
+            "key": "b",
+            "text": "$\\frac{3}{2}$"
+          },
+          {
+            "key": "c",
+            "text": "$\\frac{5}{2}$"
+          },
+          {
+            "key": "d",
+            "text": "$\\frac{7}{2}$"
+          }
+        ]
+      },
+      {
+        "q": "Q52",
+        "subject": "Mathematics",
+        "chapter": "Sequences and Series",
+        "topic": "Telescoping Series",
+        "difficulty": "Hard",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.333333,
+        "text": "The sum to infinity of the series Σ(k = 1 to ∞) 6^k / [(3^k − 2^k)(3^(k+1) − 2^(k+1))] is:",
+        "selected": null,
+        "correctAnswer": "B",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Write the k-th term as 2^k/(3^k − 2^k) − 2^(k+1)/(3^(k+1) − 2^(k+1)). Check: the combined numerator is 2^k(3^(k+1) − 2^(k+1)) − 2^(k+1)(3^k − 2^k) = 3·6^k − 2·4^k − 2·6^k + 2·4^k = 6^k. The series telescopes: S = 2^1/(3^1 − 2^1) − lim(k→∞) 2^(k+1)/(3^(k+1) − 2^(k+1)) = 2/1 − 0 = 2.",
+        "options": [
+          {
+            "key": "a",
+            "text": "1"
+          },
+          {
+            "key": "b",
+            "text": "2"
+          },
+          {
+            "key": "c",
+            "text": "3"
+          },
+          {
+            "key": "d",
+            "text": "6"
+          }
+        ]
+      },
+      {
+        "q": "Q53",
+        "subject": "Mathematics",
+        "chapter": "Trigonometry",
+        "topic": "Trigonometric Identities",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 5.133333,
+        "text": "The exact numerical value of the expression tan²(π/16) + tan²(3π/16) + tan²(5π/16) + tan²(7π/16) is:",
+        "selected": "B",
+        "correctAnswer": "B",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Since tan(7π/16) = cot(π/16) and tan(5π/16) = cot(3π/16), the sum = [tan²A + cot²A] + [tan²B + cot²B] with A = π/16, B = 3π/16. tan²θ + cot²θ = (tanθ + cotθ)² −2 = 4/sin²2θ −2. So sum = 4/sin²(π/8) + 4/sin²(3π/8) −4. With sin²(π/8) = (2 −√2)/4 and sin²(3π/8) = (2 + √2)/4: 16/(2 −√2) + 16/(2 + √2) = 16·4/(4 −2) = 32. Sum = 32 −4 = 28.",
+        "options": [
+          {
+            "key": "a",
+            "text": "14"
+          },
+          {
+            "key": "b",
+            "text": "28"
+          },
+          {
+            "key": "c",
+            "text": "56"
+          },
+          {
+            "key": "d",
+            "text": "12"
+          }
+        ]
+      },
+      {
+        "q": "Q54",
+        "subject": "Mathematics",
+        "chapter": "Quadratic Equations",
+        "topic": "Exponential Equations",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.3,
+        "text": "Find the sum of all real values of x satisfying the equation (x² − 5x + 5)^(x² + 4x − 60) = 1.",
+        "selected": "C",
+        "correctAnswer": "C",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Case 1: Base = 1 => x² - 5x + 5 = 1 => x² - 5x + 4 = 0 => x = 1, 4. Case 2: Exponent = 0 with base ≠0 => x² + 4x - 60 = 0 => (x+10)(x-6)=0 => x = -10, 6. Base at -10 is 155 ≠0, base at 6 is 11 ≠0. Case 3: Base = -1 with even exponent => x² - 5x + 5 = -1 => x² - 5x + 6 = 0 => x = 2, 3. For x=2, exp = 4+8-60 = -48 (even, valid). For x=3, exp = 9+12-60 = -39 (odd, rejected). Valid roots: 1, 4, -10, 6, 2. Sum = 1 + 4 - 10 + 6 + 2 = 3.",
+        "options": [
+          {
+            "key": "a",
+            "text": "-1"
+          },
+          {
+            "key": "b",
+            "text": "0"
+          },
+          {
+            "key": "c",
+            "text": "3"
+          },
+          {
+            "key": "d",
+            "text": "5"
+          }
+        ]
+      },
+      {
+        "q": "Q55",
+        "subject": "Mathematics",
+        "chapter": "Complex Numbers",
+        "topic": "Modulus Properties",
+        "difficulty": "Hard",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 0.85,
+        "text": "Let z₁, z₂, z₃ be complex numbers such that |z₁| = 1, |z₂| = 2, and |z₃| = 3. If |z₁ + z₂ + z₃| = 1, the value of |9 z₁ z₂ + 4 z₁ z₃ + z₂ z₃| is:",
+        "selected": "D",
+        "correctAnswer": "C",
+        "mistakeCategory": "Calculation Error",
+        "mistakeHint": "Your approach looks right but a computational slip derailed the answer. Double-check each arithmetic step and watch for sign/factor errors. Topic: Modulus Properties.",
+        "explanation": "Note that |z₁|² = z₁ z̄₁ = 1 => 1/z₁ = z̄₁. Similarly, |z₂|² = 4 => 4/z₂ = z̄₂, and |z₃|² = 9 => 9/z₃ = z̄₃. Now, |9 z₁ z₂ + 4 z₁ z₃ + z₂ z₃| = |z₁ z₂ z₃| |9/z₃ + 4/z₂ + 1/z₁| = (1 × 2 × 3) |z̄₃ + z̄₂ + z̄₁| = 6 |z₁ + z₂ + z₃| = 6 × 1 = 6.",
+        "options": [
+          {
+            "key": "a",
+            "text": "2"
+          },
+          {
+            "key": "b",
+            "text": "4"
+          },
+          {
+            "key": "c",
+            "text": "6"
+          },
+          {
+            "key": "d",
+            "text": "8"
+          }
+        ]
+      },
+      {
+        "q": "Q56",
+        "subject": "Mathematics",
+        "chapter": "Complex Numbers",
+        "topic": "Triangle Inequality",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 6.116667,
+        "text": "The maximum value of |z| when z satisfies the condition |z - 4/z| = 2 is:",
+        "selected": null,
+        "correctAnswer": "B",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "By the triangle inequality: |z| = |(z - 4/z) + 4/z| ≤|z - 4/z| + 4/|z| = 2 + 4/|z|. Let r = |z|. Then r ≤2 + 4/r => r² - 2r - 4 ≤0 => r ≤(2 + √(4 + 16)) / 2 = 1 + √5. Therefore, max |z| = √5 + 1.",
+        "options": [
+          {
+            "key": "a",
+            "text": "√3 + 1"
+          },
+          {
+            "key": "b",
+            "text": "√5 + 1"
+          },
+          {
+            "key": "c",
+            "text": "√5 - 1"
+          },
+          {
+            "key": "d",
+            "text": "2 + √2"
+          }
+        ]
+      },
+      {
+        "q": "Q57",
+        "subject": "Mathematics",
+        "chapter": "Sequences and Series",
+        "topic": "Telescoping Sums",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.833333,
+        "text": "If S_n = Σ(r = 1 to n) r/(r⁴ + r² + 1), then lim(n→∞) S_n is equal to:",
+        "selected": "A",
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "r⁴ + r² + 1 = (r² + r + 1)(r² - r + 1). The numerator r = 1/2 [(r² + r + 1) - (r² - r + 1)]. Thus the term is 1/2 [1/(r² - r + 1) - 1/(r² + r + 1)]. Telescoping sum gives 1/2 [1 - 1/(n² + n + 1)]. As n → ∞, the limit is 1/2.",
+        "options": [
+          {
+            "key": "a",
+            "text": "$\\frac{1}{2}$"
+          },
+          {
+            "key": "b",
+            "text": "1"
+          },
+          {
+            "key": "c",
+            "text": "$\\frac{1}{4}$"
+          },
+          {
+            "key": "d",
+            "text": "$\\infty$"
+          }
+        ]
+      },
+      {
+        "q": "Q58",
+        "subject": "Mathematics",
+        "chapter": "Inequalities",
+        "topic": "Quadratic Inequalities",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.833333,
+        "text": "The number of integral values of x satisfying the system of inequalities x² - 10x - 11 ≤0 and x² - x - 2 > 0 is:",
+        "selected": null,
+        "correctAnswer": "C",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "First inequality: (x - 11)(x + 1) ≤0 => -1 ≤x ≤11. Second inequality: (x - 2)(x + 1) > 0 => x < -1 or x > 2. Intersection: x ∈(2, 11]. The integer values are 3, 4, 5, 6, 7, 8, 9, 10, 11 (9 values).",
+        "options": [
+          {
+            "key": "a",
+            "text": "7"
+          },
+          {
+            "key": "b",
+            "text": "8"
+          },
+          {
+            "key": "c",
+            "text": "9"
+          },
+          {
+            "key": "d",
+            "text": "10"
+          }
+        ]
+      },
+      {
+        "q": "Q59",
+        "subject": "Mathematics",
+        "chapter": "Quadratic Equations",
+        "topic": "Newton's Theorem",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.066667,
+        "text": "Let α, β be the roots of x² − x − 1 = 0. Let P_n = α^n + β^n. Which of the following is true?",
+        "selected": null,
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Since α and β satisfy x² = x + 1, multiplying by x^(n−1) gives x^(n+1) = x^n + x^(n−1). Applying this to α and β and adding yields P_(n+1) = P_n + P_(n−1).",
+        "options": [
+          {
+            "key": "a",
+            "text": "$P_{n+1} = P_n + P_{n-1}$"
+          },
+          {
+            "key": "b",
+            "text": "$P_{n+1} = P_n - P_{n-1}$"
+          },
+          {
+            "key": "c",
+            "text": "$P_{n+1} = 2P_n + P_{n-1}$"
+          },
+          {
+            "key": "d",
+            "text": "$P_{n+1} = P_n \\cdot P_{n-1}$"
+          }
+        ]
+      },
+      {
+        "q": "Q60",
+        "subject": "Mathematics",
+        "chapter": "Trigonometry",
+        "topic": "Cosine Series",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 1.25,
+        "text": "The value of cos(2π/7) + cos(4π/7) + cos(6π/7) is:",
+        "selected": "A",
+        "correctAnswer": "B",
+        "mistakeCategory": "Calculation Error",
+        "mistakeHint": "Your approach looks right but a computational slip derailed the answer. Double-check each arithmetic step and watch for sign/factor errors. Topic: Cosine Series.",
+        "explanation": "Multiply and divide by 2 sin(π/7): 2 sin(π/7) [cos(2π/7) + cos(4π/7) + cos(6π/7)] = [sin(3π/7) - sin(π/7)] + [sin(5π/7) - sin(3π/7)] + [sin(7π/7) - sin(5π/7)] = sin(π) - sin(π/7) = -sin(π/7). Dividing by 2 sin(π/7) gives -1/2.",
+        "options": [
+          {
+            "key": "a",
+            "text": "1/2"
+          },
+          {
+            "key": "b",
+            "text": "-1/2"
+          },
+          {
+            "key": "c",
+            "text": "0"
+          },
+          {
+            "key": "d",
+            "text": "1"
+          }
+        ]
+      },
+      {
+        "q": "Q61",
+        "subject": "Mathematics",
+        "chapter": "Complex Numbers",
+        "topic": "Euler Form",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 1.383333,
+        "text": "If z = e^(iθ) (z ≠ −1), then (z − 1)/(z + 1) is always:",
+        "selected": "D",
+        "correctAnswer": "B",
+        "mistakeCategory": "Incomplete Reasoning",
+        "mistakeHint": "The reasoning started correctly but stopped short of the final answer. Multi-step problems need each intermediate result verified before moving on.",
+        "explanation": "(e^(iθ) − 1)/(e^(iθ) + 1) = [e^(iθ/2)(e^(iθ/2) − e^(−iθ/2))]/[e^(iθ/2)(e^(iθ/2) + e^(−iθ/2))] = 2i sin(θ/2)/(2 cos(θ/2)) = i tan(θ/2), which is purely imaginary.",
+        "options": [
+          {
+            "key": "a",
+            "text": "Purely real"
+          },
+          {
+            "key": "b",
+            "text": "Purely imaginary"
+          },
+          {
+            "key": "c",
+            "text": "Zero"
+          },
+          {
+            "key": "d",
+            "text": "Complex with equal real and imaginary parts"
+          }
+        ]
+      },
+      {
+        "q": "Q62",
+        "subject": "Mathematics",
+        "chapter": "Quadratic Equations",
+        "topic": "Rational Functions Range",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.133333,
+        "text": "The minimum value of the function f(x) = (x² + 14x + 9)/(x² + 2x + 3) for x ∈ ℝ is:",
+        "selected": null,
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Let y = (x² + 14x + 9)/(x² + 2x + 3) ⇒ (y − 1)x² + 2(y − 7)x + (3y − 9) = 0. Since x ∈ ℝ, the discriminant D ≥ 0: 4(y − 7)² − 4(y − 1)(3y − 9) ≥ 0 ⇒ (y² − 14y + 49) − (3y² − 12y + 9) ≥ 0 ⇒ −2y² − 2y + 40 ≥ 0 ⇒ y² + y − 20 ≤ 0 ⇒ (y + 5)(y − 4) ≤ 0 ⇒ −5 ≤ y ≤ 4. Minimum value is −5.",
+        "options": [
+          {
+            "key": "a",
+            "text": "-5"
+          },
+          {
+            "key": "b",
+            "text": "-4"
+          },
+          {
+            "key": "c",
+            "text": "1"
+          },
+          {
+            "key": "d",
+            "text": "5"
+          }
+        ]
+      },
+      {
+        "q": "Q63",
+        "subject": "Mathematics",
+        "chapter": "Inequalities",
+        "topic": "Logarithmic Inequalities",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 2.0,
+        "text": "The set of all real x for which log_(0.5)(x² − 5x + 6) > −1 is:",
+        "selected": "D",
+        "correctAnswer": "A",
+        "mistakeCategory": "Formula Error",
+        "mistakeHint": "The wrong formula or relationship was applied here. Revisit the relevant formulas for this topic and verify which one fits this scenario. Topic: Logarithmic Inequalities.",
+        "explanation": "Since the base 0.5 < 1, reversing the inequality gives x² - 5x + 6 < (0.5)⁻¹ = 2, and domain requires x² - 5x + 6 > 0. From x² - 5x + 6 < 2 => x² - 5x + 4 < 0 => (x - 1)(x - 4) < 0 => x ∈(1, 4). From domain: (x - 2)(x - 3) > 0 => x < 2 or x > 3. Intersection: x ∈(1, 2) ∪(3, 4).",
+        "options": [
+          {
+            "key": "a",
+            "text": "(1, 2) ∪ (3, 4)"
+          },
+          {
+            "key": "b",
+            "text": "(-∞, 1) ∪ (4, ∞)"
+          },
+          {
+            "key": "c",
+            "text": "(2, 3)"
+          },
+          {
+            "key": "d",
+            "text": "(1, 4)"
+          }
+        ]
+      },
+      {
+        "q": "Q64",
+        "subject": "Mathematics",
+        "chapter": "Sets and Relations",
+        "topic": "Power Sets",
+        "difficulty": "Easy",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.25,
+        "text": "The total number of subsets of a finite set A having n elements is 56 more than the total number of subsets of another finite set B having m elements. The value of n² + m² is:",
+        "selected": null,
+        "correctAnswer": "B",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Number of subsets of a set with n elements is 2ⁿ. Given 2ⁿ −2ᵐ= 56 = 2⁶ −2³ ⇒n = 6, m = 3. Recorded answer key option: (b) 45.",
+        "options": [
+          {
+            "key": "a",
+            "text": "41"
+          },
+          {
+            "key": "b",
+            "text": "45"
+          },
+          {
+            "key": "c",
+            "text": "52"
+          },
+          {
+            "key": "d",
+            "text": "61"
+          }
+        ]
+      },
+      {
+        "q": "Q65",
+        "subject": "Mathematics",
+        "chapter": "Quadratic Equations",
+        "topic": "Relations Between Roots",
+        "difficulty": "Hard",
+        "type": "MCQ",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 0.6,
+        "text": "If the roots of the equation ax² + bx + c = 0 are of the form α / (α - 1) and (α + 1) / α, then the value of (a + b + c)² is:",
+        "selected": "A",
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Let p = α/(α −1) and q = (α + 1)/α. Then 1 −p = −1/(α −1) and 1 −q = −1/α, so (1 −p)(1 −q) = 1/[α(α −1)]. Also p −q = [α² −(α² −1)]/[α(α −1)] = 1/[α(α −1)]. Hence (1 −p)(1 −q) = p − q. Now (1 −p)(1 −q) = 1 −(p + q) + pq = 1 + b/a + c/a = (a + b + c)/a, and (p −q)² = (p + q)² −4pq = (b² −4ac)/a². Squaring: (a + b + c)²/a² = (b² −4ac)/a² ⇒(a + b + c)² = b² −4ac.",
+        "options": [
+          {
+            "key": "a",
+            "text": "b² - 4ac"
+          },
+          {
+            "key": "b",
+            "text": "b² - 2ac"
+          },
+          {
+            "key": "c",
+            "text": "2b² - ac"
+          },
+          {
+            "key": "d",
+            "text": "4b² - ac"
+          }
+        ]
+      },
+      {
+        "q": "Q66",
+        "subject": "Mathematics",
+        "chapter": "Sequences and Series",
+        "topic": "Harmonic Progression",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 1.183333,
+        "text": "If a, b, c are positive real numbers in HP, then the equation ax² - bx + c = 0 has roots that are:",
+        "selected": "D",
+        "correctAnswer": "B",
+        "mistakeCategory": "Calculation Error",
+        "mistakeHint": "Your approach looks right but a computational slip derailed the answer. Double-check each arithmetic step and watch for sign/factor errors. Topic: Harmonic Progression.",
+        "explanation": "b is the HM of a and c: b = 2ac / (a + c). Discriminant D = b² - 4ac = 4a²c²/(a + c)² - 4ac = 4ac [ac/(a+c)² - 1]. Since (a + c)² > 4ac > ac for distinct positive numbers, [ac/(a+c)² - 1] < 0 => D < 0. Thus roots are imaginary.",
+        "options": [
+          {
+            "key": "a",
+            "text": "Real and distinct"
+          },
+          {
+            "key": "b",
+            "text": "Imaginary"
+          },
+          {
+            "key": "c",
+            "text": "Real and equal"
+          },
+          {
+            "key": "d",
+            "text": "Rational"
+          }
+        ]
+      },
+      {
+        "q": "Q67",
+        "subject": "Mathematics",
+        "chapter": "Trigonometry",
+        "topic": "Trigonometric Equations",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 0.633333,
+        "text": "The number of solutions of the equation sin⁴ x + cos⁴ x = sin x cos x in [0, 2π] is:",
+        "selected": "C",
+        "correctAnswer": "B",
+        "mistakeCategory": "Calculation Error",
+        "mistakeHint": "Your approach looks right but a computational slip derailed the answer. Double-check each arithmetic step and watch for sign/factor errors. Topic: Trigonometric Equations.",
+        "explanation": "sin⁴ x + cos⁴ x = 1 - 2 sin² x cos² x = 1 - (1/2) sin²(2x). Also sin x cos x = (1/2) sin(2x). Let t = sin(2x) ∈[-1, 1]. Then 1 - t²/2 = t/2 => t² + t - 2 = 0 => (t + 2)(t - 1) = 0 => t = 1. So sin(2x) = 1 in [0, 2π] => 2x = π/2, 5π/2 => x = π/4, 5π/4 (2 solutions).",
+        "options": [
+          {
+            "key": "a",
+            "text": "0"
+          },
+          {
+            "key": "b",
+            "text": "2"
+          },
+          {
+            "key": "c",
+            "text": "4"
+          },
+          {
+            "key": "d",
+            "text": "6"
+          }
+        ]
+      },
+      {
+        "q": "Q68",
+        "subject": "Mathematics",
+        "chapter": "Complex Numbers",
+        "topic": "Roots of Unity",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "INCORRECT",
+        "marks": -1,
+        "time": 0.4,
+        "text": "If 1, z₁, z₂, …, z_(n−1) are the n-th roots of unity, then (1 − z₁)(1 − z₂)…(1 − z_(n−1)) equals:",
+        "selected": "D",
+        "correctAnswer": "C",
+        "mistakeCategory": "Calculation Error",
+        "mistakeHint": "Your approach looks right but a computational slip derailed the answer. Double-check each arithmetic step and watch for sign/factor errors. Topic: Roots of Unity.",
+        "explanation": "z^n − 1 = (z − 1)(z − z₁)(z − z₂)…(z − z_(n−1)). Dividing by (z − 1): z^(n−1) + z^(n−2) + … + z + 1 = (z − z₁)(z − z₂)…(z − z_(n−1)). Setting z = 1 yields 1 + 1 + … + 1 (n terms) = n.",
+        "options": [
+          {
+            "key": "a",
+            "text": "0"
+          },
+          {
+            "key": "b",
+            "text": "1"
+          },
+          {
+            "key": "c",
+            "text": "n"
+          },
+          {
+            "key": "d",
+            "text": "n - 1"
+          }
+        ]
+      },
+      {
+        "q": "Q69",
+        "subject": "Mathematics",
+        "chapter": "Sequences and Series",
+        "topic": "Binomial / Generating Functions",
+        "difficulty": "Medium",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.233333,
+        "text": "The coefficient of x^n in the expansion of 1/[(1 − x)(1 − 2x)] is:",
+        "selected": null,
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "1/[(1 − x)(1 − 2x)] = 2/(1 − 2x) − 1/(1 − x) = 2Σ(k = 0 to ∞)(2x)^k − Σ(k = 0 to ∞)x^k. Therefore, the coefficient of x^n is 2^(n+1) − 1.",
+        "options": [
+          {
+            "key": "a",
+            "text": "$2^{n+1} - 1$"
+          },
+          {
+            "key": "b",
+            "text": "$2^n - 1$"
+          },
+          {
+            "key": "c",
+            "text": "$2^{n+1} + 1$"
+          },
+          {
+            "key": "d",
+            "text": "$2^n + 1$"
+          }
+        ]
+      },
+      {
+        "q": "Q70",
+        "subject": "Mathematics",
+        "chapter": "Quadratic Equations",
+        "topic": "Composite Quadratic Functions",
+        "difficulty": "Hard",
+        "type": "MCQ",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 4.116667,
+        "text": "Let f(x) = x² - 2x cos θ + 1. The sum of all roots (real and complex) of the equation f(f(x)) = 0 is:",
+        "selected": null,
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "Let roots of f(t) = 0 be t₁ and t₂. Then t₁ + t₂ = 2 cos θ. For f(f(x)) = 0, we have f(x) = t₁ and f(x) = t₂. The sum of roots of x² - 2x cos θ + (1 - t₁) = 0 is 2 cos θ, and of x² - 2x cos θ + (1 -t₂) = 0 is 2 cos θ. Total sum of all 4 roots = 2 cos θ + 2 cos θ = 4 cos θ.",
+        "options": [
+          {
+            "key": "a",
+            "text": "4 cos θ"
+          },
+          {
+            "key": "b",
+            "text": "2 cos θ"
+          },
+          {
+            "key": "c",
+            "text": "4 cos² θ"
+          },
+          {
+            "key": "d",
+            "text": "2 cos² θ"
+          }
+        ]
+      },
+      {
+        "q": "Q71",
+        "subject": "Mathematics",
+        "chapter": "Complex Numbers",
+        "topic": "Cube Roots of Unity & Probability",
+        "difficulty": "Hard",
+        "type": "Fill in the Blank",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.066667,
+        "text": "Let ω be a complex cube root of unity with ω ≠ 1. A fair die is thrown three times. If r₁, r₂, r₃ are the numbers obtained on the die, find the probability that ω^(r₁) + ω^(r₂) + ω^(r₃) = 0. (Multiply your final probability by 216 to get the integer answer).",
+        "selected": null,
+        "correctAnswer": "48",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "ω³ = 1 and 1 + ω + ω² = 0. ω^{r₁} + ω^{r₂} + ω^{r₃} = 0 iff r₁, r₂, r₃ fall in distinct residue classes mod 3 ({1,4}, {2,5}, {3,6}). Number of ordered triples = 3! × 2 × 2 × 2 = 48. P = 48/216 = 2/9 ⇒216P = 48.",
+        "options": []
+      },
+      {
+        "q": "Q72",
+        "subject": "Mathematics",
+        "chapter": "Sequences and Series",
+        "topic": "Geometric Progression",
+        "difficulty": "Easy",
+        "type": "Fill in the Blank",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.05,
+        "text": "Let S_n = 1 + 1/2 + 1/4 + 1/8 + … up to n terms. If 2 − S_n < 1/1000, find the minimum integral value of n.",
+        "selected": null,
+        "correctAnswer": "11",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "S_n = 1 + 1/2 + 1/4 + … (n terms) = 2(1 −2⁻ⁿ) = 2 −2¹⁻ⁿ. Given 2 −S_n = 2¹⁻ⁿ < 1/1000 ⇒ 2ⁿ⁻¹ > 1000. Since 2⁹ = 512 and 2¹⁰ = 1024, n −1 ≥10 ⇒minimum n = 11.",
+        "options": []
+      },
+      {
+        "q": "Q73",
+        "subject": "Mathematics",
+        "chapter": "Quadratic Equations",
+        "topic": "Location of Roots",
+        "difficulty": "Hard",
+        "type": "Fill in the Blank",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 0.016667,
+        "text": "If the quadratic equation x² + 2(a + 1)x + 9a - 5 = 0 has exactly one root in the interval (0, ∞) and a is an integer, find the sum of all possible values of a.",
+        "selected": null,
+        "correctAnswer": "A",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "For f(x) = x² + 2(a+1)x + (9a −5) = 0, under the restricted textbook reading of one positive root and one negative root with discriminant condition, a = 10 (flagged defective/unbounded in general since 9a −5 < 0 holds for all integers a ≤0).",
+        "options": []
+      },
+      {
+        "q": "Q74",
+        "subject": "Mathematics",
+        "chapter": "Trigonometry",
+        "topic": "Sine Product Identity",
+        "difficulty": "Easy",
+        "type": "Fill in the Blank",
+        "status": "CORRECT",
+        "marks": 4,
+        "time": 3.483333,
+        "text": "Find the value of 8 sin(20°) sin(40°) sin(80°).",
+        "selected": "1.713",
+        "correctAnswer": "1.73",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "8 sin(20°) sin(40°) sin(80°) = 4 sin(20°)[2 sin(40°) sin(80°)] = 4 sin(20°)[cos(40°) − cos(120°)] = 2[sin(60°) −sin(20°)] + 2 sin(20°) = 2 sin(60°) = √3 ≈1.732.",
+        "options": []
+      },
+      {
+        "q": "Q75",
+        "subject": "Mathematics",
+        "chapter": "Complex Numbers",
+        "topic": "Geometric Locus & Circles",
+        "difficulty": "Easy",
+        "type": "Fill in the Blank",
+        "status": "SKIPPED",
+        "marks": 0,
+        "time": 20.383333,
+        "text": "A complex number z satisfies |z - 3 - 4i| ≤5. Find the maximum possible value of |z|².",
+        "selected": null,
+        "correctAnswer": "100",
+        "mistakeCategory": "",
+        "mistakeHint": "",
+        "explanation": "|z −(3 + 4i)| ≤5 is a closed disc of radius 5 centred at C = 3 + 4i with |C| = 5. By the triangle inequality, max |z| = |C| + 5 = 10, so max |z|² = 100. 06 LEARNING INTELLIGENCE Learning intelligence Published revision priorities Priority revision register PRIORITY TOPIC CLASSIFICATION TIMEFRAME Kinematics Graphs High This week Vertical Motion Under Gravity High This week Motion Under Gravity High This week Consecutive Time Distances High This week Topic-level accuracy TOPIC SUBJECT ACCURACY LEVEL Kinematics Graphs Physics 0% Critical Vertical Motion Under Gravity Physics 0% Critical Acceleration Calculation Physics 100% Strong Motion Under Gravity Physics 50% Weak Acceleration-Time Graph Physics 100% Strong Consecutive Time Distances Physics 0% Critical Distance in nth Second Physics 100% Strong Multi-stage Motion Physics 0% Critical Instantaneous Rest Physics 0% Critical Uniform Acceleration Equations Physics 100% Strong Three-stage Motion Physics 0% Critical Newton's Second Law Physics 0% Critical Contact Forces Physics 0% Critical Pulley Systems Physics 0% Critical Friction and Pseudo Force Physics 100% Strong Tension and Breaking Strength Physics 0% Critical Equilibrium of Concurrent Forces Physics 0% Critical Connected Bodies and Pulleys Physics 0% Critical Topic-level accuracy · continued TOPIC SUBJECT ACCURACY LEVEL Relative Velocity Physics 0% Critical Uniform Motion Physics 0% Critical Variable Acceleration Physics 0% Critical Work-Energy Theorem Physics 0% Critical Relative Speed Physics 100% Strong Discovery of Subatomic Particles Chemistry 0% Critical Orbital Energies and Penetration Chemistry 0% Critical Electronic Configuration Chemistry 100% Strong Nodes in Orbitals Chemistry 100% Strong Photoelectric Effect and Ionization Chemistry 0% Critical Hydrogen Spectral Series Chemistry 0% Critical Aufbau Principle Chemistry 100% Strong Transition Metal Electronic Configuration Chemistry 0% Critical Bohr Model Transitions Chemistry 0% Critical Electromagnetic Spectrum Chemistry 0% Critical Photoelectric Effect Chemistry 0% Critical Excited State Configurations Chemistry 0% Critical de Broglie Wavelength Chemistry 100% Strong Valence Shell Configuration Chemistry 100% Strong Quantum Numbers Chemistry 100% Strong Orbital Symmetry and Waves Chemistry 100% Strong Bohr Radius Chemistry 100% Strong Photon Energy Chemistry 0% Critical Electron Gain Enthalpy Chemistry 0% Critical Radial Probability Distribution Chemistry 0% Critical Atomic Orbitals Chemistry 100% Strong Periodic Table Periods Chemistry 100% Strong Magnetic Moment Chemistry 100% Strong Bohr Energy Levels Chemistry 0% Critical Topic-level accuracy · continued TOPIC SUBJECT ACCURACY LEVEL Quantum Numbers Counting Chemistry 0% Critical Fractional Part Equations Mathematics 0% Critical Telescoping Series Mathematics 0% Critical Trigonometric Identities Mathematics 100% Strong Exponential Equations Mathematics 100% Strong Modulus Properties Mathematics 0% Critical Triangle Inequality Mathematics 0% Critical Telescoping Sums Mathematics 100% Strong Quadratic Inequalities Mathematics 0% Critical Newton's Theorem Mathematics 0% Critical Cosine Series Mathematics 0% Critical Euler Form Mathematics 0% Critical Rational Functions Range Mathematics 0% Critical Logarithmic Inequalities Mathematics 0% Critical Power Sets Mathematics 0% Critical Relations Between Roots Mathematics 100% Strong Harmonic Progression Mathematics 0% Critical Trigonometric Equations Mathematics 0% Critical Roots of Unity Mathematics 0% Critical Binomial / Generating Functions Mathematics 0% Critical Composite Quadratic Functions Mathematics 0% Critical Cube Roots of Unity & Probability Mathematics 0% Critical Geometric Progression Mathematics 0% Critical Location of Roots Mathematics 0% Critical Sine Product Identity Mathematics 100% Strong Geometric Locus & Circles Mathematics 0% Critical Mistake evidence QUESTION SOURCE DETAIL Q1 Unit Error · Kinematics Graphs Q2 Unit Error · Kinematics Graphs Q3 Formula Error · Vertical Motion Under Gravity Q7 Formula Error · Consecutive Time Distances Q9 Knowledge Gap · Multi-stage Motion Q10 Formula Error · Instantaneous Rest Q12 Unit Error · Three-stage Motion Q13 Unit Error · Newton's Second Law Q14 Calculation Error · Contact Forces Q15 Formula Error · Motion Under Gravity Q18 Calculation Error · Tension and Breaking Strength Q23 Formula Error · Variable Acceleration Q26 Calculation Error · Discovery of Subatomic Particles Q27 Knowledge Gap · Orbital Energies and Penetration Q30 Knowledge Gap · Photoelectric Effect and Ionization Q33 Calculation Error · Transition Metal Electronic Configuration Q35 Calculation Error · Electromagnetic Spectrum Q37 Calculation Error · Excited State Configurations Q44 Unit Error · Electron Gain Enthalpy Q55 Calculation Error · Modulus Properties Q60 Calculation Error · Cosine Series Q61 Incomplete Reasoning · Euler Form Q63 Formula Error · Logarithmic Inequalities Q66 Calculation Error · Harmonic Progression Q67 Calculation Error · Trigonometric Equations Q68 Calculation Error · Roots of Unity Weak chapters NO. WEAK CHAPTER 1 Kinematics 2 Laws of Motion 3 Structure of Atom 4 Sets and Relations 5 Sequences and Series 6 Trigonometry 7 Quadratic Equations 8 Complex Numbers 9 Inequalities Subject-wise revision sections Priority topics grouped by subject PRIORITY TOPIC CHAPTER ACCURACY CLASSIFICATION Physics Kinematics Graphs Kinematics 0% Critical Vertical Motion Under Gravity Kinematics 0% Critical Consecutive Time Distances Kinematics 0% Critical Multi-stage Motion Kinematics 0% Critical Instantaneous Rest Kinematics 0% Critical Three-stage Motion Kinematics 0% Critical Newton's Second Law Laws of Motion 0% Critical Contact Forces Laws of Motion 0% Critical Pulley Systems Laws of Motion 0% Critical Tension and Breaking Strength Laws of Motion 0% Critical Equilibrium of Concurrent Forces Laws of Motion 0% Critical Connected Bodies and Pulleys Laws of Motion 0% Critical Relative Velocity Kinematics 0% Critical Uniform Motion Kinematics 0% Critical Variable Acceleration Kinematics 0% Critical Work-Energy Theorem Laws of Motion 0% Critical Motion Under Gravity Kinematics 50% Weak Priority topics grouped by subject · continued PRIORITY TOPIC CHAPTER ACCURACY CLASSIFICATION Chemistry Discovery of Subatomic Particles Structure of Atom 0% Critical Orbital Energies and Penetration Structure of Atom 0% Critical Photoelectric Effect and Ionization Structure of Atom 0% Critical Hydrogen Spectral Series Structure of Atom 0% Critical Transition Metal Electronic Configuration Structure of Atom 0% Critical Bohr Model Transitions Structure of Atom 0% Critical Electromagnetic Spectrum Structure of Atom 0% Critical Photoelectric Effect Structure of Atom 0% Critical Excited State Configurations Structure of Atom 0% Critical Photon Energy Structure of Atom 0% Critical Electron Gain Enthalpy Classification of Elements 0% Critical Radial Probability Distribution Structure of Atom 0% Critical Bohr Energy Levels Structure of Atom 0% Critical Quantum Numbers Counting Structure of Atom 0% Critical Mathematics Fractional Part Equations Sets and Relations 0% Critical Telescoping Series Sequences and Series 0% Critical Modulus Properties Complex Numbers 0% Critical Triangle Inequality Complex Numbers 0% Critical Quadratic Inequalities Inequalities 0% Critical Newton's Theorem Quadratic Equations 0% Critical Cosine Series Trigonometry 0% Critical Euler Form Complex Numbers 0% Critical Rational Functions Range Quadratic Equations 0% Critical Logarithmic Inequalities Inequalities 0% Critical Power Sets Sets and Relations 0% Critical Harmonic Progression Sequences and Series 0% Critical Trigonometric Equations Trigonometry 0% Critical Roots of Unity Complex Numbers 0% Critical Binomial / Generating Functions Sequences and Series 0% Critical Composite Quadratic Functions Quadratic Equations 0% Critical Priority topics grouped by subject · continued PRIORITY TOPIC CHAPTER ACCURACY CLASSIFICATION Cube Roots of Unity & Probability Complex Numbers 0% Critical Mathematics Geometric Progression Sequences and Series 0% Critical Location of Roots Quadratic Equations 0% Critical Geometric Locus & Circles Complex Numbers 0% Critical Recommended next actions Weak topics · published list NO. WEAK TOPIC 1 Kinematics Graphs 2 Vertical Motion Under Gravity 3 Motion Under Gravity 4 Consecutive Time Distances 5 Multi-stage Motion 6 Instantaneous Rest 7 Three-stage Motion 8 Newton's Second Law 9 Contact Forces 10 Pulley Systems 11 Tension and Breaking Strength 12 Equilibrium of Concurrent Forces 13 Connected Bodies and Pulleys 14 Relative Velocity 15 Uniform Motion 16 Variable Acceleration 17 Work-Energy Theorem 18 Discovery of Subatomic Particles 19 Orbital Energies and Penetration 20 Photoelectric Effect and Ionization 21 Hydrogen Spectral Series Weak topics · published list · continued NO. WEAK TOPIC 22 Transition Metal Electronic Configuration 23 Bohr Model Transitions 24 Electromagnetic Spectrum 25 Photoelectric Effect 26 Excited State Configurations 27 Photon Energy 28 Electron Gain Enthalpy 29 Radial Probability Distribution 30 Bohr Energy Levels 31 Quantum Numbers Counting 32 Fractional Part Equations 33 Telescoping Series 34 Modulus Properties 35 Triangle Inequality 36 Quadratic Inequalities 37 Newton's Theorem 38 Cosine Series 39 Euler Form 40 Rational Functions Range 41 Logarithmic Inequalities 42 Power Sets 43 Harmonic Progression 44 Trigonometric Equations 45 Roots of Unity 46 Binomial / Generating Functions 47 Composite Quadratic Functions 48 Cube Roots of Unity & Probability 49 Geometric Progression 50 Location of Roots Weak topics · published list · continued NO. WEAK TOPIC 51 Geometric Locus & Circles MediXO EduX · Examination Intelligence End of report · 03 Nov 2026",
+        "options": []
+      }
+    ],
+    "timeIntelligence": {
+      "avgTimePerQuestion": "2.4",
+      "navigationCount": 0,
+      "timeManagementScore": 19.7,
+      "fastestQuestion": {
+        "q": "Q34",
+        "time": "0.02"
+      },
+      "slowestQuestion": {
+        "q": "Q1",
+        "time": "29.43"
+      },
+      "distribution": [
+        {
+          "section": "Physics",
+          "allocated": 180,
+          "used": 92.5,
+          "efficiency": 51.4
+        },
+        {
+          "section": "Chemistry",
+          "allocated": 180,
+          "used": 30.5,
+          "efficiency": 16.9
+        },
+        {
+          "section": "Mathematics",
+          "allocated": 180,
+          "used": 57.1,
+          "efficiency": 31.7
+        }
+      ]
+    }
+  }
+}
